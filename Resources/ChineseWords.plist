@@ -3,6 +3,9 @@
 <plist version="1.0">
 <array>
   <dict>
+  <key>title</key>
+  <string>消灭星星</string>
+
 	<key>guanqia</key>
 	<string>关卡</string>
     
