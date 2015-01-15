@@ -26,7 +26,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
   					../../Classes/StarParticle.cpp \
   					../../Classes/TopMenu.cpp\
   					../../Classes/GameOverScene.cpp\
-                    ../../Classes/GameOverLayer.cpp
+                    ../../Classes/GameOverLayer.cpp \
   					../../Classes/TopMenu.cpp \
             		../../Classes/Audio.cpp
 
