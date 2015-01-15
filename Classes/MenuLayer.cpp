@@ -22,6 +22,7 @@ bool MenuLayer::init(){
 	menu->alignItemsVertically();
 	menu->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(menu);
+	Audio::getInstance()->playBGM();
 	return true;
 }
 

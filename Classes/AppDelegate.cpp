@@ -55,7 +55,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	//³õÊ¼»¯ÒôĞ§
 	Audio::getInstance()->prepare();
-
     return true;
 }
 

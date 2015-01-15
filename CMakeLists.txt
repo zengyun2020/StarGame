@@ -128,13 +128,10 @@ set(GAME_SRC
   Classes/StarMatrix.cpp
   Classes/StarParticle.cpp
   Classes/TopMenu.cpp
-<<<<<<< HEAD
   Classes/GameOverScene.cpp
   Classes/GameOverLayer.cpp
-
-=======
   Classes/Audio.cpp
->>>>>>> origin/master
+
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -153,12 +150,9 @@ set(GAME_HEADERS
   Classes/StarMatrix.h
   Classes/StarParticle.h
   Classes/TopMenu.h
-<<<<<<< HEAD
   Classes/GameOverScene.h
   Classes/GameOverLayer.h
-=======
   Classes/Audio.h
->>>>>>> origin/master
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
