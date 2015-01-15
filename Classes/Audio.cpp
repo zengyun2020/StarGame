@@ -21,6 +21,10 @@ void Audio::playPop(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/pop.ogg",false);
 }
 
+void Audio::playClick(){
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/select.ogg",false);
+}
+
 void Audio::playCombo(int size){
 	if(size < 5)
 		return;

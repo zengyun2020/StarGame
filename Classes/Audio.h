@@ -5,6 +5,7 @@ public:
 	static Audio* getInstance();
 	void playBGM();
 	void playReadyGo();
+	void playClick();
 	void playPop();
 	void prepare();
 	void playCombo(int size);
