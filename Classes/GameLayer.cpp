@@ -4,7 +4,6 @@
 #include "Chinese.h"
 #include "StarMatrix.h"
 #include "HelloWorldScene.h"
-#include "GameOverScene.h"
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -41,7 +40,6 @@ void GameLayer::floatLevelWord(){
 	
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	_levelMsg = FloatWord::create(
-		//"Level" + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextLevel())->_string,
 		ChineseWord("guanqia") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextLevel())->_string,
 		50, Point(visibleSize.width,visibleSize.height/3*2)
 		);
@@ -52,7 +50,7 @@ void GameLayer::floatLevelWord(){
 void GameLayer::floatTargetScoreWord(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	_targetScore = FloatWord::create(
-		"mubiao" + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextScore())->_string + "fen",
+		ChineseWord("mubiao") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen"),
 		50, Point(visibleSize.width,visibleSize.height/3)
 		);
 	this->addChild(_targetScore,1);
@@ -92,8 +90,8 @@ void GameLayer::refreshMenu(){
 
 void GameLayer::showLinkNum(int size){
 	
-	string s = String::createWithFormat("%d",size)->_string + "lianji" + 
-		String::createWithFormat("%d",size*size*5)->_string + "fen";
+	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") + 
+		String::createWithFormat("%d",size*size*5)->_string + ChineseWord("fen");
 	linkNum->setString(s);
 	linkNum->setVisible(true);
 }
@@ -104,11 +102,11 @@ void GameLayer::hideLinkNum(){
 
 void GameLayer::floatLeftStarMsg(int leftNum){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* leftStarMsg1 = FloatWord::create("shengyu" + String::createWithFormat("%d",leftNum)->_string +"ge", 
+	FloatWord* leftStarMsg1 = FloatWord::create(ChineseWord("shengyu") + String::createWithFormat("%d",leftNum)->_string +ChineseWord("ge"), 
 		50,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(leftStarMsg1);
     int jiangLiScore = GAMEDATA::getInstance()->getJiangli(leftNum);
-	FloatWord* leftStarMsg2 = FloatWord::create("jiangli" + String::createWithFormat("%d",jiangLiScore)->_string + "fen",
+	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
 		50,Point(visibleSize.width,visibleSize.height/2 - 50));
 	this->addChild(leftStarMsg2);
 
@@ -125,19 +123,17 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 				});
 	leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
 }
-//继续下一关
+
 void GameLayer::gotoNextLevel(){
 	refreshMenu();
 	floatLevelWord();
 }
-//游戏结束
+
 void GameLayer::gotoGameOver(){
-	GAMEDATA::getInstance()->saveHighestScore();//保存最高分
-	/*Size visibleSize = Director::getInstance()->getVisibleSize();
+	GAMEDATA::getInstance()->saveHighestScore();
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* gameOver = FloatWord::create(
 		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOver);
-	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});*/
-	CCLOG("游戏结束","KKKKKKKK");
-	Director::getInstance()->replaceScene(GameOverScene::create());
+	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});
 }

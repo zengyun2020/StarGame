@@ -5,8 +5,6 @@
 using namespace std;
 using namespace cocos2d;
 
-static ValueVector txt_vec = FileUtils::getInstance()->getValueVectorFromFile("ChineseWords.xml");
-
-string ChineseWord(const char* wordId);
+std::string ChineseWord(const char* wordId);
 
 #endif

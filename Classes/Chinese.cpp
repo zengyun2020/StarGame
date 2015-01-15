@@ -1,7 +1,8 @@
 #include "Chinese.h"
-string ChineseWord(const char* wordId)
+std::string ChineseWord(const char* wordId)
 {
-	auto txt_map = txt_vec.at(0).asValueMap();
-	string ret = txt_map.at(wordId).asString();
+	ValueVector txt_vec = FileUtils::getInstance()->getValueVectorFromFile("ChineseWords.plist");
+	 auto txt_map = txt_vec.at(0).asValueMap();
+	 std::string ret = txt_map.at(wordId).asString();
 	return ret;
 }

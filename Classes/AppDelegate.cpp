@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include "Chinese.h"
 
 USING_NS_CC;
 
@@ -29,12 +30,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	auto glview = director->getOpenGLView(); 
 
 	if(!glview) {
-        glview = GLViewImpl::create("Star");
+		glview = GLViewImpl::create(ChineseWord("title"));
         director->setOpenGLView(glview);
     }
  
     /* 游戏设计大小 */
-	//glview->setFrameSize(480, 800);
+	// glview->setFrameSize(480, 800);
     glview->setDesignResolutionSize(480, 800, ResolutionPolicy::SHOW_ALL);
 	
 
