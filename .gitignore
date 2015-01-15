@@ -3,6 +3,7 @@ proj.winp8-xaml/
 proj.win8.1-universal/
 proj.linux/
 cocos2d/
+bin/
 
 #ignore thumbnails created by windows
 Thumbs.db
