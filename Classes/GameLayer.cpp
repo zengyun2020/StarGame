@@ -4,6 +4,7 @@
 #include "StarMatrix.h"
 #include "HelloWorldScene.h"
 #include "Audio.h"
+#include "GameOverScene.h"
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -132,9 +133,11 @@ void GameLayer::gotoNextLevel(){
 
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
-	Size visibleSize = Director::getInstance()->getVisibleSize();
+	/*Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* gameOver = FloatWord::create(
 		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOver);
-	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});
+	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});*/
+	Director::getInstance()->replaceScene(GameOverScene::create());
+}
 }
