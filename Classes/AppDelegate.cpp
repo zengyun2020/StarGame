@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "Chinese.h"
+#include "Audio.h"
 
 USING_NS_CC;
 
@@ -50,6 +51,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // run
     director->runWithScene(scene);
+
+
+	//³õÊ¼»¯ÒôĞ§
+	Audio::getInstance()->prepare();
 
     return true;
 }

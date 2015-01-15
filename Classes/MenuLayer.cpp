@@ -1,6 +1,7 @@
 #include "MenuLayer.h"
 #include "GameScene.h"
 #include "GameData.h"
+#include "Audio.h"
 
 bool MenuLayer::init(){
 	if(!Layer::init()){
@@ -25,6 +26,7 @@ bool MenuLayer::init(){
 }
 
 void MenuLayer::startGame(){
+	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
 	Director::getInstance()->replaceScene(GameScene::create());
 }

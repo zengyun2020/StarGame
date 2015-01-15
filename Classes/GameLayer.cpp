@@ -1,9 +1,9 @@
 #include "GameLayer.h"
-
 #include "GameData.h"
 #include "Chinese.h"
 #include "StarMatrix.h"
 #include "HelloWorldScene.h"
+#include "Audio.h"
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -45,6 +45,7 @@ void GameLayer::floatLevelWord(){
 		);
 	this->addChild(_levelMsg,1);
 	_levelMsg->floatIn(0.5f,CC_CALLBACK_0(GameLayer::floatTargetScoreWord,this));
+	Audio::getInstance()->playReadyGo();
 }
 
 void GameLayer::floatTargetScoreWord(){

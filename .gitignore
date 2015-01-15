@@ -38,15 +38,10 @@ _ReSharper*/
 *.sdf
 
 # Ignore Android SDK, NDK, Eclipse plugin and ANT files
-.classpath
-.project
-.cproject
 local.properties
 proj.android/gen/
 proj.android/bin/
-proj.android/libs/
 proj.android/obj/
-proj.android/assets/
 
 
 # Ignore files build by airplay
