@@ -140,4 +140,3 @@ void GameLayer::gotoGameOver(){
 	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});*/
 	Director::getInstance()->replaceScene(GameOverScene::create());
 }
-}
