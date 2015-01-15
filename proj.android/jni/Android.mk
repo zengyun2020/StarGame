@@ -24,14 +24,11 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
  	 				../../Classes/Star.cpp \
   					../../Classes/StarMatrix.cpp \
   					../../Classes/StarParticle.cpp \
-<<<<<<< HEAD
   					../../Classes/TopMenu.cpp\
   					../../Classes/GameOverScene.cpp\
                     ../../Classes/GameOverLayer.cpp
-=======
   					../../Classes/TopMenu.cpp \
-            ../../Classes/Audio.cpp
->>>>>>> origin/master
+            		../../Classes/Audio.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
