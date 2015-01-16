@@ -14,6 +14,7 @@ public:
 	void updateStar(float delta);
 	void onTouch(const Point& p);
 	void setNeedClear(bool b);
+	void setClearing(bool b);
 	 void initMatrix();
 	
 private:
@@ -35,6 +36,7 @@ private:
 	deque<Star*> selectedList;
 	GameLayer* m_layer;
 	bool needClear;
+	bool clearing;
     static float ONE_CLEAR_TIME;
 	float clearSumTime;
 };

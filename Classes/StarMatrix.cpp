@@ -23,6 +23,7 @@ bool StarMatrix::init(GameLayer* layer){
 	}
 	m_layer = layer;
 	needClear = false;
+	clearing = false;
 	clearSumTime = 0;
 	memset(stars, 0, sizeof(Star*) * ROW_NUM * COL_NUM);
 	initMatrix();
@@ -60,6 +61,11 @@ void StarMatrix::onTouch(const Point& p){
 void StarMatrix::setNeedClear(bool b){
 	needClear = b;
 }
+
+void StarMatrix::setClearing(bool b){
+	clearing = b;
+}
+
 void StarMatrix::initMatrix(){
 	srand(time(0));
 	for(int i=0;i<ROW_NUM;i++){
@@ -159,7 +165,10 @@ void StarMatrix::deleteSelectedList(){
 	m_layer->showLinkNum(selectedList.size());
 	adjustMatrix();
 	if(isEnded()){
-		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
+		if(!clearing){
+			clearing =true;
+				m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
+		}
 		CCLOG("ENDED");
 	}
 }
