@@ -1,5 +1,6 @@
 #include "PlayerRank.h"
-
+PLAYERRANK::PLAYERRANK(){
+}
 PLAYERRANK* PLAYERRANK::_instance = 0;
 PLAYERRANK* PLAYERRANK::getInstance(){
 	if(_instance == 0){

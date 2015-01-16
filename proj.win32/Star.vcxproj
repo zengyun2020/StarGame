@@ -139,6 +139,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Audio.cpp" />
+    <ClCompile Include="..\Classes\CallAndroidMethod.cpp" />
     <ClCompile Include="..\Classes\Chinese.cpp" />
     <ClCompile Include="..\Classes\ComboEffect.cpp" />
     <ClCompile Include="..\Classes\FloatWord.cpp" />

@@ -17,7 +17,7 @@ public:
 	const static int LEVEL_6 = 320000;
 	const static int LEVEL_7 = 400000;
 private:
-	PLAYERRANK::PLAYERRANK(){};
+	PLAYERRANK();
 private:
 	static PLAYERRANK* _instance;
 };
