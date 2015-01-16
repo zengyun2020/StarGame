@@ -10,5 +10,8 @@ public:
 	virtual bool init();
 	CREATE_FUNC(MenuLayer);
 	void startGame();
+	void stopAction();
+	void startAction();
+	void setGoldNum();
 };
 #endif

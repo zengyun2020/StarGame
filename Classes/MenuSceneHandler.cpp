@@ -9,36 +9,36 @@ MenuSceneHandler::MenuSceneHandler()
 {}
 Widget::ccWidgetTouchCallback MenuSceneHandler::onLocateTouchCallback(const string &callBackName)
 {
-    if (callBackName == "buyGold")//判断事件名，返回对应的函数。下同
+     if (callBackName == "buyGold")
     {
-           return CC_CALLBACK_2(MenuSceneHandler::onTouch, this);
+        return CC_CALLBACK_2(MenuSceneHandler::buyGold, this);
     }
+	else if(callBackName == "buyTip"){
+		return CC_CALLBACK_2(MenuSceneHandler::buyTip, this);
+	}
+	else if(callBackName == "upgrade"){
+		return CC_CALLBACK_2(MenuSceneHandler::upgrade, this);
+	}
+	else if(callBackName == "startGame"){
+		return CC_CALLBACK_2(MenuSceneHandler::startGame, this);
+	}
+	else if(callBackName == "getPackage"){
+		return CC_CALLBACK_2(MenuSceneHandler::getPackage, this);
+	}
+	else if(callBackName == "set"){
+		return CC_CALLBACK_2(MenuSceneHandler::set, this);
+	}
+	else if(callBackName == "moreGame"){
+		return CC_CALLBACK_2(MenuSceneHandler::moreGame, this);
+	}
     return nullptr;
 }
 Widget::ccWidgetClickCallback MenuSceneHandler::onLocateClickCallback(const string &callBackName)
 {
-    if (callBackName == "buyGold")
+    if (callBackName == "onClick")
     {
-        return CC_CALLBACK_1(MenuSceneHandler::buyGold, this);
+		return CC_CALLBACK_1(MenuSceneHandler::onClick, this);
     }
-	else if(callBackName == "buyTip"){
-		return CC_CALLBACK_1(MenuSceneHandler::buyTip, this);
-	}
-	else if(callBackName == "upgrade"){
-		return CC_CALLBACK_1(MenuSceneHandler::upgrade, this);
-	}
-	else if(callBackName == "startGame"){
-		return CC_CALLBACK_1(MenuSceneHandler::startGame, this);
-	}
-	else if(callBackName == "getPackage"){
-		return CC_CALLBACK_1(MenuSceneHandler::getPackage, this);
-	}
-	else if(callBackName == "set"){
-		return CC_CALLBACK_1(MenuSceneHandler::set, this);
-	}
-	else if(callBackName == "moreGame"){
-		return CC_CALLBACK_1(MenuSceneHandler::moreGame, this);
-	}
     return nullptr;
 }
 Widget::ccWidgetEventCallback MenuSceneHandler::onLocateEventCallback(const string &callBackName)
@@ -49,49 +49,109 @@ Widget::ccWidgetEventCallback MenuSceneHandler::onLocateEventCallback(const stri
     }
     return nullptr;
 }
-void MenuSceneHandler::buyGold(cocos2d::Ref* sender)
+void MenuSceneHandler::buyGold(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("buyGold");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		
+	}
 }
 
-void MenuSceneHandler::buyTip(cocos2d::Ref* sender)
+void MenuSceneHandler::buyTip(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("buyTip");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		
+	}
 }
 
-void MenuSceneHandler::startGame(cocos2d::Ref* sender)
+void MenuSceneHandler::startGame(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("startGame");
 	MenuLayer *layer = MenuLayer::create();
-	layer->startGame();
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		layer->stopAction();
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		layer->startAction();
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		layer->startGame();
+	}
 }
 
-void MenuSceneHandler::upgrade(cocos2d::Ref* sender)
+void MenuSceneHandler::upgrade(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("upgrade");
-	Director::getInstance()->replaceScene(UpgradeScene::create());
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){		
+		Director::getInstance()->replaceScene(UpgradeScene::create());
+	}
 }
 
-void MenuSceneHandler::getPackage(cocos2d::Ref* sender)
+void MenuSceneHandler::getPackage(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("getPackage");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		
+	}
 }
 
-void MenuSceneHandler::set(cocos2d::Ref* sender)
+void MenuSceneHandler::set(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("set");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		
+	}
 }
 
-void MenuSceneHandler::moreGame(cocos2d::Ref* sender)
+void MenuSceneHandler::moreGame(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("moreGame");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		
+	}
 }
 
-void MenuSceneHandler::onTouch(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
-{
-    CCLOG("onTouch");
+void MenuSceneHandler::onClick(cocos2d::Ref* sender){
+	
 }
-void MenuSceneHandler::onEvent(cocos2d::Ref* sender, int eventType)
-{
-    CCLOG("onEvent");
+
+void MenuSceneHandler::onEvent(cocos2d::Ref* sender, int eventType){
+	
 }
