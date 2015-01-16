@@ -30,7 +30,7 @@ bool StarMatrix::init(GameLayer* layer){
 }
 
 void StarMatrix::updateStar(float delta){
-	
+
 	for(int i = 0;i < ROW_NUM;i++){
 		for(int j = 0;j< COL_NUM;j++){
 			if(stars[i][j]!=nullptr){
@@ -45,15 +45,15 @@ void StarMatrix::updateStar(float delta){
 			clearSumTime = 0;
 		}
 	}
-	
+
 }
 
 void StarMatrix::onTouch(const Point& p){
 	Star* s = getStarByTouch(p);
 	if(s){
-	genSelectedList(s);
-	CCLOG("SIZE = %d",selectedList.size());
-	deleteSelectedList();
+		genSelectedList(s);
+		CCLOG("SIZE = %d",selectedList.size());
+		deleteSelectedList();
 	}
 }
 
@@ -66,7 +66,7 @@ void StarMatrix::initMatrix(){
 		for(int j=0;j<COL_NUM;j++){
 			int color = abs(rand()%Star::COLOR_MAX_NUM);
 			if(color < 0) {
-				 CCLOG("color i=%d,j=%d");
+				CCLOG("color i=%d,j=%d");
 			}
 			Star* star = Star::create(color);
 			stars[i][j] = star;
@@ -89,10 +89,10 @@ Star* StarMatrix::getStarByTouch(const Point& p){
 	int i = ROW_NUM - 1 - k;
 	int j = p.x/Star::STAR_WIDTH;
 	if(i >= 0 && i < ROW_NUM && 
-	   j >= 0 && j < COL_NUM &&
-	   stars[i][j] != nullptr){
-		CCLOG("i=%d,j=%d",i,j);
-		return stars[i][j];
+		j >= 0 && j < COL_NUM &&
+		stars[i][j] != nullptr){
+			CCLOG("i=%d,j=%d",i,j);
+			return stars[i][j];
 	}else{
 		return nullptr;
 	}
@@ -162,7 +162,6 @@ void StarMatrix::deleteSelectedList(){
 		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 		CCLOG("ENDED");
 	}
-
 }
 
 void StarMatrix::adjustMatrix(){
@@ -179,7 +178,7 @@ void StarMatrix::adjustMatrix(){
 						break;
 					}
 				}
-				
+
 				for(int begin_i = i - dis;begin_i >= 0;begin_i--){
 					if(stars[begin_i][j] == nullptr)
 						continue;
@@ -229,6 +228,7 @@ void StarMatrix::refreshScore(){
 
 
 bool StarMatrix::isEnded(){
+	if(getLeftStarNum()<=20){return true;}
 	bool bRet = true;
 	for(int i=0;i<ROW_NUM;i++){
 		for(int j=0;j<COL_NUM;j++){
@@ -265,14 +265,16 @@ void StarMatrix::clearMatrixOneByOne(){
 	}
 	//能够执行到这一句说明Matrix全为空，不在需要清空
 	needClear = false;
-	//转到下一关或者弹出结束游戏的窗口
-	if(GAMEDATA::getInstance()->getCurScore() >= GAMEDATA::getInstance()->getNextScore()){
-		GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
-		m_layer->gotoNextLevel();
+	//转到下一关
+	GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
+	m_layer->gotoNextLevel();
+	/*if(GAMEDATA::getInstance()->getCurScore() >= GAMEDATA::getInstance()->getNextScore()){
+	GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
+	m_layer->gotoNextLevel();
 	}else{
-		m_layer->gotoGameOver();
-		CCLOG("GAME OVER");
-	}
+	m_layer->gotoGameOver();
+	CCLOG("GAME OVER");
+	}*/
 }
 
 int StarMatrix::getLeftStarNum(){
