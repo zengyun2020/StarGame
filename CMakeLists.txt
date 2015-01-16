@@ -130,8 +130,17 @@ set(GAME_SRC
   Classes/TopMenu.cpp
   Classes/GameOverScene.cpp
   Classes/GameOverLayer.cpp
-  Classes/Audio.cpp
-
+  Classes/Audio.cpp  
+  Classes/MenuSceneHandler.cpp
+  Classes/MenuSceneHandlerReader.cpp
+  Classes/GameOver.cpp
+  Classes/GameOverReader.cpp
+  Classes/GameOverScene.cpp
+  Classes/GameOverLayer.cpp
+  Classes/Upgrade.cpp
+  Classes/UpgradeReader.cpp
+  Classes/UpgradeLayer.cpp
+  Classes/UpgradeScene.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -153,6 +162,16 @@ set(GAME_HEADERS
   Classes/GameOverScene.h
   Classes/GameOverLayer.h
   Classes/Audio.h
+  Classes/MenuSceneHandler.h
+  Classes/MenuSceneHandlerReader.h
+  Classes/GameOver.h
+  Classes/GameOverReader.h
+  Classes/GameOverScene.h
+  Classes/GameOverLayer.h
+  Classes/Upgrade.h
+  Classes/UpgradeReader.h
+  Classes/UpgradeLayer.h
+  Classes/UpgradeScene.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

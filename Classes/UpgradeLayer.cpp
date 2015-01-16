@@ -1,15 +1,14 @@
-#include "GameOverLayer.h"
+#include "UpgradeLayer.h"
 #include "HelloWorldScene.h"
-#include "GameScene.h"
 #include "GameData.h"
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
-#include "GameOverReader.h"
+#include "UpgradeReader.h"
 
 using namespace cocos2d;
 
-bool GameOverLayer::init(){
+bool UpgradeLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
@@ -30,22 +29,33 @@ bool GameOverLayer::init(){
 	//this->addChild(menu);
 
 	CSLoader* instance = CSLoader::getInstance();
-	instance->registReaderObject("GameOverReader",(ObjectFactory::Instance)GameOverReader::getInstance);
-	Node *rootNode = CSLoader::createNode("GameOver.csb");
+	instance->registReaderObject("UpgradeReader",(ObjectFactory::Instance)UpgradeReader::getInstance);
+	Node *rootNode = CSLoader::createNode("Upgrade.csb");
 	this->addChild(rootNode);
 
 	return true;
 }
 
-void GameOverLayer::upgrade(){
-	CCLOG(">>>>>upgrade");
+void UpgradeLayer::buyGold(){
+	CCLOG(">>>>>click buy gold");
 }
 
-void GameOverLayer::continueGame(){
-	Director::getInstance()->replaceScene(GameScene::create());
-}
-
-void GameOverLayer::back(){
+void UpgradeLayer::back(){
 	Director::getInstance()->replaceScene(HelloWorld::createScene());
 }
 
+void UpgradeLayer::buyTip(){
+	CCLOG(">>>>>click buy gold");
+}
+
+void UpgradeLayer::addTime(){
+	CCLOG(">>>>>click addTime");
+}
+
+void UpgradeLayer::refresh(){
+	CCLOG(">>>>>click refresh");
+}
+
+void UpgradeLayer::bomb(){
+	CCLOG(">>>>>click bomb");
+}
