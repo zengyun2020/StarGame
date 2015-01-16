@@ -154,6 +154,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MenuLayer.cpp" />
     <ClCompile Include="..\Classes\MenuSceneHandler.cpp" />
     <ClCompile Include="..\Classes\MenuSceneHandlerReader.cpp" />
+    <ClCompile Include="..\Classes\PlayerRank.cpp" />
     <ClCompile Include="..\Classes\Star.cpp" />
     <ClCompile Include="..\Classes\StarMatrix.cpp" />
     <ClCompile Include="..\Classes\StarParticle.cpp" />
@@ -182,6 +183,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MenuLayer.h" />
     <ClInclude Include="..\Classes\MenuSceneHandler.h" />
     <ClInclude Include="..\Classes\MenuSceneHandlerReader.h" />
+    <ClInclude Include="..\Classes\PlayerRank.h" />
     <ClInclude Include="..\Classes\Star.h" />
     <ClInclude Include="..\Classes\StarMatrix.h" />
     <ClInclude Include="..\Classes\StarParticle.h" />
