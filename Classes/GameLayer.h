@@ -26,6 +26,11 @@ public:
 	void floatLeftStarMsg(int leftNum);
 	void gotoNextLevel();
 	void gotoGameOver();
+
+	void updateCustom(float dt);
+	void initTime();//重置游戏时间
+	int getTime();
+	void setTime(int time);
 	
 private:
 	FloatWord* _levelMsg;
@@ -33,6 +38,6 @@ private:
 	TopMenu* menu;
 	StarMatrix* matrix;
 	Label* linkNum;
-	
+	int totalTime;//游戏时间
 };
 #endif

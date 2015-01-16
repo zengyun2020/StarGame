@@ -10,7 +10,8 @@ bool GameLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-
+	initTime();
+	schedule(schedule_selector(GameLayer::updateCustom), 1.0f, kRepeatForever, 0);
 		
 	matrix = nullptr;
 	this->scheduleUpdate();
@@ -139,4 +140,27 @@ void GameLayer::gotoGameOver(){
 	this->addChild(gameOver);
 	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});*/
 	Director::getInstance()->replaceScene(GameOverScene::create());
+}
+
+void GameLayer::initTime(){
+	setTime(60);
+}
+
+int GameLayer::getTime(){
+	return totalTime;
+}
+
+void GameLayer::setTime(int time){
+	GameLayer::totalTime = time;
+}
+
+void GameLayer::updateCustom(float dt){
+	if(totalTime>0){
+	   totalTime--;
+	}
+	CCLOG("Time=%d",totalTime);
+	if(totalTime <= 0){
+	   //时间结束，弹出游戏结算界面
+		gotoGameOver();
+	}
 }
