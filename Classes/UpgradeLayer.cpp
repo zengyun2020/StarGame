@@ -59,7 +59,7 @@ void UpgradeLayer::buyGold(){
 }
 
 void UpgradeLayer::back(){
-	Director::getInstance()->replaceScene(HelloWorld::createScene());
+	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,HelloWorld::createScene()));
 }
 
 void UpgradeLayer::buyTip(){

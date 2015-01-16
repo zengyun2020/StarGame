@@ -60,15 +60,15 @@ bool GameOverLayer::init(){
 
 void GameOverLayer::upgrade(){
 	CCLOG(">>>>>upgrade");
-	Director::getInstance()->replaceScene(UpgradeScene::create());
+	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,UpgradeScene::create()));
 }
 
 void GameOverLayer::continueGame(){
 	GAMEDATA::getInstance()->init();
-	Director::getInstance()->replaceScene(GameScene::create());
+	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,GameScene::create()));
 }
 
 void GameOverLayer::back(){
-	Director::getInstance()->replaceScene(HelloWorld::createScene());
+	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,HelloWorld::createScene()));
 }
 

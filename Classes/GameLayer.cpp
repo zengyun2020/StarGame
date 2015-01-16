@@ -150,7 +150,7 @@ void GameLayer::gotoGameOver(){
 		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOver);
 	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});*/
-	Director::getInstance()->replaceScene(GameOverScene::create());
+	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,GameOverScene::create()));
 }
 
 void GameLayer::initTime(){

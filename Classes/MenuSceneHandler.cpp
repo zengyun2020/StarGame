@@ -102,7 +102,7 @@ void MenuSceneHandler::upgrade(cocos2d::Ref* object, cocos2d::ui::Widget::TouchE
 		
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){		
-		Director::getInstance()->replaceScene(UpgradeScene::create());
+		Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,UpgradeScene::create()));
 	}
 }
 
