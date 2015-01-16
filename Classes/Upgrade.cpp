@@ -9,34 +9,34 @@ Upgrade::Upgrade()
 {}
 Widget::ccWidgetTouchCallback Upgrade::onLocateTouchCallback(const string &callBackName)
 {
-    if (callBackName == "buyGold")//判断事件名，返回对应的函数。下同
+   if (callBackName == "buyGold")
     {
-           return CC_CALLBACK_2(Upgrade::onTouch, this);
+        return CC_CALLBACK_2(Upgrade::buyGold, this);
     }
+	else if(callBackName == "buyTip"){
+		return CC_CALLBACK_2(Upgrade::buyTip, this);
+	}
+	else if(callBackName == "addTime"){
+		return CC_CALLBACK_2(Upgrade::addTime, this);
+	}
+	else if(callBackName == "refresh"){
+		return CC_CALLBACK_2(Upgrade::refresh, this);
+	}
+	else if(callBackName == "bomb"){
+		return CC_CALLBACK_2(Upgrade::bomb, this);
+	}
+	else if(callBackName == "back"){
+		return CC_CALLBACK_2(Upgrade::back, this);
+	}
     return nullptr;
 }
 Widget::ccWidgetClickCallback Upgrade::onLocateClickCallback(const string &callBackName)
 {
 	CCLOG(">>>>>>>>>>>>on click");
-    if (callBackName == "buyGold")
+    if (callBackName == "onClick")
     {
-        return CC_CALLBACK_1(Upgrade::buyGold, this);
+        return CC_CALLBACK_1(Upgrade::onClick, this);
     }
-	else if(callBackName == "buyTip"){
-		return CC_CALLBACK_1(Upgrade::buyTip, this);
-	}
-	else if(callBackName == "addTime"){
-		return CC_CALLBACK_1(Upgrade::addTime, this);
-	}
-	else if(callBackName == "refresh"){
-		return CC_CALLBACK_1(Upgrade::refresh, this);
-	}
-	else if(callBackName == "bomb"){
-		return CC_CALLBACK_1(Upgrade::bomb, this);
-	}
-	else if(callBackName == "back"){
-		return CC_CALLBACK_1(Upgrade::back, this);
-	}
     return nullptr;
 }
 Widget::ccWidgetEventCallback Upgrade::onLocateEventCallback(const string &callBackName)
@@ -47,42 +47,97 @@ Widget::ccWidgetEventCallback Upgrade::onLocateEventCallback(const string &callB
     }
     return nullptr;
 }
-void Upgrade::buyGold(cocos2d::Ref* sender)
+void Upgrade::buyGold(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("buyGold");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+
+	}
 }
 
-void Upgrade::buyTip(cocos2d::Ref* sender)
+void Upgrade::buyTip(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("buyTip");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+
+	}
 }
 
-void Upgrade::addTime(cocos2d::Ref* sender)
+void Upgrade::addTime(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("addTime");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+
+	}
 }
 
-void Upgrade::refresh(cocos2d::Ref* sender)
+void Upgrade::refresh(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("refresh");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+
+	}
 }
 
-void Upgrade::bomb(cocos2d::Ref* sender)
+void Upgrade::bomb(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("bomb");
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+
+	}
 }
 
-void Upgrade::back(cocos2d::Ref* sender)
+void Upgrade::back(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("back");
-	UpgradeLayer *layer = UpgradeLayer::create();
-	layer->back();
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		UpgradeLayer *layer = UpgradeLayer::create();
+		layer->back();
+	}
 }
 
-void Upgrade::onTouch(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
+void Upgrade::onClick(cocos2d::Ref* sender)
 {
-    CCLOG("onTouch");
+    CCLOG("onClick");
 }
+
+
 void Upgrade::onEvent(cocos2d::Ref* sender, int eventType)
 {
     CCLOG("onEvent");

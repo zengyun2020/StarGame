@@ -15,10 +15,10 @@ class GameOver: public cocos2d::Node, public cocostudio::WidgetCallBackHandlerPr
         onLocateClickCallback(const std::string &callBackName);
         virtual cocos2d::ui::Widget::ccWidgetEventCallback
         onLocateEventCallback(const std::string &callBackName);
-		void onTouch(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
-        void upgrade(cocos2d::Ref* sender);
-        void continueGame(cocos2d::Ref* sender);
-        void back(cocos2d::Ref* sender);
+        void upgrade(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void continueGame(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void back(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+		void onClick(cocos2d::Ref* sender);
         void onEvent(cocos2d::Ref* sender, int eventType);
     private:
         std::vector<std::string> _touchTypes;

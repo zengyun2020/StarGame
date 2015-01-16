@@ -34,19 +34,21 @@ bool MenuLayer::init(){
 	this->addChild(rootNode);
 	Audio::getInstance()->playBGM();
 
-	auto labelLv = Label::create("Lv"+GAMEDATA::getInstance()->getUserLevel(),"Arial",24);
+	auto labelLv = Label::create("Lv"+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getUserLevel())->_string,"Arial",24);
 	labelLv->setColor(Color3B::GREEN);
 	labelLv->setPosition(107,718);
 	labelLv->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(labelLv);
 
-	auto labelGb = Label::create(""+GAMEDATA::getInstance()->getGoldNum(),"Arial",24);
+	CCString* goldNum =CCString::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum());
+	auto labelGb = Label::create("12","Arial",24);
 	labelGb->setColor(Color3B::GREEN);
 	labelGb->setPosition(200,736);
 	labelGb->setAnchorPoint(Point(0,0.5));
 	this->addChild(labelGb);
 
-	auto labelPs = Label::create(""+GAMEDATA::getInstance()->getPowerStoneNum(),"Arial",24);
+	CCString* powerStoneNum =CCString::createWithFormat("%d",GAMEDATA::getInstance()->getPowerStoneNum());
+	auto labelPs = Label::create(powerStoneNum->_string,"Arial",24);
 	labelPs->setColor(Color3B::GREEN);
 	labelPs->setPosition(200,705);
 	labelPs->setAnchorPoint(Point(0,0.5));

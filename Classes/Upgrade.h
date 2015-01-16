@@ -15,13 +15,13 @@ class Upgrade: public cocos2d::Node, public cocostudio::WidgetCallBackHandlerPro
         onLocateClickCallback(const std::string &callBackName);
         virtual cocos2d::ui::Widget::ccWidgetEventCallback
         onLocateEventCallback(const std::string &callBackName);
-		void onTouch(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
-        void buyGold(cocos2d::Ref* sender);
-        void buyTip(cocos2d::Ref* sender);
-        void addTime(cocos2d::Ref* sender);
-        void refresh(cocos2d::Ref* sender);
-        void bomb(cocos2d::Ref* sender);
-        void back(cocos2d::Ref* sender);
+        void buyGold(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void buyTip(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void addTime(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void refresh(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void bomb(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void back(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void onClick(cocos2d::Ref* sender);
         void onEvent(cocos2d::Ref* sender, int eventType);
     private:
         std::vector<std::string> _touchTypes;

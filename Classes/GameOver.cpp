@@ -9,24 +9,24 @@ GameOver::GameOver()
 {}
 Widget::ccWidgetTouchCallback GameOver::onLocateTouchCallback(const string &callBackName)
 {
-    if (callBackName == "upgrade")//判断事件名，返回对应的函数。下同
+    if (callBackName == "upgrade")
     {
-           return CC_CALLBACK_2(GameOver::onTouch, this);
+        return CC_CALLBACK_2(GameOver::upgrade, this);
     }
+	else if(callBackName == "continueGame"){
+		return CC_CALLBACK_2(GameOver::continueGame, this);
+	}
+	else if(callBackName == "back"){
+		return CC_CALLBACK_2(GameOver::back, this);
+	}
     return nullptr;
 }
 Widget::ccWidgetClickCallback GameOver::onLocateClickCallback(const string &callBackName)
 {
-    if (callBackName == "upgrade")
+    if (callBackName == "onClick")
     {
-        return CC_CALLBACK_1(GameOver::upgrade, this);
+        return CC_CALLBACK_1(GameOver::onClick, this);
     }
-	else if(callBackName == "continueGame"){
-		return CC_CALLBACK_1(GameOver::continueGame, this);
-	}
-	else if(callBackName == "back"){
-		return CC_CALLBACK_1(GameOver::back, this);
-	}
     return nullptr;
 }
 Widget::ccWidgetEventCallback GameOver::onLocateEventCallback(const string &callBackName)
@@ -37,31 +37,56 @@ Widget::ccWidgetEventCallback GameOver::onLocateEventCallback(const string &call
     }
     return nullptr;
 }
-void GameOver::upgrade(cocos2d::Ref* sender)
+void GameOver::upgrade(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("upgrade");
-	GameOverLayer *layer = GameOverLayer::create();
-	layer->upgrade();
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		GameOverLayer *layer = GameOverLayer::create();
+		layer->upgrade();
+	}
 }
 
-void GameOver::continueGame(cocos2d::Ref* sender)
+void GameOver::continueGame(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("continueGame");
-	GameOverLayer *layer = GameOverLayer::create();
-	layer->continueGame();
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		GameOverLayer *layer = GameOverLayer::create();
+		layer->continueGame();
+	}
 }
 
-void GameOver::back(cocos2d::Ref* sender)
+void GameOver::back(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("back");
-	GameOverLayer *layer = GameOverLayer::create();
-	layer->back();
+	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
+		
+	}
+	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
+		GameOverLayer *layer = GameOverLayer::create();
+		layer->back();
+	}
 }
 
-void GameOver::onTouch(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
+void GameOver::onClick(cocos2d::Ref* sender)
 {
-    CCLOG("onTouch");
+    CCLOG("onClick");
 }
+
 void GameOver::onEvent(cocos2d::Ref* sender, int eventType)
 {
     CCLOG("onEvent");

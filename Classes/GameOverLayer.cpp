@@ -36,19 +36,20 @@ bool GameOverLayer::init(){
 	Node *rootNode = CSLoader::createNode("GameOver.csb");
 	this->addChild(rootNode);
 
-	auto labelScore = Label::create("Lv"+GAMEDATA::getInstance()->getCurScore(),"Arial",36);
+	int score = GAMEDATA::getInstance()->getCurScore();
+	auto labelScore = Label::create(cocos2d::String::createWithFormat("%d",score)->_string,"Arial",36);
 	labelScore->setColor(Color3B::GREEN);
 	labelScore->setPosition(240,564);
 	labelScore->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(labelScore);
 
-	auto labelRank = Label::create(""+PlayerRank::getRankList(GAMEDATA::getInstance()->getCurScore()),"Arial",36);
+	auto labelRank = Label::create(cocos2d::String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankList(score))->_string,"Arial",36);
 	labelRank->setColor(Color3B::GREEN);
 	labelRank->setPosition(297,503);
 	labelRank->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(labelRank);
 
-	auto labelPer = Label::create(""+PlayerRank::getRankPer(GAMEDATA::getInstance()->getCurScore()),"Arial",36);
+	auto labelPer = Label::create(cocos2d::String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankPer(score))->_string,"Arial",36);
 	labelPer->setColor(Color3B::GREEN);
 	labelPer->setPosition(267,433);
 	labelPer->setAnchorPoint(Point(0.5,0.5));

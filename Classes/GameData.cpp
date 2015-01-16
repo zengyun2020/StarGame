@@ -16,6 +16,9 @@ void GAMEDATA::init(){
     setCurLevel(0);
 	setCurScore(0);
 	setHistoryScore(UserDefault::getInstance()->getIntegerForKey("highestScore",0));
+	setUserLevel(UserDefault::getInstance()->getIntegerForKey("userLevel",0));
+	setGoldNum(UserDefault::getInstance()->getIntegerForKey("goldNum",0));
+	setPowerStoneNum(UserDefault::getInstance()->getIntegerForKey("powerStoneNum",0));
 }
 
 void GAMEDATA::setCurLevel(int level){
