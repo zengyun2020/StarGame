@@ -22,6 +22,7 @@ public:
 	virtual bool onTouchBegan(Touch* touch,Event* event);
 	void refreshMenu();
 	void showLinkNum(int size);
+	void showGameTime(int time);
 	void hideLinkNum();
 	void floatLeftStarMsg(int leftNum);
 	void gotoNextLevel();
@@ -38,6 +39,7 @@ private:
 	TopMenu* menu;
 	StarMatrix* matrix;
 	Label* linkNum;
+	Label* gameTime;//游戏时间显示
 	int totalTime;//游戏时间
 };
 #endif
