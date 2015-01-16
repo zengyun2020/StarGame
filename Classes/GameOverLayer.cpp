@@ -44,6 +44,7 @@ void GameOverLayer::upgrade(){
 }
 
 void GameOverLayer::continueGame(){
+	GAMEDATA::getInstance()->init();
 	Director::getInstance()->replaceScene(GameScene::create());
 }
 

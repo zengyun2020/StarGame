@@ -34,5 +34,6 @@ private:
 	int cur_score;
 	int next_score;
 	friend class MenuLayer;
+	friend class GameOverLayer;
 };
 #endif
