@@ -31,7 +31,11 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../Classes/GameOver.cpp\
 					../../Classes/GameOverReader.cpp\
 					../../Classes/GameOverScene.cpp\
-					../../Classes/GameOverLayer.cpp
+					../../Classes/GameOverLayer.cpp\
+          ../../Classes/Upgrade.cpp\
+          ../../Classes/UpgradeReader.cpp\
+          ../../Classes/UpgradeLayer.cpp\
+          ../../Classes/UpgradeScene.cpp\
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
