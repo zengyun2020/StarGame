@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "cocostudio/WidgetCallBackHandlerProtocol.h"
+#include "MenuLayer.h"
 
 class MenuSceneHandler: public cocos2d::Node, public cocostudio::WidgetCallBackHandlerProtocol
 {
@@ -15,14 +16,14 @@ class MenuSceneHandler: public cocos2d::Node, public cocostudio::WidgetCallBackH
         onLocateClickCallback(const std::string &callBackName);
         virtual cocos2d::ui::Widget::ccWidgetEventCallback
         onLocateEventCallback(const std::string &callBackName);
-		void onTouch(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
-        void buyGold(cocos2d::Ref* sender);
-        void buyTip(cocos2d::Ref* sender);
-        void upgrade(cocos2d::Ref* sender);
-        void startGame(cocos2d::Ref* sender);
-        void getPackage(cocos2d::Ref* sender);
-        void set(cocos2d::Ref* sender);
-        void moreGame(cocos2d::Ref* sender);
+		void buyGold(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void buyTip(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void upgrade(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void startGame(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void getPackage(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void set(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+        void moreGame(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+		void onClick(cocos2d::Ref* sender);
         void onEvent(cocos2d::Ref* sender, int eventType);
     private:
         std::vector<std::string> _touchTypes;

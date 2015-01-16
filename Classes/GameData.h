@@ -18,11 +18,23 @@ public:
 	/*通关分数*/
 	inline int getNextScore(){return next_score;}
 	inline int getScoreByLevel(int level);
+	/*金币数量*/
+	inline void setGoldNum(int goldNum){gold_num = goldNum;}
+	inline int getGoldNum(){return gold_num;}
+	/*能量石数量*/
+	inline void setPowerStoneNum(int powerStoneNum){power_stone_num = powerStoneNum;}
+	inline int getPowerStoneNum(){return power_stone_num;}
+	/*玩家等级*/
+	inline void setUserLevel(int userLevel){user_level = userLevel;}
+	inline int getUserLevel(){return user_level;}
 
 	/*奖励分数*/
 	int getJiangli(int size);
 
 	void saveHighestScore();
+	void saveGoldNum();
+	void savePowerStoneNum();
+	void saveUserLevel();
 private:
 	GAMEDATA();
 	void init();
@@ -33,6 +45,9 @@ private:
 	int history_score;
 	int cur_score;
 	int next_score;
+	int gold_num;
+	int power_stone_num;
+	int user_level;
 	friend class MenuLayer;
 	friend class GameOverLayer;
 };

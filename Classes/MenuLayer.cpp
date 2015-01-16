@@ -7,6 +7,8 @@
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
 #include "MenuSceneHandlerReader.h"
 
+using namespace cocostudio::timeline;
+
 bool MenuLayer::init(){
 	if(!Layer::init()){
 		return false;
@@ -31,6 +33,31 @@ bool MenuLayer::init(){
 	Node *rootNode = CSLoader::createNode("MenuLayer.csb");
 	this->addChild(rootNode);
 	Audio::getInstance()->playBGM();
+
+	auto labelLv = Label::create("Lv"+GAMEDATA::getInstance()->getUserLevel(),"Arial",24);
+	labelLv->setColor(Color3B::GREEN);
+	labelLv->setPosition(107,718);
+	labelLv->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(labelLv);
+
+	auto labelGb = Label::create(""+GAMEDATA::getInstance()->getGoldNum(),"Arial",24);
+	labelGb->setColor(Color3B::GREEN);
+	labelGb->setPosition(200,736);
+	labelGb->setAnchorPoint(Point(0,0.5));
+	this->addChild(labelGb);
+
+	auto labelPs = Label::create(""+GAMEDATA::getInstance()->getPowerStoneNum(),"Arial",24);
+	labelPs->setColor(Color3B::GREEN);
+	labelPs->setPosition(200,705);
+	labelPs->setAnchorPoint(Point(0,0.5));
+	this->addChild(labelPs);
+
+	//加载动画： 
+	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
+	rootNode->runAction(action);//注!!!：同一个文件创建的节点只能使用同一个文件创建的动画。   
+  
+	//播放动画： 
+	action->gotoFrameAndPlay(0,480,true);//从第0帧到60帧循环播放
 	return true;
 }
 
@@ -38,4 +65,18 @@ void MenuLayer::startGame(){
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
 	Director::getInstance()->replaceScene(GameScene::create());
+}
+
+void MenuLayer::startAction(){
+	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
+	action->resume();
+}
+
+void MenuLayer::stopAction(){
+	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
+	action->stop();
+}
+
+void MenuLayer::setGoldNum(){
+	
 }

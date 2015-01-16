@@ -33,6 +33,24 @@ bool UpgradeLayer::init(){
 	Node *rootNode = CSLoader::createNode("Upgrade.csb");
 	this->addChild(rootNode);
 
+	auto labelLv = Label::create("Lv"+GAMEDATA::getInstance()->getUserLevel(),"Arial",36);
+	labelLv->setColor(Color3B::GREEN);
+	labelLv->setPosition(113,714);
+	labelLv->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(labelLv);
+
+	auto labelGb = Label::create(""+GAMEDATA::getInstance()->getGoldNum(),"Arial",36);
+	labelGb->setColor(Color3B::GREEN);
+	labelGb->setPosition(230,733);
+	labelGb->setAnchorPoint(Point(0,0.5));
+	this->addChild(labelGb);
+
+	auto labelPs = Label::create(""+GAMEDATA::getInstance()->getPowerStoneNum(),"Arial",36);
+	labelPs->setColor(Color3B::GREEN);
+	labelPs->setPosition(230,691);
+	labelPs->setAnchorPoint(Point(0,0.5));
+	this->addChild(labelPs);
+
 	return true;
 }
 

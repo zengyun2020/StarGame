@@ -72,3 +72,15 @@ int GAMEDATA::getJiangli(int size){
 void GAMEDATA::saveHighestScore(){
 	UserDefault::getInstance()->setIntegerForKey("highestScore",getHistoryScore());
 }
+
+void GAMEDATA::saveGoldNum(){
+	UserDefault::getInstance()->setIntegerForKey("goldNum",getGoldNum());
+}
+
+void GAMEDATA::savePowerStoneNum(){
+	UserDefault::getInstance()->setIntegerForKey("powerStoneNum",getPowerStoneNum());
+}
+
+void GAMEDATA::saveUserLevel(){
+	UserDefault::getInstance()->setIntegerForKey("userLevel",getUserLevel());
+}
