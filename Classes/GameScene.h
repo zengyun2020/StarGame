@@ -6,5 +6,6 @@ class GameScene : public Scene{
 public:
 	virtual bool init();
 	CREATE_FUNC(GameScene);
+
 };
 #endif

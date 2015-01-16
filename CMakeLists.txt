@@ -141,6 +141,7 @@ set(GAME_SRC
   Classes/UpgradeReader.cpp
   Classes/UpgradeLayer.cpp
   Classes/UpgradeScene.cpp
+  Classes/PlayerRank.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -172,6 +173,7 @@ set(GAME_HEADERS
   Classes/UpgradeReader.h
   Classes/UpgradeLayer.h
   Classes/UpgradeScene.h
+  Classes/PlayerRank.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

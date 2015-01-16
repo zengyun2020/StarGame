@@ -10,7 +10,8 @@ bool GameLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-
+	initTime();
+	schedule(schedule_selector(GameLayer::updateCustom), 1.0f, kRepeatForever, 0);
 		
 	matrix = nullptr;
 	this->scheduleUpdate();
@@ -30,6 +31,11 @@ bool GameLayer::init(){
 	linkNum->setPosition(visibleSize.width/2,visibleSize.height-250);
 	linkNum->setVisible(false);
 	this->addChild(linkNum,1);
+
+	gameTime = Label::create("","Arial",40);
+	gameTime->setPosition(100,visibleSize.height-200);
+	showGameTime(totalTime);
+	this->addChild(gameTime,0);
 
 	 this->floatLevelWord();
 	
@@ -102,6 +108,12 @@ void GameLayer::hideLinkNum(){
 	linkNum->setVisible(false);
 }
 
+void GameLayer::showGameTime(int time){
+	string s = ChineseWord("shengyu") + String::createWithFormat("%d",time)->_string + ChineseWord("miao");
+	gameTime->setString(s);
+}
+
+
 void GameLayer::floatLeftStarMsg(int leftNum){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* leftStarMsg1 = FloatWord::create(ChineseWord("shengyu") + String::createWithFormat("%d",leftNum)->_string +ChineseWord("ge"), 
@@ -139,4 +151,28 @@ void GameLayer::gotoGameOver(){
 	this->addChild(gameOver);
 	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});*/
 	Director::getInstance()->replaceScene(GameOverScene::create());
+}
+
+void GameLayer::initTime(){
+	setTime(60);
+}
+
+int GameLayer::getTime(){
+	return totalTime;
+}
+
+void GameLayer::setTime(int time){
+	GameLayer::totalTime = time;
+}
+
+void GameLayer::updateCustom(float dt){
+	if(totalTime>0){
+	   totalTime--;
+	   showGameTime(totalTime);
+	}
+	CCLOG("Time=%d",totalTime);
+	if(totalTime <= 0){
+	   //时间结束，弹出游戏结算界面
+		gotoGameOver();
+	}
 }

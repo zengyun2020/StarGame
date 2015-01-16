@@ -29,6 +29,13 @@
   
   <key>jiangli</key>
   <string>奖励</string>
+
+   <key>shengyu</key>
+  <string>剩余</string>
+
+   <key>miao</key>
+  <string>秒</string>
+
 </dict>
 
 </array>
