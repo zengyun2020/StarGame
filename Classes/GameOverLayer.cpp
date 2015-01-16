@@ -6,6 +6,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
 #include "GameOverReader.h"
+#include "UpgradeScene.h"
 
 using namespace cocos2d;
 
@@ -39,6 +40,7 @@ bool GameOverLayer::init(){
 
 void GameOverLayer::upgrade(){
 	CCLOG(">>>>>upgrade");
+	Director::getInstance()->replaceScene(UpgradeScene::create());
 }
 
 void GameOverLayer::continueGame(){

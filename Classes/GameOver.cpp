@@ -1,6 +1,7 @@
 #include "GameOver.h"
 #include "ui/UIText.h"
 #include "GameOverLayer.h"
+#include "UpgradeLayer.h"
 USING_NS_CC;
 using namespace std;
 using namespace cocos2d::ui;
@@ -39,6 +40,8 @@ Widget::ccWidgetEventCallback GameOver::onLocateEventCallback(const string &call
 void GameOver::upgrade(cocos2d::Ref* sender)
 {
     CCLOG("upgrade");
+	GameOverLayer *layer = GameOverLayer::create();
+	layer->upgrade();
 }
 
 void GameOver::continueGame(cocos2d::Ref* sender)
