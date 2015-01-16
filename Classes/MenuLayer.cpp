@@ -34,11 +34,23 @@ bool MenuLayer::init(){
 	this->addChild(rootNode);
 	Audio::getInstance()->playBGM();
 
-	auto labelGb = Label::create("1000","Arial",24);
+	auto labelLv = Label::create("Lv"+GAMEDATA::getInstance()->getUserLevel(),"Arial",24);
+	labelLv->setColor(Color3B::GREEN);
+	labelLv->setPosition(107,718);
+	labelLv->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(labelLv);
+
+	auto labelGb = Label::create(""+GAMEDATA::getInstance()->getGoldNum(),"Arial",24);
 	labelGb->setColor(Color3B::GREEN);
 	labelGb->setPosition(200,736);
 	labelGb->setAnchorPoint(Point(0,0.5));
 	this->addChild(labelGb);
+
+	auto labelPs = Label::create(""+GAMEDATA::getInstance()->getPowerStoneNum(),"Arial",24);
+	labelPs->setColor(Color3B::GREEN);
+	labelPs->setPosition(200,705);
+	labelPs->setAnchorPoint(Point(0,0.5));
+	this->addChild(labelPs);
 
 	//º”‘ÿ∂Øª≠£∫ 
 	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
