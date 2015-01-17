@@ -51,24 +51,25 @@ void GameLayer::floatLevelWord(){
 		50, Point(visibleSize.width,visibleSize.height/3*2)
 		);
 	this->addChild(_levelMsg,1);
-	_levelMsg->floatIn(0.5f,CC_CALLBACK_0(GameLayer::floatTargetScoreWord,this));
+	_levelMsg->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
 	Audio::getInstance()->playReadyGo();
 }
 
-void GameLayer::floatTargetScoreWord(){
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	_targetScore = FloatWord::create(
-		ChineseWord("mubiao") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen"),
-		50, Point(visibleSize.width,visibleSize.height/3)
-		);
-	this->addChild(_targetScore,1);
-	_targetScore->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
-
-}
+//void GameLayer::floatTargetScoreWord(){
+//	Size visibleSize = Director::getInstance()->getVisibleSize();
+//	_targetScore = FloatWord::create(
+//		ChineseWord("mubiao") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen"),
+//		50, Point(visibleSize.width,visibleSize.height/3)
+//		);
+//	this->addChild(_targetScore,1);
+//	_targetScore->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
+//
+//}
 
 void GameLayer::removeFloatWord(){
-	_levelMsg->floatOut(0.5f,nullptr);
-	_targetScore->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
+
+	_levelMsg->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
+	//_targetScore->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
 }
 
 void GameLayer::showStarMatrix(){

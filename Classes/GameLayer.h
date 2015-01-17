@@ -15,7 +15,7 @@ public:
 	CREATE_FUNC(GameLayer);
 	
 	void floatLevelWord();
-	void floatTargetScoreWord();
+	//void floatTargetScoreWord();
 	void removeFloatWord();
 	void showStarMatrix();
 	virtual void update(float delta);
@@ -35,7 +35,7 @@ public:
 	
 private:
 	FloatWord* _levelMsg;
-	FloatWord* _targetScore;
+	//FloatWord* _targetScore;
 	TopMenu* menu;
 	StarMatrix* matrix;
 	Label* linkNum;
