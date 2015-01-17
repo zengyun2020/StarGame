@@ -29,9 +29,9 @@ public:
 	void gotoGameOver();
 
 	void updateCustom(float dt);
-	void initTime();//重置游戏时间
+	void initTime();  //閲嶇疆娓告垙鏃堕棿
 	int getTime();
-	void setTime(int time);
+	void plusTime(int time);
 	
 private:
 	FloatWord* _levelMsg;
@@ -39,7 +39,7 @@ private:
 	TopMenu* menu;
 	StarMatrix* matrix;
 	Label* linkNum;
-	Label* gameTime;//游戏时间显示
-	int totalTime;//游戏时间
+	Label* gameTime;//娓告垙鏃堕棿鏄剧ず
+	int totalTime;//娓告垙鏃堕棿
 };
 #endif

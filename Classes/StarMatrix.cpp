@@ -58,6 +58,19 @@ void StarMatrix::onTouch(const Point& p){
 	}
 }
 
+void StarMatrix::useBombAuto(){
+	CCLOG("BOMB BOMB BOMB BOMB BOMB");
+	Star* s=nullptr;
+	auto i=5;
+	auto j=5;
+	if(stars[i][j] != nullptr){
+			s=stars[i][j];
+	}
+	genBombList(s);
+	CCLOG("BOMB SIZE = %d",selectedList.size());
+	deleteSelectedList();
+}
+
 void StarMatrix::setNeedClear(bool b){
 	needClear = b;
 }

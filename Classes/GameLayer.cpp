@@ -145,7 +145,7 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 void GameLayer::gotoNextLevel(){
 	refreshMenu();
 	floatLevelWord();
-	matrix->setClearing(false);
+	matrix->setAcceptTouch(true);
 	Audio::getInstance()->playNextGameRound();
 }
 
@@ -160,21 +160,28 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	setTime(60);
+	GameLayer::totalTime = 60;
 }
 
 int GameLayer::getTime(){
 	return totalTime;
 }
 
-void GameLayer::setTime(int time){
-	GameLayer::totalTime = time;
+void GameLayer::plusTime(int time){
+	GameLayer::totalTime += time;
 }
 
 void GameLayer::updateCustom(float dt){
 	totalTime--;
+	//if(totalTime==50){
+	//	matrix->useBombAuto();//使用一次炸弹
+	//}
 
-	CCLOG("Time=%d",totalTime);
+	if(totalTime<=5){
+		Audio::getInstance()->playBeep();//倒计时报警
+	}
+
+	//CCLOG("Time=%d",totalTime);
 	if(totalTime == 0){
 		//时间结束，弹出游戏结算界面
 		gotoGameOver();
