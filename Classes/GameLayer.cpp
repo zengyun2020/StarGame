@@ -1,4 +1,4 @@
-#include "GameLayer.h"
+ï»¿#include "GameLayer.h"
 #include "GameData.h"
 #include "Chinese.h"
 #include "StarMatrix.h"
@@ -171,7 +171,7 @@ void GameLayer::updateCustom(float dt){
 
 	CCLOG("Time=%d",totalTime);
 	if(totalTime == 0){
-		//Ê±¼ä½áÊø£¬µ¯³öÓÎÏ·½áËã½çÃæ
+		//æ—¶é—´ç»“æŸï¼Œå¼¹å‡ºæ¸¸æˆç»“ç®—ç•Œé¢
 		gotoGameOver();
 	}
 	if(totalTime<0){
