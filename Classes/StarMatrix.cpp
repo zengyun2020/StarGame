@@ -2,7 +2,7 @@
 #include "GameData.h"
 #include "StarParticle.h"
 #include "ComboEffect.h"
-
+#include "Audio.h"
 #include <ctime>
 
 float StarMatrix::ONE_CLEAR_TIME = 0.05f;
@@ -104,6 +104,7 @@ Star* StarMatrix::getStarByTouch(const Point& p){
 	}
 }
 
+//消除检查
 void StarMatrix::genSelectedList(Star* s){
 	selectedList.clear();
 	deque<Star*> travelList;
@@ -143,6 +144,7 @@ void StarMatrix::genSelectedList(Star* s){
 	}
 }
 
+
 void StarMatrix::deleteSelectedList(){
 	if(selectedList.size() <= 1){
 		m_layer->hideLinkNum();
@@ -151,6 +153,8 @@ void StarMatrix::deleteSelectedList(){
 	}
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
+		//播放消除音效
+		Audio::getInstance()->playPop();
 		Star* star = *it;
 		//粒子效果
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);

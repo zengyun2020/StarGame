@@ -66,17 +66,20 @@ void GameLayer::floatLevelWord(){
 //
 //}
 
+//移除飘字
 void GameLayer::removeFloatWord(){
 
 	_levelMsg->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
 	//_targetScore->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
 }
 
+//显示星星矩阵
 void GameLayer::showStarMatrix(){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
 }
 
+//更新方法，scheduleUpdate,每帧调用
 void GameLayer::update(float delta){
 	if(matrix){
 		matrix->updateStar(delta);
