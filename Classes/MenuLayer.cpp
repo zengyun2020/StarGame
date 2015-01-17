@@ -30,7 +30,7 @@ bool MenuLayer::init(){
 	//this->addChild(menu);
 	CSLoader* instance = CSLoader::getInstance();
 	instance->registReaderObject("MenuSceneHandlerReader",(ObjectFactory::Instance)MenuSceneHandlerReader::getInstance);
-	Node *rootNode = CSLoader::createNode("MenuLayer.csb");
+	auto rootNode = CSLoader::createNode("MenuLayer.csb");
 	this->addChild(rootNode);
 	Audio::getInstance()->playBGM();
 
@@ -38,21 +38,21 @@ bool MenuLayer::init(){
 	labelLv->setColor(Color3B::GREEN);
 	labelLv->setPosition(107,718);
 	labelLv->setAnchorPoint(Point(0.5,0.5));
-	this->addChild(labelLv);
+	rootNode->addChild(labelLv);
 
 	CCString* goldNum =CCString::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum());
 	auto labelGb = Label::create("12","Arial",24);
 	labelGb->setColor(Color3B::GREEN);
 	labelGb->setPosition(200,736);
 	labelGb->setAnchorPoint(Point(0,0.5));
-	this->addChild(labelGb);
+	rootNode->addChild(labelGb);
 
 	CCString* powerStoneNum =CCString::createWithFormat("%d",GAMEDATA::getInstance()->getPowerStoneNum());
 	auto labelPs = Label::create(powerStoneNum->_string,"Arial",24);
 	labelPs->setColor(Color3B::GREEN);
 	labelPs->setPosition(200,705);
 	labelPs->setAnchorPoint(Point(0,0.5));
-	this->addChild(labelPs);
+	rootNode->addChild(labelPs);
 
 	//加载动画： 
 	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
@@ -61,6 +61,11 @@ bool MenuLayer::init(){
 	//播放动画： 
 	action->gotoFrameAndPlay(0,480,true);//从第0帧到60帧循环播放
 	return true;
+}
+
+void MenuLayer::clickGetPrize(){
+	auto rootNode = CSLoader::createNode("MenuLayer.csb");
+	rootNode->getChildByName("get_package")->setScale(0.9f,0.9f);
 }
 
 void MenuLayer::startGame(){

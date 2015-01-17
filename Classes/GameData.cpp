@@ -19,6 +19,7 @@ void GAMEDATA::init(){
 	setUserLevel(UserDefault::getInstance()->getIntegerForKey("userLevel",0));
 	setGoldNum(UserDefault::getInstance()->getIntegerForKey("goldNum",0));
 	setPowerStoneNum(UserDefault::getInstance()->getIntegerForKey("powerStoneNum",0));
+	setPrizeTimes(UserDefault::getInstance()->getIntegerForKey("prizeTimes",3));
 }
 
 void GAMEDATA::setCurLevel(int level){
@@ -86,4 +87,8 @@ void GAMEDATA::savePowerStoneNum(){
 
 void GAMEDATA::saveUserLevel(){
 	UserDefault::getInstance()->setIntegerForKey("userLevel",getUserLevel());
+}
+
+void GAMEDATA::savePrizeTimes(){
+	UserDefault::getInstance()->setIntegerForKey("prizeTimes",getPrizeTimes());
 }

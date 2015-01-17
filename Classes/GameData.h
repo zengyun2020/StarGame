@@ -27,6 +27,9 @@ public:
 	/*玩家等级*/
 	inline void setUserLevel(int userLevel){user_level = userLevel;}
 	inline int getUserLevel(){return user_level;}
+	/*剩余抽奖次数*/
+	inline void setPrizeTimes(int prizeTimes){prize_times = prizeTimes;}
+	inline int getPrizeTimes(){return prize_times;}
 
 	/*奖励分数*/
 	int getJiangli(int size);
@@ -35,6 +38,7 @@ public:
 	void saveGoldNum();
 	void savePowerStoneNum();
 	void saveUserLevel();
+	void savePrizeTimes();
 private:
 	GAMEDATA();
 	void init();
@@ -48,6 +52,7 @@ private:
 	int gold_num;
 	int power_stone_num;
 	int user_level;
+	int prize_times;
 	friend class MenuLayer;
 	friend class GameOverLayer;
 };

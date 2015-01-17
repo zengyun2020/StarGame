@@ -13,5 +13,6 @@ public:
 	void stopAction();
 	void startAction();
 	void setGoldNum();
+	void clickGetPrize();
 };
 #endif

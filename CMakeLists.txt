@@ -142,6 +142,12 @@ set(GAME_SRC
   Classes/UpgradeLayer.cpp
   Classes/UpgradeScene.cpp
   Classes/PlayerRank.cpp
+  Classes/Prize.cpp
+  Classes/PrizeReader.cpp
+  Classes/PrizeScene.cpp
+  Classes/PrizeLayer.cpp
+  Classes/PrizeAnim.cpp
+  Classes/PrizeAnimReader.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -174,6 +180,12 @@ set(GAME_HEADERS
   Classes/UpgradeLayer.h
   Classes/UpgradeScene.h
   Classes/PlayerRank.h
+  Classes/Prize.h
+  Classes/PrizeReader.h
+  Classes/PrizeScene.h
+  Classes/PrizeLayer.h
+  Classes/PrizeAnim.h
+  Classes/PrizeAnimReader.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

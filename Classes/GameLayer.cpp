@@ -114,7 +114,9 @@ void GameLayer::hideLinkNum(){
 
 void GameLayer::showGameTime(int time){
 	string s = ChineseWord("shengyu") + String::createWithFormat("%d",time)->_string + ChineseWord("miao");
-	gameTime->setString(s);
+	if(gameTime){
+		gameTime->setString(s);
+	}
 }
 
 

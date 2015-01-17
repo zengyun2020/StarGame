@@ -156,6 +156,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MenuSceneHandler.cpp" />
     <ClCompile Include="..\Classes\MenuSceneHandlerReader.cpp" />
     <ClCompile Include="..\Classes\PlayerRank.cpp" />
+    <ClCompile Include="..\Classes\Prize.cpp" />
+    <ClCompile Include="..\Classes\PrizeAnim.cpp" />
+    <ClCompile Include="..\Classes\PrizeAnimReader.cpp" />
+    <ClCompile Include="..\Classes\PrizeLayer.cpp" />
+    <ClCompile Include="..\Classes\PrizeReader.cpp" />
+    <ClCompile Include="..\Classes\PrizeScene.cpp" />
     <ClCompile Include="..\Classes\Star.cpp" />
     <ClCompile Include="..\Classes\StarMatrix.cpp" />
     <ClCompile Include="..\Classes\StarParticle.cpp" />
@@ -185,6 +191,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MenuSceneHandler.h" />
     <ClInclude Include="..\Classes\MenuSceneHandlerReader.h" />
     <ClInclude Include="..\Classes\PlayerRank.h" />
+    <ClInclude Include="..\Classes\Prize.h" />
+    <ClInclude Include="..\Classes\PrizeAnim.h" />
+    <ClInclude Include="..\Classes\PrizeAnimReader.h" />
+    <ClInclude Include="..\Classes\PrizeLayer.h" />
+    <ClInclude Include="..\Classes\PrizeReader.h" />
+    <ClInclude Include="..\Classes\PrizeScene.h" />
     <ClInclude Include="..\Classes\Star.h" />
     <ClInclude Include="..\Classes\StarMatrix.h" />
     <ClInclude Include="..\Classes\StarParticle.h" />

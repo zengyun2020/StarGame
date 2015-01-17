@@ -2,6 +2,9 @@
 #include "ui/UIText.h"
 #include "MenuLayer.h"
 #include "UpgradeScene.h"
+#include "HelloWorldScene.h"
+#include "PrizeLayer.h"
+#include "PrizeScene.h"
 USING_NS_CC;
 using namespace std;
 using namespace cocos2d::ui;
@@ -80,7 +83,7 @@ void MenuSceneHandler::buyTip(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEv
 void MenuSceneHandler::startGame(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
     CCLOG("startGame");
-	MenuLayer *layer = MenuLayer::create();
+	auto layer = MenuLayer::create();
 	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
 		layer->stopAction();
 	}
@@ -108,15 +111,16 @@ void MenuSceneHandler::upgrade(cocos2d::Ref* object, cocos2d::ui::Widget::TouchE
 
 void MenuSceneHandler::getPackage(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
 {
-    CCLOG("getPackage");
+    CCLOG("getPackage");	
+	auto layer = MenuLayer::create();
 	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
-		
+		layer->clickGetPrize();
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
 		
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		
+		Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,PrizeScene::create()));
 	}
 }
 
