@@ -9,16 +9,16 @@ public:
 	void playPop();
 	void playCombo(int size);
 
-	void playClear();//Çå³ı
-	void playCoin();//²úÉú½ğ±Ò
-	void playCoinsIn();//½ğ±Ò½øÈë±³°ü
-	void playNextGameRound();//½øÈëÏÂÒ»»ØºÏ
-	void playPropBomb();//µÀ¾ßÕ¨µ¯
-	void playPropRainbow();//µÀ¾ß²Êºç
-	void playPropPlusTime();//µÀ¾ß¼ÓÊ±
-	void playBeep();//µ¹¼ÆÊ±
-	void playLanding();//¼ÓÔØ
-	void playFireWorks(int type);//Àı×ÓĞ§¹û
+	void playClear();//æ¸…é™¤
+	void playCoin();//äº§ç”Ÿé‡‘å¸
+	void playCoinsIn();//é‡‘å¸è¿›å…¥èƒŒåŒ…
+	void playNextGameRound();//è¿›å…¥ä¸‹ä¸€å›åˆ
+	void playPropBomb();//é“å…·ç‚¸å¼¹
+	void playPropRainbow();//é“å…·å½©è™¹
+	void playPropPlusTime();//é“å…·åŠ æ—¶
+	void playBeep();//å€’è®¡æ—¶
+	void playLanding();//åŠ è½½
+	void playFireWorks(int type);//ä¾‹å­æ•ˆæœ
 	void prepare();
 private:
 	static Audio* m_instance;
