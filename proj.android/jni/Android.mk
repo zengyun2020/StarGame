@@ -36,7 +36,13 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
           			../../Classes/UpgradeReader.cpp\
           			../../Classes/UpgradeLayer.cpp\
           			../../Classes/UpgradeScene.cpp\
-					../../Classes/PlayerRank.cpp
+					../../Classes/PlayerRank.cpp\
+					../../Classes/Prize.cpp\
+  					../../Classes/PrizeReader.cpp\
+  					../../Classes/PrizeScene.cpp\
+  					../../Classes/PrizeLayer.cpp\
+  					../../Classes/PrizeAnim.cpp\
+  					../../Classes/PrizeAnimReader.cpp
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
