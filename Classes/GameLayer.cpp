@@ -146,6 +146,7 @@ void GameLayer::gotoNextLevel(){
 	refreshMenu();
 	floatLevelWord();
 	matrix->setClearing(false);
+	Audio::getInstance()->playNextGameRound();
 }
 
 void GameLayer::gotoGameOver(){

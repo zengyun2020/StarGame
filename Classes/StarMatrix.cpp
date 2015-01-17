@@ -23,7 +23,7 @@ bool StarMatrix::init(GameLayer* layer){
 	}
 	m_layer = layer;
 	needClear = false;
-	clearing = false;
+	acceptTouch = true;
 	clearSumTime = 0;
 	memset(stars, 0, sizeof(Star*) * ROW_NUM * COL_NUM);
 	initMatrix();
@@ -51,7 +51,7 @@ void StarMatrix::updateStar(float delta){
 
 void StarMatrix::onTouch(const Point& p){
 	Star* s = getStarByTouch(p);
-	if(s){
+	if(s && acceptTouch){
 		genSelectedList(s);
 		CCLOG("SIZE = %d",selectedList.size());
 		deleteSelectedList();
@@ -62,8 +62,8 @@ void StarMatrix::setNeedClear(bool b){
 	needClear = b;
 }
 
-void StarMatrix::setClearing(bool b){
-	clearing = b;
+void StarMatrix::setAcceptTouch(bool b){
+	acceptTouch = b;
 }
 
 void StarMatrix::initMatrix(){
@@ -151,10 +151,9 @@ void StarMatrix::deleteSelectedList(){
 		selectedList.at(0)->setSelected(false);
 		return;
 	}
-
+	//播放消除音效
+	Audio::getInstance()->playPop();
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
-		//播放消除音效
-		Audio::getInstance()->playPop();
 		Star* star = *it;
 		//粒子效果
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
@@ -169,10 +168,8 @@ void StarMatrix::deleteSelectedList(){
 	m_layer->showLinkNum(selectedList.size());
 	adjustMatrix();
 	if(isEnded()){
-		if(!clearing){
-			clearing =true;
-				m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
-		}
+		acceptTouch=false;
+		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 		CCLOG("ENDED");
 	}
 }
