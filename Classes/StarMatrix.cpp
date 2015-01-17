@@ -143,6 +143,54 @@ void StarMatrix::genSelectedList(Star* s){
 		it = travelList.begin();
 	}
 }
+//产生炸弹的消除队列
+void StarMatrix::genBombList(Star* s){
+	selectedList.clear();
+	selectedList.push_back(s);
+	Star* linkStar = nullptr;
+	int index_i = s->getIndexI();
+	int index_j = s->getIndexJ();
+	//上
+	if(index_i-1 >= 0 && (linkStar = stars[index_i-1][index_j]) ){
+		if(!linkStar->isSelected())
+			selectedList.push_back(stars[index_i-1][index_j]);
+	}
+	//左上
+	if(index_i-1 >= 0 && index_j-1 >= 0&& (linkStar = stars[index_i-1][index_j-1]) ){
+		if(!linkStar->isSelected())
+			selectedList.push_back(stars[index_i-1][index_j-1]);
+	}
+	//右上
+	if(index_i-1 >= 0 && index_j+1 <= COL_NUM && (linkStar = stars[index_i-1][index_j+1]) ){
+		if(!linkStar->isSelected())
+			selectedList.push_back(stars[index_i-1][index_j+1]);
+	}
+	//下
+	if(index_i+1 < ROW_NUM  && (linkStar = stars[index_i+1][index_j]) ){
+		if(!linkStar->isSelected())
+			selectedList.push_back(stars[index_i+1][index_j]);
+	}
+	//左下
+	if(index_i+1 < ROW_NUM  && index_j-1 >= 0 && (linkStar = stars[index_i+1][index_j-1]) ){
+		if(!linkStar->isSelected())
+			selectedList.push_back(stars[index_i+1][index_j-1]);
+	}
+	//右下
+	if(index_i+1 < ROW_NUM  &&  index_j+1 <= COL_NUM && (linkStar = stars[index_i+1][index_j+1]) ){
+		if(!linkStar->isSelected())
+			selectedList.push_back(stars[index_i+1][index_j+1]);
+	}
+	//左
+	if(index_j-1 >= 0 && (linkStar = stars[index_i][index_j-1]) ){
+		if(!linkStar->isSelected())
+			selectedList.push_back(stars[index_i][index_j-1]);
+	}
+	//右
+	if(index_j+1 < COL_NUM && (linkStar = stars[index_i][index_j+1]) ){
+		if(!linkStar->isSelected())
+			selectedList.push_back(stars[index_i][index_j+1]);
+	}
+}
 
 
 void StarMatrix::deleteSelectedList(){

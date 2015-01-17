@@ -15,13 +15,14 @@ public:
 	void onTouch(const Point& p);
 	void setNeedClear(bool b);
 	void setAcceptTouch(bool b);
-	 void initMatrix();
-	
+	void initMatrix();
+
 private:
-   
+
 	Point getPositionByIndex(int i,int j);
 	Star* getStarByTouch(const Point& p);
 	void genSelectedList(Star* s);
+	void genBombList(Star* s);//产生道具炸弹须要消除的队列
 	void deleteSelectedList();
 	void adjustMatrix();
 	void refreshScore();
@@ -37,7 +38,7 @@ private:
 	GameLayer* m_layer;
 	bool needClear;
 	bool acceptTouch;
-    static float ONE_CLEAR_TIME;
+	static float ONE_CLEAR_TIME;
 	float clearSumTime;
 };
 #endif
