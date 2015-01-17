@@ -11,7 +11,7 @@ public:
 private:
 	Label* highestScore;
 	Label* level;
-	Label* targetScore;
+	//Label* targetScore;
 	Label* curScore;
 };
 #endif
