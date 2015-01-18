@@ -38,14 +38,16 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
           			../../Classes/UpgradeScene.cpp\
 					../../Classes/PlayerRank.cpp\
 					../../Classes/Prize.cpp\
-  					../../Classes/PrizeReader.cpp\
-  					../../Classes/PrizeScene.cpp\
-  					../../Classes/PrizeLayer.cpp\
-  					../../Classes/PrizeAnim.cpp\
-  					../../Classes/PrizeAnimReader.cpp
+					../../Classes/PrizeReader.cpp\
+          			../../Classes/PrizeScene.cpp\
+          			../../Classes/PrizeLayer.cpp\
+          			../../Classes/PrizeAnim.cpp\
+					../../Classes/PrizeAnimReader.cpp\
+          ../../Classes/CallAndroidMethod.cpp
 
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes\
+              E:\cocosspace\StarGame\cocos2d\cocos\platform\android\jni
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 

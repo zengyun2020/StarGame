@@ -6,6 +6,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
 #include "MenuSceneHandlerReader.h"
+#include "PrizeAnimReader.h"
 
 using namespace cocostudio::timeline;
 
@@ -31,7 +32,10 @@ bool MenuLayer::init(){
 	CSLoader* instance = CSLoader::getInstance();
 	instance->registReaderObject("MenuSceneHandlerReader",(ObjectFactory::Instance)MenuSceneHandlerReader::getInstance);
 	auto rootNode = CSLoader::createNode("MenuLayer.csb");
+	instance->registReaderObject("PrizeAnimReader",(ObjectFactory::Instance)PrizeAnimReader::getInstance);
+	rootNode2 = CSLoader::createNode("prize.csb");
 	this->addChild(rootNode);
+	this->addChild(rootNode2);
 	Audio::getInstance()->playBGM();
 
 	auto labelLv = Label::create("Lv"+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getUserLevel())->_string,"Arial",24);
@@ -55,11 +59,11 @@ bool MenuLayer::init(){
 	rootNode->addChild(labelPs);
 
 	//加载动画： 
-	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
-	rootNode->runAction(action);//注!!!：同一个文件创建的节点只能使用同一个文件创建的动画。   
+	//ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
+	//rootNode->runAction(action);//注!!!：同一个文件创建的节点只能使用同一个文件创建的动画。   
   
 	//播放动画： 
-	action->gotoFrameAndPlay(0,480,true);//从第0帧到60帧循环播放
+	//action->gotoFrameAndPlay(0,480,true);
 	return true;
 }
 
@@ -72,6 +76,13 @@ void MenuLayer::startGame(){
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
 	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,GameScene::create()));
+	auto rootNode = CSLoader::createNode("MenuLayer.csb");
+	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
+	rootNode->runAction(action);//注!!!：同一个文件创建的节点只能使用同一个文件创建的动画。   
+  
+	//播放动画： 
+
+	action->gotoFrameAndPlay(0,480,true);
 }
 
 void MenuLayer::startAction(){

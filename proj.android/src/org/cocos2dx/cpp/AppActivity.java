@@ -28,5 +28,41 @@ package org.cocos2dx.cpp;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import com.tallbigup.android.cloud.TbuCloud;
+import com.tallbigup.android.gds.nativenotify.NotifyManager;
+
+import android.os.Bundle;
+import android.util.Log;
+
 public class AppActivity extends Cocos2dxActivity {
+	
+	public static native void addGold(int goldNum); 
+	public static native void quit();
+	
+	private GameInfoUtil gameInfo;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		gameInfo = GameInfoUtil.getInstance();
+		
+		NetWorkService.init(this);
+		if(TbuCloud.markUserType(getApplicationContext()) == 0){
+			   TbuCloud.markUserPay(getApplicationContext(), 0);
+		}
+		TbuCloud.markUserLogin(getApplicationContext(), System.currentTimeMillis());		
+		
+		TbuCloud.markAppOpened(AppActivity.this);
+		if(NotifyManager.isStartByNotifaction(getIntent())){
+			Log.i("MCH","start by click notify ...");
+			addGold(2000);
+		}
+		NotifyManager.cleanNofitifcation(this, getIntent());
+	}
+	
+	@Override
+	public void onBackPressed() {
+		quit();
+	}
 }

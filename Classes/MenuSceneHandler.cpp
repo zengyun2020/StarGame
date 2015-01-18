@@ -5,6 +5,7 @@
 #include "HelloWorldScene.h"
 #include "PrizeLayer.h"
 #include "PrizeScene.h"
+#include "CallAndroidMethod.h"
 USING_NS_CC;
 using namespace std;
 using namespace cocos2d::ui;
@@ -85,10 +86,10 @@ void MenuSceneHandler::startGame(cocos2d::Ref* object, cocos2d::ui::Widget::Touc
     CCLOG("startGame");
 	auto layer = MenuLayer::create();
 	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
-		layer->stopAction();
+		//layer->stopAction();
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
-		layer->startAction();
+		//layer->startAction();
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
 		layer->startGame();
@@ -148,7 +149,7 @@ void MenuSceneHandler::moreGame(cocos2d::Ref* object, cocos2d::ui::Widget::Touch
 		
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		
+		CallAndroidMethod::getInstance()->showMoreGame();
 	}
 }
 

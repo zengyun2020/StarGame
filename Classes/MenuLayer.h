@@ -14,5 +14,7 @@ public:
 	void startAction();
 	void setGoldNum();
 	void clickGetPrize();
+private:
+	Node* rootNode2;
 };
 #endif

@@ -215,6 +215,9 @@
     <ClInclude Include="..\Classes\PrizeAnimReader.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\CallAndroidMethod.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
