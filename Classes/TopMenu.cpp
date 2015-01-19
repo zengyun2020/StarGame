@@ -37,7 +37,7 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height - 150);
 	this->addChild(curScore);
 
-	// Ôö¼Ó¼¼ÄÜ°´¼ü
+	// ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½Ü°ï¿½ï¿½ï¿½
 	MenuItemImage* BombBtn = MenuItemImage::create(
 			"bomb.png","rainbow.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
@@ -50,7 +50,7 @@ bool TopMenu::init(){
 	menu->setPosition(visibleSize.width - 100,visibleSize.height - 200);
 	this->addChild(menu);
 
-	// Ôö¼ÓÔÝÍ£°´¼ü
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 	MenuItemImage* PauseBtn = MenuItemImage::create(
 			"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
 		);
