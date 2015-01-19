@@ -1,6 +1,8 @@
 #include "TopMenu.h"
 #include "Chinese.h"
 #include "GameData.h"
+#include "GamePauseLayer.h"
+
 bool TopMenu::init(){
 	if(!Node::init()){
 		return false;
@@ -86,4 +88,7 @@ void TopMenu::usePropsTime(){
 
 void TopMenu::PauseGame(){
 //TODO
+	CCLOG("PPPPPPPPPPPPPPPPPPPPPPPPPP");
+	gamePause = new GamePauseLayer();
+	this->addChild(GamePauseLayer::create(),100);
 }

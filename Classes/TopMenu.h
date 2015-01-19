@@ -17,5 +17,6 @@ private:
 	Label* level;
 	//Label* targetScore;
 	Label* curScore;
+	Layer* gamePause;
 };
 #endif
