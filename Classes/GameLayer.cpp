@@ -28,8 +28,7 @@ void GameLayer::loadGame(float dt){
 	listener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan,this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
 
-	menu = TopMenu::create();
-	this->addChild(menu);
+	
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	linkNum = Label::create("","Arial",40);
@@ -43,6 +42,9 @@ void GameLayer::loadGame(float dt){
 	this->addChild(gameTime,0);
 
 	this->floatLevelWord();
+
+	menu = TopMenu::create();
+	this->addChild(menu, 1000);
 }
 
 void GameLayer::floatLevelWord(){

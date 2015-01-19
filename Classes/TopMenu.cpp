@@ -37,6 +37,15 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height - 150);
 	this->addChild(curScore);
 
+	// Ôö¼Ó°´¼ü
+	MenuItemImage* startBtn = MenuItemImage::create(
+		"menu_start.png","combo_3.png",CC_CALLBACK_0(TopMenu::refresh,this)
+		);
+	Menu* menu = Menu::create(startBtn,NULL);
+	menu->alignItemsVertically();
+	menu->setPosition(visibleSize.width/2,visibleSize.height/2);
+	this->addChild(menu);
+
 	return true;
 }
 
