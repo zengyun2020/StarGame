@@ -64,6 +64,11 @@ bool MenuLayer::init(){
   
 	//播放动画： 
 	//action->gotoFrameAndPlay(0,480,true);
+
+	// 测试下雪粒子效果
+	ParticleSnow* effect = ParticleSnow::create();
+	effect->setTotalParticles(100);
+	rootNode->addChild(effect);
 	return true;
 }
 
