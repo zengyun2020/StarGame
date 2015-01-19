@@ -21,6 +21,7 @@ bool GameLayer::init(){
 
 void GameLayer::loadGame(float dt){
 	schedule(schedule_selector(GameLayer::updateCustom), 1.0f, kRepeatForever, 0);
+
 	matrix = nullptr;
 	this->scheduleUpdate();
 	EventListenerTouchOneByOne* listener = EventListenerTouchOneByOne::create();
@@ -35,16 +36,15 @@ void GameLayer::loadGame(float dt){
 	linkNum->setVisible(false);
 	this->addChild(linkNum,1);
 
-	gameTime = Label::create("","Arial",40);
-	gameTime->setPosition(100,visibleSize.height-200);
+	initTime();
+	gameTime = Label::create("","Arial",24);
+	gameTime->setPosition(50,visibleSize.height-50);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
 	this->floatLevelWord();
 
 	menu = TopMenu::create();
-	this->addChild(menu, 1000);
-
-	initTime();
+	this->addChild(menu, 2);
 
 }
 void GameLayer::usePropsBomb(){}
@@ -180,7 +180,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 10;
+	GameLayer::totalTime = 60;
 }
 
 int GameLayer::getTime(){

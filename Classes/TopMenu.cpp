@@ -9,9 +9,8 @@ bool TopMenu::init(){
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	highestScore = Label::create(
-		//"highestScore" + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string,
 		ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string,
-		"Verdana-Bold",30
+		"Verdana-Bold",24
 		);
 	highestScore->setPosition(visibleSize.width/2,visibleSize.height - 50);
 	this->addChild(highestScore);
@@ -19,9 +18,9 @@ bool TopMenu::init(){
 	level = Label::create(
 		//"guanqia" + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
 		ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
-		"Verdana-Bold",30
+		"Verdana-Bold",24
 		);
-	level->setPosition(200,visibleSize.height - 100);
+	level->setPosition(visibleSize.width-50,visibleSize.height - 50);
 	this->addChild(level);
 
 	//targetScore = Label::create(
@@ -36,7 +35,7 @@ bool TopMenu::init(){
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
 		"Verdana-Bold",50	
 		);
-	curScore->setPosition(visibleSize.width/2,visibleSize.height - 150);
+	curScore->setPosition(visibleSize.width/2,visibleSize.height - 100);
 	this->addChild(curScore);
 
 	// ���Ӽ��ܰ���
@@ -49,7 +48,7 @@ bool TopMenu::init(){
 		);
 	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
 	menu->alignItemsHorizontally();
-	menu->setPosition(visibleSize.width - 100,visibleSize.height - 200);
+	menu->setPosition(visibleSize.width - 100,visibleSize.height - 100);
 	this->addChild(menu);
 
 	// ������ͣ����
@@ -58,7 +57,7 @@ bool TopMenu::init(){
 		);
 	Menu* menuPause = Menu::create(PauseBtn, NULL);
 	menuPause->alignItemsHorizontally();
-	menuPause->setPosition(30,visibleSize.height - 200);
+	menuPause->setPosition(30,visibleSize.height - 100);
 	this->addChild(menuPause);
 	return true;
 }
@@ -68,8 +67,8 @@ void TopMenu::refresh(){
 	sprintf(buf,"%d",GAMEDATA::getInstance()->getCurScore());
 	curScore->setString(buf);
 	//string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
-	std::string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
-	highestScore->setString(history);
+	/*std::string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
+	highestScore->setString(history);*/
 
 	std::string guanqia = ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string;
 	level->setString(guanqia);
@@ -100,7 +99,7 @@ void TopMenu::PauseGame(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Menu* resumeMenu = Menu::create(resumeBtn, NULL);
 	resumeMenu->alignItemsHorizontally();
-	resumeMenu->setPosition(200,visibleSize.height - 200);
+	resumeMenu->setPosition(visibleSize.width/2,visibleSize.height/2);
 	gamePause->addChild(resumeMenu,2);
 }
 
