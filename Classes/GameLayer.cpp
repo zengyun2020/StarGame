@@ -20,7 +20,6 @@ bool GameLayer::init(){
 
 
 void GameLayer::loadGame(float dt){
-	initTime();
 	schedule(schedule_selector(GameLayer::updateCustom), 1.0f, kRepeatForever, 0);
 	matrix = nullptr;
 	this->scheduleUpdate();
@@ -41,10 +40,19 @@ void GameLayer::loadGame(float dt){
 	gameTime->setPosition(100,visibleSize.height-200);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
-
 	this->floatLevelWord();
-}
+	initTime();
 
+	 //*初始化菜单
+	MenuItemImage* startBtn = MenuItemImage::create(
+		"menu_start.png","combo_3.png",CC_CALLBACK_0(MenuLayer::usePropsBomb,this)
+		);
+	Menu* menu = Menu::create(startBtn,NULL);
+	menu->alignItemsVertically();
+	menu->setPosition(visibleSize.width/2,visibleSize.height/2);
+	this->addChild(menu);
+}
+void GameLayer::usePropsBomb(){}
 void GameLayer::floatLevelWord(){
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();

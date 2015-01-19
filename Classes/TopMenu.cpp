@@ -37,6 +37,14 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height - 150);
 	this->addChild(curScore);
 
+    //*³õÊ¼»¯²Ëµ¥
+	MenuItemImage* startBtn = MenuItemImage::create(
+		"menu_start.png","combo_3.png",CC_CALLBACK_0(MenuLayer::usePropsBomb,this)
+		);
+	Menu* menu = Menu::create(startBtn,NULL);
+	menu->alignItemsVertically();
+	menu->setPosition(visibleSize.width/2,visibleSize.height/2);
+	this->addChild(menu);
 	return true;
 }
 
@@ -54,4 +62,12 @@ void TopMenu::refresh(){
 
 	/*std::string target = ChineseWord("mubiao") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen");
 	targetScore->setString(target);*/
+}
+
+void TopMenu::usePropsBomb(){
+	//TODO
+}
+
+void TopMenu::usePropsTime(){
+//TODO
 }
