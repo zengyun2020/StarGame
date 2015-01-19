@@ -66,8 +66,7 @@ void MenuSceneHandler::soundEffectSwitch(cocos2d::Ref* object, cocos2d::ui::Widg
 		
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		auto layer = MenuLayer::create();
-		layer->showPowerStone();
+		
 	}
 }
 

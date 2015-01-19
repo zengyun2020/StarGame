@@ -11,7 +11,7 @@ class MenuScenePayHandler
         bool getResult();
         static MenuScenePayHandler* getInstance();
     private:
-    	bool result = true;
+    	bool result;
 };
 #endif
 
