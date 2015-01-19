@@ -10,23 +10,28 @@ bool GameLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Sprite* background = Sprite::create("bg_mainscene.jpg");
+	background->setPosition(visibleSize.width/2,visibleSize.height/2);
+	this->addChild(background,-1);
+	schedule(schedule_selector(GameLayer::loadGame), 2.5f, 0, 0);
+	return true;
+}
+
+
+void GameLayer::loadGame(float dt){
 	initTime();
 	schedule(schedule_selector(GameLayer::updateCustom), 1.0f, kRepeatForever, 0);
-
 	matrix = nullptr;
 	this->scheduleUpdate();
 	EventListenerTouchOneByOne* listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan,this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
 
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Sprite* background = Sprite::create("bg_mainscene.jpg");
-	background->setPosition(visibleSize.width/2,visibleSize.height/2);
-	this->addChild(background,-1);
-
 	menu = TopMenu::create();
 	this->addChild(menu);
 
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 	linkNum = Label::create("","Arial",40);
 	linkNum->setPosition(visibleSize.width/2,visibleSize.height-250);
 	linkNum->setVisible(false);
@@ -38,10 +43,7 @@ bool GameLayer::init(){
 	this->addChild(gameTime,0);
 
 	this->floatLevelWord();
-
-	return true;
 }
-
 
 void GameLayer::floatLevelWord(){
 
@@ -146,6 +148,11 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
 }
 
+
+void GameLayer::doRevive(){
+	setTime(20);
+}
+
 void GameLayer::gotoNextLevel(){
 	refreshMenu();
 	floatLevelWord();
@@ -155,25 +162,36 @@ void GameLayer::gotoNextLevel(){
 
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
-	/*Size visibleSize = Director::getInstance()->getVisibleSize();
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* gameOver = FloatWord::create(
-	"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
+		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOver);
-	gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene( HelloWorld::createScene());});*/
-	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,GameOverScene::create()));
+	//TODO 复活计费点接入
+	if(true){
+		doRevive();
+		gameOver->removeFromParentAndCleanup(true);
+	}else{
+		gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,GameOverScene::create()));});
+	}
+
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 60;
+	GameLayer::totalTime = 10;
 }
 
 int GameLayer::getTime(){
 	return totalTime;
 }
 
+void GameLayer::setTime(int time){
+	GameLayer::totalTime = time;
+}
+
 void GameLayer::plusTime(int time){
 	GameLayer::totalTime += time;
 }
+
 
 void GameLayer::updateCustom(float dt){
 	totalTime--;

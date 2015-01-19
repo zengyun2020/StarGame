@@ -27,9 +27,11 @@ public:
 	void floatLeftStarMsg(int leftNum);
 	void gotoNextLevel();
 	void gotoGameOver();
-
+	void doRevive();
+	void loadGame(float dt);
 	void updateCustom(float dt);
 	void initTime();  //重置游戏时间
+	void setTime(int time);
 	int getTime();
 	void plusTime(int time);
 	
