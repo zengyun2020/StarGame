@@ -11,6 +11,7 @@ public:
 	void usePropsBomb();
 	void usePropsTime();
 	void PauseGame();
+	void ResumeGame();
 
 private:
 	Label* highestScore;

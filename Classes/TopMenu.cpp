@@ -41,11 +41,11 @@ bool TopMenu::init(){
 
 	// ���Ӽ��ܰ���
 	MenuItemImage* BombBtn = MenuItemImage::create(
-			"bomb.png","rainbow.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
+		"bomb.png","rainbow.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
-	
+
 	MenuItemImage* TimeBtn = MenuItemImage::create(
-			"rainbow.png","bomb.png",CC_CALLBACK_0(TopMenu::usePropsTime,this)
+		"rainbow.png","bomb.png",CC_CALLBACK_0(TopMenu::usePropsTime,this)
 		);
 	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
 	menu->alignItemsHorizontally();
@@ -54,7 +54,7 @@ bool TopMenu::init(){
 
 	// ������ͣ����
 	MenuItemImage* PauseBtn = MenuItemImage::create(
-			"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
+		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
 		);
 	Menu* menuPause = Menu::create(PauseBtn, NULL);
 	menuPause->alignItemsHorizontally();
@@ -83,12 +83,24 @@ void TopMenu::usePropsBomb(){
 }
 
 void TopMenu::usePropsTime(){
-//TODO
+	//TODO
+}
+void TopMenu::ResumeGame(){
+	if(gamePause!=nullptr){
+			gamePause->removeFromParentAndCleanup(true);
+	}
 }
 
 void TopMenu::PauseGame(){
-//TODO
-	CCLOG("PPPPPPPPPPPPPPPPPPPPPPPPPP");
-	gamePause = new GamePauseLayer();
-	this->addChild(GamePauseLayer::create(),100);
+	gamePause = GamePauseLayer::create();
+	this->addChild(gamePause,1);
+	MenuItemImage* resumeBtn = MenuItemImage::create(
+		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Menu* resumeMenu = Menu::create(resumeBtn, NULL);
+	resumeMenu->alignItemsHorizontally();
+	resumeMenu->setPosition(200,visibleSize.height - 200);
+	gamePause->addChild(resumeMenu,2);
 }
+
