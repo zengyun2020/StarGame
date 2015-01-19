@@ -7,7 +7,7 @@ class MenuScenePayHandler
     public:
         MenuScenePayHandler() {};
         ~MenuScenePayHandler() {};  
-        void payCallback(int requestId,int resultId);
+        void payCallback(jclass jcl,int requestId,int resultId);
         bool getResult();
         static MenuScenePayHandler* getInstance();
     private:

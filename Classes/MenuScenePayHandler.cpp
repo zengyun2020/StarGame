@@ -10,7 +10,7 @@ MenuScenePayHandler* MenuScenePayHandler::getInstance()
     return _instance;
 }
 
-void MenuScenePayHandler::payCallback(int requestId,int resultId){
+void MenuScenePayHandler::payCallback(jclass jcl,int requestId,int resultId){
 	if(resultId == 0){
 		result = false;
 	}else{

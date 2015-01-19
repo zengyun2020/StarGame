@@ -47,8 +47,7 @@ void GameOver::upgrade(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType
 		
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		GameOverLayer *layer = GameOverLayer::create();
-		layer->upgrade();
+		
 	}
 }
 
