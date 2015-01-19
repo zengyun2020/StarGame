@@ -65,7 +65,7 @@ void StarMatrix::onTouch(const Point& p){
 		clearOneByOne = true;
 		genSelectedList(s);
 		//deleteSelectedList();
-		//³¤¶ÈĞ¡ÓÚµÈÓÚ1Ôò·µ»Ø
+		//é•¿åº¦å°äºç­‰äº1åˆ™è¿”å›
 		if(selectedList.size() <= 1){
 			m_layer->hideLinkNum();
 			selectedList.at(0)->setSelected(false);
@@ -123,7 +123,7 @@ Point StarMatrix::getPositionByIndex(int i,int j){
 }
 
 Star* StarMatrix::getStarByTouch(const Point& p){
-	int k = p.y/Star::STAR_HEIGHT;//ÕâÀïÒªÓÃK×ªÒ»ÏÂint ²»È»µÃ²»µ½ÕıÈ·½á¹û
+	int k = p.y/Star::STAR_HEIGHT;//è¿™é‡Œè¦ç”¨Kè½¬ä¸€ä¸‹int ä¸ç„¶å¾—ä¸åˆ°æ­£ç¡®ç»“æœ
 	int i = ROW_NUM - 1 - k;
 	int j = p.x/Star::STAR_WIDTH;
 	if(i >= 0 && i < ROW_NUM && 
@@ -136,7 +136,7 @@ Star* StarMatrix::getStarByTouch(const Point& p){
 	}
 }
 
-//Ïû³ı¼ì²é
+//æ¶ˆé™¤æ£€æŸ¥
 void StarMatrix::genSelectedList(Star* s){
 	selectedList.clear();
 	deque<Star*> travelList;
@@ -147,22 +147,22 @@ void StarMatrix::genSelectedList(Star* s){
 		Star* linkStar = nullptr;
 		int index_i = star->getIndexI();
 		int index_j = star->getIndexJ();
-		//ÉÏ
+		//ä¸Š
 		if(index_i-1 >= 0 && (linkStar = stars[index_i-1][index_j]) ){
 			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
 				travelList.push_back(stars[index_i-1][index_j]);
 		}
-		//ÏÂ
+		//ä¸‹
 		if(index_i+1 < ROW_NUM  && (linkStar = stars[index_i+1][index_j]) ){
 			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
 				travelList.push_back(stars[index_i+1][index_j]);
 		}
-		//×ó
+		//å·¦
 		if(index_j-1 >= 0 && (linkStar = stars[index_i][index_j-1]) ){
 			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
 				travelList.push_back(stars[index_i][index_j-1]);
 		}
-		//ÓÒ
+		//å³
 		if(index_j+1 < COL_NUM && (linkStar = stars[index_i][index_j+1]) ){
 			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
 				travelList.push_back(stars[index_i][index_j+1]);
@@ -175,49 +175,49 @@ void StarMatrix::genSelectedList(Star* s){
 		it = travelList.begin();
 	}
 }
-//²úÉúÕ¨µ¯µÄÏû³ı¶ÓÁĞ
+//äº§ç”Ÿç‚¸å¼¹çš„æ¶ˆé™¤é˜Ÿåˆ—
 void StarMatrix::genBombList(Star* s){
 	selectedList.clear();
 	selectedList.push_back(s);
 	Star* linkStar = nullptr;
 	int index_i = s->getIndexI();
 	int index_j = s->getIndexJ();
-	//ÉÏ
+	//ä¸Š
 	if(index_i-1 >= 0 && (linkStar = stars[index_i-1][index_j]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i-1][index_j]);
 	}
-	//×óÉÏ
+	//å·¦ä¸Š
 	if(index_i-1 >= 0 && index_j-1 >= 0&& (linkStar = stars[index_i-1][index_j-1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i-1][index_j-1]);
 	}
-	//ÓÒÉÏ
+	//å³ä¸Š
 	if(index_i-1 >= 0 && index_j+1 <= COL_NUM && (linkStar = stars[index_i-1][index_j+1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i-1][index_j+1]);
 	}
-	//ÏÂ
+	//ä¸‹
 	if(index_i+1 < ROW_NUM  && (linkStar = stars[index_i+1][index_j]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i+1][index_j]);
 	}
-	//×óÏÂ
+	//å·¦ä¸‹
 	if(index_i+1 < ROW_NUM  && index_j-1 >= 0 && (linkStar = stars[index_i+1][index_j-1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i+1][index_j-1]);
 	}
-	//ÓÒÏÂ
+	//å³ä¸‹
 	if(index_i+1 < ROW_NUM  &&  index_j+1 <= COL_NUM && (linkStar = stars[index_i+1][index_j+1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i+1][index_j+1]);
 	}
-	//×ó
+	//å·¦
 	if(index_j-1 >= 0 && (linkStar = stars[index_i][index_j-1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i][index_j-1]);
 	}
-	//ÓÒ
+	//å³
 	if(index_j+1 < COL_NUM && (linkStar = stars[index_i][index_j+1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i][index_j+1]);
@@ -231,20 +231,20 @@ void StarMatrix::deleteSelectedList(){
 	selectedList.at(0)->setSelected(false);
 	return;
 	}*/
-	//²¥·ÅÏû³ıÒôĞ§
+	//æ’­æ”¾æ¶ˆé™¤éŸ³æ•ˆ
 	Audio::getInstance()->playPop();
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
 		Star* star = *it;
 		selectedList.pop_front();
-		//Á£×ÓĞ§¹û
+		//ç²’å­æ•ˆæœ
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
 		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
 		star->removeFromParentAndCleanup(true);
 		return;
 	}
 	clearOneByOne =false;
-	//COMBOĞ§¹û
+	//COMBOæ•ˆæœ
 	showComboEffect(selectedListSize,this);
 	refreshScore();
 	m_layer->showLinkNum(selectedListSize);
@@ -252,13 +252,13 @@ void StarMatrix::deleteSelectedList(){
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
-		m_layer->floatLeftStarMsg(getLeftStarNum());//Í¨Öªlayerµ¯³öÊ£ÓàĞÇĞÇµÄĞÅÏ¢
+		m_layer->floatLeftStarMsg(getLeftStarNum());//é€šçŸ¥layerå¼¹å‡ºå‰©ä½™æ˜Ÿæ˜Ÿçš„ä¿¡æ¯
 		CCLOG("ENDED");
 	}
 }
 
 void StarMatrix::adjustMatrix(){
-	//´¹Ö±·½Ïòµ÷Õû
+	//å‚ç›´æ–¹å‘è°ƒæ•´
 	for(int i = ROW_NUM-1;i>=0;i--){
 		for(int j = COL_NUM-1;j>=0;j--){
 			if(stars[i][j] == nullptr){
@@ -285,7 +285,7 @@ void StarMatrix::adjustMatrix(){
 			}
 		}
 	}
-	//Ë®Æ½·½Ïòµ÷Õû
+	//æ°´å¹³æ–¹å‘è°ƒæ•´
 	for(int j = 0;j < COL_NUM;j++){
 		if(stars[ROW_NUM-1][j] == nullptr){
 			int des = 0;
@@ -328,16 +328,16 @@ bool StarMatrix::isEnded(){
 			if(stars[i][j] == nullptr)
 				continue;
 			int curColor = stars[i][j]->getColor();
-			//ÉÏ
+			//ä¸Š
 			if(i-1>=0 && stars[i-1][j]!=nullptr && stars[i-1][j]->getColor() ==  curColor)
 				return false;
-			//ÏÂ
+			//ä¸‹
 			if(i+1<ROW_NUM && stars[i+1][j]!=nullptr && stars[i+1][j]->getColor() == curColor)
 				return false;
-			//×ó
+			//å·¦
 			if(j-1>=0 && stars[i][j-1]!=nullptr && stars[i][j-1]->getColor() == curColor)
 				return false;
-			//ÓÒ
+			//å³
 			if(j+1<COL_NUM && stars[i][j+1]!=nullptr && stars[i][j+1]->getColor() == curColor)
 				return false;
 		}
@@ -356,9 +356,9 @@ void StarMatrix::clearMatrixOneByOne(){
 			return;
 		}
 	}
-	//ÄÜ¹»Ö´ĞĞµ½ÕâÒ»¾äËµÃ÷MatrixÈ«Îª¿Õ£¬²»ÔÚĞèÒªÇå¿Õ
+	//èƒ½å¤Ÿæ‰§è¡Œåˆ°è¿™ä¸€å¥è¯´æ˜Matrixå…¨ä¸ºç©ºï¼Œä¸åœ¨éœ€è¦æ¸…ç©º
 	needClear = false;
-	//×ªµ½ÏÂÒ»¹Ø
+	//è½¬åˆ°ä¸‹ä¸€å…³
 	GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
 	m_layer->gotoNextLevel();
 	/*if(GAMEDATA::getInstance()->getCurScore() >= GAMEDATA::getInstance()->getNextScore()){

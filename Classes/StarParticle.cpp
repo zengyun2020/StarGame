@@ -2,6 +2,7 @@
 #include "Star.h"
 
 void showStarParticleEffect(int color,Point position,Node* node){
+	CCLOG("Particle Particle Particle");
 	ParticleExplosion* effect = ParticleExplosion::create();
 	effect->setTexture(Director::getInstance()->getTextureCache()->addImage("star.png"));
 	effect->setTotalParticles(15);
