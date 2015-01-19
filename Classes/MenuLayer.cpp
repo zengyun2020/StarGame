@@ -35,10 +35,7 @@ bool MenuLayer::init(){
 	CSLoader* instance = CSLoader::getInstance();
 	instance->registReaderObject("MenuSceneHandlerReader",(ObjectFactory::Instance)MenuSceneHandlerReader::getInstance);
 	auto rootNode = CSLoader::createNode("MenuLayer.csb");
-	instance->registReaderObject("PrizeAnimReader",(ObjectFactory::Instance)PrizeAnimReader::getInstance);
-	rootNode2 = CSLoader::createNode("prize.csb");
 	this->addChild(rootNode);
-	this->addChild(rootNode2);
 	Audio::getInstance()->playBGM();
 
 	auto labelLv = Label::create("Lv"+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getUserLevel())->_string,"Arial",24);
@@ -61,12 +58,10 @@ bool MenuLayer::init(){
 	labelPs->setAnchorPoint(Point(0,0.5));
 	rootNode->addChild(labelPs);
 
-	//���ض����� 
-	//ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
-	//rootNode->runAction(action);//ע!!!��ͬһ���ļ������Ľڵ�ֻ��ʹ��ͬһ���ļ������Ķ�����   
-  
-	//���Ŷ����� 
-	//action->gotoFrameAndPlay(0,480,true);
+	//播放开始按钮动画
+	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
+	rootNode->runAction(action); 
+	action->gotoFrameAndPlay(0,100,true);
 
 	// ������ѩ����Ч��
 	ParticleSnow* effect = ParticleSnow::create();
@@ -75,26 +70,10 @@ bool MenuLayer::init(){
 	return true;
 }
 
-void MenuLayer::clickGetPrize(){
-	auto rootNode = CSLoader::createNode("MenuLayer.csb");
-	rootNode->getChildByName("get_package")->setScale(0.9f,0.9f);
-}
-
 void MenuLayer::startGame(){
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
-	if(MenuScenePayHandler::getInstance()->getResult()){
-		Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,GameScene::create()));
-	}else{
-		Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,UpgradeScene::create()));
-	}
-	auto rootNode = CSLoader::createNode("MenuLayer.csb");
-	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
-	rootNode->runAction(action);//ע!!!��ͬһ���ļ������Ľڵ�ֻ��ʹ��ͬһ���ļ������Ķ�����   
-  
-	//���Ŷ����� 
-
-	action->gotoFrameAndPlay(0,480,true);
+	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(1.5,GameScene::create()));
 }
 
 void MenuLayer::startAction(){
