@@ -12,7 +12,8 @@ void showStarParticleEffect(int color,Point position,Node* node){
 	effect->setEndColorVar(Color4F(0,0,0,1));
 	effect->setStartSize(25.0f);
 	effect->setGravity(Point(0,-300));
-	effect->setLife(1.0f);
+	effect->setDuration(0.2f);
+	effect->setLife(2.0f);
 	effect->setSpeed(100);
 	effect->setSpeedVar(10);
 	effect->setPosition(position);

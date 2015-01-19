@@ -5,7 +5,7 @@
 #include "Audio.h"
 #include <ctime>
 
-float StarMatrix::ONE_CLEAR_TIME = 0.05f;
+float StarMatrix::ONE_CLEAR_TIME = 0.1f;
 
 StarMatrix* StarMatrix::create(GameLayer* layer){
 	StarMatrix* ret = new StarMatrix();
