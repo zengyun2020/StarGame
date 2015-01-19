@@ -48,4 +48,5 @@ bool CallAndroidMethod::pay(int payPoint){
 			JniHelper::getEnv()->CallStaticVoidMethod(methodInfo.classID,methodInfo.methodID);
 		}
 	#endif
+		return false;
 }
