@@ -44,6 +44,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
           			../../Classes/PrizeLayer.cpp\
           			../../Classes/PrizeAnim.cpp\
 					../../Classes/PrizeAnimReader.cpp\
+					../../Classes/GamePauseLayer.cpp\
           ../../Classes/CallAndroidMethod.cpp\
           ../../Classes/PowerStone.cpp\
           ../../Classes/PowerStoneReader.cpp\
