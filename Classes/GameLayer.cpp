@@ -37,6 +37,7 @@ void GameLayer::loadGame(float dt){
 	this->addChild(linkNum,1);
 
 	initTime();
+	_PauseTime=false;
 	gameTime = Label::create("","Arial",24);
 	gameTime->setPosition(50,visibleSize.height-50);
 	showGameTime(totalTime);
@@ -195,9 +196,18 @@ void GameLayer::plusTime(int time){
 	GameLayer::totalTime += time;
 }
 
+void GameLayer::pauseTime(){
+	_PauseTime = false;
+}
+
+void GameLayer::resumeTime(){
+	_PauseTime = true;
+}
 
 void GameLayer::updateCustom(float dt){
-	totalTime--;
+	if(!_PauseTime){
+	  totalTime--;
+	}
 	//if(totalTime==50){
 	//	matrix->useBombAuto();//使用一次炸弹
 	//}
