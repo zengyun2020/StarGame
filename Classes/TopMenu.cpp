@@ -37,13 +37,16 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height - 150);
 	this->addChild(curScore);
 
-	// Ôö¼Ó°´¼ü
-	MenuItemImage* startBtn = MenuItemImage::create(
-		"menu_start.png","combo_3.png",CC_CALLBACK_0(TopMenu::refresh,this)
+	// ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½
+	MenuItemImage* useBomb = MenuItemImage::create(
+		"bomb.png","bomb.png",CC_CALLBACK_0(TopMenu::refresh,this)
 		);
-	Menu* menu = Menu::create(startBtn,NULL);
-	menu->alignItemsVertically();
-	menu->setPosition(visibleSize.width/2,visibleSize.height/2);
+	MenuItemImage* useTime = MenuItemImage::create(
+		"rainbow.png","rainbow.png",CC_CALLBACK_0(TopMenu::refresh,this)
+		);
+	Menu* menu = Menu::create(useBomb,useTime,NULL);
+	menu->alignItemsHorizontally();
+	menu->setPosition(visibleSize.width/2,visibleSize.height-200);
 	this->addChild(menu);
 
 	return true;
