@@ -14,6 +14,7 @@ public:
 	void startAction();
 	void setGoldNum();
 	void clickGetPrize();
+	void showPowerStone();
 private:
 	Node* rootNode2;
 };

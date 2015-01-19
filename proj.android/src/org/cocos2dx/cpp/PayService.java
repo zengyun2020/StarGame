@@ -2,10 +2,10 @@ package org.cocos2dx.cpp;
 
 import java.util.Random;
 
-import com.poxiao.pay.llk.GamePay;
-import com.poxiao.pay.llk.GamePayCallback;
-import com.poxiao.pay.llk.PAY;
-import com.poxiao.pay.llk.widget.MarkClickOkInterface;
+import com.poxiao.pay.star.GamePay;
+import com.poxiao.pay.star.GamePayCallback;
+import com.poxiao.pay.star.PAY;
+import com.poxiao.pay.star.widget.MarkClickOkInterface;
 import com.tallbigup.android.cloud.TbuCallback;
 import com.tallbigup.android.cloud.TbuCloud;
 import com.tallbigup.buffett.Buffett;
@@ -28,12 +28,12 @@ public class PayService {
 		playerId = GameApplication.getInstance().getPlayerId();
 	}
 	
-	public void pay(final int payPoint, final PayCallBackForCocos payCallBackForCocos,final String levelId){
+	public void pay(final int payPoint, final PayCallBackForCocos payCallBackForCocos,final String reviveNum){
 		final String orderId = String.valueOf(System.currentTimeMillis())+new Random().nextInt(100);
 		if(PAY.getMoney(payPoint) > 0){
 			final int payCount = gameInfo.getData(GameInfoUtil.PAY_COUNT) + 1;
 			gameInfo.setData(GameInfoUtil.PAY_COUNT, payCount);
-			setPayInfo("request", payPoint, playerId, PAY.getMoney(payPoint), levelId, PAY.getDesc(payPoint), 
+			setPayInfo("request", payPoint, playerId, PAY.getMoney(payPoint), "0", PAY.getDesc(payPoint), 
 					PAY.getDesc(payPoint), payCount, orderId, "100", "请求支付");
 			
 			GamePay.getInstance().pay(activity, payPoint, orderId, new GamePayCallback() {
@@ -45,15 +45,15 @@ public class PayService {
 						payCallBackForCocos.result(true);
 						TbuCloud.markUserPay(activity, 1);
 						gameInfo.setData(GameInfoUtil.PAY_MONEY, gameInfo.getData(GameInfoUtil.PAY_MONEY)+PAY.getMoney(payPoint));
-						setPayInfo("success", payPoint, playerId, PAY.getMoney(payPoint), levelId, 
+						setPayInfo("success", payPoint, playerId, PAY.getMoney(payPoint), "0", 
 								PAY.getName(payPoint), PAY.getDesc(payPoint), payCount, orderId, "0", "支付成功");
 					}else if(result.getResultCode() == -3){
 						payCallBackForCocos.result(false);
-						setPayInfo("cancel", payPoint, playerId, PAY.getMoney(payPoint), levelId, 
+						setPayInfo("cancel", payPoint, playerId, PAY.getMoney(payPoint), "0", 
 								PAY.getName(payPoint), PAY.getDesc(payPoint), payCount, orderId, "-3", "取消支付");
 					}else{
 						payCallBackForCocos.result(false);
-						setPayInfo("fail", payPoint, playerId, PAY.getMoney(payPoint), levelId, 
+						setPayInfo("fail", payPoint, playerId, PAY.getMoney(payPoint), "0", 
 								PAY.getName(payPoint), PAY.getDesc(payPoint), payCount, orderId, result.getErrorCode(), result.getErrorMsg());
 					}
 				}
@@ -61,7 +61,7 @@ public class PayService {
 				
 				@Override
 				public void clickOk() {
-					setPayInfo("clickOk", payPoint, playerId, PAY.getMoney(payPoint), levelId, 
+					setPayInfo("clickOk", payPoint, playerId, PAY.getMoney(payPoint), "0", 
 							PAY.getName(payPoint), PAY.getDesc(payPoint), payCount, orderId, "101", "点击确定");
 				}
 			});

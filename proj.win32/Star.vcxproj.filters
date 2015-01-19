@@ -114,6 +114,15 @@
     <ClCompile Include="..\Classes\PrizeAnimReader.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\PowerStone.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PowerStoneLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PowerStoneReader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -216,6 +225,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CallAndroidMethod.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PowerStone.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PowerStoneLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PowerStoneReader.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

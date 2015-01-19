@@ -43,7 +43,10 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
           			../../Classes/PrizeLayer.cpp\
           			../../Classes/PrizeAnim.cpp\
 					../../Classes/PrizeAnimReader.cpp\
-          ../../Classes/CallAndroidMethod.cpp
+          ../../Classes/CallAndroidMethod.cpp\
+          ../../Classes/PowerStone.cpp\
+          ../../Classes/PowerStoneReader.cpp\
+          ../../Classes/PowerStoneLayer.cpp
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes\
