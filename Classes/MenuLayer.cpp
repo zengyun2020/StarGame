@@ -7,6 +7,7 @@
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
 #include "MenuSceneHandlerReader.h"
 #include "PrizeAnimReader.h"
+#include "PowerStoneLayer.h"
 
 using namespace cocostudio::timeline;
 
@@ -102,4 +103,8 @@ void MenuLayer::stopAction(){
 
 void MenuLayer::setGoldNum(){
 	
+}
+
+void MenuLayer::showPowerStone(){
+	Director::getInstance()->getRunningScene()->addChild(PowerStoneLayer::getInstance());
 }

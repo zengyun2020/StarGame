@@ -20,6 +20,10 @@ void GAMEDATA::init(){
 	setGoldNum(UserDefault::getInstance()->getIntegerForKey("goldNum",0));
 	setPowerStoneNum(UserDefault::getInstance()->getIntegerForKey("powerStoneNum",0));
 	setPrizeTimes(UserDefault::getInstance()->getIntegerForKey("prizeTimes",3));
+	setAddTimeNum(UserDefault::getInstance()->getIntegerForKey("addTimeNum",1));
+	setBombNum(UserDefault::getInstance()->getIntegerForKey("bombNum",1));
+	setReviveNum(UserDefault::getInstance()->getIntegerForKey("reviveNum",0));
+	setHasShowRegisterPay(UserDefault::getInstance()->getBoolForKey("showRegisterPay",false));
 }
 
 void GAMEDATA::setCurLevel(int level){
@@ -92,3 +96,20 @@ void GAMEDATA::saveUserLevel(){
 void GAMEDATA::savePrizeTimes(){
 	UserDefault::getInstance()->setIntegerForKey("prizeTimes",getPrizeTimes());
 }
+
+void GAMEDATA::saveAddTimeNum(){
+	UserDefault::getInstance()->setIntegerForKey("addTimeNum",getAddTimeNum());
+}
+
+void GAMEDATA::saveBombNum(){
+	UserDefault::getInstance()->setIntegerForKey("bombNum",getBombNum());
+}
+
+void GAMEDATA::saveReviveNum(){
+	UserDefault::getInstance()->setIntegerForKey("reviveNum",getReviveNum());
+}
+
+void GAMEDATA::saveShowRegisterPay(){
+	UserDefault::getInstance()->setBoolForKey("showRegisterPay", true);
+}
+

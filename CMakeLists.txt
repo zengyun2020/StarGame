@@ -149,6 +149,9 @@ set(GAME_SRC
   Classes/PrizeAnim.cpp
   Classes/PrizeAnimReader.cpp
   Classes/CallAndroidMethod.cpp
+  Classes/PowerStone.cpp
+  Classes/PowerStoneReader.cpp
+  Classes/PowerStoneLayer.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -188,7 +191,9 @@ set(GAME_HEADERS
   Classes/PrizeAnim.h
   Classes/PrizeAnimReader.h
   Classes/CallAndroidMethod.h
-  Classes/jni_md.h
+  Classes/PowerStone.h
+  Classes/PowerStoneReader.h
+  Classes/PowerStoneLayer.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

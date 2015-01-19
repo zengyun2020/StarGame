@@ -31,6 +31,18 @@ public:
 	inline void setPrizeTimes(int prizeTimes){prize_times = prizeTimes;}
 	inline int getPrizeTimes(){return prize_times;}
 
+	inline void setAddTimeNum(int addTimeNum){add_time_num = addTimeNum;}
+	inline int getAddTimeNum(){return add_time_num;}
+
+	inline void setBombNum(int bombNum){bomb_num = bombNum;}
+	inline int getBombNum(){return bomb_num;}
+
+	inline void setReviveNum(int reviveNum){revive_num = reviveNum;}
+	inline int getReviveNum(){return revive_num;}
+
+	inline void setHasShowRegisterPay(bool showRegisterPay){show_register_pay = showRegisterPay;}
+	inline bool hasShowRegisterPay(){return show_register_pay;}
+
 	/*½±Àø·ÖÊý*/
 	int getJiangli(int size);
 
@@ -39,6 +51,10 @@ public:
 	void savePowerStoneNum();
 	void saveUserLevel();
 	void savePrizeTimes();
+	void saveAddTimeNum();
+	void saveBombNum();
+	void saveReviveNum();
+	void saveShowRegisterPay();
 private:
 	GAMEDATA();
 	void init();
@@ -53,6 +69,10 @@ private:
 	int power_stone_num;
 	int user_level;
 	int prize_times;
+	int add_time_num;
+	int bomb_num;
+	int revive_num;
+	bool show_register_pay;
 	friend class MenuLayer;
 	friend class GameOverLayer;
 };

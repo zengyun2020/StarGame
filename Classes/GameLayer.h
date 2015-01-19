@@ -34,6 +34,8 @@ public:
 	void setTime(int time);
 	int getTime();
 	void plusTime(int time);
+	void usePropsBomb();//使用道具炸弹
+	void usePropsTime();//使用加时道具
 	
 private:
 	FloatWord* _levelMsg;

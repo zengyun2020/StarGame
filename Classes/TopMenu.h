@@ -8,6 +8,9 @@ public:
 	virtual bool init();
 	CREATE_FUNC(TopMenu);
 	void refresh();
+	void usePropsBomb();
+	void usePropsTime();
+
 private:
 	Label* highestScore;
 	Label* level;

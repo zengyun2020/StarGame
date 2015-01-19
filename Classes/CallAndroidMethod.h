@@ -8,6 +8,7 @@ using namespace cocos2d;
 class CallAndroidMethod{
 public:
 	void showMoreGame();
+	bool pay(int payPoint);
 	void markPersonInfo(const char tag1,const char tag2);
 	static CallAndroidMethod* getInstance();
 private:

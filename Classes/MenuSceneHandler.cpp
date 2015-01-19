@@ -77,7 +77,8 @@ void MenuSceneHandler::buyTip(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEv
 		
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		
+		auto layer = MenuLayer::create();
+		layer->showPowerStone();
 	}
 }
 
