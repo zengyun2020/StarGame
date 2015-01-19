@@ -71,6 +71,7 @@ void StarMatrix::onTouch(const Point& p){
 			selectedList.at(0)->setSelected(false);
 			selectedList.clear();
 		}else{
+			acceptTouch =false;
 			selectedListSize=selectedList.size();
 			deleteSelectedList();
 		}
@@ -249,6 +250,7 @@ void StarMatrix::deleteSelectedList(){
 	refreshScore();
 	m_layer->showLinkNum(selectedListSize);
 	selectedListSize=0;
+	acceptTouch =true;
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
