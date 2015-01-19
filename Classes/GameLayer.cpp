@@ -101,7 +101,9 @@ void GameLayer::refreshMenu(){
 }
 
 void GameLayer::showLinkNum(int size){
-
+	if(size==0){
+		return;
+	}
 	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") + 
 		String::createWithFormat("%d",size*size*5)->_string + ChineseWord("fen");
 	linkNum->setString(s);

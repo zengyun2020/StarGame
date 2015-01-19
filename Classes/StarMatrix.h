@@ -38,8 +38,10 @@ private:
 	deque<Star*> selectedList;
 	GameLayer* m_layer;
 	bool needClear;
+	bool clearOneByOne;
 	bool acceptTouch;
 	static float ONE_CLEAR_TIME;
 	float clearSumTime;
+	int selectedListSize;
 };
 #endif

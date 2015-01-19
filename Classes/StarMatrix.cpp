@@ -23,6 +23,7 @@ bool StarMatrix::init(GameLayer* layer){
 	}
 	m_layer = layer;
 	needClear = false;
+	clearOneByOne = false;
 	acceptTouch = true;
 	clearSumTime = 0;
 	memset(stars, 0, sizeof(Star*) * ROW_NUM * COL_NUM);
@@ -39,6 +40,15 @@ void StarMatrix::updateStar(float delta){
 			}
 		}
 	}
+
+	if(clearOneByOne){
+		clearSumTime += delta;
+		if(clearSumTime > ONE_CLEAR_TIME){
+			deleteSelectedList();
+			clearSumTime = 0;
+		}
+	}
+
 	if(needClear){
 		clearSumTime += delta;
 		if(clearSumTime > ONE_CLEAR_TIME){
@@ -52,9 +62,18 @@ void StarMatrix::updateStar(float delta){
 void StarMatrix::onTouch(const Point& p){
 	Star* s = getStarByTouch(p);
 	if(s && acceptTouch){
+		clearOneByOne = true;
 		genSelectedList(s);
-		CCLOG("SIZE = %d",selectedList.size());
-		deleteSelectedList();
+		//deleteSelectedList();
+		//长度小于等于1则返回
+		if(selectedList.size() <= 1){
+			m_layer->hideLinkNum();
+			selectedList.at(0)->setSelected(false);
+			selectedList.clear();
+		}else{
+			selectedListSize=selectedList.size();
+			deleteSelectedList();
+		}
 	}
 }
 
@@ -64,7 +83,7 @@ void StarMatrix::useBombAuto(){
 	auto i=5;
 	auto j=5;
 	if(stars[i][j] != nullptr){
-			s=stars[i][j];
+		s=stars[i][j];
 	}
 	genBombList(s);
 	CCLOG("BOMB SIZE = %d",selectedList.size());
@@ -207,26 +226,29 @@ void StarMatrix::genBombList(Star* s){
 
 
 void StarMatrix::deleteSelectedList(){
-	if(selectedList.size() <= 1){
-		m_layer->hideLinkNum();
-		selectedList.at(0)->setSelected(false);
-		return;
-	}
+	/*if(selectedList.size() <= 1){
+	m_layer->hideLinkNum();
+	selectedList.at(0)->setSelected(false);
+	return;
+	}*/
 	//播放消除音效
 	Audio::getInstance()->playPop();
+
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
 		Star* star = *it;
+		selectedList.pop_front();
 		//粒子效果
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
 		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
 		star->removeFromParentAndCleanup(true);
-
+		return;
 	}
+	clearOneByOne =false;
 	//COMBO效果
-	showComboEffect(selectedList.size(),this);
-
+	showComboEffect(selectedListSize,this);
 	refreshScore();
-	m_layer->showLinkNum(selectedList.size());
+	m_layer->showLinkNum(selectedListSize);
+	selectedListSize=0;
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
