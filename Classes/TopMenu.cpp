@@ -37,15 +37,27 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height - 150);
 	this->addChild(curScore);
 
-	// 增加按键
-	MenuItemImage* startBtn = MenuItemImage::create(
-		"menu_start.png","combo_3.png",CC_CALLBACK_0(TopMenu::refresh,this)
+	// 增加技能按键
+	MenuItemImage* BombBtn = MenuItemImage::create(
+			"bomb.png","rainbow.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
-	Menu* menu = Menu::create(startBtn,NULL);
-	menu->alignItemsVertically();
-	menu->setPosition(visibleSize.width/2,visibleSize.height/2);
+	
+	MenuItemImage* TimeBtn = MenuItemImage::create(
+			"rainbow.png","bomb.png",CC_CALLBACK_0(TopMenu::usePropsTime,this)
+		);
+	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
+	menu->alignItemsHorizontally();
+	menu->setPosition(visibleSize.width - 100,visibleSize.height - 200);
 	this->addChild(menu);
 
+	// 增加暂停按键
+	MenuItemImage* PauseBtn = MenuItemImage::create(
+			"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
+		);
+	Menu* menuPause = Menu::create(PauseBtn, NULL);
+	menuPause->alignItemsHorizontally();
+	menuPause->setPosition(30,visibleSize.height - 200);
+	this->addChild(menuPause);
 	return true;
 }
 
@@ -53,9 +65,8 @@ void TopMenu::refresh(){
 	char buf[64];
 	sprintf(buf,"%d",GAMEDATA::getInstance()->getCurScore());
 	curScore->setString(buf);
-
 	//string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
-	std::string history =ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
+	std::string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
 	highestScore->setString(history);
 
 	std::string guanqia = ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string;
@@ -70,5 +81,9 @@ void TopMenu::usePropsBomb(){
 }
 
 void TopMenu::usePropsTime(){
+//TODO
+}
+
+void TopMenu::PauseGame(){
 //TODO
 }

@@ -10,6 +10,7 @@ public:
 	void refresh();
 	void usePropsBomb();
 	void usePropsTime();
+	void PauseGame();
 
 private:
 	Label* highestScore;
