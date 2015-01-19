@@ -152,6 +152,7 @@ set(GAME_SRC
   Classes/PowerStone.cpp
   Classes/PowerStoneReader.cpp
   Classes/PowerStoneLayer.cpp
+  Classes/MenuScenePayHandler.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -194,6 +195,7 @@ set(GAME_HEADERS
   Classes/PowerStone.h
   Classes/PowerStoneReader.h
   Classes/PowerStoneLayer.h
+  Classes/MenuScenePayHandler.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

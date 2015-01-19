@@ -11,6 +11,7 @@ LOCAL_MODULE := cocos2dcpp_shared
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
+					hellocpp/PayProxy.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/HelloWorldScene.cpp \
   					../../Classes/MenuLayer.cpp \
@@ -46,7 +47,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
           ../../Classes/CallAndroidMethod.cpp\
           ../../Classes/PowerStone.cpp\
           ../../Classes/PowerStoneReader.cpp\
-          ../../Classes/PowerStoneLayer.cpp
+          ../../Classes/PowerStoneLayer.cpp\
+          ../../Classes/MenuScenePayHandler.cpp
+          
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes\

@@ -8,6 +8,8 @@
 #include "MenuSceneHandlerReader.h"
 #include "PrizeAnimReader.h"
 #include "PowerStoneLayer.h"
+#include "UpgradeScene.h"
+#include "MenuScenePayHandler.h"
 
 using namespace cocostudio::timeline;
 
@@ -17,12 +19,12 @@ bool MenuLayer::init(){
 	}
 
 	//Size visibleSize = Director::getInstance()->getVisibleSize();
-	///*³õÊ¼»¯±³¾°*/
+	///*ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	//Sprite* background = Sprite::create("bg_menuscene.jpg");
 	//background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	//this->addChild(background,-1);
 	//
-	///*³õÊ¼»¯²Ëµ¥*/
+	///*ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ëµï¿½*/
 	//MenuItemImage* startBtn = MenuItemImage::create(
 	//	"menu_start.png","combo_3.png",CC_CALLBACK_0(MenuLayer::startGame,this)
 	//	);
@@ -59,14 +61,14 @@ bool MenuLayer::init(){
 	labelPs->setAnchorPoint(Point(0,0.5));
 	rootNode->addChild(labelPs);
 
-	//¼ÓÔØ¶¯»­£º 
+	//ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	//ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
-	//rootNode->runAction(action);//×¢!!!£ºÍ¬Ò»¸öÎÄ¼þ´´½¨µÄ½ÚµãÖ»ÄÜÊ¹ÓÃÍ¬Ò»¸öÎÄ¼þ´´½¨µÄ¶¯»­¡£   
+	//rootNode->runAction(action);//×¢!!!ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½Ö»ï¿½ï¿½Ê¹ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½   
   
-	//²¥·Å¶¯»­£º 
+	//ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	//action->gotoFrameAndPlay(0,480,true);
 
-	// ²âÊÔÏÂÑ©Á£×ÓÐ§¹û
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ©ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
 	ParticleSnow* effect = ParticleSnow::create();
 	effect->setTotalParticles(100);
 	rootNode->addChild(effect);
@@ -81,12 +83,16 @@ void MenuLayer::clickGetPrize(){
 void MenuLayer::startGame(){
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
-	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,GameScene::create()));
+	if(MenuScenePayHandler::getInstance()->getResult()){
+		Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,GameScene::create()));
+	}else{
+		Director::getInstance()->replaceScene(TransitionShrinkGrow::create(2.5,UpgradeScene::create()));
+	}
 	auto rootNode = CSLoader::createNode("MenuLayer.csb");
 	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
-	rootNode->runAction(action);//×¢!!!£ºÍ¬Ò»¸öÎÄ¼þ´´½¨µÄ½ÚµãÖ»ÄÜÊ¹ÓÃÍ¬Ò»¸öÎÄ¼þ´´½¨µÄ¶¯»­¡£   
+	rootNode->runAction(action);//×¢!!!ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½Ö»ï¿½ï¿½Ê¹ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½   
   
-	//²¥·Å¶¯»­£º 
+	//ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½ï¿½ï¿½ 
 
 	action->gotoFrameAndPlay(0,480,true);
 }

@@ -7,8 +7,9 @@ using namespace cocos2d;
 
 class CallAndroidMethod{
 public:
+	void Java_org_cocos2dx_cpp_PayService_callback();
 	void showMoreGame();
-	bool pay(int payPoint);
+	void pay(int payPoint);
 	void markPersonInfo(const char tag1,const char tag2);
 	static CallAndroidMethod* getInstance();
 private:

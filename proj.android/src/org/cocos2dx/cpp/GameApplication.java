@@ -1,6 +1,6 @@
 package org.cocos2dx.cpp;
 
-import com.poxiao.pay.star.GamePay;
+import com.poxiao.pay.llk.GamePay;
 import com.tallbigup.android.cloud.CreatePlayerCallback;
 import com.tallbigup.android.cloud.LayoutUtil;
 import com.tallbigup.android.cloud.TbuCallback;
