@@ -62,6 +62,10 @@ void StarMatrix::updateStar(float delta){
 void StarMatrix::onTouch(const Point& p){
 	Star* s = getStarByTouch(p);
 	if(s && acceptTouch){
+		if(false){
+			useBombAuto(s);
+			return;
+		}
 		clearOneByOne = true;
 		genSelectedList(s);
 		//deleteSelectedList();
@@ -78,14 +82,7 @@ void StarMatrix::onTouch(const Point& p){
 	}
 }
 
-void StarMatrix::useBombAuto(){
-	CCLOG("BOMB BOMB BOMB BOMB BOMB");
-	Star* s=nullptr;
-	auto i=5;
-	auto j=5;
-	if(stars[i][j] != nullptr){
-		s=stars[i][j];
-	}
+void StarMatrix::useBombAuto(Star* s){
 	genBombList(s);
 	CCLOG("BOMB SIZE = %d",selectedList.size());
 	deleteSelectedList();

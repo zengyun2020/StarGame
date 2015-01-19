@@ -16,7 +16,7 @@ public:
 	void setNeedClear(bool b);
 	void setAcceptTouch(bool b);
 	void initMatrix();
-	void useBombAuto();
+	void useBombAuto(Star* s);
 
 private:
 
