@@ -21,6 +21,8 @@ public class PayService {
 	private static GameInfoUtil gameInfo;
 	private static String playerId;
 	
+	public static native boolean callback();
+	
 	public static void init(Activity activity){
 		PayService.activity = activity;
 		gameInfo = GameInfoUtil.getInstance();
@@ -28,7 +30,7 @@ public class PayService {
 		playerId = GameApplication.getInstance().getPlayerId();
 	}
 	
-	public void pay(final int payPoint, final PayCallBackForCocos payCallBackForCocos,final String reviveNum){
+	public static void pay(final int payPoint, final PayCallBackForCocos payCallBackForCocos,final String reviveNum){
 		final String orderId = String.valueOf(System.currentTimeMillis())+new Random().nextInt(100);
 		if(PAY.getMoney(payPoint) > 0){
 			final int payCount = gameInfo.getData(GameInfoUtil.PAY_COUNT) + 1;
@@ -87,7 +89,7 @@ public class PayService {
 		}
 	}
 	
-	private void setPayInfo(String payState,int payPoint,String playerId,int money,String levelId,String propName,
+	private static void setPayInfo(String payState,int payPoint,String playerId,int money,String levelId,String propName,
 			String desc,int payCount,String orderId,String errorCode,String errorMsg){
 		TbuCloud.setPayInfo(
 				payState, 

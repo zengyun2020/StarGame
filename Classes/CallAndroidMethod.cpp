@@ -25,7 +25,7 @@ void CallAndroidMethod::showMoreGame(){
 	#endif
 }
 
-void CallAndroidMethod::pay(int payPoint){
+bool CallAndroidMethod::pay(int payPoint){
 	CCLOG(">>>>>>>>>>>>>>pay");
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //判断当前是否为Android平台
 	    CCLOG("android platform");
