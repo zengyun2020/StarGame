@@ -159,7 +159,7 @@ void GameLayer::doRevive(){
 
 void GameLayer::gotoNextLevel(){
 	refreshMenu();
-	floatLevelWord();
+	//floatLevelWord();
 	matrix->setAcceptTouch(true);
 	Audio::getInstance()->playNextGameRound();
 }
