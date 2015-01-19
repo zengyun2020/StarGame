@@ -314,7 +314,7 @@ void StarMatrix::adjustMatrix(){
 
 void StarMatrix::refreshScore(){
 	GAMEDATA* data = GAMEDATA::getInstance();
-	data->setCurScore(data->getCurScore() + selectedList.size()*selectedList.size()*5);
+	data->setCurScore(data->getCurScore() + selectedListSize*selectedListSize*5);
 	if(data->getCurScore() > data->getHistoryScore()){
 		data->setHistoryScore(data->getCurScore());
 	}
