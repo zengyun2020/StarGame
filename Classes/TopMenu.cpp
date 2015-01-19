@@ -1,6 +1,8 @@
 #include "TopMenu.h"
 #include "Chinese.h"
 #include "GameData.h"
+#include "GamePauseLayer.h"
+
 bool TopMenu::init(){
 	if(!Node::init()){
 		return false;
@@ -37,6 +39,27 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height - 150);
 	this->addChild(curScore);
 
+	// ���Ӽ��ܰ���
+	MenuItemImage* BombBtn = MenuItemImage::create(
+		"bomb.png","rainbow.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
+		);
+
+	MenuItemImage* TimeBtn = MenuItemImage::create(
+		"rainbow.png","bomb.png",CC_CALLBACK_0(TopMenu::usePropsTime,this)
+		);
+	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
+	menu->alignItemsHorizontally();
+	menu->setPosition(visibleSize.width - 100,visibleSize.height - 200);
+	this->addChild(menu);
+
+	// ������ͣ����
+	MenuItemImage* PauseBtn = MenuItemImage::create(
+		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
+		);
+	Menu* menuPause = Menu::create(PauseBtn, NULL);
+	menuPause->alignItemsHorizontally();
+	menuPause->setPosition(30,visibleSize.height - 200);
+	this->addChild(menuPause);
 	return true;
 }
 
@@ -44,9 +67,8 @@ void TopMenu::refresh(){
 	char buf[64];
 	sprintf(buf,"%d",GAMEDATA::getInstance()->getCurScore());
 	curScore->setString(buf);
-
 	//string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
-	std::string history =ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
+	std::string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
 	highestScore->setString(history);
 
 	std::string guanqia = ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string;
@@ -55,3 +77,30 @@ void TopMenu::refresh(){
 	/*std::string target = ChineseWord("mubiao") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen");
 	targetScore->setString(target);*/
 }
+
+void TopMenu::usePropsBomb(){
+	//TODO
+}
+
+void TopMenu::usePropsTime(){
+	//TODO
+}
+void TopMenu::ResumeGame(){
+	if(gamePause!=nullptr){
+			gamePause->removeFromParentAndCleanup(true);
+	}
+}
+
+void TopMenu::PauseGame(){
+	gamePause = GamePauseLayer::create();
+	this->addChild(gamePause,1);
+	MenuItemImage* resumeBtn = MenuItemImage::create(
+		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Menu* resumeMenu = Menu::create(resumeBtn, NULL);
+	resumeMenu->alignItemsHorizontally();
+	resumeMenu->setPosition(200,visibleSize.height - 200);
+	gamePause->addChild(resumeMenu,2);
+}
+

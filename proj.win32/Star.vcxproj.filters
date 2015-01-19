@@ -123,6 +123,9 @@
     <ClCompile Include="..\Classes\PowerStoneReader.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GamePauseLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -234,6 +237,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PowerStoneReader.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GamePauseLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

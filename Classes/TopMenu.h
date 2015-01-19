@@ -8,10 +8,16 @@ public:
 	virtual bool init();
 	CREATE_FUNC(TopMenu);
 	void refresh();
+	void usePropsBomb();
+	void usePropsTime();
+	void PauseGame();
+	void ResumeGame();
+
 private:
 	Label* highestScore;
 	Label* level;
 	//Label* targetScore;
 	Label* curScore;
+	Layer* gamePause;
 };
 #endif

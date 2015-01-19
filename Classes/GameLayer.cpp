@@ -20,7 +20,6 @@ bool GameLayer::init(){
 
 
 void GameLayer::loadGame(float dt){
-	initTime();
 	schedule(schedule_selector(GameLayer::updateCustom), 1.0f, kRepeatForever, 0);
 	matrix = nullptr;
 	this->scheduleUpdate();
@@ -28,8 +27,7 @@ void GameLayer::loadGame(float dt){
 	listener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan,this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
 
-	menu = TopMenu::create();
-	this->addChild(menu);
+	
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	linkNum = Label::create("","Arial",40);
@@ -41,10 +39,15 @@ void GameLayer::loadGame(float dt){
 	gameTime->setPosition(100,visibleSize.height-200);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
-
 	this->floatLevelWord();
-}
 
+	menu = TopMenu::create();
+	this->addChild(menu, 1000);
+
+	initTime();
+
+}
+void GameLayer::usePropsBomb(){}
 void GameLayer::floatLevelWord(){
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();

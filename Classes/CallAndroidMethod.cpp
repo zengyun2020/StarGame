@@ -37,9 +37,15 @@ void CallAndroidMethod::pay(int payPoint){
 		if(isHave){
 			JniHelper::getEnv()->CallStaticVoidMethod(methodInfo.classID,methodInfo.methodID,pay_point,reviveNum);
 		}
+<<<<<<< HEAD
 	#endif	
 }
 
 void Java_org_cocos2dx_cpp_PayService_callback(JNIEnv* env,jobject thiz){
 	GAMEDATA::getInstance()->setHasShowRegisterPay(true);
 }
+=======
+	#endif
+		return false;
+}
+>>>>>>> origin/master
