@@ -15,5 +15,6 @@ public:
 	void setGoldNum();
 	void clickGetPrize();
 	void showPowerStone();
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event* event);
 };
 #endif
