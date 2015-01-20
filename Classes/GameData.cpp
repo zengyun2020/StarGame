@@ -24,6 +24,8 @@ void GAMEDATA::init(){
 	setBombNum(UserDefault::getInstance()->getIntegerForKey("bombNum",1));
 	setReviveNum(UserDefault::getInstance()->getIntegerForKey("reviveNum",0));
 	setHasShowRegisterPay(UserDefault::getInstance()->getBoolForKey("showRegisterPay",false));
+	setSoundEffect(UserDefault::getInstance()->getBoolForKey("soundEffect",true));
+	setMusicState(UserDefault::getInstance()->getBoolForKey("musicState",true));
 }
 
 void GAMEDATA::setCurLevel(int level){
@@ -112,4 +114,10 @@ void GAMEDATA::saveReviveNum(){
 void GAMEDATA::saveShowRegisterPay(){
 	UserDefault::getInstance()->setBoolForKey("showRegisterPay", true);
 }
+void GAMEDATA::saveSoundEffect(){
+	UserDefault::getInstance()->setBoolForKey("soundEffect", getSoundEffect());
+}
 
+void GAMEDATA::saveMusicState(){
+	UserDefault::getInstance()->setBoolForKey("musicState", getMusicState());
+}

@@ -43,6 +43,12 @@ public:
 	inline void setHasShowRegisterPay(bool showRegisterPay){show_register_pay = showRegisterPay;}
 	inline bool hasShowRegisterPay(){return show_register_pay;}
 
+	inline void setSoundEffect(bool soundeffect){sound_effect = soundeffect;}
+	inline bool getSoundEffect(){return sound_effect;}
+
+	inline void setMusicState(bool musicstate){music_state = musicstate;}
+	inline bool getMusicState(){return music_state;}
+
 	/*½±Àø·ÖÊý*/
 	int getJiangli(int size);
 
@@ -55,6 +61,8 @@ public:
 	void saveBombNum();
 	void saveReviveNum();
 	void saveShowRegisterPay();
+	void saveSoundEffect();
+	void saveMusicState();
 private:
 	GAMEDATA();
 	void init();
@@ -71,6 +79,8 @@ private:
 	int prize_times;
 	int add_time_num;
 	int bomb_num;
+	bool sound_effect;
+	bool music_state;
 	int revive_num;
 	bool show_register_pay;
 	friend class MenuLayer;
