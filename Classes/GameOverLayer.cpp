@@ -39,6 +39,18 @@ bool GameOverLayer::init(){
 	di->runAction(ScaleTo::create(0.8f,2.8,2.8,0));
 	di->runAction(ScaleTo::create(0.5f,1,1,0));
 	this->addChild(di);
+
+	Sprite* ming = Sprite::create("game_result_ming_txt.png");
+	ming->setPosition(393,360);
+	ming->runAction(ScaleTo::create(0.8f,2.8,2.8,0));
+	ming->runAction(ScaleTo::create(0.5f,1,1,0));
+	this->addChild(ming);
+
+	Sprite* beatPer = Sprite::create("game_beat_person_txt.png");
+	beatPer->setPosition(240,244);
+	beatPer->runAction(ScaleTo::create(0.8f,2.8,2.8,0));
+	beatPer->runAction(ScaleTo::create(0.5f,1,1,0));
+	this->addChild(ming);
 		
 	MenuItemImage* startBtn = MenuItemImage::create(
 		"game_start_another.png","game_start_another.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
