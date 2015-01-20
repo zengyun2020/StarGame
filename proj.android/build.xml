@@ -4,6 +4,7 @@
     <loadproperties srcFile="local.properties" />
 
     <property file="ant.properties" />
+   <property name="aapt.ignore.assets" value="!.svn:!.git:\x3Cdir\x3E_*:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~:crunch" />
 
     <property
         name="java.encoding"
