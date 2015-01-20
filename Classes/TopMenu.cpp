@@ -3,6 +3,7 @@
 #include "GameData.h"
 #include "GamePauseLayer.h"
 #include "GameLayer.h"
+#include "StarMatrix.h"
 
 bool TopMenu::init(){
 	if(!Node::init()){
@@ -80,6 +81,7 @@ void TopMenu::refresh(){
 
 void TopMenu::usePropsBomb(){
 	//TODO
+	StarMatrix::BombClick =true;
 }
 
 void TopMenu::usePropsTime(){
@@ -87,11 +89,13 @@ void TopMenu::usePropsTime(){
 }
 void TopMenu::ResumeGame(){
 	if(gamePause!=nullptr){
-			gamePause->removeFromParentAndCleanup(true);
+		GameLayer::_PauseTime =false;
+		gamePause->removeFromParentAndCleanup(true);
 	}
 }
 
 void TopMenu::PauseGame(){
+	GameLayer::_PauseTime =true;
 	gamePause = GamePauseLayer::create();
 	this->addChild(gamePause,1);
 	MenuItemImage* resumeBtn = MenuItemImage::create(

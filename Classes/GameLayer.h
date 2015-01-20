@@ -33,8 +33,6 @@ public:
 	void initTime();  //重置游戏时间
 	void setTime(int time);
 	int getTime();
-	void pauseTime();
-    void resumeTime();
 	void plusTime(int time);
 	void usePropsBomb();//使用道具炸弹
 	void usePropsTime();//使用加时道具
@@ -47,6 +45,7 @@ private:
 	Label* linkNum;
 	Label* gameTime;//游戏时间显示
 	int totalTime;//游戏时间
-	bool _PauseTime;
+public :
+	static bool _PauseTime;
 };
 #endif
