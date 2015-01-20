@@ -14,10 +14,10 @@ public:
 	virtual bool init();
 	CREATE_FUNC(GameLayer);
 	
-	void floatLevelWord();
+	//void floatLevelWord();
 	//void floatTargetScoreWord();
-	void removeFloatWord();
-	void showStarMatrix();
+	//void removeFloatWord();
+	void showStarMatrix(float dt);
 	virtual void update(float delta);
 	virtual bool onTouchBegan(Touch* touch,Event* event);
 	void refreshMenu();
@@ -33,20 +33,19 @@ public:
 	void initTime();  //重置游戏时间
 	void setTime(int time);
 	int getTime();
-	void pauseTime();
-    void resumeTime();
 	void plusTime(int time);
-	void usePropsBomb();//使用道具炸弹
-	void usePropsTime();//使用加时道具
+
 	
 private:
-	FloatWord* _levelMsg;
+	//FloatWord* _levelMsg;
 	//FloatWord* _targetScore;
 	TopMenu* menu;
 	StarMatrix* matrix;
 	Label* linkNum;
 	Label* gameTime;//游戏时间显示
 	int totalTime;//游戏时间
-	bool _PauseTime;
+public :
+	static bool _PauseTime;
+	static bool needPluse;
 };
 #endif

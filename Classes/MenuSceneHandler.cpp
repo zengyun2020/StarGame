@@ -52,7 +52,7 @@ void MenuSceneHandler::bgMusicSwitch(cocos2d::Ref* object, cocos2d::ui::Widget::
 		
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		
+		CallAndroidMethod::getInstance()->pay(1);
 	}
 }
 
