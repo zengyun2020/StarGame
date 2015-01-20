@@ -62,7 +62,7 @@ bool TopMenu::init(){
 	menuPause->setPosition(30,visibleSize.height - 100);
 	this->addChild(menuPause);
 
-    propBombNum = Label::create(
+	propBombNum = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string,
 		"Verdana-Bold",18	
 		);
@@ -105,9 +105,9 @@ void TopMenu::usePropsBomb(){
 			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string );
 		}
 	}else{
-		  //TODO 弹出支付
+		//TODO 弹出支付
 	}
-	
+
 }
 
 void TopMenu::usePropsTime(){
@@ -120,7 +120,7 @@ void TopMenu::usePropsTime(){
 			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
 		}
 	}else{
-		  //TODO 弹出支付
+		//TODO 弹出支付
 	}
 }
 void TopMenu::ResumeGame(){
@@ -139,9 +139,13 @@ void TopMenu::PauseGame(){
 	MenuItemImage* exitBtn = MenuItemImage::create(
 		"exit_normal.png","exit_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
 		);
-	MenuItemImage* soundBtn = MenuItemImage::create(
-		"sound_effect_on.png","sound_effect_on.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
-		);
+
+	MenuItemImage* soundBtnOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
+	MenuItemImage* soundBtnOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");  
+	MenuItemToggle* soundTog = MenuItemToggle::createWithTarget(this,menu_selector(TopMenu::getSoudState),soundBtnOn,soundBtnOff,NULL);  
+	//TODO
+
+
 	MenuItemImage* musicBtn = MenuItemImage::create(
 		"bg_music_open.png","bg_music_open.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
 		);
@@ -149,11 +153,13 @@ void TopMenu::PauseGame(){
 	MenuItemImage* resumeBtn = MenuItemImage::create(
 		"continue_normal.png","continue_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
 		);
-	Menu* resumeMenu = Menu::create(exitBtn,soundBtn,musicBtn,resumeBtn, NULL);
+	Menu* resumeMenu = Menu::create(exitBtn,soundTog,musicBtn,resumeBtn, NULL);
 	resumeMenu->alignItemsHorizontallyWithPadding (50);
 	resumeMenu->setPosition(visibleSize.width/2,150);
 	gamePause->addChild(resumeMenu,2);
 }
 
 
-
+void TopMenu::getSoudState(CCObject* pSender){
+	//TODO
+}
