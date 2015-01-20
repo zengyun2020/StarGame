@@ -50,7 +50,7 @@ bool GameOverLayer::init(){
 	beatPer->setPosition(240,244);
 	beatPer->runAction(ScaleTo::create(0.8f,2.8,2.8,0));
 	beatPer->runAction(ScaleTo::create(0.5f,1,1,0));
-	this->addChild(ming);
+	this->addChild(beatPer);
 		
 	MenuItemImage* startBtn = MenuItemImage::create(
 		"game_start_another.png","game_start_another.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
