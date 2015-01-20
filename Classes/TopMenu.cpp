@@ -98,10 +98,22 @@ void TopMenu::PauseGame(){
 	gamePause = GamePauseLayer::create();
 	this->addChild(gamePause,1);
 	MenuItemImage* resumeBtn = MenuItemImage::create(
+		"exit.png","exit.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
+	MenuItemImage* resumeBtn = MenuItemImage::create(
+		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
+
+	MenuItemImage* resumeBtn = MenuItemImage::create(
+		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
+
+	MenuItemImage* resumeBtn = MenuItemImage::create(
 		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
 		);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Menu* resumeMenu = Menu::create(resumeBtn, NULL);
+
 	resumeMenu->alignItemsHorizontally();
 	resumeMenu->setPosition(visibleSize.width/2,visibleSize.height/2);
 	gamePause->addChild(resumeMenu,2);
