@@ -15,5 +15,8 @@ public:
 	void setGoldNum();
 	void clickGetPrize();
 	void showPowerStone();
+private:
+	Menu* menuBgMusic;
+	Menu* menuSoundEffect;
 };
 #endif
