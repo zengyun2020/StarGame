@@ -33,8 +33,12 @@
    <key>miao</key>
   <string>秒</string>
 
-  <key>xiayimu</key>
-  <string>下一幕</string>
+  <key>di</key>
+  <string>第</string>
+
+  <key>mu</key>
+  <string>幕</string>
+
 
 </dict>
 
