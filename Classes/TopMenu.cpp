@@ -42,11 +42,11 @@ bool TopMenu::init(){
 
 	// ���Ӽ��ܰ���
 	MenuItemImage* BombBtn = MenuItemImage::create(
-		"bomb.png","rainbow.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
+		"bomb_normal.png","bomb_click.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
 
 	MenuItemImage* TimeBtn = MenuItemImage::create(
-		"rainbow.png","bomb.png",CC_CALLBACK_0(TopMenu::usePropsTime,this)
+		"time_normal.png","time_click.png",CC_CALLBACK_0(TopMenu::usePropsTime,this)
 		);
 	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
 	menu->alignItemsHorizontally();
@@ -55,7 +55,7 @@ bool TopMenu::init(){
 
 	// ������ͣ����
 	MenuItemImage* PauseBtn = MenuItemImage::create(
-		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
+		"pause.png","pause.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
 		);
 	Menu* menuPause = Menu::create(PauseBtn, NULL);
 	menuPause->alignItemsHorizontally();
