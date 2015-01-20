@@ -158,23 +158,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MenuSceneHandlerReader.cpp" />
     <ClCompile Include="..\Classes\MenuScenePayHandler.cpp" />
     <ClCompile Include="..\Classes\PlayerRank.cpp" />
-    <ClCompile Include="..\Classes\PowerStone.cpp" />
-    <ClCompile Include="..\Classes\PowerStoneLayer.cpp" />
-    <ClCompile Include="..\Classes\PowerStoneReader.cpp" />
-    <ClCompile Include="..\Classes\Prize.cpp" />
-    <ClCompile Include="..\Classes\PrizeAnim.cpp" />
-    <ClCompile Include="..\Classes\PrizeAnimReader.cpp" />
-    <ClCompile Include="..\Classes\PrizeLayer.cpp" />
-    <ClCompile Include="..\Classes\PrizeReader.cpp" />
-    <ClCompile Include="..\Classes\PrizeScene.cpp" />
     <ClCompile Include="..\Classes\Star.cpp" />
     <ClCompile Include="..\Classes\StarMatrix.cpp" />
     <ClCompile Include="..\Classes\StarParticle.cpp" />
     <ClCompile Include="..\Classes\TopMenu.cpp" />
-    <ClCompile Include="..\Classes\Upgrade.cpp" />
-    <ClCompile Include="..\Classes\UpgradeLayer.cpp" />
-    <ClCompile Include="..\Classes\UpgradeReader.cpp" />
-    <ClCompile Include="..\Classes\UpgradeScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,23 +186,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MenuSceneHandlerReader.h" />
     <ClInclude Include="..\Classes\MenuScenePayHandler.h" />
     <ClInclude Include="..\Classes\PlayerRank.h" />
-    <ClInclude Include="..\Classes\PowerStone.h" />
-    <ClInclude Include="..\Classes\PowerStoneLayer.h" />
-    <ClInclude Include="..\Classes\PowerStoneReader.h" />
-    <ClInclude Include="..\Classes\Prize.h" />
-    <ClInclude Include="..\Classes\PrizeAnim.h" />
-    <ClInclude Include="..\Classes\PrizeAnimReader.h" />
-    <ClInclude Include="..\Classes\PrizeLayer.h" />
-    <ClInclude Include="..\Classes\PrizeReader.h" />
-    <ClInclude Include="..\Classes\PrizeScene.h" />
     <ClInclude Include="..\Classes\Star.h" />
     <ClInclude Include="..\Classes\StarMatrix.h" />
     <ClInclude Include="..\Classes\StarParticle.h" />
     <ClInclude Include="..\Classes\TopMenu.h" />
-    <ClInclude Include="..\Classes\Upgrade.h" />
-    <ClInclude Include="..\Classes\UpgradeLayer.h" />
-    <ClInclude Include="..\Classes\UpgradeReader.h" />
-    <ClInclude Include="..\Classes\UpgradeScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

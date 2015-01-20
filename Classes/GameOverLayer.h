@@ -11,7 +11,7 @@ public:
 	CREATE_FUNC(GameOverLayer);
 	void continueGame();
 	void back();
-	void showScore();
+	void showScore(float dt);
 	GameOverLayer getInstance();
 private:
 	float score;

@@ -12,9 +12,6 @@ public:
 	void startGame();
 	void stopAction();
 	void startAction();
-	void setGoldNum();
-	void clickGetPrize();
-	void showPowerStone();
 private:
 	Menu* menuBgMusic;
 	Menu* menuSoundEffect;

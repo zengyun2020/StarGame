@@ -33,22 +33,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../Classes/GameOverReader.cpp\
 					../../Classes/GameOverScene.cpp\
 					../../Classes/GameOverLayer.cpp\
-          			../../Classes/Upgrade.cpp\
-          			../../Classes/UpgradeReader.cpp\
-          			../../Classes/UpgradeLayer.cpp\
-          			../../Classes/UpgradeScene.cpp\
 					../../Classes/PlayerRank.cpp\
-					../../Classes/Prize.cpp\
-					../../Classes/PrizeReader.cpp\
-          			../../Classes/PrizeScene.cpp\
-          			../../Classes/PrizeLayer.cpp\
-          			../../Classes/PrizeAnim.cpp\
-					../../Classes/PrizeAnimReader.cpp\
 					../../Classes/GamePauseLayer.cpp\
           ../../Classes/CallAndroidMethod.cpp\
-          ../../Classes/PowerStone.cpp\
-          ../../Classes/PowerStoneReader.cpp\
-          ../../Classes/PowerStoneLayer.cpp\
           ../../Classes/MenuScenePayHandler.cpp
           
 

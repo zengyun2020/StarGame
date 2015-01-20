@@ -6,7 +6,6 @@
 #include "cocostudio/CocoStudio.h"
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
 #include "GameOverReader.h"
-#include "UpgradeScene.h"
 #include "PlayerRank.h"
 
 using namespace cocos2d;
@@ -71,10 +70,11 @@ bool GameOverLayer::init(){
 	menu2->setPosition(84,131);
 	this->addChild(menu2);
 
+	schedule(schedule_selector(GameOverLayer::showScore), 2.5f, 0, 0);
 	return true;
 }
 
-void GameOverLayer::showScore(){
+void GameOverLayer::showScore(float dt){
 	score += GAMEDATA::getInstance()->getCurScore()/180;
 }
 

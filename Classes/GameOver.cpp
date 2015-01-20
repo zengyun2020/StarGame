@@ -1,7 +1,6 @@
 #include "GameOver.h"
 #include "ui/UIText.h"
 #include "GameOverLayer.h"
-#include "UpgradeLayer.h"
 USING_NS_CC;
 using namespace std;
 using namespace cocos2d::ui;

@@ -6,9 +6,6 @@
 #include "cocostudio/CocoStudio.h"
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
 #include "MenuSceneHandlerReader.h"
-#include "PrizeAnimReader.h"
-#include "PowerStoneLayer.h"
-#include "UpgradeScene.h"
 #include "MenuScenePayHandler.h"
 
 using namespace cocostudio::timeline;
@@ -64,12 +61,4 @@ void MenuLayer::startAction(){
 void MenuLayer::stopAction(){
 	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
 	action->stop();
-}
-
-void MenuLayer::setGoldNum(){
-	
-}
-
-void MenuLayer::showPowerStone(){
-	Director::getInstance()->getRunningScene()->addChild(PowerStoneLayer::getInstance());
 }

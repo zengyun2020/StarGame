@@ -1,10 +1,7 @@
 #include "MenuSceneHandler.h"
 #include "ui/UIText.h"
 #include "MenuLayer.h"
-#include "UpgradeScene.h"
 #include "HelloWorldScene.h"
-#include "PrizeLayer.h"
-#include "PrizeScene.h"
 #include "CallAndroidMethod.h"
 USING_NS_CC;
 using namespace std;

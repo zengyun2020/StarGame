@@ -2,10 +2,10 @@ package org.cocos2dx.cpp;
 
 import java.util.Random;
 
-import com.poxiao.pay.llk.GamePay;
-import com.poxiao.pay.llk.PAY;
-import com.poxiao.pay.llk.GamePayCallback;
-import com.poxiao.pay.llk.widget.MarkClickOkInterface;
+import com.poxiao.pay.star.GamePay;
+import com.poxiao.pay.star.PAY;
+import com.poxiao.pay.star.GamePayCallback;
+import com.poxiao.pay.star.widget.MarkClickOkInterface;
 import com.tallbigup.android.cloud.TbuCallback;
 import com.tallbigup.android.cloud.TbuCloud;
 import com.tallbigup.buffett.Buffett;
@@ -36,7 +36,7 @@ public class PayService {
 			setPayInfo("request", payPoint, playerId, PAY.getMoney(payPoint), "0", PAY.getDesc(payPoint), 
 					PAY.getDesc(payPoint), payCount, orderId, "100", "请求支付");
 			
-			GamePay.getInstance().pay(activity, payPoint, orderId, new GamePayCallback() {
+			GamePay.getInstance().pay(activity, payPoint, reviveNum, orderId, new GamePayCallback() {
 				
 				@Override
 				public void result(OrderResultInfo result) {
@@ -66,7 +66,7 @@ public class PayService {
 				}
 			});
 		}else{
-			GamePay.getInstance().pay(activity, payPoint, orderId, new GamePayCallback() {
+			GamePay.getInstance().pay(activity, payPoint, reviveNum, orderId, new GamePayCallback() {
 				
 				@Override
 				public void result(OrderResultInfo result) {
