@@ -50,7 +50,7 @@ void GameLayer::loadGame(float dt){
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	Audio::getInstance()->playReadyGo();
 }
-void GameLayer::usePropsBomb(){}
+
 //void GameLayer::floatLevelWord(){
 //
 //	Size visibleSize = Director::getInstance()->getVisibleSize();
