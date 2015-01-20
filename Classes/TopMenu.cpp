@@ -63,7 +63,7 @@ bool TopMenu::init(){
 	this->addChild(menuPause);
 
     propBombNum = Label::create(
-		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
+		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string,
 		"Verdana-Bold",18	
 		);
 	propBombNum->setPosition(visibleSize.width-110,visibleSize.height - 120);
@@ -96,11 +96,32 @@ void TopMenu::refresh(){
 }
 
 void TopMenu::usePropsBomb(){
-	StarMatrix::BombClick =true;
+	auto num =GAMEDATA::getInstance()->getBombNum();
+	if(num>0){
+		if(!(StarMatrix::BombClick)){
+			StarMatrix::BombClick =true;
+			GAMEDATA::getInstance()->setBombNum(num-1);
+			GAMEDATA::getInstance()->saveBombNum();
+			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string );
+		}
+	}else{
+		  //TODO 弹出支付
+	}
+	
 }
 
 void TopMenu::usePropsTime(){
-	GameLayer::needPluse =true;  
+	auto num =GAMEDATA::getInstance()->getAddTimeNum();
+	if(num>0){
+		if(!(StarMatrix::BombClick)){
+			GameLayer::needPluse =true;  
+			GAMEDATA::getInstance()->setAddTimeNum(num-1);
+			GAMEDATA::getInstance()->saveAddTimeNum();
+			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
+		}
+	}else{
+		  //TODO 弹出支付
+	}
 }
 void TopMenu::ResumeGame(){
 	if(gamePause!=nullptr){
