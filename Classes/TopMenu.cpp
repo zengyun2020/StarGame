@@ -61,6 +61,22 @@ bool TopMenu::init(){
 	menuPause->alignItemsHorizontally();
 	menuPause->setPosition(30,visibleSize.height - 100);
 	this->addChild(menuPause);
+
+    propBombNum = Label::create(
+		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
+		"Verdana-Bold",18	
+		);
+	propBombNum->setPosition(visibleSize.width-110,visibleSize.height - 120);
+	this->addChild(propBombNum);
+
+	propTimeNum = Label::create(
+		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
+		"Verdana-Bold",18	
+		);
+	propTimeNum->setPosition(visibleSize.width-40,visibleSize.height - 120);
+	this->addChild(propTimeNum);
+
+
 	return true;
 }
 
