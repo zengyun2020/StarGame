@@ -11,6 +11,10 @@ public:
 	CREATE_FUNC(GameOverLayer);
 	void continueGame();
 	void back();
+	void showScore();
 	GameOverLayer getInstance();
+private:
+	float score;
+	Label* labelScore;
 };
 #endif

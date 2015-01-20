@@ -16,46 +16,49 @@ bool GameOverLayer::init(){
 		return false;
 	}
 
-	//Size visibleSize = Director::getInstance()->getVisibleSize();
-	///*初始化背景*/
-	//Sprite* background = Sprite::create("bg_menuscene.jpg");
-	//background->setPosition(visibleSize.width/2,visibleSize.height/2);
-	//this->addChild(background,-1);
-	//
-	///*初始化菜单*/
-	//MenuItemImage* startBtn = MenuItemImage::create(
-	//	"menu_start.png","combo_3.png",CC_CALLBACK_0(MenuLayer::startGame,this)
-	//	);
-	//Menu* menu = Menu::create(startBtn,NULL);
-	//menu->alignItemsVertically();
-	//menu->setPosition(visibleSize.width/2,visibleSize.height/2);
-	//this->addChild(menu);
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	/*初始化背景*/
+	Sprite* background = Sprite::create("bg_mainscene.jpg");
+	background->setPosition(visibleSize.width/2,visibleSize.height/2);
+	this->addChild(background,-1);
 
-	CSLoader* instance = CSLoader::getInstance();
-	instance->registReaderObject("GameOverReader",(ObjectFactory::Instance)GameOverReader::getInstance);
-	Node *rootNode = CSLoader::createNode("GameOver.csb");
-	this->addChild(rootNode);
+	Sprite* despite = Sprite::create("game_result_despite.png");
+	despite->setPosition(240,495);
+	this->addChild(despite,0);
 
-	int score = GAMEDATA::getInstance()->getCurScore();
-	auto labelScore = Label::create(cocos2d::String::createWithFormat("%d",score)->_string,"Arial",36);
-	labelScore->setColor(Color3B::GREEN);
-	labelScore->setPosition(240,564);
-	labelScore->setAnchorPoint(Point(0.5,0.5));
+	Sprite* currentRoundScore = Sprite::create("game_result_curr_round_score.png");
+	currentRoundScore->setPosition(240,725);
+	this->addChild(currentRoundScore,1);
+
+	labelScore = Label::create(cocos2d::String::createWithFormat(": %d",(int)score)->_string,"Arial",48);
+	labelScore->setPosition(240,648);
 	this->addChild(labelScore);
 
-	auto labelRank = Label::create(cocos2d::String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankList(score))->_string,"Arial",36);
-	labelRank->setColor(Color3B::GREEN);
-	labelRank->setPosition(297,503);
-	labelRank->setAnchorPoint(Point(0.5,0.5));
-	this->addChild(labelRank);
+	Sprite* di = Sprite::create("game_result_di_txt.png");
+	di->setPosition(210,360);
+	di->runAction(ScaleTo::create(0.8f,2.8,2.8,0));
+	di->runAction(ScaleTo::create(0.5f,1,1,0));
+	this->addChild(di);
+		
+	MenuItemImage* startBtn = MenuItemImage::create(
+		"game_start_another.png","game_start_another.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
+		);
+	Menu* menu1 = Menu::create(startBtn,NULL);
+	menu1->setPosition(294,131);
+	this->addChild(menu1);
 
-	auto labelPer = Label::create(cocos2d::String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankPer(score))->_string,"Arial",36);
-	labelPer->setColor(Color3B::GREEN);
-	labelPer->setPosition(267,433);
-	labelPer->setAnchorPoint(Point(0.5,0.5));
-	this->addChild(labelPer);
+	MenuItemImage* backBtn = MenuItemImage::create(
+		"game_result_back.png","game_result_back.png",CC_CALLBACK_0(GameOverLayer::back,this)
+		);
+	Menu* menu2 = Menu::create(backBtn,NULL);
+	menu2->setPosition(84,131);
+	this->addChild(menu2);
 
 	return true;
+}
+
+void GameOverLayer::showScore(){
+	score += GAMEDATA::getInstance()->getCurScore()/180;
 }
 
 void GameOverLayer::continueGame(){
