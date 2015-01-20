@@ -80,12 +80,11 @@ void TopMenu::refresh(){
 }
 
 void TopMenu::usePropsBomb(){
-	//TODO
 	StarMatrix::BombClick =true;
 }
 
 void TopMenu::usePropsTime(){
-	//TODO
+	GameLayer::needPluse =true;  
 }
 void TopMenu::ResumeGame(){
 	if(gamePause!=nullptr){

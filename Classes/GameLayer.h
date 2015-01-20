@@ -46,5 +46,6 @@ private:
 	int totalTime;//游戏时间
 public :
 	static bool _PauseTime;
+	static bool needPluse;
 };
 #endif

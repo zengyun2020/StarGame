@@ -7,6 +7,7 @@
 #include "GameOverScene.h"
 
 bool GameLayer::_PauseTime=false;
+bool GameLayer::needPluse = false;
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -89,6 +90,10 @@ void GameLayer::showStarMatrix(float dt){
 
 //更新方法，scheduleUpdate,每帧调用
 void GameLayer::update(float delta){
+	if(needPluse){
+		plusTime(10);
+		needPluse =false;
+	}
 	if(matrix){
 		matrix->updateStar(delta);
 	}
