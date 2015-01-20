@@ -28,7 +28,7 @@ public class PayService {
 		playerId = GameApplication.getInstance().getPlayerId();
 	}
 	
-	public static void pay(final int payPoint,final String reviveNum){
+	public static void pay(final int payPoint,final int reviveNum){
 		final String orderId = String.valueOf(System.currentTimeMillis())+new Random().nextInt(100);
 		if(PAY.getMoney(payPoint) > 0){
 			final int payCount = gameInfo.getData(GameInfoUtil.PAY_COUNT) + 1;
@@ -42,17 +42,17 @@ public class PayService {
 				public void result(OrderResultInfo result) {
 					Log.e("MCH", "resultCode="+result.getResultCode());
 					if(result.getResultCode() == 0){
-						//payCallback(true);
+						JniPayCallbackHelper.payCallback(payPoint, 0);
 						TbuCloud.markUserPay(activity, 1);
 						gameInfo.setData(GameInfoUtil.PAY_MONEY, gameInfo.getData(GameInfoUtil.PAY_MONEY)+PAY.getMoney(payPoint));
 						setPayInfo("success", payPoint, playerId, PAY.getMoney(payPoint), "0", 
 								PAY.getName(payPoint), PAY.getDesc(payPoint), payCount, orderId, "0", "支付成功");
 					}else if(result.getResultCode() == -3){
-						//payCallback(false);
+						JniPayCallbackHelper.payCallback(payPoint, 1);
 						setPayInfo("cancel", payPoint, playerId, PAY.getMoney(payPoint), "0", 
 								PAY.getName(payPoint), PAY.getDesc(payPoint), payCount, orderId, "-3", "取消支付");
 					}else{
-						//payCallback(false);
+						JniPayCallbackHelper.payCallback(payPoint, 1);
 						setPayInfo("fail", payPoint, playerId, PAY.getMoney(payPoint), "0", 
 								PAY.getName(payPoint), PAY.getDesc(payPoint), payCount, orderId, result.getErrorCode(), result.getErrorMsg());
 					}
@@ -71,11 +71,11 @@ public class PayService {
 				@Override
 				public void result(OrderResultInfo result) {
 					if(result.getResultCode() == 0){
-						//payCallback(true);
+						JniPayCallbackHelper.payCallback(payPoint, 0);
 					}else if(result.getResultCode() == -3){
-						//payCallback(false);
+						JniPayCallbackHelper.payCallback(payPoint, 1);
 					}else{
-						//payCallback(false);
+						JniPayCallbackHelper.payCallback(payPoint, 1);
 					}
 				}
 			}, new MarkClickOkInterface() {
