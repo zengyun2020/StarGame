@@ -57,9 +57,7 @@ bool MenuLayer::init(){
 void MenuLayer::startGame(){
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
-	if(MenuScenePayHandler::getInstance()->getResult()){
-		Director::getInstance()->replaceScene(TransitionShrinkGrow::create(1.5,GameScene::create()));
-	}
+	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(1.5,GameScene::create()));
 }
 
 void MenuLayer::startAction(){
