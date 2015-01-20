@@ -31,7 +31,7 @@ void GameLayer::loadGame(float dt){
 	listener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan,this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
 
-	
+
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	linkNum = Label::create("","Arial",40);
@@ -137,26 +137,28 @@ void GameLayer::showGameTime(int time){
 
 void GameLayer::floatLeftStarMsg(int leftNum){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* leftStarMsg1 = FloatWord::create(ChineseWord("shengyu") + String::createWithFormat("%d",leftNum)->_string +ChineseWord("ge"), 
-		50,Point(visibleSize.width,visibleSize.height/2));
+	/*FloatWord* leftStarMsg1 = FloatWord::create(ChineseWord("shengyu") + String::createWithFormat("%d",leftNum)->_string +ChineseWord("ge"), 
+	50,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(leftStarMsg1);
 	int jiangLiScore = GAMEDATA::getInstance()->getJiangli(leftNum);
 	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
-		50,Point(visibleSize.width,visibleSize.height/2 - 50));
-	this->addChild(leftStarMsg2);
-
-	leftStarMsg1->floatInOut(0.5f,1.0f,
+	50,Point(visibleSize.width,visibleSize.height/2 - 50));
+	this->addChild(leftStarMsg2);*/
+	FloatWord* msg1 = FloatWord::create(ChineseWord("xiayimu"),50,Point(visibleSize.width,visibleSize.height/2 - 50));
+	this->addChild(msg1);
+	msg1->floatInOut(0.5f,1.0f,
 		[=](){
 			hideLinkNum();
 			matrix->setNeedClear(true);
 			GAMEDATA* data = GAMEDATA::getInstance();
-			data->setCurScore(data->getCurScore() + jiangLiScore);
+			//data->setCurScore(data->getCurScore() + jiangLiScore);
+			data->setCurScore(data->getCurScore());
 			if(data->getCurScore() > data->getHistoryScore()){
 				data->setHistoryScore(data->getCurScore());
 			}
 			refreshMenu();
 	});
-	leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
+	//leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
 }
 
 
@@ -206,7 +208,7 @@ void GameLayer::plusTime(int time){
 
 void GameLayer::updateCustom(float dt){
 	if(!_PauseTime){
-	  totalTime--;
+		totalTime--;
 	}
 	//if(totalTime==50){
 	//	matrix->useBombAuto();//使用一次炸弹
