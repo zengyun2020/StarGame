@@ -43,5 +43,7 @@ private:
 	static float ONE_CLEAR_TIME;
 	float clearSumTime;
 	int selectedListSize;
+public :
+	static bool BombClick;
 };
 #endif
