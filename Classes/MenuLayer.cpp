@@ -14,7 +14,11 @@ bool MenuLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-
+	//注册捕捉监听
+	auto listenerkeyPad = EventListenerKeyboard::create();
+	listenerkeyPad->onKeyReleased = CC_CALLBACK_2(MenuLayer::onKeyReleased, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
+	
 	//Size visibleSize = Director::getInstance()->getVisibleSize();
 	///*��ʼ������*/
 	//Sprite* background = Sprite::create("bg_menuscene.jpg");
