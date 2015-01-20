@@ -49,7 +49,7 @@ public class AppActivity extends Cocos2dxActivity {
 		
 		NetWorkService.init(this);
 		PayService.init(this);
-		JniPayCallbackHelper.payCallback(JniPayCallbackHelper.class,0, 0);
+		JniPayCallbackHelper.payCallback(0, 1);
 		if(TbuCloud.markUserType(getApplicationContext()) == 0){
 			   TbuCloud.markUserPay(getApplicationContext(), 0);
 		}
@@ -67,9 +67,5 @@ public class AppActivity extends Cocos2dxActivity {
 	public void onBackPressed() {
 		quit();
 	}
-	
-//	static {
-//        System.loadLibrary("libcocos2dcpp.so");
-//    }
 
 }

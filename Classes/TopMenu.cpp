@@ -2,6 +2,7 @@
 #include "Chinese.h"
 #include "GameData.h"
 #include "GamePauseLayer.h"
+#include "GameLayer.h"
 
 bool TopMenu::init(){
 	if(!Node::init()){
@@ -15,13 +16,13 @@ bool TopMenu::init(){
 	highestScore->setPosition(visibleSize.width/2,visibleSize.height - 50);
 	this->addChild(highestScore);
 
-	level = Label::create(
-		//"guanqia" + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
-		ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
-		"Verdana-Bold",24
-		);
-	level->setPosition(visibleSize.width-50,visibleSize.height - 50);
-	this->addChild(level);
+	//level = Label::create(
+	//	//"guanqia" + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
+	//	ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
+	//	"Verdana-Bold",24
+	//	);
+	//level->setPosition(visibleSize.width-50,visibleSize.height - 50);
+	//this->addChild(level);
 
 	//targetScore = Label::create(
 	//	//"mubiao" + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextScore())->_string + "fen",
@@ -70,8 +71,8 @@ void TopMenu::refresh(){
 	/*std::string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
 	highestScore->setString(history);*/
 
-	std::string guanqia = ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string;
-	level->setString(guanqia);
+	/*std::string guanqia = ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string;
+	level->setString(guanqia);*/
 
 	/*std::string target = ChineseWord("mubiao") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen");
 	targetScore->setString(target);*/

@@ -15,7 +15,7 @@ public:
 
 private:
 	Label* highestScore;
-	Label* level;
+	//Label* level;
 	//Label* targetScore;
 	Label* curScore;
 	Layer* gamePause;
