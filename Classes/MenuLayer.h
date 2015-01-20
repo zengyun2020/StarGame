@@ -15,12 +15,9 @@ public:
 	void setGoldNum();
 	void clickGetPrize();
 	void showPowerStone();
-<<<<<<< HEAD
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event* event);
-=======
 private:
 	Menu* menuBgMusic;
 	Menu* menuSoundEffect;
->>>>>>> origin/master
 };
 #endif
