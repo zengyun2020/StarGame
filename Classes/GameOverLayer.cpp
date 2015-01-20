@@ -17,7 +17,7 @@ bool GameOverLayer::init(){
 	}
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	/*³õÊ¼»¯±³¾°*/
+	/*ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
@@ -36,21 +36,26 @@ bool GameOverLayer::init(){
 
 	Sprite* di = Sprite::create("game_result_di_txt.png");
 	di->setPosition(210,360);
-	di->runAction(ScaleTo::create(0.8f,2.8,2.8,0));
+	di->setScale(3.8);
 	di->runAction(ScaleTo::create(0.5f,1,1,0));
 	this->addChild(di);
 
 	Sprite* ming = Sprite::create("game_result_ming_txt.png");
 	ming->setPosition(393,360);
-	ming->runAction(ScaleTo::create(0.8f,2.8,2.8,0));
+	ming->setScale(3.8);
 	ming->runAction(ScaleTo::create(0.5f,1,1,0));
 	this->addChild(ming);
 
 	Sprite* beatPer = Sprite::create("game_beat_person_txt.png");
-	beatPer->setPosition(240,244);
-	beatPer->runAction(ScaleTo::create(0.8f,2.8,2.8,0));
-	beatPer->runAction(ScaleTo::create(0.5f,1,1,0));
-	this->addChild(ming);
+	beatPer->setPosition(-240,244);
+	beatPer->runAction(MoveTo::create(1.8f,Point(240,244)));
+	this->addChild(beatPer);
+
+	auto la = LabelAtlas::create("98635", "game_result_score_num.png", 58.0f, 67.0f, '0');
+    la->setPosition(Point(240, 648));
+    la->setAnchorPoint(Point(0.5, 0.5));//Ô­ï¿½ï¿½ï¿½ï¿½Ãªï¿½ï¿½ï¿½ï¿½(0,0)
+    this->addChild(la);
+    la->setString("20000");
 		
 	MenuItemImage* startBtn = MenuItemImage::create(
 		"game_start_another.png","game_start_another.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
