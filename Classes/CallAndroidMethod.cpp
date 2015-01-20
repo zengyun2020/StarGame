@@ -14,11 +14,10 @@ CallAndroidMethod* CallAndroidMethod::getInstance(){
 
 void CallAndroidMethod::showMoreGame(){
 	CCLOG(">>>>>>>>>>>>>>showMoreGame");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //判断当前是否为Android平台
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //锟叫断碉拷前锟角凤拷为Android平台
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
 		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/NetWorkService","showMoreGame","()V");
-		jobject jobj;
 		if(isHave){
 			JniHelper::getEnv()->CallStaticVoidMethod(methodInfo.classID,methodInfo.methodID);
 		}
@@ -27,11 +26,10 @@ void CallAndroidMethod::showMoreGame(){
 
 void CallAndroidMethod::pay(int payPoint){
 	CCLOG(">>>>>>>>>>>>>>pay");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //判断当前是否为Android平台
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //锟叫断碉拷前锟角凤拷为Android平台
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
-		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/PayService","pay","(I;I)V");
-		jobject jobj;
+		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/PayService","pay","(II)V");
 		jint pay_point = payPoint;
 		jint reviveNum = GAMEDATA::getInstance()->getReviveNum();
 		if(isHave){
