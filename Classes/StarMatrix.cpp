@@ -5,6 +5,7 @@
 #include "Audio.h"
 #include <ctime>
 
+bool StarMatrix::BombClick = false;
 float StarMatrix::ONE_CLEAR_TIME = 0.1f;
 
 StarMatrix* StarMatrix::create(GameLayer* layer){
@@ -63,11 +64,13 @@ void StarMatrix::updateStar(float delta){
 void StarMatrix::onTouch(const Point& p){
 	Star* s = getStarByTouch(p);
 	if(s && acceptTouch){
-		if(false){
+		clearOneByOne = true;
+		if(BombClick){
+
 			useBombAuto(s);
+			BombClick =false;
 			return;
 		}
-		clearOneByOne = true;
 		genSelectedList(s);
 		//deleteSelectedList();
 		//长度小于等于1则返回
