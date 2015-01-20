@@ -8,6 +8,7 @@ class GamePauseLayer : public Layer{
 public:
 	virtual bool init();
 	CREATE_FUNC(GamePauseLayer);
+	void payProps();
 };
 
 #endif // !_GAMEPAUSELAYER_H_

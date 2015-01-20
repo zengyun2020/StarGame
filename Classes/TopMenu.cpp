@@ -97,25 +97,26 @@ void TopMenu::PauseGame(){
 	GameLayer::_PauseTime =true;
 	gamePause = GamePauseLayer::create();
 	this->addChild(gamePause,1);
-	MenuItemImage* resumeBtn = MenuItemImage::create(
-		"exit.png","exit.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
-		);
-	MenuItemImage* resumeBtn = MenuItemImage::create(
-		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
-		);
 
-	MenuItemImage* resumeBtn = MenuItemImage::create(
-		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
-		);
-
-	MenuItemImage* resumeBtn = MenuItemImage::create(
-		"Item_pause.png","rainbow.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
-		);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Menu* resumeMenu = Menu::create(resumeBtn, NULL);
+	MenuItemImage* exitBtn = MenuItemImage::create(
+		"exit_normal.png","exit_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
+	MenuItemImage* soundBtn = MenuItemImage::create(
+		"sound_effect_on.png","sound_effect_on.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
+	MenuItemImage* musicBtn = MenuItemImage::create(
+		"bg_music_open.png","bg_music_open.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
 
-	resumeMenu->alignItemsHorizontally();
-	resumeMenu->setPosition(visibleSize.width/2,visibleSize.height/2);
+	MenuItemImage* resumeBtn = MenuItemImage::create(
+		"continue_normal.png","continue_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		);
+	Menu* resumeMenu = Menu::create(exitBtn,soundBtn,musicBtn,resumeBtn, NULL);
+	resumeMenu->alignItemsHorizontallyWithPadding (50);
+	resumeMenu->setPosition(visibleSize.width/2,150);
 	gamePause->addChild(resumeMenu,2);
 }
+
+
 
