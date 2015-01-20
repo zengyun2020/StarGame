@@ -42,24 +42,25 @@ void GameLayer::loadGame(float dt){
 	gameTime->setPosition(50,visibleSize.height-50);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
-	this->floatLevelWord();
 
 	menu = TopMenu::create();
 	this->addChild(menu, 2);
 
-}
-void GameLayer::usePropsBomb(){}
-void GameLayer::floatLevelWord(){
-
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	_levelMsg = FloatWord::create(
-		ChineseWord("guanqia") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextLevel())->_string,
-		50, Point(visibleSize.width,visibleSize.height/3*2)
-		);
-	this->addChild(_levelMsg,1);
-	_levelMsg->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
+	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	Audio::getInstance()->playReadyGo();
 }
+void GameLayer::usePropsBomb(){}
+//void GameLayer::floatLevelWord(){
+//
+//	Size visibleSize = Director::getInstance()->getVisibleSize();
+//	_levelMsg = FloatWord::create(
+//		ChineseWord("guanqia") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextLevel())->_string,
+//		50, Point(visibleSize.width,visibleSize.height/3*2)
+//		);
+//	this->addChild(_levelMsg,1);
+//	_levelMsg->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
+//	Audio::getInstance()->playReadyGo();
+//}
 
 //void GameLayer::floatTargetScoreWord(){
 //	Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -73,14 +74,14 @@ void GameLayer::floatLevelWord(){
 //}
 
 //移除飘字
-void GameLayer::removeFloatWord(){
-
-	_levelMsg->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
-	//_targetScore->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
-}
+//void GameLayer::removeFloatWord(){
+//
+//	_levelMsg->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
+//	//_targetScore->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
+//}
 
 //显示星星矩阵
-void GameLayer::showStarMatrix(){
+void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
 }
@@ -159,7 +160,8 @@ void GameLayer::doRevive(){
 
 void GameLayer::gotoNextLevel(){
 	refreshMenu();
-	floatLevelWord();
+	//floatLevelWord();
+	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	matrix->setAcceptTouch(true);
 	Audio::getInstance()->playNextGameRound();
 }
@@ -171,7 +173,7 @@ void GameLayer::gotoGameOver(){
 		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOver);
 	//TODO 复活计费点接入
-	if(true){
+	if(false){
 		doRevive();
 		gameOver->removeFromParentAndCleanup(true);
 	}else{

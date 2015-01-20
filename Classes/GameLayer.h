@@ -14,10 +14,10 @@ public:
 	virtual bool init();
 	CREATE_FUNC(GameLayer);
 	
-	void floatLevelWord();
+	//void floatLevelWord();
 	//void floatTargetScoreWord();
-	void removeFloatWord();
-	void showStarMatrix();
+	//void removeFloatWord();
+	void showStarMatrix(float dt);
 	virtual void update(float delta);
 	virtual bool onTouchBegan(Touch* touch,Event* event);
 	void refreshMenu();
@@ -40,7 +40,7 @@ public:
 	void usePropsTime();//使用加时道具
 	
 private:
-	FloatWord* _levelMsg;
+	//FloatWord* _levelMsg;
 	//FloatWord* _targetScore;
 	TopMenu* menu;
 	StarMatrix* matrix;

@@ -26,6 +26,7 @@ bool StarMatrix::init(GameLayer* layer){
 	clearOneByOne = false;
 	acceptTouch = true;
 	clearSumTime = 0;
+	selectedListSize = 0;
 	memset(stars, 0, sizeof(Star*) * ROW_NUM * COL_NUM);
 	initMatrix();
 	return true;
