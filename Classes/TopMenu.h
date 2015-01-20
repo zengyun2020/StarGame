@@ -19,5 +19,7 @@ private:
 	//Label* targetScore;
 	Label* curScore;
 	Layer* gamePause;
+	Label* propBombNum;
+	Label* propTimeNum;
 };
 #endif
