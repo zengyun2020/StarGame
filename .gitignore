@@ -43,6 +43,9 @@ proj.android/gen/
 proj.android/bin/
 proj.android/obj/
 
+StarPay/gen/
+StarPay/bin/
+
 
 # Ignore files build by airplay
 build_*_xcode/
