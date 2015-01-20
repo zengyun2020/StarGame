@@ -17,7 +17,11 @@ bool MenuLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-
+	//注册捕捉监听
+	auto listenerkeyPad = EventListenerKeyboard::create();
+	listenerkeyPad->onKeyReleased = CC_CALLBACK_2(MenuLayer::onKeyReleased, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
+	
 	//Size visibleSize = Director::getInstance()->getVisibleSize();
 	///*��ʼ������*/
 	//Sprite* background = Sprite::create("bg_menuscene.jpg");
@@ -74,4 +78,17 @@ void MenuLayer::setGoldNum(){
 
 void MenuLayer::showPowerStone(){
 	Director::getInstance()->getRunningScene()->addChild(PowerStoneLayer::getInstance());
+}
+
+//捕捉监听
+void MenuLayer::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event)
+{
+	Audio::getInstance()->playClick();
+    if (keycode == EventKeyboard::KeyCode::KEY_BACKSPACE)  //返回
+    {
+		Director::getInstance()->end();
+    } else if (keycode == EventKeyboard::KeyCode::KEY_MENU)
+    {
+  
+    }
 }
