@@ -5,6 +5,7 @@
 using namespace cocos2d;
 class TopMenu : public Node{
 public:
+	static TopMenu* getInstance();
 	virtual bool init();
 	CREATE_FUNC(TopMenu);
 	void refresh();
@@ -14,6 +15,7 @@ public:
 	void ResumeGame();
 	void getSoudState(CCObject* pSender);
 	void getMusicState(CCObject* pSender);
+	void updatePropsNum();
 
 private:
 	Label* highestScore;
@@ -23,5 +25,9 @@ private:
 	Layer* gamePause;
 	Label* propBombNum;
 	Label* propTimeNum;
+	static TopMenu* _instance;
+private:
+	TopMenu();
+
 };
 #endif

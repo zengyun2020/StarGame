@@ -34,7 +34,6 @@ bool StarMatrix::init(GameLayer* layer){
 }
 
 void StarMatrix::updateStar(float delta){
-
 	for(int i = 0;i < ROW_NUM;i++){
 		for(int j = 0;j< COL_NUM;j++){
 			if(stars[i][j]!=nullptr){

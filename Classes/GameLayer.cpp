@@ -18,7 +18,7 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
-
+	GameLayer::_PauseTime=true;
 	CallAndroidMethod::getInstance()->pay(1);
 	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
 
@@ -49,7 +49,7 @@ void GameLayer::loadGame(float dt){
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
 
-	menu = TopMenu::create();
+	menu = TopMenu::getInstance();
 	this->addChild(menu, 2);
 
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
