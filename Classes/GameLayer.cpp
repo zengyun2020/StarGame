@@ -182,7 +182,6 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 
 void GameLayer::doRevive(){
 	setTime(20);
-	_PauseTime=false;
 }
 
 void GameLayer::doGameOver(){
@@ -212,8 +211,8 @@ void GameLayer::gotoGameOver(){
 	}
     #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	gameOver=false;
-	needRevive=true;
+	gameOver=true;
+	needRevive=false;
 #endif
 }
 
