@@ -38,8 +38,8 @@ void GameLayer::loadGame(float dt){
 
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	linkNum = Label::create("","Arial",40);
-	linkNum->setPosition(visibleSize.width/2,visibleSize.height-250);
+	linkNum = Label::create("","Arial",32);
+	linkNum->setPosition(visibleSize.width/2,visibleSize.height-160);
 	linkNum->setVisible(false);
 	this->addChild(linkNum,1);
 

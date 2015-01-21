@@ -119,13 +119,13 @@ void StarMatrix::initMatrix(){
 
 Point StarMatrix::getPositionByIndex(int i,int j){
 	float x = j * Star::STAR_WIDTH + Star::STAR_WIDTH/2;
-	float y = (StarMatrix::COL_NUM - i)*Star::STAR_HEIGHT - Star::STAR_HEIGHT/2;
+	float y = Star::STAR_HEIGHT*2 + (StarMatrix::COL_NUM - i)*Star::STAR_HEIGHT - Star::STAR_HEIGHT/2;
 	return Point(x,y);
 }
 
 Star* StarMatrix::getStarByTouch(const Point& p){
-	int k = p.y/Star::STAR_HEIGHT;//这里要用K转一下int 不然得不到正确结果
-	int i = ROW_NUM - 1 - k;
+	int k = (p.y)/Star::STAR_HEIGHT;//这里要用K转一下int 不然得不到正确结果
+	int i = ROW_NUM - 1 - k + 2;
 	int j = p.x/Star::STAR_WIDTH;
 	if(i >= 0 && i < ROW_NUM && 
 		j >= 0 && j < COL_NUM &&
