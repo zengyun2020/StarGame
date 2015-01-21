@@ -76,9 +76,6 @@ void Audio::prepare(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/combo_1.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/combo_2.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/combo_3.ogg");
-
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/coin.ogg");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/coinsin.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/NextGameRound.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/Props_Bomb.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/Props_Rainbow.ogg");
@@ -86,7 +83,4 @@ void Audio::prepare(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/clear.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/beep.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/landing.ogg");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/fireworks_01.ogg");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/fireworks_02.ogg");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/fireworks_03.ogg");
 }

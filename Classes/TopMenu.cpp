@@ -5,6 +5,19 @@
 #include "GameLayer.h"
 #include "StarMatrix.h"
 #include "SimpleAudioEngine.h"
+#include "CallAndroidMethod.h"
+
+TopMenu* TopMenu::_instance = nullptr;
+TopMenu::TopMenu(){
+	this->init();
+}
+
+TopMenu* TopMenu::getInstance(){
+	if(_instance == 0){
+		_instance = new TopMenu();
+	}
+	return _instance;
+}
 
 bool TopMenu::init(){
 	if(!Node::init()){
@@ -71,7 +84,7 @@ bool TopMenu::init(){
 	this->addChild(propBombNum);
 
 	propTimeNum = Label::create(
-		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
+		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string,
 		"Verdana-Bold",18	
 		);
 	propTimeNum->setPosition(visibleSize.width-40,visibleSize.height - 120);
@@ -118,7 +131,7 @@ void TopMenu::usePropsTime(){
 			GameLayer::needPluse =true;  
 			GAMEDATA::getInstance()->setAddTimeNum(num-1);
 			GAMEDATA::getInstance()->saveAddTimeNum();
-			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
+			propTimeNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
 		}
 	}else{
 		//TODO 弹出支付
@@ -208,4 +221,10 @@ void TopMenu::getMusicState(CCObject* pSender){
         //继续播放音乐  
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();  
     }  
+}
+
+
+void TopMenu::updatePropsNum(){
+	propTimeNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
+	propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string );
 }
