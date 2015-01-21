@@ -189,7 +189,7 @@ void GameLayer::gotoGameOver(){
 		doRevive();
 		gameOver->removeFromParentAndCleanup(true);
 	}else{
-		gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionShrinkGrow::create(1.5,GameOverScene::create()));});
+		gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameOverScene::create()));});
 	}
 
 }

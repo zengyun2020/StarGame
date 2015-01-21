@@ -39,15 +39,15 @@ void Star::setDesPosition(const Point& p){
 	desPosition = p;
 }
 
-void Star::updatePosition(){
+void Star::updatePosition(float delta){
 	if(desPosition.y != getPositionY()){
-		setPositionY(getPositionY() - MOVE_SPEED);
+		setPositionY(getPositionY() - MOVE_SPEED*delta);
 		if(getPositionY() < desPosition.y){
 			setPositionY(desPosition.y);
 		}
 	}
 	if(desPosition.x != getPositionX()){
-		setPositionX(getPositionX() - MOVE_SPEED);
+		setPositionX(getPositionX() - MOVE_SPEED*delta);
 		if(getPositionX() < desPosition.x){
 			setPositionX(desPosition.x);
 		}

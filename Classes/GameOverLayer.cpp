@@ -80,10 +80,10 @@ void GameOverLayer::showScore(float dt){
 
 void GameOverLayer::continueGame(){
 	GAMEDATA::getInstance()->init();
-	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(1.5,GameScene::create()));
+	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameScene::create()));
 }
 
 void GameOverLayer::back(){
-	Director::getInstance()->replaceScene(TransitionShrinkGrow::create(1.5,HelloWorld::createScene()));
+	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,HelloWorld::createScene()));
 }
 
