@@ -48,7 +48,7 @@ void GameLayer::loadGame(float dt){
 
 	initTime();
 	gameTime = Label::create("","Arial",24);
-	gameTime->setPosition(50,visibleSize.height-50);
+	gameTime->setPosition(visibleSize.width/2-180,visibleSize.height-50);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
 
