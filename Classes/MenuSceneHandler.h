@@ -16,8 +16,6 @@ class MenuSceneHandler: public cocos2d::Node, public cocostudio::WidgetCallBackH
         onLocateClickCallback(const std::string &callBackName);
         virtual cocos2d::ui::Widget::ccWidgetEventCallback
         onLocateEventCallback(const std::string &callBackName);
-		void bgMusicSwitch(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
-        void soundEffectSwitch(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
         void startGame(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
 		void onClick(cocos2d::Ref* sender);
         void onEvent(cocos2d::Ref* sender, int eventType);

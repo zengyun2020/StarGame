@@ -70,3 +70,6 @@ build/
 Simulator/
 Device-Debug/
 Device-Release/
+/proj.android/*.properties
+/proj.android/project.properties
+/StarPay/*.properties
