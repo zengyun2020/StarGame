@@ -36,7 +36,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../Classes/PlayerRank.cpp\
 					../../Classes/GamePauseLayer.cpp\
           ../../Classes/CallAndroidMethod.cpp\
-          ../../Classes/MenuScenePayHandler.cpp
+          ../../Classes/MenuScenePayHandler.cpp\
+          ../../Classes/GameQuitLayer.cpp\
+          ../../Classes/GameQuitHandler.cpp
           
 
 

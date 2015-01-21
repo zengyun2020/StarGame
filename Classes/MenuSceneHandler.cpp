@@ -3,6 +3,7 @@
 #include "MenuLayer.h"
 #include "HelloWorldScene.h"
 #include "CallAndroidMethod.h"
+#include "GameQuitHandler.h"
 USING_NS_CC;
 using namespace std;
 using namespace cocos2d::ui;
@@ -63,7 +64,7 @@ void MenuSceneHandler::soundEffectSwitch(cocos2d::Ref* object, cocos2d::ui::Widg
 		
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		
+		GameQuitHandler::getInstance()->quitGame();
 	}
 }
 

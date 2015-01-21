@@ -35,10 +35,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class AppActivity extends Cocos2dxActivity {
-	
-	public static native void addGold(int goldNum); 
-	public static native void quit();
-	
+		
 	private GameInfoUtil gameInfo;
 	
 	@Override
@@ -58,14 +55,14 @@ public class AppActivity extends Cocos2dxActivity {
 		TbuCloud.markAppOpened(AppActivity.this);
 		if(NotifyManager.isStartByNotifaction(getIntent())){
 			Log.i("MCH","start by click notify ...");
-			addGold(2000);
+			//TODO 根据需求添加
 		}
 		NotifyManager.cleanNofitifcation(this, getIntent());
 	}
 	
 	@Override
 	public void onBackPressed() {
-		quit();
+		JniGameQuitHelper.quitGame();
 	}
 
 }

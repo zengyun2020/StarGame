@@ -137,23 +137,12 @@ set(GAME_SRC
   Classes/GameOverReader.cpp
   Classes/GameOverScene.cpp
   Classes/GameOverLayer.cpp
-  Classes/Upgrade.cpp
-  Classes/UpgradeReader.cpp
-  Classes/UpgradeLayer.cpp
-  Classes/UpgradeScene.cpp
   Classes/PlayerRank.cpp
-  Classes/Prize.cpp
-  Classes/PrizeReader.cpp
-  Classes/PrizeScene.cpp
-  Classes/PrizeLayer.cpp
-  Classes/PrizeAnim.cpp
-  Classes/PrizeAnimReader.cpp
   Classes/CallAndroidMethod.cpp
-  Classes/PowerStone.cpp
-  Classes/PowerStoneReader.cpp
-  Classes/PowerStoneLayer.cpp
   Classes/MenuScenePayHandler.cpp
   Classes/GamePauseLayer.cpp
+  Classes/GameQuitLayer.cpp
+  Classes/GameQuitHandler.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -181,23 +170,12 @@ set(GAME_HEADERS
   Classes/GameOverReader.h
   Classes/GameOverScene.h
   Classes/GameOverLayer.h
-  Classes/Upgrade.h
-  Classes/UpgradeReader.h
-  Classes/UpgradeLayer.h
-  Classes/UpgradeScene.h
   Classes/PlayerRank.h
-  Classes/Prize.h
-  Classes/PrizeReader.h
-  Classes/PrizeScene.h
-  Classes/PrizeLayer.h
-  Classes/PrizeAnim.h
-  Classes/PrizeAnimReader.h
   Classes/CallAndroidMethod.h
-  Classes/PowerStone.h
-  Classes/PowerStoneReader.h
-  Classes/PowerStoneLayer.h
   Classes/MenuScenePayHandler.h
   Classes/GamePauseLayer.h
+  Classes/GameQuitLayer.h
+  Classes/GameQuitHandler.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

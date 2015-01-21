@@ -11,6 +11,7 @@ MenuScenePayHandler* MenuScenePayHandler::getInstance()
 }
 
 void MenuScenePayHandler::payCallback(int requestId,int resultId){
+	request_id = requestId;
 	if(resultId == 0){
 		result = true;
 	}else{

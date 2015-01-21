@@ -35,7 +35,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
  
-    /* ÓÎÏ·Éè¼Æ´óĞ¡ */
+    /* ï¿½ï¿½Ï·ï¿½ï¿½Æ´ï¿½Ğ?*/
 	// glview->setFrameSize(480, 800);
     glview->setDesignResolutionSize(480, 800, ResolutionPolicy::SHOW_ALL);
 	
@@ -53,7 +53,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->runWithScene(scene);
 
 
-	//³õÊ¼»¯ÒôĞ§
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ğ§
 	Audio::getInstance()->prepare();
     return true;
 }
