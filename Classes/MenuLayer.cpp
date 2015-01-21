@@ -39,8 +39,8 @@ bool MenuLayer::init(){
 	instance->registReaderObject("MenuSceneHandlerReader",(ObjectFactory::Instance)MenuSceneHandlerReader::getInstance);
 	auto rootNode = CSLoader::createNode("MenuLayer.csb");
 	this->addChild(rootNode);
+	//backgroud music
 	Audio::getInstance()->playBGM();
-
 	//播放开始按钮动画
 	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
 	rootNode->runAction(action); 

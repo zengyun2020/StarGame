@@ -6,6 +6,7 @@
 #include "StarMatrix.h"
 #include "SimpleAudioEngine.h"
 #include "CallAndroidMethod.h"
+#include "HelloWorldScene.h"
 
 TopMenu* TopMenu::_instance = nullptr;
 TopMenu::TopMenu(){
@@ -73,7 +74,7 @@ bool TopMenu::init(){
 		);
 	Menu* menuPause = Menu::create(PauseBtn, NULL);
 	menuPause->alignItemsHorizontally();
-	menuPause->setPosition(30,visibleSize.height - 100);
+	menuPause->setPosition(50,visibleSize.height - 100);
 	this->addChild(menuPause);
 
 	propBombNum = Label::create(
@@ -119,7 +120,11 @@ void TopMenu::usePropsBomb(){
 			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string );
 		}
 	}else{
-		//TODO 弹出支付
+		//弹出支付
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->pay(3);
+#endif
+
 	}
 
 }
@@ -134,15 +139,27 @@ void TopMenu::usePropsTime(){
 			propTimeNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
 		}
 	}else{
-		//TODO 弹出支付
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->pay(2);
+#endif
 	}
 }
+
+void TopMenu::goBack(){
+	if(gamePause!=nullptr){
+		GameLayer::_PauseTime =false;
+		gamePause->removeFromParentAndCleanup(true);
+	}
+	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,HelloWorld::createScene()));
+}
+
 void TopMenu::ResumeGame(){
 	if(gamePause!=nullptr){
 		GameLayer::_PauseTime =false;
 		gamePause->removeFromParentAndCleanup(true);
 	}
 }
+
 
 void TopMenu::PauseGame(){
 	GameLayer::_PauseTime =true;
@@ -151,7 +168,7 @@ void TopMenu::PauseGame(){
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	MenuItemImage* exitBtn = MenuItemImage::create(
-		"exit_normal.png","exit_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		"exit_normal.png","exit_click.png",CC_CALLBACK_0(TopMenu::goBack,this)
 		);
 
 	MenuItemImage* soundBtnOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
@@ -195,15 +212,13 @@ void TopMenu::getSoudState(CCObject* pSender){
     //根据CCMenuItemToggle的选项来决定音乐的开关  
     if (temp->getSelectedIndex()==1)  
     {   
-        //暂停播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseAllEffects(); 
 		GAMEDATA::getInstance()->setSoundEffect(false);
+		GAMEDATA::getInstance()->saveSoundEffect();
     }  
     if (temp->getSelectedIndex()==0)  
     {  
-        //继续播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();  
 		GAMEDATA::getInstance()->setSoundEffect(true);
+		GAMEDATA::getInstance()->saveSoundEffect();
     }  
 }
 
@@ -214,12 +229,16 @@ void TopMenu::getMusicState(CCObject* pSender){
     if (temp->getSelectedIndex()==1)  
     {   
         //暂停播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();  
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic(); 
+		GAMEDATA::getInstance()->setMusicState(false);
+		GAMEDATA::getInstance()->saveMusicState();
     }  
     if (temp->getSelectedIndex()==0)  
     {  
         //继续播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();  
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic(); 
+		GAMEDATA::getInstance()->setMusicState(true);
+		GAMEDATA::getInstance()->saveMusicState();
     }  
 }
 

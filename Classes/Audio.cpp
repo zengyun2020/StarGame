@@ -1,5 +1,6 @@
 #include "Audio.h"
 #include "SimpleAudioEngine.h"
+#include "GameData.h"
 
 Audio* Audio::m_instance = nullptr;
 Audio* Audio::getInstance(){
@@ -10,23 +11,29 @@ Audio* Audio::getInstance(){
 }
 
 void Audio::playBGM(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/music.ogg",true);
+	if(GAMEDATA::getInstance()->getMusicState()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/music.ogg",true);
+	}
 }
 
 void Audio::playReadyGo(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/readygo.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/readygo.ogg",false);}
 }
 
 void Audio::playPop(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/pop.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/pop.ogg",false);}
 }
 
 void Audio::playClick(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/select.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/select.ogg",false);}
 }
 
 
 void Audio::playCombo(int size){
+	if(GAMEDATA::getInstance()->getSoundEffect()){
 	if(size < 5)
 		return;
 	if(size >= 10){
@@ -35,37 +42,44 @@ void Audio::playCombo(int size){
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/combo_2.ogg",false);
 	}else {
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/combo_1.ogg",false);
-	}
+	}}
 }
 
 
 
 void Audio::playNextGameRound(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/NextGameRound.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/NextGameRound.ogg",false);}
 }
 
 void Audio::playPropBomb(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/Props_Bomb.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/Props_Bomb.ogg",false);}
 }
 
 void Audio::playPropRainbow(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/Props_Rainbow.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/Props_Rainbow.ogg",false);}
 }
 
 void Audio::playPropPlusTime(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/Props_Paint.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/Props_Paint.ogg",false);}
 }
 
 void Audio::playClear(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/clear.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/clear.ogg",false);}
 }
 
 void Audio::playBeep(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/beep.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/beep.ogg",false);}
 }
 
 void Audio::playLanding(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/landing.ogg",false);
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/landing.ogg",false);}
 }
 
 

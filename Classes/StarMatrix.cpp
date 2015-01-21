@@ -87,8 +87,7 @@ void StarMatrix::onTouch(const Point& p){
 
 void StarMatrix::useBombAuto(Star* s){
 	genBombList(s);
-	CCLOG("BOMB SIZE = %d",selectedList.size());
-	deleteSelectedList();
+	deleteBombList();
 }
 
 void StarMatrix::setNeedClear(bool b){
@@ -119,13 +118,13 @@ void StarMatrix::initMatrix(){
 
 Point StarMatrix::getPositionByIndex(int i,int j){
 	float x = j * Star::STAR_WIDTH + Star::STAR_WIDTH/2;
-	float y = (StarMatrix::COL_NUM - i)*Star::STAR_HEIGHT - Star::STAR_HEIGHT/2;
+	float y = Star::STAR_HEIGHT*2 + (StarMatrix::COL_NUM - i)*Star::STAR_HEIGHT - Star::STAR_HEIGHT/2;
 	return Point(x,y);
 }
 
 Star* StarMatrix::getStarByTouch(const Point& p){
-	int k = p.y/Star::STAR_HEIGHT;//这里要用K转一下int 不然得不到正确结果
-	int i = ROW_NUM - 1 - k;
+	int k = (p.y)/Star::STAR_HEIGHT;//这里要用K转一下int 不然得不到正确结果
+	int i = ROW_NUM - 1 - k + 2;
 	int j = p.x/Star::STAR_WIDTH;
 	if(i >= 0 && i < ROW_NUM && 
 		j >= 0 && j < COL_NUM &&
@@ -259,6 +258,28 @@ void StarMatrix::deleteSelectedList(){
 	}
 }
 
+void StarMatrix::deleteBombList(){
+	//播放消除音效
+	Audio::getInstance()->playPropBomb();
+
+	for(auto it = selectedList.begin();it != selectedList.end();it++){
+		Star* star = *it;
+		selectedList.pop_front();
+		//粒子效果
+		showStarParticleEffect(star->getColor(),star->getPosition(),this);
+		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
+		star->removeFromParentAndCleanup(true);
+	}
+	//COMBO效果
+	selectedListSize=0;
+	acceptTouch =true;
+	adjustMatrix();
+	if(isEnded()){
+		acceptTouch=false;
+		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
+	}
+}
+
 void StarMatrix::adjustMatrix(){
 	//垂直方向调整
 	for(int i = ROW_NUM-1;i>=0;i--){
@@ -348,6 +369,8 @@ bool StarMatrix::isEnded(){
 }
 
 void StarMatrix::clearMatrixOneByOne(){
+	//播放消除音效
+	Audio::getInstance()->playPop();
 	for(int i=0;i<ROW_NUM;i++){
 		for(int j=0;j<COL_NUM;j++){
 			if(stars[i][j] == nullptr)

@@ -28,6 +28,7 @@ public:
 	void gotoNextLevel();
 	void gotoGameOver();
 	void doRevive();
+	void doGameOver();
 	void loadGame(float dt);
 	void updateCustom(float dt);
 	void initTime();  //重置游戏时间
@@ -44,8 +45,11 @@ private:
 	Label* linkNum;
 	Label* gameTime;//游戏时间显示
 	int totalTime;//游戏时间
+	FloatWord* gameOverWord;
 public :
 	static bool _PauseTime;
 	static bool needPluse;
+	static bool gameOver;
+	static bool needRevive;
 };
 #endif

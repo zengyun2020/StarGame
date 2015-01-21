@@ -1,4 +1,5 @@
 #include "GamePauseLayer.h"
+#include "CallAndroidMethod.h"
 
 using namespace cocos2d;
 bool GamePauseLayer::init(){
@@ -27,7 +28,5 @@ bool GamePauseLayer::init(){
 }
 
 void GamePauseLayer::payProps(){
-
-
-
+	CallAndroidMethod::getInstance()->pay(4);
 }

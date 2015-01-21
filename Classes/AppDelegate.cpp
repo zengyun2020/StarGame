@@ -35,12 +35,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		glview = GLViewImpl::create(ChineseWord("title"));
         director->setOpenGLView(glview);
     }
- 
-    /* ��Ϸ��ƴ��?*/
-	// glview->setFrameSize(480, 800);
-    glview->setDesignResolutionSize(480, 800, ResolutionPolicy::SHOW_ALL);
-	
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	glview->setFrameSize(480, 800);
+#endif
+	glview->setDesignResolutionSize(480, 800, ResolutionPolicy::NO_BORDER);
     // turn on display FPS
     director->setDisplayStats(true);
 
@@ -54,7 +53,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->runWithScene(scene);
 
 
-	//��ʼ����Ч
+
 	Audio::getInstance()->prepare();
     return true;
 }

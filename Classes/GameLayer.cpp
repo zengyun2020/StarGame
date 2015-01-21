@@ -9,6 +9,8 @@
 
 bool GameLayer::_PauseTime=false;
 bool GameLayer::needPluse = false;
+bool GameLayer::needRevive =false;
+bool GameLayer::gameOver =false;
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -18,10 +20,13 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
-	GameLayer::_PauseTime=true;
-	CallAndroidMethod::getInstance()->pay(1);
+		
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
+		GameLayer::_PauseTime=true;
+		CallAndroidMethod::getInstance()->pay(1);}
+#endif
 	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
-
 	return true;
 }
 
@@ -36,8 +41,8 @@ void GameLayer::loadGame(float dt){
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	linkNum = Label::create("","Arial",40);
-	linkNum->setPosition(visibleSize.width/2,visibleSize.height-250);
+	linkNum = Label::create("","Arial",32);
+	linkNum->setPosition(visibleSize.width/2,visibleSize.height-160);
 	linkNum->setVisible(false);
 	this->addChild(linkNum,1);
 
@@ -98,6 +103,15 @@ void GameLayer::update(float delta){
 	}
 	if(matrix){
 		matrix->updateStar(delta);
+	}
+
+	if(gameOver){
+		doGameOver();
+		gameOver =false;
+	}
+	if(needRevive){
+		doRevive();
+		needRevive=false;
 	}
 }
 
@@ -168,6 +182,14 @@ void GameLayer::doRevive(){
 	setTime(20);
 }
 
+void GameLayer::doGameOver(){
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	gameOverWord = FloatWord::create(
+		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
+	this->addChild(gameOverWord);
+	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameOverScene::create()));});
+}
+
 void GameLayer::gotoNextLevel(){
 	refreshMenu();
 	//floatLevelWord();
@@ -178,18 +200,18 @@ void GameLayer::gotoNextLevel(){
 
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* gameOver = FloatWord::create(
-		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
-	this->addChild(gameOver);
 	//TODO 复活计费点接入
-	if(false){
-		doRevive();
-		gameOver->removeFromParentAndCleanup(true);
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if(GAMEDATA::getInstance()->getReviveNum()>0){
+		CallAndroidMethod::getInstance()->pay(6);
 	}else{
-		gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameOverScene::create()));});
+		CallAndroidMethod::getInstance()->pay(5);
 	}
-
+    #endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	gameOver=true;
+	needRevive=false;
+#endif
 }
 
 void GameLayer::initTime(){
@@ -205,6 +227,7 @@ void GameLayer::setTime(int time){
 }
 
 void GameLayer::plusTime(int time){
+	Audio::getInstance()->playPropPlusTime();
 	GameLayer::totalTime += time;
 }
 
@@ -212,15 +235,10 @@ void GameLayer::updateCustom(float dt){
 	if(!_PauseTime){
 		totalTime--;
 	}
-	//if(totalTime==50){
-	//	matrix->useBombAuto();//使用一次炸弹
-	//}
 
 	if(totalTime<=5){
 		Audio::getInstance()->playBeep();//倒计时报警
 	}
-
-	//CCLOG("Time=%d",totalTime);
 	if(totalTime == 0){
 		//时间结束，弹出游戏结算界面
 		gotoGameOver();
