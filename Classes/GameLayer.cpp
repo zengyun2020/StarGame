@@ -5,6 +5,7 @@
 #include "HelloWorldScene.h"
 #include "Audio.h"
 #include "GameOverScene.h"
+#include "CallAndroidMethod.h"
 
 bool GameLayer::_PauseTime=false;
 bool GameLayer::needPluse = false;
@@ -17,7 +18,10 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
-	schedule(schedule_selector(GameLayer::loadGame), 2.5f, 0, 0);
+
+	CallAndroidMethod::getInstance()->pay(1);
+	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
+
 	return true;
 }
 
