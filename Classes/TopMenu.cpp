@@ -119,7 +119,11 @@ void TopMenu::usePropsBomb(){
 			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string );
 		}
 	}else{
-		//TODO 弹出支付
+		//弹出支付
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->pay(3);
+#endif
+
 	}
 
 }
@@ -134,7 +138,9 @@ void TopMenu::usePropsTime(){
 			propTimeNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
 		}
 	}else{
-		//TODO 弹出支付
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->pay(2);
+#endif
 	}
 }
 void TopMenu::ResumeGame(){

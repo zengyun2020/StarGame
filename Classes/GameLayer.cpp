@@ -9,6 +9,8 @@
 
 bool GameLayer::_PauseTime=false;
 bool GameLayer::needPluse = false;
+bool GameLayer::needRevive =false;
+bool GameLayer::gameOver =false;
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -18,10 +20,11 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	GameLayer::_PauseTime=true;
 	CallAndroidMethod::getInstance()->pay(1);
+#endif
 	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
-
 	return true;
 }
 
@@ -101,6 +104,13 @@ void GameLayer::update(float delta){
 	if(matrix){
 		matrix->updateStar(delta);
 	}
+
+	if(gameOver){
+		doGameOver();
+	}
+	if(needRevive){
+		doRevive();
+	}
 }
 
 bool GameLayer::onTouchBegan(Touch* touch,Event* event){
@@ -167,7 +177,16 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 
 
 void GameLayer::doRevive(){
+	gameOverWord->removeFromParentAndCleanup(true);
 	setTime(20);
+}
+
+void GameLayer::doGameOver(){
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	gameOverWord = FloatWord::create(
+		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
+	this->addChild(gameOverWord);
+	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameOverScene::create()));});
 }
 
 void GameLayer::gotoNextLevel(){
@@ -180,18 +199,18 @@ void GameLayer::gotoNextLevel(){
 
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* gameOver = FloatWord::create(
-		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
-	this->addChild(gameOver);
 	//TODO 复活计费点接入
-	if(false){
-		doRevive();
-		gameOver->removeFromParentAndCleanup(true);
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if(GAMEDATA::getInstance()->getReviveNum()>0){
+		CallAndroidMethod::getInstance()->pay(6);
 	}else{
-		gameOver->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameOverScene::create()));});
+		CallAndroidMethod::getInstance()->pay(5);
 	}
-
+    #endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	gameOver=true;
+	needRevive=false;
+#endif
 }
 
 void GameLayer::initTime(){
