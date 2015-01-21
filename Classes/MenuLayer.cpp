@@ -39,19 +39,7 @@ bool MenuLayer::init(){
 	auto rootNode = CSLoader::createNode("MenuLayer.csb");
 	this->addChild(rootNode);
 	//backgroud music
-	if(GAMEDATA::getInstance()->getMusicState()){
-		Audio::getInstance()->playBGM();
-	}
-	//sound effects
-	if (GAMEDATA::getInstance()->getSoundEffect())  
-        {  
-               CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects(); 
-        }   
-        else  
-        {  
-              CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseAllEffects(); 
-        }  
-
+	Audio::getInstance()->playBGM();
 	//播放开始按钮动画
 	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
 	rootNode->runAction(action); 

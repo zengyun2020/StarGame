@@ -212,15 +212,11 @@ void TopMenu::getSoudState(CCObject* pSender){
     //根据CCMenuItemToggle的选项来决定音乐的开关  
     if (temp->getSelectedIndex()==1)  
     {   
-        //暂停播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseAllEffects(); 
 		GAMEDATA::getInstance()->setSoundEffect(false);
 		GAMEDATA::getInstance()->saveSoundEffect();
     }  
     if (temp->getSelectedIndex()==0)  
     {  
-        //继续播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();  
 		GAMEDATA::getInstance()->setSoundEffect(true);
 		GAMEDATA::getInstance()->saveSoundEffect();
     }  
