@@ -160,7 +160,7 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
 	50,Point(visibleSize.width,visibleSize.height/2 - 50));
 	this->addChild(leftStarMsg2);*/
-	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(visibleSize.width,visibleSize.height/2 - 50));
+	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
 	this->addChild(msg1);
 	msg1->floatInOut(0.5f,1.0f,
 		[=](){
@@ -185,7 +185,7 @@ void GameLayer::doRevive(){
 void GameLayer::doGameOver(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	gameOverWord = FloatWord::create(
-		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
+		"GAME OVER",80,Point(0,visibleSize.height/2));
 	this->addChild(gameOverWord);
 	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameOverScene::create()));});
 }
@@ -236,7 +236,7 @@ void GameLayer::updateCustom(float dt){
 		totalTime--;
 	}
 
-	if(totalTime<=5){
+	if(totalTime<=5&&totalTime>0){
 		Audio::getInstance()->playBeep();//倒计时报警
 	}
 	if(totalTime == 0){
