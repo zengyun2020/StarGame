@@ -8,6 +8,7 @@
 #include "MenuSceneHandlerReader.h"
 #include "MenuScenePayHandler.h"
 #include "SimpleAudioEngine.h"
+#include "GameQuitLayer.h"
 
 using namespace cocostudio::timeline;
 
@@ -78,6 +79,23 @@ bool MenuLayer::init(){
 	soundEffectMenu->setPosition(427,751);
 	this->addChild(musicMenu);
 	this->addChild(soundEffectMenu);
+	this->setKeypadEnabled(true);
+	//监听物理按键
+	auto listener = EventListenerKeyboard::create();
+	listener->onKeyReleased = [](EventKeyboard::KeyCode code, Event * e){
+		switch (code)
+		    {
+		    case cocos2d::EventKeyboard::KeyCode::KEY_NONE:
+		        break;
+		    case cocos2d::EventKeyboard::KeyCode::KEY_BACK:
+//			    MenuLayer::showQuit();
+		        break;
+		    default:
+		        break;
+		    }
+	};
+
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 	return true;
 }
 
@@ -104,14 +122,16 @@ void MenuLayer::getSoudState(CCObject* pSender){
     if (temp->getSelectedIndex()==1)
     {
         //暂停播放音乐
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseAllEffects();
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 		GAMEDATA::getInstance()->setSoundEffect(false);
+	    GAMEDATA::getInstance()->saveSoundEffect();
     }
     if (temp->getSelectedIndex()==0)
     {
         //继续播放音乐
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
 		GAMEDATA::getInstance()->setSoundEffect(true);
+	    GAMEDATA::getInstance()->saveSoundEffect();
     }
 }
 
@@ -123,10 +143,19 @@ void MenuLayer::getMusicState(CCObject* pSender){
     {
         //暂停播放音乐
         CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+        GAMEDATA::getInstance()->setMusicState(false);
+        GAMEDATA::getInstance()->saveMusicState();
     }
     if (temp->getSelectedIndex()==0)
     {
         //继续播放音乐
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+        GAMEDATA::getInstance()->setMusicState(true);
+        GAMEDATA::getInstance()->saveMusicState();
     }
+}
+
+void MenuLayer::showQuit(){
+	layer = GameQuitLayer::getInstance();
+	this->addChild(layer);
 }

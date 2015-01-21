@@ -11,7 +11,8 @@ public:
 	CREATE_FUNC(GameOverLayer);
 	void continueGame();
 	void back();
-	void showScore(float dt);
+	void getSoudState(CCObject* pSender);
+	void getMusicState(CCObject* pSender);
 	GameOverLayer getInstance();
 private:
 	float score;

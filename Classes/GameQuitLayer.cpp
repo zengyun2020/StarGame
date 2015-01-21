@@ -2,8 +2,19 @@
 #include "GameQuitHandler.h"
 
 using namespace cocos2d;
+GameQuitLayer* GameQuitLayer::_instance = nullptr;
+GameQuitLayer::GameQuitLayer(){
+	this->init();
+}
+
+GameQuitLayer* GameQuitLayer::getInstance(){
+	if(_instance == 0){
+		_instance = new GameQuitLayer();
+	}
+	return _instance;
+}
 bool GameQuitLayer::init(){
-	if(!Layer::init()){
+	if(!Node::init()){
 		return false;
 	}
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -24,7 +35,7 @@ bool GameQuitLayer::init(){
 	this->addChild(confirmMenu,1);
 
 	MenuItemImage* cancelBtn = MenuItemImage::create(
-		"quit_cancel_up.png","quit_cancel_down.png",CC_CALLBACK_0(GameQuitLayer::quit,this)
+		"quit_cancel_up.png","quit_cancel_down.png",CC_CALLBACK_0(GameQuitLayer::cancel,this)
 		);
 	Menu* cancelMenu = Menu::create(cancelBtn, NULL);
 	cancelMenu->setPosition(164,355);
@@ -34,9 +45,9 @@ bool GameQuitLayer::init(){
 }
 
 void GameQuitLayer::quit(){
-	GameQuitHandler::getInstance()->quit();
+	Director::getInstance()->end();
 }
 
 void GameQuitLayer::cancel(){
-	GameQuitHandler::getInstance()->cancel();
+
 }

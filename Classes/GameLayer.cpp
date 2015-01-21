@@ -35,8 +35,6 @@ void GameLayer::loadGame(float dt){
 	listener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan,this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
 
-
-
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	linkNum = Label::create("","Arial",40);
 	linkNum->setPosition(visibleSize.width/2,visibleSize.height-250);

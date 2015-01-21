@@ -11,12 +11,6 @@ Java_org_cocos2dx_cpp_JniPayCallbackHelper_payCallback(JNIEnv* env,jclass jcl,ji
 		MenuScenePayHandler::getInstance()->payCallback(requestId, resultId);
 	}
 
-extern "C" JNIEXPORT void JNICALL
-Java_org_cocos2dx_cpp_JniGameQuitHelper(JNIEnv* env,jclass jcl)
-	{
-		GameQuitHandler::getInstance()->quitGame();
-	}
-
 
 
 

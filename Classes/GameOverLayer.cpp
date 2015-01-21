@@ -7,6 +7,7 @@
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
 #include "GameOverReader.h"
 #include "PlayerRank.h"
+#include "SimpleAudioEngine.h"
 
 using namespace cocos2d;
 
@@ -16,66 +17,96 @@ bool GameOverLayer::init(){
 	}
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
+	score = 0;
 	/*��ʼ������*/
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
 
-	Sprite* despite = Sprite::create("game_result_despite.png");
-	despite->setPosition(240,495);
+	Sprite* despite = Sprite::create("game_result_shine_bg.png");
+	despite->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(despite,0);
 
-	Sprite* currentRoundScore = Sprite::create("game_result_curr_round_score.png");
-	currentRoundScore->setPosition(240,725);
+	Sprite* title = Sprite::create("title.png");
+	title->setPosition(240,632);
+	this->addChild(title,0);
+
+	auto score = LabelAtlas::create("2000", "game_result_score_num.png", 39.0f, 69.0f, '0');
+	score->setPosition(Point(217, 400));
+	score->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
+	this->addChild(score);
+	score->setString(cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getCurScore())->_string);
+
+	Sprite* currentRoundScore = Sprite::create("game_result_score.png");
+	currentRoundScore->setPosition(400,400);
 	this->addChild(currentRoundScore,1);
 
-	labelScore = Label::create(cocos2d::String::createWithFormat(": %d",(int)score)->_string,"Arial",48);
-	labelScore->setPosition(240,648);
-	this->addChild(labelScore);
+	auto rankNum = LabelAtlas::create("2000", "game_result_rank_num.png", 19.0f, 33.0f, '0');
+	rankNum->setPosition(Point(317, 324));
+	rankNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
+	this->addChild(rankNum);
+	rankNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankList(GAMEDATA::getInstance()->getCurScore()))->_string);
 
-	Sprite* di = Sprite::create("game_result_di_txt.png");
-	di->setPosition(210,360);
-	di->setScale(3.8);
-	di->runAction(ScaleTo::create(0.5f,1,1,0));
-	this->addChild(di);
+	Sprite* rank = Sprite::create("game_result_rank.png");
+	rank->setPosition(200,324);
+	rank->setScale(3.8);
+	rank->runAction(ScaleTo::create(0.5f,1,1,0));
+	this->addChild(rank);
 
-	Sprite* ming = Sprite::create("game_result_ming_txt.png");
-	ming->setPosition(393,360);
-	ming->setScale(3.8);
-	ming->runAction(ScaleTo::create(0.5f,1,1,0));
-	this->addChild(ming);
-
-	Sprite* beatPer = Sprite::create("game_beat_person_txt.png");
-	beatPer->setPosition(-240,244);
-	beatPer->runAction(MoveTo::create(1.8f,Point(240,244)));
+	Sprite* beatPer = Sprite::create("game_result_beat.png");
+	beatPer->setPosition(240,272);
+	beatPer->runAction(MoveTo::create(1.8f,Point(240,272)));
 	this->addChild(beatPer);
 
-	auto la = LabelAtlas::create("98635", "game_result_score_num.png", 58.0f, 67.0f, '0');
-    la->setPosition(Point(240, 648));
-    la->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
-    this->addChild(la);
-    la->setString("20000");
+	auto beatNum = LabelAtlas::create("98635", "game_result_rank_num.png", 19.0f, 33.0f, '0');
+	beatNum->setPosition(Point(230, 272));
+	beatNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
+    this->addChild(beatNum);
+    beatNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankPer(GAMEDATA::getInstance()->getCurScore()))->_string);
 		
 	MenuItemImage* startBtn = MenuItemImage::create(
-		"game_start_another.png","game_start_another.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
+		"game_result_retry_normal.png","game_result_retry_click.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
 		);
 	Menu* menu1 = Menu::create(startBtn,NULL);
-	menu1->setPosition(294,131);
+	menu1->setPosition(408,160);
 	this->addChild(menu1);
 
 	MenuItemImage* backBtn = MenuItemImage::create(
-		"game_result_back.png","game_result_back.png",CC_CALLBACK_0(GameOverLayer::back,this)
+		"exit_normal.png","exit_click.png",CC_CALLBACK_0(GameOverLayer::back,this)
 		);
 	Menu* menu2 = Menu::create(backBtn,NULL);
-	menu2->setPosition(84,131);
+	menu2->setPosition(72,160);
 	this->addChild(menu2);
 
-	schedule(schedule_selector(GameOverLayer::showScore), 2.5f, 0, 0);
+	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
+		MenuItemImage* musicBtnOff = MenuItemImage::create("bg_music_close.png","bg_music_close.png");
+		MenuItemToggle* musicTog = MenuItemToggle::createWithTarget(this,menu_selector(GameOverLayer::getMusicState),musicBtnOn,musicBtnOff,NULL);
+		 if (CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+			{
+				musicTog->setSelectedIndex(0);
+			}
+			else
+			{
+				musicTog->setSelectedIndex(1);
+			}
+		auto musicMenu = Menu::create(musicTog,NULL);
+		musicMenu->setPosition(184,160);
+		MenuItemImage* soundEffectOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
+		MenuItemImage* soundEffectOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");
+		MenuItemToggle* soundEffectTog = MenuItemToggle::createWithTarget(this,menu_selector(GameOverLayer::getSoudState),soundEffectOn,soundEffectOff,NULL);
+		 if (GAMEDATA::getInstance()->getSoundEffect())
+			{
+			    soundEffectTog->setSelectedIndex(0);
+			}
+			else
+			{
+				soundEffectTog->setSelectedIndex(1);
+			}
+		auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
+		soundEffectMenu->setPosition(296,160);
+		this->addChild(musicMenu);
+		this->addChild(soundEffectMenu);
 	return true;
-}
-
-void GameOverLayer::showScore(float dt){
-	score += GAMEDATA::getInstance()->getCurScore()/180;
 }
 
 void GameOverLayer::continueGame(){
@@ -85,5 +116,45 @@ void GameOverLayer::continueGame(){
 
 void GameOverLayer::back(){
 	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,HelloWorld::createScene()));
+}
+
+void GameOverLayer::getSoudState(CCObject* pSender){
+	 //创建临时CCMenuItemToggle
+    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
+    //根据CCMenuItemToggle的选项来决定音乐的开关
+    if (temp->getSelectedIndex()==1)
+    {
+        //暂停播放音乐
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+		GAMEDATA::getInstance()->setSoundEffect(false);
+	    GAMEDATA::getInstance()->saveSoundEffect();
+    }
+    if (temp->getSelectedIndex()==0)
+    {
+        //继续播放音乐
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
+		GAMEDATA::getInstance()->setSoundEffect(true);
+	    GAMEDATA::getInstance()->saveSoundEffect();
+    }
+}
+
+void GameOverLayer::getMusicState(CCObject* pSender){
+	 //创建临时CCMenuItemToggle
+    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
+    //根据CCMenuItemToggle的选项来决定音乐的开关
+    if (temp->getSelectedIndex()==1)
+    {
+        //暂停播放音乐
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+        GAMEDATA::getInstance()->setMusicState(false);
+        GAMEDATA::getInstance()->saveMusicState();
+    }
+    if (temp->getSelectedIndex()==0)
+    {
+        //继续播放音乐
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+        GAMEDATA::getInstance()->setMusicState(true);
+        GAMEDATA::getInstance()->saveMusicState();
+    }
 }
 

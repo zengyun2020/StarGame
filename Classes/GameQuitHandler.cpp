@@ -12,7 +12,8 @@ GameQuitHandler* GameQuitHandler::getInstance()
 }
 
 void GameQuitHandler::quitGame(){
-	//layer = GameQuitLayer::create();
+	layer = GameQuitLayer::create();
+	Director::getInstance()->getRunningScene()->addChild(layer);
 }
 
 void GameQuitHandler::quit(){
