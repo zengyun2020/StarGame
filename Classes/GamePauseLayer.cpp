@@ -13,7 +13,7 @@ bool GamePauseLayer::init(){
 	this->addChild(background,0);
 
 	Sprite* prop_des = Sprite::create("props_describe.png");
-	prop_des->setPosition(visibleSize.width/2+50,visibleSize.height-150);
+	prop_des->setPosition(visibleSize.width/2+50,visibleSize.height/2+250);
 	this->addChild(prop_des,0);
 
 	MenuItemImage* payBtn = MenuItemImage::create(

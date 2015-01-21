@@ -29,7 +29,7 @@ bool TopMenu::init(){
 		ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string,
 		"Verdana-Bold",24
 		);
-	highestScore->setPosition(visibleSize.width/2,visibleSize.height - 50);
+	highestScore->setPosition(visibleSize.width/2,visibleSize.height/2+350);
 	this->addChild(highestScore);
 
 	//level = Label::create(
@@ -52,7 +52,7 @@ bool TopMenu::init(){
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
 		"Verdana-Bold",50	
 		);
-	curScore->setPosition(visibleSize.width/2,visibleSize.height - 100);
+	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
 
 	// ���Ӽ��ܰ���
@@ -65,7 +65,7 @@ bool TopMenu::init(){
 		);
 	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
 	menu->alignItemsHorizontally();
-	menu->setPosition(visibleSize.width - 100,visibleSize.height - 100);
+	menu->setPosition(visibleSize.width/2+140,visibleSize.height/2+300);
 	this->addChild(menu);
 
 	// ������ͣ����
@@ -74,21 +74,21 @@ bool TopMenu::init(){
 		);
 	Menu* menuPause = Menu::create(PauseBtn, NULL);
 	menuPause->alignItemsHorizontally();
-	menuPause->setPosition(50,visibleSize.height - 100);
+	menuPause->setPosition(visibleSize.width/2-190,visibleSize.height/2+300);
 	this->addChild(menuPause);
 
 	propBombNum = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string,
 		"Verdana-Bold",18	
 		);
-	propBombNum->setPosition(visibleSize.width-110,visibleSize.height - 120);
+	propBombNum->setPosition(visibleSize.width/2+130,visibleSize.height/2+280);
 	this->addChild(propBombNum);
 
 	propTimeNum = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string,
 		"Verdana-Bold",18	
 		);
-	propTimeNum->setPosition(visibleSize.width-40,visibleSize.height - 120);
+	propTimeNum->setPosition(visibleSize.width/2+200,visibleSize.height/2+280);
 	this->addChild(propTimeNum);
 
 
@@ -201,7 +201,7 @@ void TopMenu::PauseGame(){
 		);
 	Menu* resumeMenu = Menu::create(exitBtn,soundTog,musicTog,resumeBtn, NULL);
 	resumeMenu->alignItemsHorizontallyWithPadding (50);
-	resumeMenu->setPosition(visibleSize.width/2,150);
+	resumeMenu->setPosition(visibleSize.width/2,visibleSize.height/2-250);
 	gamePause->addChild(resumeMenu,2);
 }
 
