@@ -191,7 +191,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 10;
+	GameLayer::totalTime = 60;
 }
 
 int GameLayer::getTime(){

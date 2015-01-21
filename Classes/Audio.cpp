@@ -38,13 +38,7 @@ void Audio::playCombo(int size){
 	}
 }
 
-void Audio::playCoin(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/coin.ogg",false);
-}
 
-void Audio::playCoinsIn(){
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/coinsin.ogg",false);
-}
 
 void Audio::playNextGameRound(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/NextGameRound.ogg",false);
@@ -74,15 +68,6 @@ void Audio::playLanding(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/landing.ogg",false);
 }
 
-void Audio::playFireWorks(int type){
-	if(type%3==0){
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/fireworks_01.ogg",false);
-	}else if(type%3==1){
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/fireworks_02.ogg",false);
-	}else if(type%3==2){
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/fireworks_03.ogg",false);
-	}
-}
 
 void Audio::prepare(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/music.ogg");

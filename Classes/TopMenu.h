@@ -12,6 +12,8 @@ public:
 	void usePropsTime();
 	void PauseGame();
 	void ResumeGame();
+	void getSoudState(CCObject* pSender);
+	void getMusicState(CCObject* pSender);
 
 private:
 	Label* highestScore;

@@ -4,6 +4,7 @@
 #include "GamePauseLayer.h"
 #include "GameLayer.h"
 #include "StarMatrix.h"
+#include "SimpleAudioEngine.h"
 
 bool TopMenu::init(){
 	if(!Node::init()){
@@ -62,7 +63,7 @@ bool TopMenu::init(){
 	menuPause->setPosition(30,visibleSize.height - 100);
 	this->addChild(menuPause);
 
-    propBombNum = Label::create(
+	propBombNum = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string,
 		"Verdana-Bold",18	
 		);
@@ -105,9 +106,9 @@ void TopMenu::usePropsBomb(){
 			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string );
 		}
 	}else{
-		  //TODO 弹出支付
+		//TODO 弹出支付
 	}
-	
+
 }
 
 void TopMenu::usePropsTime(){
@@ -120,7 +121,7 @@ void TopMenu::usePropsTime(){
 			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
 		}
 	}else{
-		  //TODO 弹出支付
+		//TODO 弹出支付
 	}
 }
 void TopMenu::ResumeGame(){
@@ -139,21 +140,73 @@ void TopMenu::PauseGame(){
 	MenuItemImage* exitBtn = MenuItemImage::create(
 		"exit_normal.png","exit_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
 		);
-	MenuItemImage* soundBtn = MenuItemImage::create(
-		"sound_effect_on.png","sound_effect_on.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
-		);
-	MenuItemImage* musicBtn = MenuItemImage::create(
-		"bg_music_open.png","bg_music_open.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
-		);
+
+	MenuItemImage* soundBtnOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
+	MenuItemImage* soundBtnOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");  
+	MenuItemToggle* soundTog = MenuItemToggle::createWithTarget(this,menu_selector(TopMenu::getSoudState),soundBtnOn,soundBtnOff,NULL);  
+	if (GAMEDATA::getInstance()->getSoundEffect())  
+        {  
+            soundTog->setSelectedIndex(0);  
+        }   
+        else  
+        {  
+            soundTog->setSelectedIndex(1);  
+        }  
+
+
+	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
+	MenuItemImage* musicBtnOff = MenuItemImage::create("bg_music_close.png","bg_music_close.png");  
+	MenuItemToggle* musicTog = MenuItemToggle::createWithTarget(this,menu_selector(TopMenu::getMusicState),musicBtnOn,musicBtnOff,NULL);  
+	//TODO
+	 if (CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())  
+        {  
+            musicTog->setSelectedIndex(0);  
+        }   
+        else  
+        {  
+            musicTog->setSelectedIndex(1);  
+        }  
 
 	MenuItemImage* resumeBtn = MenuItemImage::create(
 		"continue_normal.png","continue_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
 		);
-	Menu* resumeMenu = Menu::create(exitBtn,soundBtn,musicBtn,resumeBtn, NULL);
+	Menu* resumeMenu = Menu::create(exitBtn,soundTog,musicTog,resumeBtn, NULL);
 	resumeMenu->alignItemsHorizontallyWithPadding (50);
 	resumeMenu->setPosition(visibleSize.width/2,150);
 	gamePause->addChild(resumeMenu,2);
 }
 
 
+void TopMenu::getSoudState(CCObject* pSender){
+	 //创建临时CCMenuItemToggle  
+    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;  
+    //根据CCMenuItemToggle的选项来决定音乐的开关  
+    if (temp->getSelectedIndex()==1)  
+    {   
+        //暂停播放音乐  
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseAllEffects(); 
+		GAMEDATA::getInstance()->setSoundEffect(false);
+    }  
+    if (temp->getSelectedIndex()==0)  
+    {  
+        //继续播放音乐  
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();  
+		GAMEDATA::getInstance()->setSoundEffect(true);
+    }  
+}
 
+void TopMenu::getMusicState(CCObject* pSender){
+	 //创建临时CCMenuItemToggle  
+    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;  
+    //根据CCMenuItemToggle的选项来决定音乐的开关  
+    if (temp->getSelectedIndex()==1)  
+    {   
+        //暂停播放音乐  
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();  
+    }  
+    if (temp->getSelectedIndex()==0)  
+    {  
+        //继续播放音乐  
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();  
+    }  
+}
