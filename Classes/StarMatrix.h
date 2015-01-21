@@ -25,6 +25,7 @@ private:
 	void genSelectedList(Star* s);
 	void genBombList(Star* s);//产生道具炸弹须要消除的队列
 	void deleteSelectedList();
+	void deleteBombList();
 	void adjustMatrix();
 	void refreshScore();
 	bool isEnded();

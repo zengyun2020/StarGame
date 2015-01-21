@@ -87,8 +87,7 @@ void StarMatrix::onTouch(const Point& p){
 
 void StarMatrix::useBombAuto(Star* s){
 	genBombList(s);
-	CCLOG("BOMB SIZE = %d",selectedList.size());
-	deleteSelectedList();
+	deleteBombList();
 }
 
 void StarMatrix::setNeedClear(bool b){
@@ -256,6 +255,28 @@ void StarMatrix::deleteSelectedList(){
 		acceptTouch=false;
 		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 		CCLOG("ENDED");
+	}
+}
+
+void StarMatrix::deleteBombList(){
+	//播放消除音效
+	Audio::getInstance()->playPropBomb();
+
+	for(auto it = selectedList.begin();it != selectedList.end();it++){
+		Star* star = *it;
+		selectedList.pop_front();
+		//粒子效果
+		showStarParticleEffect(star->getColor(),star->getPosition(),this);
+		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
+		star->removeFromParentAndCleanup(true);
+	}
+	//COMBO效果
+	selectedListSize=0;
+	acceptTouch =true;
+	adjustMatrix();
+	if(isEnded()){
+		acceptTouch=false;
+		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 	}
 }
 

@@ -6,6 +6,7 @@
 #include "StarMatrix.h"
 #include "SimpleAudioEngine.h"
 #include "CallAndroidMethod.h"
+#include "HelloWorldScene.h"
 
 TopMenu* TopMenu::_instance = nullptr;
 TopMenu::TopMenu(){
@@ -143,12 +144,22 @@ void TopMenu::usePropsTime(){
 #endif
 	}
 }
+
+void TopMenu::goBack(){
+	if(gamePause!=nullptr){
+		GameLayer::_PauseTime =false;
+		gamePause->removeFromParentAndCleanup(true);
+	}
+	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,HelloWorld::createScene()));
+}
+
 void TopMenu::ResumeGame(){
 	if(gamePause!=nullptr){
 		GameLayer::_PauseTime =false;
 		gamePause->removeFromParentAndCleanup(true);
 	}
 }
+
 
 void TopMenu::PauseGame(){
 	GameLayer::_PauseTime =true;
@@ -157,7 +168,7 @@ void TopMenu::PauseGame(){
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	MenuItemImage* exitBtn = MenuItemImage::create(
-		"exit_normal.png","exit_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
+		"exit_normal.png","exit_click.png",CC_CALLBACK_0(TopMenu::goBack,this)
 		);
 
 	MenuItemImage* soundBtnOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");

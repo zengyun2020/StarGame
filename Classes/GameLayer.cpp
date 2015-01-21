@@ -113,7 +113,7 @@ void GameLayer::update(float delta){
 	}
 	if(needRevive){
 		doRevive();
-		needPluse=false;
+		needRevive=false;
 	}
 }
 
@@ -181,8 +181,8 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 
 
 void GameLayer::doRevive(){
-	gameOverWord->removeFromParentAndCleanup(true);
 	setTime(20);
+	_PauseTime=false;
 }
 
 void GameLayer::doGameOver(){
@@ -212,8 +212,8 @@ void GameLayer::gotoGameOver(){
 	}
     #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	gameOver=true;
-	needRevive=false;
+	gameOver=false;
+	needRevive=true;
 #endif
 }
 
@@ -230,6 +230,7 @@ void GameLayer::setTime(int time){
 }
 
 void GameLayer::plusTime(int time){
+	Audio::getInstance()->playPropPlusTime();
 	GameLayer::totalTime += time;
 }
 
@@ -237,15 +238,10 @@ void GameLayer::updateCustom(float dt){
 	if(!_PauseTime){
 		totalTime--;
 	}
-	//if(totalTime==50){
-	//	matrix->useBombAuto();//使用一次炸弹
-	//}
 
 	if(totalTime<=5){
 		Audio::getInstance()->playBeep();//倒计时报警
 	}
-
-	//CCLOG("Time=%d",totalTime);
 	if(totalTime == 0){
 		//时间结束，弹出游戏结算界面
 		gotoGameOver();

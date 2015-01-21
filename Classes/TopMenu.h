@@ -16,6 +16,7 @@ public:
 	void getSoudState(CCObject* pSender);
 	void getMusicState(CCObject* pSender);
 	void updatePropsNum();
+	void goBack();
 
 private:
 	Label* highestScore;
