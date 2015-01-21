@@ -20,9 +20,11 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
+		
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	GameLayer::_PauseTime=true;
-	CallAndroidMethod::getInstance()->pay(1);
+	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
+		GameLayer::_PauseTime=true;
+		CallAndroidMethod::getInstance()->pay(1);}
 #endif
 	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
 	return true;
@@ -107,9 +109,11 @@ void GameLayer::update(float delta){
 
 	if(gameOver){
 		doGameOver();
+		gameOver =false;
 	}
 	if(needRevive){
 		doRevive();
+		needPluse=false;
 	}
 }
 
