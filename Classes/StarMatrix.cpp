@@ -6,7 +6,7 @@
 #include <ctime>
 
 bool StarMatrix::BombClick = false;
-float StarMatrix::ONE_CLEAR_TIME = 0.1f;
+float StarMatrix::ONE_CLEAR_TIME = 0.08f;
 
 StarMatrix* StarMatrix::create(GameLayer* layer){
 	StarMatrix* ret = new StarMatrix();
@@ -38,7 +38,7 @@ void StarMatrix::updateStar(float delta){
 	for(int i = 0;i < ROW_NUM;i++){
 		for(int j = 0;j< COL_NUM;j++){
 			if(stars[i][j]!=nullptr){
-				stars[i][j]->updatePosition();
+				stars[i][j]->updatePosition(delta);
 			}
 		}
 	}
