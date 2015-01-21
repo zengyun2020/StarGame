@@ -18,18 +18,30 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 	{
 	case 1:
 		//新手礼包
-		GameLayer::_PauseTime=false;
+				GameLayer::_PauseTime=false;
+		if(resultId==0){
 		GAMEDATA::getInstance()->setAddTimeNum(5+GAMEDATA::getInstance()->getAddTimeNum());
 		GAMEDATA::getInstance()->saveAddTimeNum();
 		GAMEDATA::getInstance()->setBombNum(5+GAMEDATA::getInstance()->getBombNum());
 		GAMEDATA::getInstance()->saveBombNum();
-		TopMenu::getInstance()->updatePropsNum();
+		TopMenu::getInstance()->updatePropsNum();	
+		}	
 		break;
 	case 2:
 		//加时
+		GameLayer::_PauseTime=false;
+		if(resultId==0){
+		GAMEDATA::getInstance()->setAddTimeNum(5+GAMEDATA::getInstance()->getAddTimeNum());
+		GAMEDATA::getInstance()->saveAddTimeNum();
+		TopMenu::getInstance()->updatePropsNum();}
 		break;
 	case 3:
 		//炸弹
+		GameLayer::_PauseTime=false;
+		if(resultId==0){
+		GAMEDATA::getInstance()->setBombNum(5+GAMEDATA::getInstance()->getBombNum());
+		GAMEDATA::getInstance()->saveBombNum();
+		TopMenu::getInstance()->updatePropsNum();}
 		break;
 	case 4:
 		//暂停界面礼包
