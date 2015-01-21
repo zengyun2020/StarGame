@@ -46,7 +46,6 @@ public class AppActivity extends Cocos2dxActivity {
 		
 		NetWorkService.init(this);
 		PayService.init(this);
-		JniPayCallbackHelper.payCallback(0, 1);
 		if(TbuCloud.markUserType(getApplicationContext()) == 0){
 			   TbuCloud.markUserPay(getApplicationContext(), 0);
 		}
