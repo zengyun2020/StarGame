@@ -215,12 +215,14 @@ void TopMenu::getSoudState(CCObject* pSender){
         //暂停播放音乐  
         CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseAllEffects(); 
 		GAMEDATA::getInstance()->setSoundEffect(false);
+		GAMEDATA::getInstance()->saveSoundEffect();
     }  
     if (temp->getSelectedIndex()==0)  
     {  
         //继续播放音乐  
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();  
 		GAMEDATA::getInstance()->setSoundEffect(true);
+		GAMEDATA::getInstance()->saveSoundEffect();
     }  
 }
 
@@ -231,12 +233,16 @@ void TopMenu::getMusicState(CCObject* pSender){
     if (temp->getSelectedIndex()==1)  
     {   
         //暂停播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();  
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic(); 
+		GAMEDATA::getInstance()->setMusicState(false);
+		GAMEDATA::getInstance()->saveMusicState();
     }  
     if (temp->getSelectedIndex()==0)  
     {  
         //继续播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();  
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic(); 
+		GAMEDATA::getInstance()->setMusicState(true);
+		GAMEDATA::getInstance()->saveMusicState();
     }  
 }
 
