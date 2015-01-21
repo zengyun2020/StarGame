@@ -44,7 +44,14 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		TopMenu::getInstance()->updatePropsNum();}
 		break;
 	case 4:
-		//暂停界面礼包
+		//暂停界面
+		if(resultId==0){
+			GAMEDATA::getInstance()->setAddTimeNum(5+GAMEDATA::getInstance()->getAddTimeNum());
+			GAMEDATA::getInstance()->saveAddTimeNum();
+			GAMEDATA::getInstance()->setBombNum(5+GAMEDATA::getInstance()->getBombNum());
+			GAMEDATA::getInstance()->saveBombNum();
+			TopMenu::getInstance()->updatePropsNum();	
+		}	
 		break;
 	case 5:
 		//复活
