@@ -348,6 +348,8 @@ bool StarMatrix::isEnded(){
 }
 
 void StarMatrix::clearMatrixOneByOne(){
+	//播放消除音效
+	Audio::getInstance()->playPop();
 	for(int i=0;i<ROW_NUM;i++){
 		for(int j=0;j<COL_NUM;j++){
 			if(stars[i][j] == nullptr)
