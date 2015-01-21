@@ -73,7 +73,7 @@ bool TopMenu::init(){
 		);
 	Menu* menuPause = Menu::create(PauseBtn, NULL);
 	menuPause->alignItemsHorizontally();
-	menuPause->setPosition(30,visibleSize.height - 100);
+	menuPause->setPosition(50,visibleSize.height - 100);
 	this->addChild(menuPause);
 
 	propBombNum = Label::create(
