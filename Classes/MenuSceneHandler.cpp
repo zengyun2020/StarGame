@@ -2,8 +2,6 @@
 #include "ui/UIText.h"
 #include "MenuLayer.h"
 #include "HelloWorldScene.h"
-#include "CallAndroidMethod.h"
-#include "GameQuitHandler.h"
 USING_NS_CC;
 using namespace std;
 using namespace cocos2d::ui;
@@ -11,14 +9,7 @@ MenuSceneHandler::MenuSceneHandler()
 {}
 Widget::ccWidgetTouchCallback MenuSceneHandler::onLocateTouchCallback(const string &callBackName)
 {
-     if (callBackName == "bgMusicSwitch")
-    {
-        return CC_CALLBACK_2(MenuSceneHandler::bgMusicSwitch, this);
-    }
-	else if(callBackName == "soundEffectSwitch"){
-		return CC_CALLBACK_2(MenuSceneHandler::soundEffectSwitch, this);
-	}
-	else if(callBackName == "startGame"){
+	if(callBackName == "startGame"){
 		return CC_CALLBACK_2(MenuSceneHandler::startGame, this);
 	}
     return nullptr;
@@ -38,34 +29,6 @@ Widget::ccWidgetEventCallback MenuSceneHandler::onLocateEventCallback(const stri
         return CC_CALLBACK_2(MenuSceneHandler::onEvent, this);
     }
     return nullptr;
-}
-
-void MenuSceneHandler::bgMusicSwitch(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
-{
-    CCLOG("bgMusicSwitch");
-	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
-		
-	}
-	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
-		
-	}
-	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		CallAndroidMethod::getInstance()->pay(1);
-	}
-}
-
-void MenuSceneHandler::soundEffectSwitch(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
-{
-    CCLOG("soundEffectSwitch");
-	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
-		
-	}
-	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
-		
-	}
-	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		GameQuitHandler::getInstance()->quitGame();
-	}
 }
 
 void MenuSceneHandler::startGame(cocos2d::Ref* object, cocos2d::ui::Widget::TouchEventType type)
