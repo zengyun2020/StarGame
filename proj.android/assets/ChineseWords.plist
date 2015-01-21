@@ -16,7 +16,7 @@
   <string>分</string>
   
   <key>highestScore</key>
-  <string>历史最高分</string>
+  <string>最高分</string>
   
   <key>lianji</key>
   <string>连击增加</string>
@@ -28,7 +28,7 @@
   <string>奖励</string>
 
    <key>shengyu</key>
-  <string>剩余</string>
+  <string>剩</string>
 
    <key>miao</key>
   <string>秒</string>
