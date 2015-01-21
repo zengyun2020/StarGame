@@ -24,7 +24,10 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			GAMEDATA::getInstance()->saveAddTimeNum();
 			GAMEDATA::getInstance()->setBombNum(5+GAMEDATA::getInstance()->getBombNum());
 			GAMEDATA::getInstance()->saveBombNum();
+			GAMEDATA::getInstance()->setHasShowRegisterPay(true);
+			GAMEDATA::getInstance()->saveShowRegisterPay();
 			TopMenu::getInstance()->updatePropsNum();	
+	
 		}	
 		break;
 	case 2:
