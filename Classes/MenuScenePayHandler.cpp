@@ -33,7 +33,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		//¼ÓÊ±
 		GameLayer::_PauseTime=false;
 		if(resultId==0){
-			GAMEDATA::getInstance()->setAddTimeNum(5+GAMEDATA::getInstance()->getAddTimeNum());
+			GAMEDATA::getInstance()->setAddTimeNum(10+GAMEDATA::getInstance()->getAddTimeNum());
 			GAMEDATA::getInstance()->saveAddTimeNum();
 			TopMenu::getInstance()->updatePropsNum();}
 		break;
@@ -41,7 +41,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		//Õ¨µ¯
 		GameLayer::_PauseTime=false;
 		if(resultId==0){
-			GAMEDATA::getInstance()->setBombNum(5+GAMEDATA::getInstance()->getBombNum());
+			GAMEDATA::getInstance()->setBombNum(10+GAMEDATA::getInstance()->getBombNum());
 			GAMEDATA::getInstance()->saveBombNum();
 			TopMenu::getInstance()->updatePropsNum();}
 		break;
