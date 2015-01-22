@@ -39,7 +39,8 @@
   <key>mu</key>
   <string>幕</string>
 
-
+  <key>gameover</key>
+  <string>游戏结束</string>
 </dict>
 
 </array>
