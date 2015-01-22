@@ -142,9 +142,9 @@ void TopMenu::usePropsTime(){
 	if(num>0){
 		if(!(StarMatrix::BombClick) && GameLayer::totalTime>1){
 			Size visibleSize = Director::getInstance()->getVisibleSize();
-			plusTimeWord =FloatWord::create("+10"+ChineseWord("miao"),10,Point(visibleSize.width/2+200,visibleSize.height/2+280));
+			plusTimeWord =FloatWord::create("+10"+ChineseWord("miao"),12,Point(visibleSize.width/2+175,visibleSize.height/2+300));
 			this->addChild(plusTimeWord);
-			plusTimeWord->floatInTime(0.5,0.5,[=](){
+			plusTimeWord->floatInTime(0.5,0,[=](){
 				GameLayer::needPluse =true;  
 				GAMEDATA::getInstance()->setAddTimeNum(num-1);
 				GAMEDATA::getInstance()->saveAddTimeNum();
