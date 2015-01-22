@@ -210,12 +210,21 @@ void TopMenu::PauseGame(){
             musicTog->setSelectedIndex(1);  
         }  
 
-	MenuItemImage* resumeBtn = MenuItemImage::create(
+	Menu* otherMenu = Menu::create(exitBtn,soundTog,musicTog, NULL);
+	otherMenu->alignItemsHorizontallyWithPadding (25);
+	otherMenu->setPosition(visibleSize.width/2+65,visibleSize.height/2-250);
+	gamePause->addChild(otherMenu,2);
+
+		MenuItemImage* resumeBtn = MenuItemImage::create(
 		"continue_normal.png","continue_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
 		);
-	Menu* resumeMenu = Menu::create(exitBtn,soundTog,musicTog,resumeBtn, NULL);
+		auto scale1 = ScaleTo::create(1,1.25);
+	auto scale2 = ScaleTo::create(1,1);
+	auto seq =Sequence::create(scale1,scale2,nullptr);
+	resumeBtn->runAction(RepeatForever::create(seq));
+	Menu* resumeMenu = Menu::create(resumeBtn, NULL);
 	resumeMenu->alignItemsHorizontallyWithPadding (50);
-	resumeMenu->setPosition(visibleSize.width/2,visibleSize.height/2-250);
+	resumeMenu->setPosition(visibleSize.width/2-130,visibleSize.height/2-250);
 	gamePause->addChild(resumeMenu,2);
 }
 
