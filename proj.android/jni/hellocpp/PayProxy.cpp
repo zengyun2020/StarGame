@@ -1,6 +1,5 @@
 #include "cocos2d.h"
 #include "../../../Classes/MenuScenePayHandler.h"
-#include "../../../Classes/GameQuitHandler.h"
 #include <jni.h>
 
 using namespace cocos2d;

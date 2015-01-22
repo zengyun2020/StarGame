@@ -22,7 +22,7 @@ private:
 	float animTime;
 	int curScore;
 	int rankNumTemp;
-	float scale;
+	float rotation;
 	LabelAtlas* labelScore;
 	Sprite* currentRoundScore;
 	LabelAtlas* rankNum;
