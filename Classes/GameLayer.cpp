@@ -112,10 +112,10 @@ void GameLayer::showLinkNum(int size){
 	linkNum->setVisible(true);
 }
 
-void GameLayer::showEveryScore(int score,int index){
+void GameLayer::showEveryScore(int score,int index,Point point){
 	//显示分数
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(visibleSize.width,-10*index));
+	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,-20*index));
 	this->addChild(everyScore);
 	everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),[=](){
 		this->refreshMenu(score);

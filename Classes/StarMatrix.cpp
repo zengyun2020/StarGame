@@ -233,8 +233,8 @@ void StarMatrix::deleteSelectedList(){
 	Audio::getInstance()->playPop();
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
-		m_layer->showEveryScore(selectedListSize*5,selectedListSize-selectedList.size());
 		Star* star = *it;
+		m_layer->showEveryScore(selectedListSize*5,selectedListSize-selectedList.size(),star->getPosition());
 		selectedList.pop_front();
 		//粒子效果
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
