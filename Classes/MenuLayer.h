@@ -12,12 +12,17 @@ public:
 	void startGame();
 	void stopAction();
 	void startAction();
-	void showQuit();
 	void getSoudState(CCObject* pSender);
 	void getMusicState(CCObject* pSender);
+	void quit();
+	void cancel();
+	void showQuit();
 private:
 	Menu* menuBgMusic;
 	Menu* menuSoundEffect;
-	Node* layer;
+	Sprite* quitBg;
+	Sprite* quitDesc;
+	Menu* confirmMenu;
+	Menu* cancelMenu;
 };
 #endif

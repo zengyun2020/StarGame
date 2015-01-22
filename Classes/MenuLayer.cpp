@@ -8,7 +8,6 @@
 #include "MenuSceneHandlerReader.h"
 #include "MenuScenePayHandler.h"
 #include "SimpleAudioEngine.h"
-#include "GameQuitLayer.h"
 
 using namespace cocostudio::timeline;
 
@@ -67,6 +66,33 @@ bool MenuLayer::init(){
 	soundEffectMenu->setPosition(427,751);
 	this->addChild(musicMenu);
 	this->addChild(soundEffectMenu);
+
+	quitBg = Sprite::create("quit_bg.jpg");
+	quitBg->setPosition(240,400);
+	quitBg->setVisible(false);
+	this->addChild(quitBg,3);
+
+	quitDesc = Sprite::create("quit_desc.png");
+	quitDesc->setPosition(240,428);
+	quitDesc->setVisible(false);
+	this->addChild(quitDesc,3);
+
+	MenuItemImage* confirmBtn = MenuItemImage::create(
+		"quit_confirm_up.png","quit_confirm_down.png",CC_CALLBACK_0(MenuLayer::quit,this)
+		);
+	confirmMenu = Menu::create(confirmBtn, NULL);
+	confirmMenu->setPosition(164,355);
+	confirmMenu->setVisible(false);
+	this->addChild(confirmMenu,3);
+
+	MenuItemImage* cancelBtn = MenuItemImage::create(
+		"quit_cancel_up.png","quit_cancel_down.png",CC_CALLBACK_0(MenuLayer::cancel,this)
+		);
+	cancelMenu = Menu::create(cancelBtn, NULL);
+	cancelMenu->setPosition(164,355);
+	cancelMenu->setVisible(false);
+	this->addChild(cancelMenu,3);
+
 	this->setKeypadEnabled(true);
 	//监听物理按键
 	auto listener = EventListenerKeyboard::create();
@@ -76,7 +102,7 @@ bool MenuLayer::init(){
 		    case cocos2d::EventKeyboard::KeyCode::KEY_NONE:
 		        break;
 		    case cocos2d::EventKeyboard::KeyCode::KEY_BACK:
-//			    MenuLayer::showQuit();
+		    	showQuit();
 		        break;
 		    default:
 		        break;
@@ -91,6 +117,24 @@ void MenuLayer::startGame(){
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
 	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+}
+
+void MenuLayer::showQuit(){
+	quitBg->setVisible(true);
+	quitDesc->setVisible(true);
+	confirmMenu->setVisible(true);
+	cancelMenu->setVisible(true);
+}
+
+void MenuLayer::quit(){
+	Director::getInstance()->end();
+}
+
+void MenuLayer::cancel(){
+	quitBg->setVisible(false);
+	quitDesc->setVisible(false);
+	confirmMenu->setVisible(false);
+	cancelMenu->setVisible(false);
 }
 
 void MenuLayer::startAction(){
@@ -141,10 +185,5 @@ void MenuLayer::getMusicState(CCObject* pSender){
         GAMEDATA::getInstance()->setMusicState(true);
         GAMEDATA::getInstance()->saveMusicState();
     }
-}
-
-void MenuLayer::showQuit(){
-	layer = GameQuitLayer::getInstance();
-	this->addChild(layer);
 }
 

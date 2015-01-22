@@ -18,7 +18,6 @@ bool GameOverLayer::init(){
 	curScore = 10000;
 	scoreNum = 0;
 	animTime = 0;
-	scale = 1;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	/*��ʼ������*/
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
@@ -44,30 +43,30 @@ bool GameOverLayer::init(){
 	rank = Sprite::create("game_result_rank.png");
 	rankNumTemp = PLAYERRANK::getInstance()->getRankList(curScore);
 	if(rankNumTemp > 0 && rankNumTemp < 10){
-		rankNum->setPosition(Point(238, 339));
-		rank->setPosition(230,339);
+		rankNum->setPosition(Point(238, 309));
+		rank->setPosition(230,309);
 	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
-		rankNum->setPosition(Point(247.5, 339));
-		rank->setPosition(220.5,324);
+		rankNum->setPosition(Point(247.5, 309));
+		rank->setPosition(220.5,309);
 	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
-		rankNum->setPosition(Point(257, 339));
-		rank->setPosition(211,324);
+		rankNum->setPosition(Point(257, 309));
+		rank->setPosition(211,309);
 	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
-		rankNum->setPosition(Point(266.5, 339));
-		rank->setPosition(201.5,324);
+		rankNum->setPosition(Point(266.5, 309));
+		rank->setPosition(201.5,309);
 	}else if(rankNumTemp >= 10000 && rankNumTemp < 100000){
-		rankNum->setPosition(Point(276, 339));
-		rank->setPosition(192,339);
+		rankNum->setPosition(Point(276, 309));
+		rank->setPosition(192,309);
 	}
 	rankNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
 	rankNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankList(curScore))->_string);
 
 	beatPer = Sprite::create("game_result_beat.png");
-	beatPer->setPosition(-240,287);
+	beatPer->setPosition(-240,256);
 	beatPer->setAnchorPoint(Point(0.5, 0.5));
 
 	beatNum = LabelAtlas::create("98635", "game_result_rank_num.png", 19.0f, 33.0f, '0');
-	beatNum->setPosition(Point(-254, 287));
+	beatNum->setPosition(Point(-254, 256));
 	beatNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
     beatNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankPer(curScore))->_string);
 
@@ -83,15 +82,16 @@ bool GameOverLayer::init(){
 	startBtn = MenuItemImage::create(
 		"game_result_retry_normal.png","game_result_retry_click.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
 		);
+	startBtn->setScale(1.2);
 	Menu* menu1 = Menu::create(startBtn,NULL);
-	menu1->setPosition(72,160);
+	menu1->setPosition(72,150);
 	this->addChild(menu1);
 
 	MenuItemImage* backBtn = MenuItemImage::create(
 		"exit_normal.png","exit_click.png",CC_CALLBACK_0(GameOverLayer::back,this)
 		);
 	Menu* menu2 = Menu::create(backBtn,NULL);
-	menu2->setPosition(408,160);
+	menu2->setPosition(408,150);
 	this->addChild(menu2);
 
 	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
@@ -106,7 +106,7 @@ bool GameOverLayer::init(){
 				musicTog->setSelectedIndex(1);
 			}
 		auto musicMenu = Menu::create(musicTog,NULL);
-		musicMenu->setPosition(184,160);
+		musicMenu->setPosition(184,150);
 		MenuItemImage* soundEffectOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
 		MenuItemImage* soundEffectOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");
 		MenuItemToggle* soundEffectTog = MenuItemToggle::createWithTarget(this,menu_selector(GameOverLayer::getSoudState),soundEffectOn,soundEffectOff,NULL);
@@ -119,7 +119,7 @@ bool GameOverLayer::init(){
 				soundEffectTog->setSelectedIndex(1);
 			}
 		auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
-		soundEffectMenu->setPosition(296,160);
+		soundEffectMenu->setPosition(296,150);
 		this->addChild(musicMenu);
 		this->addChild(soundEffectMenu);
 		this->scheduleUpdate();
@@ -132,28 +132,28 @@ void GameOverLayer::showRank(float dt){
 	rank->setVisible(true);
 	rankNum->setVisible(true);
 	if(rankNumTemp > 0 && rankNumTemp < 10){
-		rankNum->runAction(MoveTo::create(0.5f,Point(238, 339)));
-		rank->runAction(MoveTo::create(0.5f,Point(230,339)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(238, 309)));
+		rank->runAction(MoveTo::create(0.5f,Point(230,309)));
 	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
-		rankNum->runAction(MoveTo::create(0.5f,Point(247.5, 339)));
-		rank->runAction(MoveTo::create(0.5f,Point(220.5,339)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(247.5, 309)));
+		rank->runAction(MoveTo::create(0.5f,Point(220.5,309)));
 	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
-		rankNum->runAction(MoveTo::create(0.5f,Point(257, 339)));
-		rank->runAction(MoveTo::create(0.5f,Point(211,339)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(257, 309)));
+		rank->runAction(MoveTo::create(0.5f,Point(211,309)));
 	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
-		rankNum->runAction(MoveTo::create(0.5f,Point(266.5, 339)));
-		rank->runAction(MoveTo::create(0.5f,Point(201.5,339)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(266.5, 309)));
+		rank->runAction(MoveTo::create(0.5f,Point(201.5,309)));
 	}else if(rankNumTemp >= 10000 && rankNumTemp < 100000){
-		rankNum->runAction(MoveTo::create(0.5f,Point(276, 339)));
-		rank->runAction(MoveTo::create(0.5f,Point(192,339)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(276, 309)));
+		rank->runAction(MoveTo::create(0.5f,Point(192,309)));
 	}
 }
 
 void GameOverLayer::showBeat(float dt){
 	beatNum->setVisible(true);
 	beatPer->setVisible(true);
-	beatPer->runAction(MoveTo::create(0.5f,Point(240,287)));
-	beatNum->runAction(MoveTo::create(0.5f,Point(226,287)));
+	beatPer->runAction(MoveTo::create(0.5f,Point(240,256)));
+	beatNum->runAction(MoveTo::create(0.5f,Point(226,256)));
 }
 
 void GameOverLayer::update(float delta){
@@ -161,7 +161,10 @@ void GameOverLayer::update(float delta){
 		return;
 	}
 	animTime += delta/0.05;
-	scoreNum = animTime/60 * curScore;
+	if(animTime >= 60000000){
+		animTime = 6000;
+	}
+	scoreNum = animTime/40 * curScore;
 	if(scoreNum > curScore){
 		scoreNum = curScore;
 	}
@@ -182,22 +185,24 @@ void GameOverLayer::update(float delta){
 		currentRoundScore->setPosition(Point(341,392));
 	}
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
-	auto animTimeTemp = (int)animTime;
-	if(animTimeTemp/18%2 == 0){
-		scale = 1+0.3*(animTimeTemp%18)/18;
-	}else{
-		scale = 1.3-0.3*(animTimeTemp%18)/18;
-	}
-	startBtn->setScale(scale);
+//	auto animTimeTemp = (int)animTime;
+//	if(animTimeTemp/18%2 == 0){
+//		scale = 1+0.3*(animTimeTemp%18)/18;
+//	}else{
+//		scale = 1.3-0.3*(animTimeTemp%18)/18;
+//	}
+//	startBtn->setScale(scale);
+	rotation = 360*animTime/60;
+	startBtn->setRotation(rotation);
 }
 
 void GameOverLayer::continueGame(){
 	GAMEDATA::getInstance()->init();
-	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameScene::create()));
+	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
 }
 
 void GameOverLayer::back(){
-	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,HelloWorld::createScene()));
+	Director::getInstance()->replaceScene(TransitionFade::create(1,HelloWorld::createScene()));
 }
 
 void GameOverLayer::getSoudState(CCObject* pSender){

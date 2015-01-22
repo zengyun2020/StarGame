@@ -189,7 +189,7 @@ void GameLayer::doGameOver(){
 	gameOverWord = FloatWord::create(
 		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOverWord);
-	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameOverScene::create()));});
+	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionFade::create(1,GameOverScene::create()));});
 }
 
 void GameLayer::gotoNextLevel(){
