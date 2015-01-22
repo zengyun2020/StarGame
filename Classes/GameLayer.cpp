@@ -110,8 +110,12 @@ void GameLayer::showLinkNum(int size){
 	if(size==0){
 		return;
 	}
+	int result=0;
+	for(int i=0;i<size;i++){
+	   result += 30+i*5;
+	}
 	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") + 
-		String::createWithFormat("%d",size*size*5)->_string + ChineseWord("fen");
+		String::createWithFormat("%d",result)->_string + ChineseWord("fen");
 	linkNum->setString(s);
 	linkNum->setVisible(true);
 }
@@ -198,7 +202,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 10;
+	GameLayer::totalTime = 60;
 }
 
 int GameLayer::getTime(){
