@@ -35,6 +35,11 @@ void Audio::playClick(){
 }
 
 
+void Audio::playScore(){
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/coin.ogg",false);}
+}
+
 void Audio::playCombo(int size){
 	if(GAMEDATA::getInstance()->getSoundEffect()){
 	if(size < 5)
@@ -100,4 +105,5 @@ void Audio::prepare(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/clear.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/beep.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/landing.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/coin.ogg");
 }

@@ -1,5 +1,6 @@
 #include "GamePauseLayer.h"
 #include "CallAndroidMethod.h"
+#include "Audio.h"
 
 using namespace cocos2d;
 bool GamePauseLayer::init(){
@@ -28,5 +29,6 @@ bool GamePauseLayer::init(){
 }
 
 void GamePauseLayer::payProps(){
+	Audio::getInstance()->playClick();
 	CallAndroidMethod::getInstance()->pay(4);
 }

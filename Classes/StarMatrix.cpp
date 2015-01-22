@@ -234,7 +234,7 @@ void StarMatrix::deleteSelectedList(){
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
 		Star* star = *it;
-		m_layer->showEveryScore(selectedListSize*5,selectedListSize-selectedList.size(),star->getPosition());
+		m_layer->showEveryScore(30+(selectedListSize-selectedList.size())*5,selectedListSize-selectedList.size(),star->getPosition());
 		selectedList.pop_front();
 		//粒子效果
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
@@ -276,7 +276,7 @@ void StarMatrix::deleteBombList(){
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
-		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
+		m_layer->floatLeftStarMsg(getLeftStarNum());
 	}
 }
 
