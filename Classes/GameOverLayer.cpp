@@ -30,7 +30,7 @@ bool GameOverLayer::init(){
 	this->addChild(title,0);
 
 	labelScore = LabelAtlas::create("2000", "game_result_score_num.png", 39.0f, 69.0f, '0');
-	labelScore->setPosition(Point(248, 400));
+	labelScore->setPosition(Point(218, 400));
 	labelScore->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
 	this->addChild(labelScore);
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
@@ -170,19 +170,19 @@ void GameOverLayer::update(float delta){
 		scoreNum = curScore;
 	}
 	if((int)scoreNum > 0 && (int)scoreNum < 10){
-		labelScore->setPosition(Point(248, 400));
+		labelScore->setPosition(Point(190, 400));
 		currentRoundScore->setPosition(Point(261,392));
 	}else if((int)scoreNum >= 10 && (int)scoreNum < 100){
-		labelScore->setPosition(Point(228, 400));
+		labelScore->setPosition(Point(198, 400));
 		currentRoundScore->setPosition(Point(281,392));
 	}else if((int)scoreNum >= 100 && (int)scoreNum < 1000){
-		labelScore->setPosition(Point(208, 400));
+		labelScore->setPosition(Point(178, 400));
 		currentRoundScore->setPosition(Point(301,392));
 	}else if((int)scoreNum >= 1000 && (int)scoreNum < 10000){
-		labelScore->setPosition(Point(188, 400));
+		labelScore->setPosition(Point(158, 400));
 		currentRoundScore->setPosition(Point(321,392));
 	}else if((int)scoreNum >= 10000 && (int)scoreNum < 100000){
-		labelScore->setPosition(Point(168, 400));
+		labelScore->setPosition(Point(138, 400));
 		currentRoundScore->setPosition(Point(341,392));
 	}
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
