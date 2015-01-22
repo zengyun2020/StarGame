@@ -11,6 +11,8 @@ bool GameLayer::_PauseTime=false;
 bool GameLayer::needPluse = false;
 bool GameLayer::needRevive =false;
 bool GameLayer::gameOver =false;
+int  GameLayer::totalTime =60;
+
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -48,7 +50,7 @@ void GameLayer::loadGame(float dt){
 
 	initTime();
 	gameTime = Label::create("","Arial",24);
-	gameTime->setPosition(50,visibleSize.height-50);
+	gameTime->setPosition(visibleSize.width/2-180,visibleSize.height-50);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
 
