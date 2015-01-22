@@ -16,29 +16,17 @@ bool MenuLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
+
 	//注册捕捉监听
 	auto listenerkeyPad = EventListenerKeyboard::create();
 	listenerkeyPad->onKeyReleased = CC_CALLBACK_2(MenuLayer::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
 	
-	//Size visibleSize = Director::getInstance()->getVisibleSize();
-	///*��ʼ������*/
-	//Sprite* background = Sprite::create("bg_menuscene.jpg");
-	//background->setPosition(visibleSize.width/2,visibleSize.height/2);
-	//this->addChild(background,-1);
-	//
-	///*��ʼ���˵�*/
-	//MenuItemImage* startBtn = MenuItemImage::create(
-	//	"menu_start.png","combo_3.png",CC_CALLBACK_0(MenuLayer::startGame,this)
-	//	);
-	//Menu* menu = Menu::create(startBtn,NULL);
-	//menu->alignItemsVertically();
-	//menu->setPosition(visibleSize.width/2,visibleSize.height/2);
-	//this->addChild(menu);
 	CSLoader* instance = CSLoader::getInstance();
 	instance->registReaderObject("MenuSceneHandlerReader",(ObjectFactory::Instance)MenuSceneHandlerReader::getInstance);
 	auto rootNode = CSLoader::createNode("MenuLayer.csb");
 	this->addChild(rootNode);
+
 	//backgroud music
 	Audio::getInstance()->playBGM();
 	//播放开始按钮动画
@@ -46,7 +34,7 @@ bool MenuLayer::init(){
 	rootNode->runAction(action); 
 	action->gotoFrameAndPlay(0,100,true);
 
-	// ������ѩ����Ч��
+	// 飘雪粒子效果
 	ParticleSnow* effect = ParticleSnow::create();
 	effect->setTotalParticles(100);
 	rootNode->addChild(effect);
@@ -102,7 +90,7 @@ bool MenuLayer::init(){
 void MenuLayer::startGame(){
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
-	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameScene::create()));
+	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
 }
 
 void MenuLayer::startAction(){
@@ -159,3 +147,4 @@ void MenuLayer::showQuit(){
 	layer = GameQuitLayer::getInstance();
 	this->addChild(layer);
 }
+

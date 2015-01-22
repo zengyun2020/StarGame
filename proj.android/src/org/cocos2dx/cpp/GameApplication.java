@@ -28,7 +28,7 @@ public class GameApplication extends Application{
 		gameInfo = GameInfoUtil.getInstance();
 		gameInfo.init(this);
 		setLayout();		
-		GamePay.getInstance().init(getApplicationContext(), GamePay.MM_POJIE_PAY_TYPE, false, GamePay.SKY_PAY_TYPE, 7003553, 9975, "消星星");
+		GamePay.getInstance().init(getApplicationContext(), GamePay.MM_POJIE_PAY_TYPE, false, GamePay.SKY_PAY_TYPE, 7005194, 9970, "羊年消星星");
 		
 		TbuCloud.initCloud(getApplicationContext(), new TbuCallback() {
 			
@@ -59,7 +59,7 @@ public class GameApplication extends Application{
 					Log.e(TAG, "avos init fail ...");
 				}
 			}
-		}, "j8tntyor2q4rvxh4sflo7scv7fssif1kfy8s7ikew2f6nnpw", "9e685psy7f7ag8714xofp3w1rs0naw8m2rys77y0rjzijy5d", DeviceInfo.version, AppActivity.class);
+		}, "fi68r9jrdpvgboosoduw367409zze6wx96at1la0p6tawvuq", "rvx72drfn7o3um1meevpzgss1k2i8jwyejigr7e7uxgtl0i4", DeviceInfo.version, AppActivity.class);
 	}
 	
 	private void setLayout() {

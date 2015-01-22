@@ -33,6 +33,7 @@ void CallAndroidMethod::pay(int payPoint){
 		jint pay_point = payPoint;
 		jint reviveNum = GAMEDATA::getInstance()->getReviveNum();
 		if(isHave){
+			jobject jobj;
 			JniHelper::getEnv()->CallStaticVoidMethod(methodInfo.classID,methodInfo.methodID,pay_point,reviveNum);
 		}
 	#endif	

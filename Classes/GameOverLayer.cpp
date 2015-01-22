@@ -23,10 +23,6 @@ bool GameOverLayer::init(){
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
 
-	Sprite* despite = Sprite::create("game_result_shine_bg.png");
-	despite->setPosition(visibleSize.width/2,visibleSize.height/2);
-	this->addChild(despite,0);
-
 	Sprite* title = Sprite::create("title.png");
 	title->setPosition(240,632);
 	this->addChild(title,0);

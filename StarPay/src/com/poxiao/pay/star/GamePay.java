@@ -81,7 +81,7 @@ public class GamePay{
 						//此处使用的是sky支付，若是其他支付可进行相应修改
 						Buffett.init(new SkyPayImpl());
 						buffett = Buffett.getInstance();
-//						buffett.initPayApplication(context);
+						buffett.initPayApplication(context);
 					}
 					successInit = true;
 				}
