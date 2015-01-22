@@ -122,6 +122,7 @@ void GameLayer::showEveryScore(int score,int index,Point point){
 	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,-20*index));
 	this->addChild(everyScore);
 	everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),[=](){
+		Audio::getInstance()->playScore();
 		this->refreshMenu(score);
 	});
 }
@@ -165,7 +166,11 @@ void GameLayer::doGameOver(){
 	gameOverWord = FloatWord::create(
 		ChineseWord("gameover"),80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOverWord);
-	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionFade::create(1.0,GameOverScene::create()));});
+	gameOverWord->floatIn(1.0f,[]{
+		Director::getInstance()->replaceScene(TransitionFade::create(1.0,GameOverScene::create()));
+		TopMenu::getInstance()->cleanScore();
+	});
+
 }
 
 void GameLayer::gotoNextLevel(){
@@ -193,7 +198,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 60;
+	GameLayer::totalTime = 10;
 }
 
 int GameLayer::getTime(){

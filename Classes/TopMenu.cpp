@@ -93,6 +93,13 @@ void TopMenu::refresh(int score){
 	curScore->setString(buf);
 }
 
+void TopMenu::cleanScore(){
+	char buf[64];
+	sprintf(buf,"%d",0);
+	curScore->setString(buf);
+
+}
+
 void TopMenu::usePropsBomb(){
 	Audio::getInstance()->playClick();
 	auto num =GAMEDATA::getInstance()->getBombNum();

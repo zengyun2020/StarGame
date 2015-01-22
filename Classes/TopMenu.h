@@ -19,6 +19,7 @@ public:
 	void updatePropsNum();
 	void goBack();
 	void stopScaleAction();
+	void cleanScore();
 
 private:
 	static TopMenu* _instance;

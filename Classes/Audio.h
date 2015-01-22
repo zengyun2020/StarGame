@@ -6,6 +6,7 @@ public:
 	void playBGM();
 	void playReadyGo();
 	void playClick();
+	void playScore();
 	void playPop();
 	void playCombo(int size);
 	void playClear();//清除
