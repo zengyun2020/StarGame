@@ -128,10 +128,12 @@ void MenuLayer::showQuit(){
 }
 
 void MenuLayer::quit(){
+	Audio::getInstance()->playClick();
 	Director::getInstance()->end();
 }
 
 void MenuLayer::cancel(){
+	Audio::getInstance()->playClick();
 	quitBg->setVisible(false);
 	quitDesc->setVisible(false);
 	confirmMenu->setVisible(false);
@@ -149,6 +151,7 @@ void MenuLayer::stopAction(){
 }
 
 void MenuLayer::getSoudState(CCObject* pSender){
+	Audio::getInstance()->playClick();
 	 //创建临时CCMenuItemToggle
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
     //根据CCMenuItemToggle的选项来决定音乐的开关
@@ -169,6 +172,7 @@ void MenuLayer::getSoudState(CCObject* pSender){
 }
 
 void MenuLayer::getMusicState(CCObject* pSender){
+	Audio::getInstance()->playClick();
 	 //创建临时CCMenuItemToggle
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
     //根据CCMenuItemToggle的选项来决定音乐的开关

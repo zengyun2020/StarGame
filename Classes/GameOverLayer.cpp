@@ -8,6 +8,7 @@
 #include "GameOverReader.h"
 #include "PlayerRank.h"
 #include "SimpleAudioEngine.h"
+#include "Audio.h"
 
 using namespace cocos2d;
 
@@ -15,7 +16,7 @@ bool GameOverLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-	curScore = 10000;
+	curScore = GAMEDATA::getInstance()->getCurScore();
 	scoreNum = 0;
 	animTime = 0;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -43,20 +44,20 @@ bool GameOverLayer::init(){
 	rank = Sprite::create("game_result_rank.png");
 	rankNumTemp = PLAYERRANK::getInstance()->getRankList(curScore);
 	if(rankNumTemp > 0 && rankNumTemp < 10){
-		rankNum->setPosition(Point(238, 309));
-		rank->setPosition(230,309);
+		rankNum->setPosition(Point(238-480, 309));
+		rank->setPosition(230-480,309);
 	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
-		rankNum->setPosition(Point(247.5, 309));
-		rank->setPosition(220.5,309);
+		rankNum->setPosition(Point(247.5-480, 309));
+		rank->setPosition(220.5-480,309);
 	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
-		rankNum->setPosition(Point(257, 309));
-		rank->setPosition(211,309);
+		rankNum->setPosition(Point(257-480, 309));
+		rank->setPosition(211-480,309);
 	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
-		rankNum->setPosition(Point(266.5, 309));
-		rank->setPosition(201.5,309);
+		rankNum->setPosition(Point(266.5-480, 309));
+		rank->setPosition(201.5-480,309);
 	}else if(rankNumTemp >= 10000 && rankNumTemp < 100000){
-		rankNum->setPosition(Point(276, 309));
-		rank->setPosition(192,309);
+		rankNum->setPosition(Point(276-480, 309));
+		rank->setPosition(192-480,309);
 	}
 	rankNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
 	rankNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankList(curScore))->_string);
@@ -197,15 +198,18 @@ void GameOverLayer::update(float delta){
 }
 
 void GameOverLayer::continueGame(){
+	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
 	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
 }
 
 void GameOverLayer::back(){
+	Audio::getInstance()->playClick();
 	Director::getInstance()->replaceScene(TransitionFade::create(1,HelloWorld::createScene()));
 }
 
 void GameOverLayer::getSoudState(CCObject* pSender){
+	Audio::getInstance()->playClick();
 	 //创建临时CCMenuItemToggle
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
     //根据CCMenuItemToggle的选项来决定音乐的开关
@@ -226,6 +230,7 @@ void GameOverLayer::getSoudState(CCObject* pSender){
 }
 
 void GameOverLayer::getMusicState(CCObject* pSender){
+	Audio::getInstance()->playClick();
 	 //创建临时CCMenuItemToggle
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
     //根据CCMenuItemToggle的选项来决定音乐的开关
