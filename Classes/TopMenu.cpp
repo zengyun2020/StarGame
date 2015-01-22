@@ -32,21 +32,6 @@ bool TopMenu::init(){
 	highestScore->setPosition(visibleSize.width/2,visibleSize.height/2+350);
 	this->addChild(highestScore);
 
-	//level = Label::create(
-	//	//"guanqia" + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
-	//	ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
-	//	"Verdana-Bold",24
-	//	);
-	//level->setPosition(visibleSize.width-50,visibleSize.height - 50);
-	//this->addChild(level);
-
-	//targetScore = Label::create(
-	//	//"mubiao" + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextScore())->_string + "fen",
-	//	ChineseWord("mubiao") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen"),
-	//	"Verdana-Bold",30
-	//);
-	//targetScore->setPosition(400,visibleSize.height - 100);
-	//this->addChild(targetScore);
 
 	curScore = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
@@ -54,6 +39,17 @@ bool TopMenu::init(){
 		);
 	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
+
+
+		// ������ͣ����
+	MenuItemImage* PauseBtn = MenuItemImage::create(
+		"pause.png","pause.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
+		);
+	Menu* menuPause = Menu::create(PauseBtn, NULL);
+	menuPause->alignItemsHorizontally();
+	menuPause->setPosition(visibleSize.width/2-190,visibleSize.height/2+300);
+	this->addChild(menuPause);
+
 
 	// ���Ӽ��ܰ���
 	 BombBtn = MenuItemImage::create(
@@ -64,30 +60,21 @@ bool TopMenu::init(){
 		);
 	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
 	menu->alignItemsHorizontally();
-	menu->setPosition(visibleSize.width/2+140,visibleSize.height/2+300);
+	menu->setPosition(visibleSize.width/2+155,visibleSize.height/2+300);
 	this->addChild(menu);
-
-	// ������ͣ����
-	MenuItemImage* PauseBtn = MenuItemImage::create(
-		"pause.png","pause.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
-		);
-	Menu* menuPause = Menu::create(PauseBtn, NULL);
-	menuPause->alignItemsHorizontally();
-	menuPause->setPosition(visibleSize.width/2-190,visibleSize.height/2+300);
-	this->addChild(menuPause);
 
 	propBombNum = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string,
 		"Verdana-Bold",18	
 		);
-	propBombNum->setPosition(visibleSize.width/2+130,visibleSize.height/2+280);
+	propBombNum->setPosition(visibleSize.width/2+145,visibleSize.height/2+280);
 	this->addChild(propBombNum);
 
 	propTimeNum = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string,
 		"Verdana-Bold",18	
 		);
-	propTimeNum->setPosition(visibleSize.width/2+200,visibleSize.height/2+280);
+	propTimeNum->setPosition(visibleSize.width/2+215,visibleSize.height/2+280);
 	this->addChild(propTimeNum);
 
 
