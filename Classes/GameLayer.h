@@ -44,9 +44,9 @@ private:
 	StarMatrix* matrix;
 	Label* linkNum;
 	Label* gameTime;//游戏时间显示
-	int totalTime;//游戏时间
 	FloatWord* gameOverWord;
 public :
+	static int totalTime;//游戏时间
 	static bool _PauseTime;
 	static bool needPluse;
 	static bool gameOver;

@@ -140,11 +140,17 @@ void TopMenu::stopScaleAction(){
 void TopMenu::usePropsTime(){
 	auto num =GAMEDATA::getInstance()->getAddTimeNum();
 	if(num>0){
-		if(!(StarMatrix::BombClick)){
-			GameLayer::needPluse =true;  
-			GAMEDATA::getInstance()->setAddTimeNum(num-1);
-			GAMEDATA::getInstance()->saveAddTimeNum();
-			propTimeNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
+		if(!(StarMatrix::BombClick) && GameLayer::totalTime>1){
+			Size visibleSize = Director::getInstance()->getVisibleSize();
+			plusTimeWord =FloatWord::create("+10"+ChineseWord("miao"),10,Point(visibleSize.width/2+200,visibleSize.height/2+280));
+			this->addChild(plusTimeWord);
+			plusTimeWord->floatInTime(0.5,0.5,[=](){
+				GameLayer::needPluse =true;  
+				GAMEDATA::getInstance()->setAddTimeNum(num-1);
+				GAMEDATA::getInstance()->saveAddTimeNum();
+				propTimeNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
+			});
+			
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
