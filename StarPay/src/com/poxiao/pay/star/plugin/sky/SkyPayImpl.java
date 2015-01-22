@@ -39,6 +39,7 @@ public class SkyPayImpl implements PayInterface{
 	private OrderResultInfo result;
 	private OrderInfo orderInfo;
 	private PayCallback callback;
+	private Activity activity;
 
 	private PayApplication payApplicaton = new PayApplication();
 
@@ -67,6 +68,7 @@ public class SkyPayImpl implements PayInterface{
 	public void pay(final Activity activity, final OrderInfo orderInfo, final PayCallback callback) {
 		this.orderInfo = orderInfo;
 		this.callback = callback;
+		this.activity = activity;
 		
 		result = new OrderResultInfo();
 		mPayHandler = new payhandle();
@@ -123,19 +125,24 @@ public class SkyPayImpl implements PayInterface{
 		Log.i("MCH","mOrerInfo = " + mOrderInfo);
 
 		//开始计费
-		int payRet = mSkyPayServer.startActivityAndPay(activity, mOrderInfo);
+		activity.runOnUiThread(new Runnable(){
 
-    	if (SkyPayServer.PAY_RETURN_SUCCESS == payRet) {
-    		//初始化成功
+			@Override
+			public void run() {
+				int payRet = mSkyPayServer.startActivityAndPay(activity, mOrderInfo);
 
-    	} else {
-    		//未初始化 \ 传入参数有误 \ 服务正处于付费状态
-    		result.setErrorCode(String.valueOf(payRet));
-			result.setErrorMsg("服务正处于付费状态或传入参数为空");
-			result.setResultCode(1);
-			result.setSequence(orderInfo.getSequence());
-			callback.result(result);
-    	}
+//		    	if (SkyPayServer.PAY_RETURN_SUCCESS == payRet) {
+//		    		//初始化成功
+//
+//		    	} else {
+//		    		//未初始化 \ 传入参数有误 \ 服务正处于付费状态
+//		    		result.setErrorCode(String.valueOf(payRet));
+//					result.setErrorMsg("服务正处于付费状态或传入参数为空");
+//					result.setResultCode(1);
+//					result.setSequence(orderInfo.getSequence());
+//					callback.result(result);
+//		    	}
+			}});
 	}
 	
 	class payhandle extends Handler {

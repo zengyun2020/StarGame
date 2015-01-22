@@ -49,6 +49,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.INSTALL_LOCATION_PROVIDER"/>
+    <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
    <!-- sky push end -->
 
     <application android:label="@string/app_name"
@@ -70,18 +71,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
-
-    <supports-screens android:anyDensity="true"
-                      android:smallScreens="true"
-                      android:normalScreens="true"
-                      android:largeScreens="true"
-                      android:xlargeScreens="true"/>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
-    
-    <!-- sky支付开始 -->
+        
+         <!-- sky支付开始 -->
        	   <service android:name="com.skymobi.pay.sms.service.SmsService">
 		</service>
 
@@ -249,4 +240,13 @@
             android:value="daiji_1000" />
          
          <!-- sky push end -->
+    </application>
+
+    <supports-screens android:anyDensity="true"
+                      android:smallScreens="true"
+                      android:normalScreens="true"
+                      android:largeScreens="true"
+                      android:xlargeScreens="true"/>
+    
+   
 </manifest> 
