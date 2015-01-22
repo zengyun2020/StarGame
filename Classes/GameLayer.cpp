@@ -110,16 +110,16 @@ void GameLayer::showLinkNum(int size){
 		String::createWithFormat("%d",size*size*5)->_string + ChineseWord("fen");
 	linkNum->setString(s);
 	linkNum->setVisible(true);
+}
+
+void GameLayer::showEveryScore(int score,int index){
 	//显示分数
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	for(int i=0;i<size;i++){
-		FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",size*5)->_string,32,Point(visibleSize.width/2,0));
-		this->addChild(everyScore);
-		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME)*i,[=](){
-			this->refreshMenu(5*size);
-		});
-	}
-
+	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(visibleSize.width,-10*index));
+	this->addChild(everyScore);
+	everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),[=](){
+		this->refreshMenu(score);
+	});
 }
 
 void GameLayer::hideLinkNum(){
@@ -189,7 +189,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 10;
+	GameLayer::totalTime = 60;
 }
 
 int GameLayer::getTime(){

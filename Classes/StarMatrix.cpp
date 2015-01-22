@@ -229,21 +229,18 @@ void StarMatrix::genBombList(Star* s){
 
 
 void StarMatrix::deleteSelectedList(){
-	/*if(selectedList.size() <= 1){
-	m_layer->hideLinkNum();
-	selectedList.at(0)->setSelected(false);
-	return;
-	}*/
 	//播放消除音效
 	Audio::getInstance()->playPop();
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
+		m_layer->showEveryScore(selectedListSize*5,selectedListSize-selectedList.size());
 		Star* star = *it;
 		selectedList.pop_front();
 		//粒子效果
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
 		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
 		star->removeFromParentAndCleanup(true);
+	
 		return;
 	}
 	clearOneByOne =false;
