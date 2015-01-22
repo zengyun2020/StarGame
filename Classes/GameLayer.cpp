@@ -223,7 +223,7 @@ void GameLayer::updateCustom(float dt){
 		totalTime--;
 	}
 
-	if(totalTime<=5){
+	if(totalTime<=5 && totalTime>0){
 		Audio::getInstance()->playBeep();//倒计时报警
 	}
 	if(totalTime == 0){
