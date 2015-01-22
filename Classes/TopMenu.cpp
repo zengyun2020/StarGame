@@ -7,6 +7,7 @@
 #include "SimpleAudioEngine.h"
 #include "CallAndroidMethod.h"
 #include "HelloWorldScene.h"
+#include "Audio.h"
 
 TopMenu* TopMenu::_instance = nullptr;
 TopMenu::TopMenu(){
@@ -93,6 +94,7 @@ void TopMenu::refresh(int score){
 }
 
 void TopMenu::usePropsBomb(){
+	Audio::getInstance()->playClick();
 	auto num =GAMEDATA::getInstance()->getBombNum();
 	if(num>0){
 		if(!(StarMatrix::BombClick)){
@@ -121,6 +123,7 @@ void TopMenu::stopScaleAction(){
 
 
 void TopMenu::usePropsTime(){
+	Audio::getInstance()->playClick();
 	auto num =GAMEDATA::getInstance()->getAddTimeNum();
 	if(num>0){
 		if(!(StarMatrix::BombClick) && GameLayer::totalTime>1){
@@ -145,13 +148,15 @@ void TopMenu::usePropsTime(){
 void TopMenu::goBack(){
 	if(gamePause!=nullptr){
 		GameLayer::_PauseTime =false;
+		Audio::getInstance()->playClick();
 		gamePause->removeFromParentAndCleanup(true);
 	}
-	Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,HelloWorld::createScene()));
+	Director::getInstance()->replaceScene(HelloWorld::createScene());
 }
 
 void TopMenu::ResumeGame(){
 	if(gamePause!=nullptr){
+		Audio::getInstance()->playClick();
 		GameLayer::_PauseTime =false;
 		gamePause->removeFromParentAndCleanup(true);
 	}
@@ -159,6 +164,7 @@ void TopMenu::ResumeGame(){
 
 
 void TopMenu::PauseGame(){
+	Audio::getInstance()->playClick();
 	GameLayer::_PauseTime =true;
 	gamePause = GamePauseLayer::create();
 	this->addChild(gamePause,1);
@@ -193,7 +199,7 @@ void TopMenu::PauseGame(){
             musicTog->setSelectedIndex(1);  
         }  
 
-	Menu* otherMenu = Menu::create(exitBtn,soundTog,musicTog, NULL);
+	Menu* otherMenu = Menu::create(soundTog,musicTog,exitBtn, NULL);
 	otherMenu->alignItemsHorizontallyWithPadding (25);
 	otherMenu->setPosition(visibleSize.width/2+65,visibleSize.height/2-250);
 	gamePause->addChild(otherMenu,2);
@@ -218,6 +224,7 @@ void TopMenu::getSoudState(CCObject* pSender){
     //根据CCMenuItemToggle的选项来决定音乐的开关  
     if (temp->getSelectedIndex()==1)  
     {   
+		Audio::getInstance()->playClick();
 		GAMEDATA::getInstance()->setSoundEffect(false);
 		GAMEDATA::getInstance()->saveSoundEffect();
     }  
@@ -234,10 +241,12 @@ void TopMenu::getMusicState(CCObject* pSender){
     //根据CCMenuItemToggle的选项来决定音乐的开关  
     if (temp->getSelectedIndex()==1)  
     {   
+		Audio::getInstance()->playClick();
         //暂停播放音乐  
         CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic(); 
 		GAMEDATA::getInstance()->setMusicState(false);
 		GAMEDATA::getInstance()->saveMusicState();
+
     }  
     if (temp->getSelectedIndex()==0)  
     {  
