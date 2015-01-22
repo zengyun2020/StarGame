@@ -105,5 +105,5 @@ void Audio::prepare(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/clear.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/beep.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/landing.ogg");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/coin.ogg");}
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/coin.ogg");
 }
