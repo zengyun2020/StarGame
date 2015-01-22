@@ -98,8 +98,8 @@ bool GameLayer::onTouchBegan(Touch* touch,Event* event){
 	return true;
 }
 
-void GameLayer::refreshMenu(){
-	menu->refresh();
+void GameLayer::refreshMenu(int score){
+	menu->refresh(score);
 }
 
 void GameLayer::showLinkNum(int size){
@@ -110,6 +110,16 @@ void GameLayer::showLinkNum(int size){
 		String::createWithFormat("%d",size*size*5)->_string + ChineseWord("fen");
 	linkNum->setString(s);
 	linkNum->setVisible(true);
+	//显示分数
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	for(int i=0;i<size;i++){
+		FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",size*5)->_string,32,Point(visibleSize.width/2,0));
+		this->addChild(everyScore);
+		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME)*i,[=](){
+			this->refreshMenu(5*size);
+		});
+	}
+
 }
 
 void GameLayer::hideLinkNum(){
@@ -137,7 +147,7 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 			if(data->getCurScore() > data->getHistoryScore()){
 				data->setHistoryScore(data->getCurScore());
 			}
-			refreshMenu();
+			refreshMenu(0);
 	});
 }
 
@@ -149,13 +159,13 @@ void GameLayer::doRevive(){
 void GameLayer::doGameOver(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	gameOverWord = FloatWord::create(
-		"GAME OVER",80,Point(visibleSize.width,visibleSize.height/2));
+		ChineseWord("gameover"),80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOverWord);
-	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionProgressHorizontal::create(1.5,GameOverScene::create()));});
+	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionFade::create(1.0,GameOverScene::create()));});
 }
 
 void GameLayer::gotoNextLevel(){
-	refreshMenu();
+	refreshMenu(0);
 	//floatLevelWord();
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	matrix->setAcceptTouch(true);
@@ -179,7 +189,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 60;
+	GameLayer::totalTime = 10;
 }
 
 int GameLayer::getTime(){

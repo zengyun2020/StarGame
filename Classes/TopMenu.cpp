@@ -94,19 +94,15 @@ bool TopMenu::init(){
 	return true;
 }
 
-void TopMenu::refresh(){
+void TopMenu::refresh(int score){
+	GAMEDATA* data = GAMEDATA::getInstance();
+	data->setCurScore(data->getCurScore() + score);
+	if(data->getCurScore() > data->getHistoryScore()){
+		data->setHistoryScore(data->getCurScore());
+	}
 	char buf[64];
-	sprintf(buf,"%d",GAMEDATA::getInstance()->getCurScore());
+	sprintf(buf,"%d",data->getCurScore());
 	curScore->setString(buf);
-	//string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
-	/*std::string history = ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string;
-	highestScore->setString(history);*/
-
-	/*std::string guanqia = ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string;
-	level->setString(guanqia);*/
-
-	/*std::string target = ChineseWord("mubiao") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen");
-	targetScore->setString(target);*/
 }
 
 void TopMenu::usePropsBomb(){

@@ -10,7 +10,7 @@ public:
 	void floatOut(const float delay,std::function<void()> callback);
 	void floatInOut(const float speed,const float delay,std::function<void()> callback);
 	void floatInTime(const float speed,const float delay,std::function<void()> callback);
-	
+	void floatInScore(const float delay,std::function<void()> callback);
 
 private:
 	int _fontSize;

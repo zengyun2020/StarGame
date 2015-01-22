@@ -20,7 +20,7 @@ public:
 	void showStarMatrix(float dt);
 	virtual void update(float delta);
 	virtual bool onTouchBegan(Touch* touch,Event* event);
-	void refreshMenu();
+	void refreshMenu(int score);
 	void showLinkNum(int size);
 	void showGameTime(int time);
 	void hideLinkNum();
@@ -35,7 +35,6 @@ public:
 	void setTime(int time);
 	int getTime();
 	void plusTime(int time);
-
 	
 private:
 	//FloatWord* _levelMsg;

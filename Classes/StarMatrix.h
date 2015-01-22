@@ -41,10 +41,11 @@ private:
 	bool needClear;
 	bool clearOneByOne;
 	bool acceptTouch;
-	static float ONE_CLEAR_TIME;
+	
 	float clearSumTime;
 	int selectedListSize;
 public :
 	static bool BombClick;
+	static float ONE_CLEAR_TIME;
 };
 #endif

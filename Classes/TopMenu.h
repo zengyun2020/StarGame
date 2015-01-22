@@ -9,7 +9,7 @@ public:
 	static TopMenu* getInstance();
 	virtual bool init();
 	CREATE_FUNC(TopMenu);
-	void refresh();
+	void refresh(int score);
 	void usePropsBomb();
 	void usePropsTime();
 	void PauseGame();
