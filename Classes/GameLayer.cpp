@@ -11,6 +11,8 @@ bool GameLayer::_PauseTime=false;
 bool GameLayer::needPluse = false;
 bool GameLayer::needRevive =false;
 bool GameLayer::gameOver =false;
+int  GameLayer::totalTime =60;
+
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -48,7 +50,7 @@ void GameLayer::loadGame(float dt){
 
 	initTime();
 	gameTime = Label::create("","Arial",24);
-	gameTime->setPosition(50,visibleSize.height-50);
+	gameTime->setPosition(visibleSize.width/2-180,visibleSize.height-50);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
 
@@ -160,7 +162,7 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
 	50,Point(visibleSize.width,visibleSize.height/2 - 50));
 	this->addChild(leftStarMsg2);*/
-	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(visibleSize.width,visibleSize.height/2 - 50));
+	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
 	this->addChild(msg1);
 	msg1->floatInOut(0.5f,1.0f,
 		[=](){

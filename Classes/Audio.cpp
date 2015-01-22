@@ -11,8 +11,11 @@ Audio* Audio::getInstance(){
 }
 
 void Audio::playBGM(){
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/music.ogg",true);
 	if(GAMEDATA::getInstance()->getMusicState()){
-		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/music.ogg",true);
+		  CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic(); 
+	}else{
+	  CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic(); 
 	}
 }
 

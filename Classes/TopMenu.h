@@ -2,6 +2,7 @@
 #define _TOPMENU_H_
 #include <string>
 #include "cocos2d.h"
+#include "FloatWord.h"
 using namespace cocos2d;
 class TopMenu : public Node{
 public:
@@ -17,8 +18,10 @@ public:
 	void getMusicState(CCObject* pSender);
 	void updatePropsNum();
 	void goBack();
+	void stopScaleAction();
 
 private:
+	static TopMenu* _instance;
 	Label* highestScore;
 	//Label* level;
 	//Label* targetScore;
@@ -26,7 +29,9 @@ private:
 	Layer* gamePause;
 	Label* propBombNum;
 	Label* propTimeNum;
-	static TopMenu* _instance;
+	MenuItemImage* BombBtn;
+	MenuItemImage* TimeBtn;
+	FloatWord* plusTimeWord;
 private:
 	TopMenu();
 

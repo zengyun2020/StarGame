@@ -27,7 +27,6 @@ bool HelloWorld::init()
     {
         return false;
     }
-
     // this->setIsKeypadEnabled(true);
     this->addChild(MenuLayer::create());
     

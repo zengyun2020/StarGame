@@ -65,7 +65,10 @@ void StarMatrix::onTouch(const Point& p){
 	if(s && acceptTouch){
 		clearOneByOne = true;
 		if(BombClick){
-
+			GAMEDATA::getInstance()->setBombNum(GAMEDATA::getInstance()->getBombNum()-1);
+			GAMEDATA::getInstance()->saveBombNum();
+			TopMenu::getInstance()->updatePropsNum();
+			TopMenu::getInstance()->stopScaleAction();
 			useBombAuto(s);
 			BombClick =false;
 			return;

@@ -29,7 +29,7 @@ bool TopMenu::init(){
 		ChineseWord("highestScore") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string,
 		"Verdana-Bold",24
 		);
-	highestScore->setPosition(visibleSize.width/2,visibleSize.height - 50);
+	highestScore->setPosition(visibleSize.width/2,visibleSize.height/2+350);
 	this->addChild(highestScore);
 
 	//level = Label::create(
@@ -52,20 +52,19 @@ bool TopMenu::init(){
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
 		"Verdana-Bold",50	
 		);
-	curScore->setPosition(visibleSize.width/2,visibleSize.height - 100);
+	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
 
 	// ���Ӽ��ܰ���
-	MenuItemImage* BombBtn = MenuItemImage::create(
+	 BombBtn = MenuItemImage::create(
 		"bomb_normal.png","bomb_click.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
-
-	MenuItemImage* TimeBtn = MenuItemImage::create(
+	 TimeBtn = MenuItemImage::create(
 		"time_normal.png","time_click.png",CC_CALLBACK_0(TopMenu::usePropsTime,this)
 		);
 	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
 	menu->alignItemsHorizontally();
-	menu->setPosition(visibleSize.width - 100,visibleSize.height - 100);
+	menu->setPosition(visibleSize.width/2+140,visibleSize.height/2+300);
 	this->addChild(menu);
 
 	// ������ͣ����
@@ -74,21 +73,21 @@ bool TopMenu::init(){
 		);
 	Menu* menuPause = Menu::create(PauseBtn, NULL);
 	menuPause->alignItemsHorizontally();
-	menuPause->setPosition(50,visibleSize.height - 100);
+	menuPause->setPosition(visibleSize.width/2-190,visibleSize.height/2+300);
 	this->addChild(menuPause);
 
 	propBombNum = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string,
 		"Verdana-Bold",18	
 		);
-	propBombNum->setPosition(visibleSize.width-110,visibleSize.height - 120);
+	propBombNum->setPosition(visibleSize.width/2+130,visibleSize.height/2+280);
 	this->addChild(propBombNum);
 
 	propTimeNum = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string,
 		"Verdana-Bold",18	
 		);
-	propTimeNum->setPosition(visibleSize.width-40,visibleSize.height - 120);
+	propTimeNum->setPosition(visibleSize.width/2+200,visibleSize.height/2+280);
 	this->addChild(propTimeNum);
 
 
@@ -115,9 +114,12 @@ void TopMenu::usePropsBomb(){
 	if(num>0){
 		if(!(StarMatrix::BombClick)){
 			StarMatrix::BombClick =true;
-			GAMEDATA::getInstance()->setBombNum(num-1);
-			GAMEDATA::getInstance()->saveBombNum();
-			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string );
+			auto scale1 = ScaleTo::create(1.0f,0.6,0.6,0);
+			auto scale2 = ScaleTo::create(1.0f,1.0,1.0,0);
+			// create the sequence of actions, in the order we want to run them
+			auto seq1 = Sequence::create(scale1, scale2,nullptr);
+			// run the sequence and repeat forever.
+			BombBtn->runAction(RepeatForever::create(seq1));
 		}
 	}else{
 		//弹出支付
@@ -129,14 +131,26 @@ void TopMenu::usePropsBomb(){
 
 }
 
+void TopMenu::stopScaleAction(){
+	BombBtn->setScale(1.0);
+	BombBtn->stopAllActions();
+}
+
+
 void TopMenu::usePropsTime(){
 	auto num =GAMEDATA::getInstance()->getAddTimeNum();
 	if(num>0){
-		if(!(StarMatrix::BombClick)){
-			GameLayer::needPluse =true;  
-			GAMEDATA::getInstance()->setAddTimeNum(num-1);
-			GAMEDATA::getInstance()->saveAddTimeNum();
-			propTimeNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
+		if(!(StarMatrix::BombClick) && GameLayer::totalTime>1){
+			Size visibleSize = Director::getInstance()->getVisibleSize();
+			plusTimeWord =FloatWord::create("+10"+ChineseWord("miao"),10,Point(visibleSize.width/2+200,visibleSize.height/2+280));
+			this->addChild(plusTimeWord);
+			plusTimeWord->floatInTime(0.5,0.5,[=](){
+				GameLayer::needPluse =true;  
+				GAMEDATA::getInstance()->setAddTimeNum(num-1);
+				GAMEDATA::getInstance()->saveAddTimeNum();
+				propTimeNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getAddTimeNum())->_string );
+			});
+			
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -201,7 +215,7 @@ void TopMenu::PauseGame(){
 		);
 	Menu* resumeMenu = Menu::create(exitBtn,soundTog,musicTog,resumeBtn, NULL);
 	resumeMenu->alignItemsHorizontallyWithPadding (50);
-	resumeMenu->setPosition(visibleSize.width/2,150);
+	resumeMenu->setPosition(visibleSize.width/2,visibleSize.height/2-250);
 	gamePause->addChild(resumeMenu,2);
 }
 
