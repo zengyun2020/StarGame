@@ -39,15 +39,11 @@
   <key>mu</key>
   <string>幕</string>
 
-<<<<<<< HEAD
   <key>gameover</key>
   <string>游戏结束</string>
-=======
 
 <key>zhadan</key>
-  <string>炸弹:消除3X3的方块</string>
-
->>>>>>> origin/master
+<string>炸弹:消除3X3的方块</string>
 </dict>
 
 </array>
