@@ -61,35 +61,6 @@ void GameLayer::loadGame(float dt){
 	Audio::getInstance()->playReadyGo();
 }
 
-//void GameLayer::floatLevelWord(){
-//
-//	Size visibleSize = Director::getInstance()->getVisibleSize();
-//	_levelMsg = FloatWord::create(
-//		ChineseWord("guanqia") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextLevel())->_string,
-//		50, Point(visibleSize.width,visibleSize.height/3*2)
-//		);
-//	this->addChild(_levelMsg,1);
-//	_levelMsg->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
-//	Audio::getInstance()->playReadyGo();
-//}
-
-//void GameLayer::floatTargetScoreWord(){
-//	Size visibleSize = Director::getInstance()->getVisibleSize();
-//	_targetScore = FloatWord::create(
-//		ChineseWord("mubiao") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen"),
-//		50, Point(visibleSize.width,visibleSize.height/3)
-//		);
-//	this->addChild(_targetScore,1);
-//	_targetScore->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
-//
-//}
-
-//移除飘字
-//void GameLayer::removeFloatWord(){
-//
-//	_levelMsg->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
-//	//_targetScore->floatOut(0.5f,CC_CALLBACK_0(GameLayer::showStarMatrix,this));
-//}
 
 //显示星星矩阵
 void GameLayer::showStarMatrix(float dt){
@@ -155,13 +126,6 @@ void GameLayer::showGameTime(int time){
 
 void GameLayer::floatLeftStarMsg(int leftNum){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	/*FloatWord* leftStarMsg1 = FloatWord::create(ChineseWord("shengyu") + String::createWithFormat("%d",leftNum)->_string +ChineseWord("ge"), 
-	50,Point(visibleSize.width,visibleSize.height/2));
-	this->addChild(leftStarMsg1);
-	int jiangLiScore = GAMEDATA::getInstance()->getJiangli(leftNum);
-	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
-	50,Point(visibleSize.width,visibleSize.height/2 - 50));
-	this->addChild(leftStarMsg2);*/
 	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
 	this->addChild(msg1);
 	msg1->floatInOut(0.5f,1.0f,
@@ -169,14 +133,12 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 			hideLinkNum();
 			matrix->setNeedClear(true);
 			GAMEDATA* data = GAMEDATA::getInstance();
-			//data->setCurScore(data->getCurScore() + jiangLiScore);
 			data->setCurScore(data->getCurScore());
 			if(data->getCurScore() > data->getHistoryScore()){
 				data->setHistoryScore(data->getCurScore());
 			}
 			refreshMenu();
 	});
-	//leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
 }
 
 
