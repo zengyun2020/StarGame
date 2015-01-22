@@ -15,11 +15,6 @@ bool MenuLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-
-	//注册捕捉监听
-	auto listenerkeyPad = EventListenerKeyboard::create();
-	listenerkeyPad->onKeyReleased = CC_CALLBACK_2(MenuLayer::onKeyReleased, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
 	
 	CSLoader* instance = CSLoader::getInstance();
 	instance->registReaderObject("MenuSceneHandlerReader",(ObjectFactory::Instance)MenuSceneHandlerReader::getInstance);
@@ -67,21 +62,21 @@ bool MenuLayer::init(){
 	this->addChild(musicMenu);
 	this->addChild(soundEffectMenu);
 
-	quitBg = Sprite::create("quit_bg.jpg");
+	quitBg = Sprite::create("quit_bg.png");
 	quitBg->setPosition(240,400);
 	quitBg->setVisible(false);
-	this->addChild(quitBg,3);
+	this->addChild(quitBg);
 
 	quitDesc = Sprite::create("quit_desc.png");
 	quitDesc->setPosition(240,428);
 	quitDesc->setVisible(false);
-	this->addChild(quitDesc,3);
+	this->addChild(quitDesc);
 
 	MenuItemImage* confirmBtn = MenuItemImage::create(
 		"quit_confirm_up.png","quit_confirm_down.png",CC_CALLBACK_0(MenuLayer::quit,this)
 		);
 	confirmMenu = Menu::create(confirmBtn, NULL);
-	confirmMenu->setPosition(164,355);
+	confirmMenu->setPosition(316,355);
 	confirmMenu->setVisible(false);
 	this->addChild(confirmMenu,3);
 
@@ -96,7 +91,7 @@ bool MenuLayer::init(){
 	this->setKeypadEnabled(true);
 	//监听物理按键
 	auto listener = EventListenerKeyboard::create();
-	listener->onKeyReleased = [](EventKeyboard::KeyCode code, Event * e){
+	listener->onKeyReleased = [=](EventKeyboard::KeyCode code, Event * e){
 		switch (code)
 		    {
 		    case cocos2d::EventKeyboard::KeyCode::KEY_NONE:
@@ -114,12 +109,18 @@ bool MenuLayer::init(){
 }
 
 void MenuLayer::startGame(){
+	if(quitBg->isVisible()){
+		return;
+	}
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
 	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
 }
 
 void MenuLayer::showQuit(){
+	if(quitBg->isVisible()){
+		return;
+	}
 	quitBg->setVisible(true);
 	quitDesc->setVisible(true);
 	confirmMenu->setVisible(true);
