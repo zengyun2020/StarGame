@@ -15,9 +15,11 @@ bool GameOverLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-
+	curScore = 10000;
+	scoreNum = 0;
+	animTime = 0;
+	scale = 1;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	score = 0;
 	/*��ʼ������*/
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
@@ -27,51 +29,69 @@ bool GameOverLayer::init(){
 	title->setPosition(240,632);
 	this->addChild(title,0);
 
-	auto score = LabelAtlas::create("2000", "game_result_score_num.png", 39.0f, 69.0f, '0');
-	score->setPosition(Point(217, 400));
-	score->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
-	this->addChild(score);
-	score->setString(cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getCurScore())->_string);
+	labelScore = LabelAtlas::create("2000", "game_result_score_num.png", 39.0f, 69.0f, '0');
+	labelScore->setPosition(Point(248, 400));
+	labelScore->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
+	this->addChild(labelScore);
+	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
 
-	Sprite* currentRoundScore = Sprite::create("game_result_score.png");
-	currentRoundScore->setPosition(400,400);
+	currentRoundScore = Sprite::create("game_result_score.png");
+	currentRoundScore->setPosition(261,382);
+	currentRoundScore->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(currentRoundScore,1);
 
-	auto rankNum = LabelAtlas::create("2000", "game_result_rank_num.png", 19.0f, 33.0f, '0');
-	rankNum->setPosition(Point(317, 324));
+	rankNum = LabelAtlas::create("2000", "game_result_rank_num.png", 19.0f, 33.0f, '0');
+	rank = Sprite::create("game_result_rank.png");
+	rankNumTemp = PLAYERRANK::getInstance()->getRankList(curScore);
+	if(rankNumTemp > 0 && rankNumTemp < 10){
+		rankNum->setPosition(Point(238, 324));
+		rank->setPosition(230,324);
+	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
+		rankNum->setPosition(Point(247.5, 324));
+		rank->setPosition(220.5,324);
+	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
+		rankNum->setPosition(Point(257, 324));
+		rank->setPosition(211,324);
+	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
+		rankNum->setPosition(Point(266.5, 324));
+		rank->setPosition(201.5,324);
+	}else if(rankNumTemp >= 10000 && rankNumTemp < 100000){
+		rankNum->setPosition(Point(276, 324));
+		rank->setPosition(192,324);
+	}
 	rankNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
-	this->addChild(rankNum);
-	rankNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankList(GAMEDATA::getInstance()->getCurScore()))->_string);
+	rankNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankList(curScore))->_string);
 
-	Sprite* rank = Sprite::create("game_result_rank.png");
-	rank->setPosition(200,324);
-	rank->setScale(3.8);
-	rank->runAction(ScaleTo::create(0.5f,1,1,0));
-	this->addChild(rank);
+	beatPer = Sprite::create("game_result_beat.png");
+	beatPer->setPosition(-240,272);
+	beatPer->setAnchorPoint(Point(0.5, 0.5));
 
-	Sprite* beatPer = Sprite::create("game_result_beat.png");
-	beatPer->setPosition(240,272);
-	beatPer->runAction(MoveTo::create(1.8f,Point(240,272)));
-	this->addChild(beatPer);
-
-	auto beatNum = LabelAtlas::create("98635", "game_result_rank_num.png", 19.0f, 33.0f, '0');
-	beatNum->setPosition(Point(230, 272));
+	beatNum = LabelAtlas::create("98635", "game_result_rank_num.png", 19.0f, 33.0f, '0');
+	beatNum->setPosition(Point(-254, 272));
 	beatNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
-    this->addChild(beatNum);
-    beatNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankPer(GAMEDATA::getInstance()->getCurScore()))->_string);
-		
-	MenuItemImage* startBtn = MenuItemImage::create(
+    beatNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankPer(curScore))->_string);
+
+	this->addChild(beatPer);
+	this->addChild(beatNum);
+	this->addChild(rankNum);
+	this->addChild(rank);
+	beatPer->setVisible(false);
+	beatNum->setVisible(false);
+	rankNum->setVisible(false);
+	rank->setVisible(false);
+
+	startBtn = MenuItemImage::create(
 		"game_result_retry_normal.png","game_result_retry_click.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
 		);
 	Menu* menu1 = Menu::create(startBtn,NULL);
-	menu1->setPosition(408,160);
+	menu1->setPosition(72,160);
 	this->addChild(menu1);
 
 	MenuItemImage* backBtn = MenuItemImage::create(
 		"exit_normal.png","exit_click.png",CC_CALLBACK_0(GameOverLayer::back,this)
 		);
 	Menu* menu2 = Menu::create(backBtn,NULL);
-	menu2->setPosition(72,160);
+	menu2->setPosition(408,160);
 	this->addChild(menu2);
 
 	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
@@ -102,7 +122,73 @@ bool GameOverLayer::init(){
 		soundEffectMenu->setPosition(296,160);
 		this->addChild(musicMenu);
 		this->addChild(soundEffectMenu);
+		this->scheduleUpdate();
+		schedule(schedule_selector(GameOverLayer::showRank), 3.2f, 0, 0);
+		schedule(schedule_selector(GameOverLayer::showBeat), 3.4f, 0, 0);
 	return true;
+}
+
+void GameOverLayer::showRank(float dt){
+	rank->setVisible(true);
+	rankNum->setVisible(true);
+	if(rankNumTemp > 0 && rankNumTemp < 10){
+		rankNum->runAction(MoveTo::create(0.5f,Point(238, 324)));
+		rank->runAction(MoveTo::create(0.5f,Point(230,324)));
+	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
+		rankNum->runAction(MoveTo::create(0.5f,Point(247.5, 324)));
+		rank->runAction(MoveTo::create(0.5f,Point(220.5,324)));
+	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
+		rankNum->runAction(MoveTo::create(0.5f,Point(257, 324)));
+		rank->runAction(MoveTo::create(0.5f,Point(211,324)));
+	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
+		rankNum->runAction(MoveTo::create(0.5f,Point(266.5, 324)));
+		rank->runAction(MoveTo::create(0.5f,Point(201.5,324)));
+	}else if(rankNumTemp >= 10000 && rankNumTemp < 100000){
+		rankNum->runAction(MoveTo::create(0.5f,Point(276, 324)));
+		rank->runAction(MoveTo::create(0.5f,Point(192,324)));
+	}
+}
+
+void GameOverLayer::showBeat(float dt){
+	beatNum->setVisible(true);
+	beatPer->setVisible(true);
+	beatPer->runAction(MoveTo::create(0.5f,Point(240,272)));
+	beatNum->runAction(MoveTo::create(0.5f,Point(226,272)));
+}
+
+void GameOverLayer::update(float delta){
+	if(!this->isVisible()){
+		return;
+	}
+	animTime += delta/0.05;
+	scoreNum = animTime/60 * curScore;
+	if(scoreNum > curScore){
+		scoreNum = curScore;
+	}
+	if((int)scoreNum > 0 && (int)scoreNum < 10){
+		labelScore->setPosition(Point(248, 400));
+		currentRoundScore->setPosition(Point(261,392));
+	}else if((int)scoreNum >= 10 && (int)scoreNum < 100){
+		labelScore->setPosition(Point(228, 400));
+		currentRoundScore->setPosition(Point(281,392));
+	}else if((int)scoreNum >= 100 && (int)scoreNum < 1000){
+		labelScore->setPosition(Point(208, 400));
+		currentRoundScore->setPosition(Point(301,392));
+	}else if((int)scoreNum >= 1000 && (int)scoreNum < 10000){
+		labelScore->setPosition(Point(188, 400));
+		currentRoundScore->setPosition(Point(321,392));
+	}else if((int)scoreNum >= 10000 && (int)scoreNum < 100000){
+		labelScore->setPosition(Point(168, 400));
+		currentRoundScore->setPosition(Point(341,392));
+	}
+	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
+	auto animTimeTemp = (int)animTime;
+	if(animTimeTemp/18%2 == 0){
+		scale = 1+0.3*(animTimeTemp%18)/18;
+	}else{
+		scale = 1.3-0.3*(animTimeTemp%18)/18;
+	}
+	startBtn->setScale(scale);
 }
 
 void GameOverLayer::continueGame(){
