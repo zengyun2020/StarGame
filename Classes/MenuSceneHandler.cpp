@@ -36,10 +36,8 @@ void MenuSceneHandler::startGame(cocos2d::Ref* object, cocos2d::ui::Widget::Touc
     CCLOG("startGame");
 	auto layer = MenuLayer::create();
 	if(type == cocos2d::ui::Widget::TouchEventType::BEGAN){
-		layer->stopAction();
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
-		layer->startAction();
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
 		layer->startGame();

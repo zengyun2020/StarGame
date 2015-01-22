@@ -23,6 +23,7 @@ class MenuSceneHandler: public cocos2d::Node, public cocostudio::WidgetCallBackH
         std::vector<std::string> _touchTypes;
         std::string _click;
         std::vector<std::string> _eventTypes;
+        bool hasStartGame;
  };
 #endif
 

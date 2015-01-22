@@ -16,7 +16,7 @@ bool GameOverLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-	curScore = GAMEDATA::getInstance()->getCurScore();
+	curScore = 12229;
 	scoreNum = 0;
 	animTime = 0;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -124,8 +124,8 @@ bool GameOverLayer::init(){
 		this->addChild(musicMenu);
 		this->addChild(soundEffectMenu);
 		this->scheduleUpdate();
-		schedule(schedule_selector(GameOverLayer::showRank), 3.2f, 0, 0);
-		schedule(schedule_selector(GameOverLayer::showBeat), 3.4f, 0, 0);
+		schedule(schedule_selector(GameOverLayer::showRank), 2.2f, 0, 0);
+		schedule(schedule_selector(GameOverLayer::showBeat), 2.4f, 0, 0);
 	return true;
 }
 
@@ -170,20 +170,23 @@ void GameOverLayer::update(float delta){
 		scoreNum = curScore;
 	}
 	if((int)scoreNum > 0 && (int)scoreNum < 10){
-		labelScore->setPosition(Point(190, 400));
-		currentRoundScore->setPosition(Point(261,392));
+		labelScore->setPosition(Point(185, 400));
+		currentRoundScore->setPosition(Point(266,392));
 	}else if((int)scoreNum >= 10 && (int)scoreNum < 100){
-		labelScore->setPosition(Point(198, 400));
+		labelScore->setPosition(Point(178, 400));
 		currentRoundScore->setPosition(Point(281,392));
 	}else if((int)scoreNum >= 100 && (int)scoreNum < 1000){
 		labelScore->setPosition(Point(178, 400));
-		currentRoundScore->setPosition(Point(301,392));
+		currentRoundScore->setPosition(Point(304,392));
 	}else if((int)scoreNum >= 1000 && (int)scoreNum < 10000){
-		labelScore->setPosition(Point(158, 400));
-		currentRoundScore->setPosition(Point(321,392));
+		labelScore->setPosition(Point(180, 400));
+		currentRoundScore->setPosition(Point(330,392));
 	}else if((int)scoreNum >= 10000 && (int)scoreNum < 100000){
-		labelScore->setPosition(Point(138, 400));
-		currentRoundScore->setPosition(Point(341,392));
+		labelScore->setPosition(Point(178, 400));
+		currentRoundScore->setPosition(Point(348,392));
+	}else if((int)scoreNum >= 100000 && (int)scoreNum < 1000000){
+		labelScore->setPosition(Point(183, 400));
+		currentRoundScore->setPosition(Point(363,392));
 	}
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
 //	auto animTimeTemp = (int)animTime;
@@ -200,7 +203,7 @@ void GameOverLayer::update(float delta){
 void GameOverLayer::continueGame(){
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
-	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+	Director::getInstance()->replaceScene(TransitionSlideInL::create(1,GameScene::create()));
 }
 
 void GameOverLayer::back(){

@@ -63,12 +63,12 @@ bool MenuLayer::init(){
 	this->addChild(soundEffectMenu);
 
 	quitBg = Sprite::create("quit_bg.png");
-	quitBg->setPosition(240,400);
+	quitBg->setPosition(240,116);
 	quitBg->setVisible(false);
 	this->addChild(quitBg);
 
 	quitDesc = Sprite::create("quit_desc.png");
-	quitDesc->setPosition(240,428);
+	quitDesc->setPosition(240,144);
 	quitDesc->setVisible(false);
 	this->addChild(quitDesc);
 
@@ -76,7 +76,7 @@ bool MenuLayer::init(){
 		"quit_confirm_up.png","quit_confirm_down.png",CC_CALLBACK_0(MenuLayer::quit,this)
 		);
 	confirmMenu = Menu::create(confirmBtn, NULL);
-	confirmMenu->setPosition(316,355);
+	confirmMenu->setPosition(316,71);
 	confirmMenu->setVisible(false);
 	this->addChild(confirmMenu,3);
 
@@ -84,7 +84,7 @@ bool MenuLayer::init(){
 		"quit_cancel_up.png","quit_cancel_down.png",CC_CALLBACK_0(MenuLayer::cancel,this)
 		);
 	cancelMenu = Menu::create(cancelBtn, NULL);
-	cancelMenu->setPosition(164,355);
+	cancelMenu->setPosition(164,71);
 	cancelMenu->setVisible(false);
 	this->addChild(cancelMenu,3);
 

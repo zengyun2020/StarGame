@@ -161,7 +161,7 @@ void GameLayer::doGameOver(){
 	gameOverWord = FloatWord::create(
 		ChineseWord("gameover"),80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOverWord);
-	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionFade::create(1.0,GameOverScene::create()));});
+	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionSlideInR::create(1.0,GameOverScene::create()));});
 }
 
 void GameLayer::gotoNextLevel(){
@@ -189,7 +189,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 60;
+	GameLayer::totalTime = 10;
 }
 
 int GameLayer::getTime(){
