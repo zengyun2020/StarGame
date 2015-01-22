@@ -56,11 +56,10 @@ bool TopMenu::init(){
 	this->addChild(curScore);
 
 	// ���Ӽ��ܰ���
-	MenuItemImage* BombBtn = MenuItemImage::create(
+	 BombBtn = MenuItemImage::create(
 		"bomb_normal.png","bomb_click.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
-
-	MenuItemImage* TimeBtn = MenuItemImage::create(
+	 TimeBtn = MenuItemImage::create(
 		"time_normal.png","time_click.png",CC_CALLBACK_0(TopMenu::usePropsTime,this)
 		);
 	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
@@ -115,9 +114,12 @@ void TopMenu::usePropsBomb(){
 	if(num>0){
 		if(!(StarMatrix::BombClick)){
 			StarMatrix::BombClick =true;
-			GAMEDATA::getInstance()->setBombNum(num-1);
-			GAMEDATA::getInstance()->saveBombNum();
-			propBombNum->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getBombNum())->_string );
+			auto scale1 = ScaleTo::create(1.0f,0.6,0.6,0);
+			auto scale2 = ScaleTo::create(1.0f,1.0,1.0,0);
+			// create the sequence of actions, in the order we want to run them
+			auto seq1 = Sequence::create(scale1, scale2,nullptr);
+			// run the sequence and repeat forever.
+			BombBtn->runAction(RepeatForever::create(seq1));
 		}
 	}else{
 		//弹出支付
@@ -128,6 +130,12 @@ void TopMenu::usePropsBomb(){
 	}
 
 }
+
+void TopMenu::stopScaleAction(){
+	BombBtn->setScale(1.0);
+	BombBtn->stopAllActions();
+}
+
 
 void TopMenu::usePropsTime(){
 	auto num =GAMEDATA::getInstance()->getAddTimeNum();

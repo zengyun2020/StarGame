@@ -17,8 +17,10 @@ public:
 	void getMusicState(CCObject* pSender);
 	void updatePropsNum();
 	void goBack();
+	void stopScaleAction();
 
 private:
+	static TopMenu* _instance;
 	Label* highestScore;
 	//Label* level;
 	//Label* targetScore;
@@ -26,7 +28,8 @@ private:
 	Layer* gamePause;
 	Label* propBombNum;
 	Label* propTimeNum;
-	static TopMenu* _instance;
+	MenuItemImage* BombBtn;
+	MenuItemImage* TimeBtn;
 private:
 	TopMenu();
 

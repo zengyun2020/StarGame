@@ -113,6 +113,12 @@ void GameLayer::update(float delta){
 		doRevive();
 		needRevive=false;
 	}
+
+	if(StarMatrix::BombClick){
+		string s =  ChineseWord("zhadan");
+		linkNum->setString(s);
+		linkNum->setVisible(true);
+	}
 }
 
 bool GameLayer::onTouchBegan(Touch* touch,Event* event){
