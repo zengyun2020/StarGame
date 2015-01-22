@@ -16,7 +16,7 @@ bool GameOverLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-	curScore = 12229;
+	curScore = GAMEDATA::getInstance()->getCurScore();
 	scoreNum = 0;
 	animTime = 0;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
