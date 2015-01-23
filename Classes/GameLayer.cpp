@@ -18,6 +18,7 @@ bool GameLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
+	TopMenu::getInstance()->cleanScore();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
@@ -113,8 +114,12 @@ void GameLayer::showLinkNum(int size){
 	if(size==0){
 		return;
 	}
+	int result=0;
+	for(int i=0;i<size;i++){
+	   result += 30+i*5;
+	}
 	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") + 
-		String::createWithFormat("%d",size*size*5)->_string + ChineseWord("fen");
+		String::createWithFormat("%d",result)->_string + ChineseWord("fen");
 	linkNum->setString(s);
 	linkNum->setVisible(true);
 }
@@ -169,7 +174,9 @@ void GameLayer::doGameOver(){
 	gameOverWord = FloatWord::create(
 		ChineseWord("gameover"),80,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(gameOverWord);
-	gameOverWord->floatIn(1.0f,[]{Director::getInstance()->replaceScene(TransitionSlideInR::create(1.0,GameOverScene::create()));});
+	gameOverWord->floatIn(1.0f,[]{
+		Director::getInstance()->replaceScene(TransitionSlideInR::create(1.0,GameOverScene::create()));
+	});
 }
 
 void GameLayer::gotoNextLevel(){

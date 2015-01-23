@@ -97,7 +97,7 @@ void TopMenu::cleanScore(){
 	char buf[64];
 	sprintf(buf,"%d",0);
 	curScore->setString(buf);
-
+	highestScore->setString(cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string);
 }
 
 void TopMenu::usePropsBomb(){
