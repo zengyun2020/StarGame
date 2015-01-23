@@ -48,6 +48,18 @@
 <key>shijian</key>
 <string>时间增加10秒</string>
 
+<key>dengji</key>
+<string>等级</string>
+
+<key>jindu</key>
+<string>进度</string>
+
+<key>jiacheng</key>
+<string>得分加成</string>
+
+<key>jinbei</key>
+<string>金币</string>
+
 </dict>
 
 </array>

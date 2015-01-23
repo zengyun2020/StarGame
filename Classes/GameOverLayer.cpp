@@ -30,13 +30,13 @@ bool GameOverLayer::init(){
 	this->addChild(title,0);
 
 	labelScore = LabelAtlas::create("2000", "game_result_score_num.png", 39.0f, 69.0f, '0');
-	labelScore->setPosition(Point(218, 400));
+	labelScore->setPosition(Point(185, 400));
 	labelScore->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
 	this->addChild(labelScore);
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
 
 	currentRoundScore = Sprite::create("game_result_score.png");
-	currentRoundScore->setPosition(261,382);
+	currentRoundScore->setPosition(266,382);
 	currentRoundScore->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(currentRoundScore,1);
 
@@ -44,7 +44,7 @@ bool GameOverLayer::init(){
 	rank = Sprite::create("game_result_rank.png");
 	rankNumTemp = PLAYERRANK::getInstance()->getRankList(curScore);
 	if(rankNumTemp > 0 && rankNumTemp < 10){
-		rankNum->setPosition(Point(238-480, 309));
+		rankNum->setPosition(Point(241-480, 309));
 		rank->setPosition(230-480,309);
 	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
 		rankNum->setPosition(Point(247.5-480, 309));
@@ -133,7 +133,7 @@ void GameOverLayer::showRank(float dt){
 	rank->setVisible(true);
 	rankNum->setVisible(true);
 	if(rankNumTemp > 0 && rankNumTemp < 10){
-		rankNum->runAction(MoveTo::create(0.5f,Point(238, 309)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(241,309)));
 		rank->runAction(MoveTo::create(0.5f,Point(230,309)));
 	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
 		rankNum->runAction(MoveTo::create(0.5f,Point(247.5, 309)));
@@ -154,7 +154,21 @@ void GameOverLayer::showBeat(float dt){
 	beatNum->setVisible(true);
 	beatPer->setVisible(true);
 	beatPer->runAction(MoveTo::create(0.5f,Point(240,256)));
-	beatNum->runAction(MoveTo::create(0.5f,Point(226,256)));
+	beatNum->runAction(MoveTo::create(0.5f,Point(226,256)));	
+
+	int curExpNum = GAMEDATA::getInstance()->getCurExpNum();
+	CCLog("curExpNum=%d",curExpNum);
+	int level = GAMEDATA::getInstance()->getUserLevel();
+	if(curExpNum+1 == GAMEDATA::getInstance()->getFullExpNum(level)){
+		GAMEDATA::getInstance()->setUserLevel(level+1);
+		GAMEDATA::getInstance()->saveUserLevel();
+		GAMEDATA::getInstance()->setCurExpNum(0);
+	}else{
+		GAMEDATA::getInstance()->setCurExpNum(curExpNum+1);
+	}
+	GAMEDATA::getInstance()->saveCurExpNum();
+	GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+20);
+	GAMEDATA::getInstance()->saveGoldNum();
 }
 
 void GameOverLayer::update(float delta){

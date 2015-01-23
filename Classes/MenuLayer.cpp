@@ -8,6 +8,9 @@
 #include "MenuSceneHandlerReader.h"
 #include "MenuScenePayHandler.h"
 #include "SimpleAudioEngine.h"
+#include "Chinese.h"
+#include "GameData.h"
+#include "CallAndroidMethod.h"
 
 using namespace cocostudio::timeline;
 
@@ -32,6 +35,36 @@ bool MenuLayer::init(){
 	ParticleSnow* effect = ParticleSnow::create();
 	effect->setTotalParticles(100);
 	rootNode->addChild(effect);
+
+	int level = GAMEDATA::getInstance()->getUserLevel();
+	auto userLevel = Label::create(ChineseWord("dengji")+":"
+		+String::createWithFormat("%d",level)->_string,"Arial",24);
+	userLevel->setPosition(30,780);
+	userLevel->setAnchorPoint(Point(0,0.5));
+	this->addChild(userLevel);
+
+	auto per = Label::create(ChineseWord("jindu")+":"
+		+String::createWithFormat("%d",
+		(int)((float)GAMEDATA::getInstance()->getCurExpNum()/GAMEDATA::getInstance()->getFullExpNum(level)*100))->_string
+		+"%","Arial",24);
+	per->setPosition(160,780);
+	per->setAnchorPoint(Point(0, 0.5));
+	this->addChild(per);
+
+	auto scoreAdd = Label::create(ChineseWord("jiacheng")+":"
+		+String::createWithFormat("%d",
+		(int)(GAMEDATA::getInstance()->getScoreAddPer(level)*100))->_string
+		+"%","Arial",24);
+	scoreAdd->setPosition(30,750);
+	scoreAdd->setAnchorPoint(Point(0, 0.5));
+	this->addChild(scoreAdd);
+
+	auto gold = Label::create(ChineseWord("jinbei")+":"
+		+String::createWithFormat("%d",
+		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
+	gold->setPosition(30,720);
+	gold->setAnchorPoint(Point(0, 0.5));
+	this->addChild(gold);
 
 	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
 	MenuItemImage* musicBtnOff = MenuItemImage::create("bg_music_close.png","bg_music_close.png");
@@ -129,6 +162,9 @@ void MenuLayer::showQuit(){
 
 void MenuLayer::quit(){
 	Audio::getInstance()->playClick();
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->startNativeNotify();
+    #endif
 	Director::getInstance()->end();
 }
 

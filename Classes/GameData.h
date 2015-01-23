@@ -49,8 +49,17 @@ public:
 	inline void setMusicState(bool musicstate){music_state = musicstate;}
 	inline bool getMusicState(){return music_state;}
 
+	inline void setCurExpNum(int curExpNum){cur_exp_num = curExpNum;}
+	inline int getCurExpNum(){return cur_exp_num;}	 
+
 	/*奖励分数*/
 	int getJiangli(int size);
+
+	/*获取当前升级的经验值*/
+	int getFullExpNum(int userLevel);
+
+	/*获取玩家得分加成*/
+	float getScoreAddPer(int userLevel);
 
 	void saveHighestScore();
 	void saveGoldNum();
@@ -63,6 +72,8 @@ public:
 	void saveShowRegisterPay();
 	void saveSoundEffect();
 	void saveMusicState();
+	void saveCurExpNum();
+
 private:
 	GAMEDATA();
 	void init();
@@ -83,6 +94,8 @@ private:
 	bool music_state;
 	int revive_num;
 	bool show_register_pay;
+	int cur_exp_num;
+	float score_add_per;
 	friend class MenuLayer;
 	friend class GameOverLayer;
 };

@@ -17,7 +17,7 @@ void GAMEDATA::init(){
 	setCurScore(0);
 	setHistoryScore(UserDefault::getInstance()->getIntegerForKey("highestScore",0));
 	setUserLevel(UserDefault::getInstance()->getIntegerForKey("userLevel",0));
-	setGoldNum(UserDefault::getInstance()->getIntegerForKey("goldNum",0));
+	setGoldNum(UserDefault::getInstance()->getIntegerForKey("goldNum",3000));
 	setPowerStoneNum(UserDefault::getInstance()->getIntegerForKey("powerStoneNum",0));
 	setPrizeTimes(UserDefault::getInstance()->getIntegerForKey("prizeTimes",3));
 	setAddTimeNum(UserDefault::getInstance()->getIntegerForKey("addTimeNum",1));
@@ -26,6 +26,7 @@ void GAMEDATA::init(){
 	setHasShowRegisterPay(UserDefault::getInstance()->getBoolForKey("showRegisterPay",false));
 	setSoundEffect(UserDefault::getInstance()->getBoolForKey("soundEffect",true));
 	setMusicState(UserDefault::getInstance()->getBoolForKey("musicState",true));
+	setCurExpNum(UserDefault::getInstance()->getIntegerForKey("curExpNum",0));
 }
 
 void GAMEDATA::setCurLevel(int level){
@@ -78,6 +79,14 @@ int GAMEDATA::getJiangli(int size){
 	return jiangli[size][1];
 }
 
+int GAMEDATA::getFullExpNum(int userLevel){
+	return userLevel+(userLevel/10)*1+1;
+}
+
+float GAMEDATA::getScoreAddPer(int userLevel){
+	return userLevel*0.01;
+}
+
 
 void GAMEDATA::saveHighestScore(){
 	UserDefault::getInstance()->setIntegerForKey("highestScore",getHistoryScore());
@@ -120,4 +129,8 @@ void GAMEDATA::saveSoundEffect(){
 
 void GAMEDATA::saveMusicState(){
 	UserDefault::getInstance()->setBoolForKey("musicState", getMusicState());
+}
+
+void GAMEDATA::saveCurExpNum(){
+	UserDefault::getInstance()->setIntegerForKey("curExpNum", getCurExpNum());
 }

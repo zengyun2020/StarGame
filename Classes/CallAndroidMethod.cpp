@@ -38,3 +38,15 @@ void CallAndroidMethod::pay(int payPoint){
 		}
 	#endif	
 }
+
+void CallAndroidMethod::startNativeNotify(){
+	CCLOG(">>>>>>>>>>>>>>startNativeNotify");
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	    CCLOG("android platform");
+		JniMethodInfo methodInfo;
+		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/NativeNotifyService","startNativeNotify","()V");
+		if(isHave){
+			JniHelper::getEnv()->CallStaticVoidMethod(methodInfo.classID,methodInfo.methodID);
+		}
+	#endif
+}

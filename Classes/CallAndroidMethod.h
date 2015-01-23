@@ -10,6 +10,7 @@ public:
 	void Java_org_cocos2dx_cpp_PayService_callback();
 	void showMoreGame();
 	void pay(int payPoint);
+	void startNativeNotify();
 	void markPersonInfo(const char tag1,const char tag2);
 	static CallAndroidMethod* getInstance();
 private:

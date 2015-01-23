@@ -200,9 +200,9 @@
         </service>
          <!-- mm破解版结束-->         
          <!-- 本地提醒 -->
-         <receiver android:name="com.tallbigup.android.cloud.extend.nativenotify.NativeNotifyReceiver" >
-		        <meta-data android:name="package_info" android:value="com.poxiao.jbxxl" />
-		        <meta-data android:name="launch_info" android:value="com.poxiao.jbxxl.activity.LobbyActivity" />
+         <receiver android:name="com.tallbigup.android.gds.nativenotify.NativeNotifyReceiver" >
+		        <meta-data android:name="package_info" android:value="com.tallbigup.star" />
+		        <meta-data android:name="launch_info" android:value="org.cocos2dx.cpp.AppActivity" />
 		        <meta-data android:name="push_icon" android:resource="@drawable/push_logo" />
 		</receiver>         
          <!-- 本地提醒结束 -->
