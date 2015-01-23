@@ -57,7 +57,7 @@ void FloatWord::floatInOut(const float speed,const float delayTime,std::function
 
 void FloatWord::floatInTime(const float speed,const float delayTime,std::function<void()> callback){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	auto scale =ScaleTo::create(0.5,1.5);
+	auto scale =ScaleTo::create(0.5,2.0);
 	MoveTo* moveIn = MoveTo::create(speed,Point(visibleSize.width/2-180,visibleSize.height/2+350));
 	CallFunc* removeC = CallFunc::create([this](){
 		this->removeFromParentAndCleanup(true);

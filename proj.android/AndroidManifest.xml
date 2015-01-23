@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.tallbigup.star"
-      android:versionCode="1"
-      android:versionName="1.0"
+      android:versionCode="2"
+      android:versionName="1.0.1"
       android:installLocation="auto">
 
     <uses-sdk android:minSdkVersion="9"/>
@@ -206,40 +206,6 @@
 		        <meta-data android:name="push_icon" android:resource="@drawable/push_logo" />
 		</receiver>         
          <!-- 本地提醒结束 -->
-         <!-- sky push -->
-         <activity android:name="com.skymobi.pay.sprpush.sdk.SkyPushActivity" />
-         <receiver android:name="com.skymobi.pay.sprpush.sdk.util.PushReceiver" 
-		    android:exported="false" >
-		    <intent-filter>
-		        <action android:name="PushAlarmManager_Action" />
-		        <action android:name="PushNotifyManager_Action" />
-		        <action android:name="PushDownSuccess_Action" />
-		        <action android:name="Action_from_selfalrm" />
-		        <action android:name="Action_reload_pushplugin" />
-		        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-		        <action android:name="android.intent.action.USER_PRESENT" />
-		    </intent-filter>
-		    <!-- 此处必须分开写， android:scheme="package" 会影响到其他的action -->
-		    <intent-filter>
-		        <action android:name="android.intent.action.PACKAGE_ADDED" />
-		        <data android:scheme="package"/>
-		    </intent-filter>
-		</receiver>
-         
-         <!-- 商户号 -->
-        <meta-data
-            android:name="Spr_MerchantId"
-            android:value="10008" />
-        <!-- 应用ID -->
-        <meta-data
-            android:name="Spr_AppId"
-            android:value="8000009" />
-        <!-- 渠道号 -->
-        <meta-data
-            android:name="Spr_ChannelId"
-            android:value="daiji_1000" />
-         
-         <!-- sky push end -->
     </application>
 
     <supports-screens android:anyDensity="true"

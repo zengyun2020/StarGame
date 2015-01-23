@@ -23,11 +23,11 @@ bool GameLayer::init(){
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
 		
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
-		GameLayer::_PauseTime=true;
-		CallAndroidMethod::getInstance()->pay(1);}
-#endif
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+//	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
+//		GameLayer::_PauseTime=true;
+//		CallAndroidMethod::getInstance()->pay(1);}
+//#endif
 	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
 	return true;
 }
@@ -71,6 +71,8 @@ void GameLayer::showStarMatrix(float dt){
 //更新方法，scheduleUpdate,每帧调用
 void GameLayer::update(float delta){
 	if(needPluse){
+		linkNum->setString(ChineseWord("shijian"));
+						linkNum->setVisible(true);
 		plusTime(10);
 		needPluse =false;
 	}
@@ -86,7 +88,12 @@ void GameLayer::update(float delta){
 		doRevive();
 		needRevive=false;
 	}
+	if(StarMatrix::BombClick){
+		linkNum->setString(ChineseWord("zhadan"));
+		linkNum->setVisible(true);
+	}
 }
+
 
 bool GameLayer::onTouchBegan(Touch* touch,Event* event){
 	Point p = touch->getLocationInView();
@@ -118,6 +125,7 @@ void GameLayer::showEveryScore(int score,int index,Point point){
 	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,-20*index));
 	this->addChild(everyScore);
 	everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),[=](){
+		Audio::getInstance()->playScore();
 		this->refreshMenu(score);
 	});
 }
@@ -210,7 +218,7 @@ void GameLayer::updateCustom(float dt){
 		totalTime--;
 	}
 
-	if(totalTime<=5){
+	if(totalTime<=5 && totalTime>=0){
 		Audio::getInstance()->playBeep();//倒计时报警
 	}
 	if(totalTime == 0){

@@ -44,6 +44,10 @@
 
 <key>zhadan</key>
 <string>炸弹:消除3X3的方块</string>
+
+<key>shijian</key>
+<string>时间增加10秒</string>
+
 </dict>
 
 </array>

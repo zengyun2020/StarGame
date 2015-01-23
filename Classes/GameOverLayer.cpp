@@ -50,7 +50,7 @@ bool GameOverLayer::init(){
 		rankNum->setPosition(Point(247.5-480, 309));
 		rank->setPosition(220.5-480,309);
 	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
-		rankNum->setPosition(Point(257-480, 309));
+		rankNum->setPosition(Point(262-480, 309));
 		rank->setPosition(211-480,309);
 	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
 		rankNum->setPosition(Point(266.5-480, 309));
@@ -139,7 +139,7 @@ void GameOverLayer::showRank(float dt){
 		rankNum->runAction(MoveTo::create(0.5f,Point(247.5, 309)));
 		rank->runAction(MoveTo::create(0.5f,Point(220.5,309)));
 	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
-		rankNum->runAction(MoveTo::create(0.5f,Point(257, 309)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(262, 309)));
 		rank->runAction(MoveTo::create(0.5f,Point(211,309)));
 	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
 		rankNum->runAction(MoveTo::create(0.5f,Point(266.5, 309)));
