@@ -64,6 +64,9 @@ public:
 	/*��ȡ��ҵ÷ּӳ�*/
 	float getScoreAddPer(int userLevel);
 
+	/*获取升级奖励金币数量*/
+	int getUpgradePrizeNum(int urserLevel);
+
 	void saveHighestScore();
 	void saveGoldNum();
 	void savePowerStoneNum();

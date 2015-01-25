@@ -2,6 +2,7 @@
 #define _MENULAYER_H_
 
 #include "cocos2d.h"
+#include "SignIn.h"
 
 using namespace cocos2d;
 
@@ -25,6 +26,6 @@ private:
 	Sprite* quitDesc;
 	Menu* confirmMenu;
 	Menu* cancelMenu;
-	bool isSignIn;
+	SignIn* signIn;
 };
 #endif

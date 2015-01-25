@@ -88,6 +88,10 @@ float GAMEDATA::getScoreAddPer(int userLevel){
 	return userLevel*0.01;
 }
 
+int GAMEDATA::getUpgradePrizeNum(int userLevel){
+	return (userLevel/10+1)*1000;
+}
+
 
 void GAMEDATA::saveHighestScore(){
 	UserDefault::getInstance()->setIntegerForKey("highestScore",getHistoryScore());

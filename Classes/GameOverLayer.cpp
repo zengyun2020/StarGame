@@ -203,27 +203,36 @@ void GameOverLayer::update(float delta){
 		int curExpNum = GAMEDATA::getInstance()->getCurExpNum();
 		CCLog("curExpNum=%d",curExpNum);
 		int level = GAMEDATA::getInstance()->getUserLevel();
+		int upgradePrizeGoldNum = 0;
 		if(curExpNum+1 == GAMEDATA::getInstance()->getFullExpNum(level)){
+			upgradePrizeGoldNum = GAMEDATA::getInstance()->getUpgradePrizeNum(level);
 			GAMEDATA::getInstance()->setUserLevel(level+1);
 			GAMEDATA::getInstance()->saveUserLevel();
 			GAMEDATA::getInstance()->setCurExpNum(0);
+
+			upgrade->setVisible(true);
 		}else{
 			GAMEDATA::getInstance()->setCurExpNum(curExpNum+1);
 		}
 		GAMEDATA::getInstance()->saveCurExpNum();
-		GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+20);
+		GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+GAMEDATA::getInstance()->getPrizeGoldNum()+upgradePrizeGoldNum);
 		GAMEDATA::getInstance()->saveGoldNum();
-		upgrade->setVisible(true);
 	}
 }
 
 void GameOverLayer::continueGame(){
+	if(upgrade->isVisible()){
+		return;
+	}
 	Audio::getInstance()->playClick();
 	GAMEDATA::getInstance()->init();
 	Director::getInstance()->replaceScene(TransitionSlideInL::create(1,GameScene::create()));
 }
 
 void GameOverLayer::back(){
+	if(upgrade->isVisible()){
+		return;
+	}
 	Audio::getInstance()->playClick();
 	Director::getInstance()->replaceScene(TransitionFade::create(1,HelloWorld::createScene()));
 }
@@ -269,4 +278,3 @@ void GameOverLayer::getMusicState(CCObject* pSender){
         GAMEDATA::getInstance()->saveMusicState();
     }
 }
-

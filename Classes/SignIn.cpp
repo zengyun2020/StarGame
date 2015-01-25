@@ -171,6 +171,7 @@ bool SignIn::init(){
 }
 
 void SignIn::hideSelf(){
+	this->setVisible(false);
 	this->removeFromParentAndCleanup(true);
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		CallAndroidMethod::getInstance()->sign();

@@ -93,14 +93,6 @@ bool MenuLayer::init(){
 	goldBuy->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(goldBuy);
 
-//	auto scoreAdd = Label::create(ChineseWord("jiacheng")+":"
-//		+String::createWithFormat("%d",
-//		(int)(GAMEDATA::getInstance()->getScoreAddPer(level)*100))->_string
-//		+"%","Arial",24);
-//	scoreAdd->setPosition(30,750);
-//	scoreAdd->setAnchorPoint(Point(0, 0.5));
-//	this->addChild(scoreAdd);
-
 	auto gold = Label::create(String::createWithFormat("%d",
 		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
 	gold->setPosition(252,749);
@@ -180,12 +172,14 @@ bool MenuLayer::init(){
 
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
+	signIn = SignIn::getInstance();
+	signIn->setVisible(false);
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		if(CallAndroidMethod::getInstance()->isSignToday()){
 			CCLOG("result:%d",2);
 		}else{
 			CCLOG("result:%d",1);
-			auto signIn = SignIn::getInstance();
+			signIn->setVisible(true);
 			this->addChild(signIn,5);
 		}
     #endif
@@ -194,7 +188,7 @@ bool MenuLayer::init(){
 }
 
 void MenuLayer::startGame(){
-	if(quitBg->isVisible()){
+	if(signIn->isVisible()){
 		return;
 	}
 	Audio::getInstance()->playClick();
@@ -203,9 +197,6 @@ void MenuLayer::startGame(){
 }
 
 void MenuLayer::showQuit(){
-	if(quitBg->isVisible()){
-		return;
-	}
 	quitBg->setVisible(true);
 	quitDesc->setVisible(true);
 	confirmMenu->setVisible(true);

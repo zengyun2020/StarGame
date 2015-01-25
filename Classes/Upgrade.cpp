@@ -68,5 +68,6 @@ bool Upgrade::init(){
 }
 
 void Upgrade::hideSelf(){
+	this->setVisible(false);
 	this->removeFromParentAndCleanup(true);
 }
