@@ -67,6 +67,7 @@ void GameLayer::loadGame(float dt){
 void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
+    GameLayer::_PauseTime=false;//resume time
 }
 
 //更新方法，scheduleUpdate,每帧调用
@@ -149,6 +150,28 @@ void GameLayer::showGameTime(int time){
 
 void GameLayer::floatLeftStarMsg(int leftNum){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
+	FloatWord* leftStarMsg1 = FloatWord::create(ChineseWord("shengyu") + String::createWithFormat("%d",leftNum)->_string +ChineseWord("ge"), 
+		50,Point(visibleSize.width,visibleSize.height/2));
+	this->addChild(leftStarMsg1);
+	int jiangLiScore = GAMEDATA::getInstance()->getJiangli(leftNum);
+	leftStarMsg1->floatInOut(0.5f,1.0f,
+				[=](){
+					hideLinkNum();
+					matrix->setNeedClear(true);
+					GAMEDATA* data = GAMEDATA::getInstance();
+					data->setCurScore(data->getCurScore() + jiangLiScore);
+					if(data->getCurScore() > data->getHistoryScore()){
+						data->setHistoryScore(data->getCurScore());
+					}
+					refreshMenu(0);
+				});
+	if(leftNum<10){
+	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
+		50,Point(visibleSize.width,visibleSize.height/2 - 50));
+	this->addChild(leftStarMsg2);
+	leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
+	} 
+	/*Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
 	this->addChild(msg1);
 	msg1->floatInOut(0.5f,1.0f,
@@ -161,7 +184,7 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 				data->setHistoryScore(data->getCurScore());
 			}
 			refreshMenu(0);
-	});
+	});*/
 }
 
 

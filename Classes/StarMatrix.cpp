@@ -253,6 +253,7 @@ void StarMatrix::deleteSelectedList(){
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
+		GameLayer::_PauseTime=true;// pause time
 		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 		CCLOG("ENDED");
 	}
@@ -378,6 +379,7 @@ void StarMatrix::clearMatrixOneByOne(){
 	}
 	//能够执行到这一句说明Matrix全为空，不在需要清空
 	needClear = false;
+	GameLayer::_PauseTime=false;
 	//转到下一关
 	GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
 	m_layer->gotoNextLevel();
