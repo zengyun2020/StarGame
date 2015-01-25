@@ -63,6 +63,7 @@ bool CallAndroidMethod::isSignToday(){
 			return false;
 		}
 	#endif
+		return false;
 }
 
 int CallAndroidMethod::getCurrentSignDayas(){
@@ -77,6 +78,7 @@ int CallAndroidMethod::getCurrentSignDayas(){
 			return 0;
 		}
 	#endif
+		return 0;
 }
 
 void CallAndroidMethod::sign(){
