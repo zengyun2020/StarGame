@@ -201,7 +201,7 @@ void GameOverLayer::update(float delta){
 	if(animTime > 70 && !hasShowUpgrade){
 		hasShowUpgrade = true;
 		int curExpNum = GAMEDATA::getInstance()->getCurExpNum();
-		CCLog("curExpNum=%d",curExpNum);
+		CCLOG("curExpNum=%d",curExpNum);
 		int level = GAMEDATA::getInstance()->getUserLevel();
 		int upgradePrizeGoldNum = 0;
 		if(curExpNum+1 == GAMEDATA::getInstance()->getFullExpNum(level)){
