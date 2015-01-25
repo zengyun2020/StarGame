@@ -9,6 +9,7 @@
 #include "PlayerRank.h"
 #include "SimpleAudioEngine.h"
 #include "Audio.h"
+#include "Upgrade.h"
 
 using namespace cocos2d;
 
@@ -126,6 +127,10 @@ bool GameOverLayer::init(){
 		this->scheduleUpdate();
 		schedule(schedule_selector(GameOverLayer::showRank), 2.2f, 0, 0);
 		schedule(schedule_selector(GameOverLayer::showBeat), 2.4f, 0, 0);
+
+		upgrade = Upgrade::getInstance();
+		this->addChild(upgrade);
+		upgrade->setVisible(false);
 	return true;
 }
 
@@ -154,21 +159,7 @@ void GameOverLayer::showBeat(float dt){
 	beatNum->setVisible(true);
 	beatPer->setVisible(true);
 	beatPer->runAction(MoveTo::create(0.5f,Point(240,256)));
-	beatNum->runAction(MoveTo::create(0.5f,Point(226,256)));	
-
-	int curExpNum = GAMEDATA::getInstance()->getCurExpNum();
-	CCLog("curExpNum=%d",curExpNum);
-	int level = GAMEDATA::getInstance()->getUserLevel();
-	if(curExpNum+1 == GAMEDATA::getInstance()->getFullExpNum(level)){
-		GAMEDATA::getInstance()->setUserLevel(level+1);
-		GAMEDATA::getInstance()->saveUserLevel();
-		GAMEDATA::getInstance()->setCurExpNum(0);
-	}else{
-		GAMEDATA::getInstance()->setCurExpNum(curExpNum+1);
-	}
-	GAMEDATA::getInstance()->saveCurExpNum();
-	GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+20);
-	GAMEDATA::getInstance()->saveGoldNum();
+	beatNum->runAction(MoveTo::create(0.5f,Point(226,256)));
 }
 
 void GameOverLayer::update(float delta){
@@ -203,15 +194,27 @@ void GameOverLayer::update(float delta){
 		currentRoundScore->setPosition(Point(363,392));
 	}
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
-//	auto animTimeTemp = (int)animTime;
-//	if(animTimeTemp/18%2 == 0){
-//		scale = 1+0.3*(animTimeTemp%18)/18;
-//	}else{
-//		scale = 1.3-0.3*(animTimeTemp%18)/18;
-//	}
-//	startBtn->setScale(scale);
+
 	rotation = 360*animTime/60;
 	startBtn->setRotation(rotation);
+
+	if(animTime > 70 && !hasShowUpgrade){
+		hasShowUpgrade = true;
+		int curExpNum = GAMEDATA::getInstance()->getCurExpNum();
+		CCLog("curExpNum=%d",curExpNum);
+		int level = GAMEDATA::getInstance()->getUserLevel();
+		if(curExpNum+1 == GAMEDATA::getInstance()->getFullExpNum(level)){
+			GAMEDATA::getInstance()->setUserLevel(level+1);
+			GAMEDATA::getInstance()->saveUserLevel();
+			GAMEDATA::getInstance()->setCurExpNum(0);
+		}else{
+			GAMEDATA::getInstance()->setCurExpNum(curExpNum+1);
+		}
+		GAMEDATA::getInstance()->saveCurExpNum();
+		GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+20);
+		GAMEDATA::getInstance()->saveGoldNum();
+		upgrade->setVisible(true);
+	}
 }
 
 void GameOverLayer::continueGame(){

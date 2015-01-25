@@ -141,6 +141,8 @@ set(GAME_SRC
   Classes/CallAndroidMethod.cpp
   Classes/MenuScenePayHandler.cpp
   Classes/GamePauseLayer.cpp
+  Classes/SignIn.cpp
+  Classes/Upgrade.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -172,6 +174,8 @@ set(GAME_HEADERS
   Classes/CallAndroidMethod.h
   Classes/MenuScenePayHandler.h
   Classes/GamePauseLayer.h
+  Classes/SignIn.h
+  Classes/Upgrade.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

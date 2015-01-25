@@ -17,6 +17,7 @@ public:
 	void quit();
 	void cancel();
 	void showQuit();
+	void setSignIn(bool signIn);
 private:
 	Menu* menuBgMusic;
 	Menu* menuSoundEffect;
@@ -24,5 +25,6 @@ private:
 	Sprite* quitDesc;
 	Menu* confirmMenu;
 	Menu* cancelMenu;
+	bool isSignIn;
 };
 #endif

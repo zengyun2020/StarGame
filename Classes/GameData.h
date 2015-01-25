@@ -4,30 +4,30 @@
 class GAMEDATA{
 public:
 	static GAMEDATA* getInstance();
-	/*µ±Ç°µÈ¼¶*/
+	/*ï¿½ï¿½Ç°ï¿½È¼ï¿½*/
 	void setCurLevel(int level);
 	inline int getCurLevel(){return cur_level;}
-	/*ÏÂÒ»µÈ¼¶*/
+	/*ï¿½ï¿½Ò»ï¿½È¼ï¿½*/
 	inline int getNextLevel(){return next_level;}
-	/*×î¸ß·Ö*/
+	/*ï¿½ï¿½ß·ï¿½*/
 	inline void setHistoryScore(int score){history_score = score;}
 	inline int getHistoryScore(){return history_score;}
-	/*µ±Ç°·ÖÊý*/
+	/*ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½*/
 	inline void setCurScore(int score){cur_score = score;}
 	inline int getCurScore(){return cur_score;}
-	/*Í¨¹Ø·ÖÊý*/
+	/*Í¨ï¿½Ø·ï¿½ï¿½ï¿½*/
 	inline int getNextScore(){return next_score;}
 	inline int getScoreByLevel(int level);
-	/*½ð±ÒÊýÁ¿*/
+	/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	inline void setGoldNum(int goldNum){gold_num = goldNum;}
 	inline int getGoldNum(){return gold_num;}
-	/*ÄÜÁ¿Ê¯ÊýÁ¿*/
+	/*ï¿½ï¿½ï¿½ï¿½Ê¯ï¿½ï¿½ï¿½ï¿½*/
 	inline void setPowerStoneNum(int powerStoneNum){power_stone_num = powerStoneNum;}
 	inline int getPowerStoneNum(){return power_stone_num;}
-	/*Íæ¼ÒµÈ¼¶*/
+	/*ï¿½ï¿½ÒµÈ¼ï¿½*/
 	inline void setUserLevel(int userLevel){user_level = userLevel;}
 	inline int getUserLevel(){return user_level;}
-	/*Ê£Óà³é½±´ÎÊý*/
+	/*Ê£ï¿½ï¿½é½±ï¿½ï¿½ï¿½ï¿½*/
 	inline void setPrizeTimes(int prizeTimes){prize_times = prizeTimes;}
 	inline int getPrizeTimes(){return prize_times;}
 
@@ -52,13 +52,16 @@ public:
 	inline void setCurExpNum(int curExpNum){cur_exp_num = curExpNum;}
 	inline int getCurExpNum(){return cur_exp_num;}	 
 
-	/*½±Àø·ÖÊý*/
+	inline void setPrizeGoldNum(int prizeGoldNum){prize_gold_num = prizeGoldNum;}
+	inline int getPrizeGoldNum(){return prize_gold_num;}
+
+	/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	int getJiangli(int size);
 
-	/*»ñÈ¡µ±Ç°Éý¼¶µÄ¾­ÑéÖµ*/
+	/*ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½Öµ*/
 	int getFullExpNum(int userLevel);
 
-	/*»ñÈ¡Íæ¼ÒµÃ·Ö¼Ó³É*/
+	/*ï¿½ï¿½È¡ï¿½ï¿½ÒµÃ·Ö¼Ó³ï¿½*/
 	float getScoreAddPer(int userLevel);
 
 	void saveHighestScore();
@@ -73,6 +76,7 @@ public:
 	void saveSoundEffect();
 	void saveMusicState();
 	void saveCurExpNum();
+	void savePrizeGoldNum();
 
 private:
 	GAMEDATA();
@@ -96,6 +100,7 @@ private:
 	bool show_register_pay;
 	int cur_exp_num;
 	float score_add_per;
+	int prize_gold_num;
 	friend class MenuLayer;
 	friend class GameOverLayer;
 };

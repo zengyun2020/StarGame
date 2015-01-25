@@ -11,6 +11,7 @@
 #include "Chinese.h"
 #include "GameData.h"
 #include "CallAndroidMethod.h"
+#include "SignIn.h"
 
 using namespace cocostudio::timeline;
 
@@ -36,33 +37,73 @@ bool MenuLayer::init(){
 	effect->setTotalParticles(100);
 	rootNode->addChild(effect);
 
+	auto playerIcon = Sprite::create("player_icon.png");
+	playerIcon->setPosition(51,756);
+	playerIcon->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(playerIcon);
+
 	int level = GAMEDATA::getInstance()->getUserLevel();
-	auto userLevel = Label::create(ChineseWord("dengji")+":"
-		+String::createWithFormat("%d",level)->_string,"Arial",24);
-	userLevel->setPosition(30,780);
+	auto userLevel = Label::create("LV "
+		+String::createWithFormat("%d",level)->_string,"Arial",36);
+	userLevel->setColor(ccc3(233, 168, 16));
+	userLevel->setPosition(103,770);
 	userLevel->setAnchorPoint(Point(0,0.5));
 	this->addChild(userLevel);
 
-	auto per = Label::create(ChineseWord("jindu")+":"
-		+String::createWithFormat("%d",
-		(int)((float)GAMEDATA::getInstance()->getCurExpNum()/GAMEDATA::getInstance()->getFullExpNum(level)*100))->_string
-		+"%","Arial",24);
-	per->setPosition(160,780);
-	per->setAnchorPoint(Point(0, 0.5));
-	this->addChild(per);
+	auto proBg = Sprite::create("progress_bg.png");
+	proBg->setPosition(100,740);
+	proBg->setAnchorPoint(Point(0,0.5));
+	this->addChild(proBg);
 
-	auto scoreAdd = Label::create(ChineseWord("jiacheng")+":"
-		+String::createWithFormat("%d",
-		(int)(GAMEDATA::getInstance()->getScoreAddPer(level)*100))->_string
-		+"%","Arial",24);
-	scoreAdd->setPosition(30,750);
-	scoreAdd->setAnchorPoint(Point(0, 0.5));
-	this->addChild(scoreAdd);
+	int per = (int)((float)GAMEDATA::getInstance()->getCurExpNum()/GAMEDATA::getInstance()->getFullExpNum(level)*100);
+	if(per > 0){
+		auto leftPer = Sprite::create("progress_left.png");
+		leftPer->setPosition(100,740);
+		leftPer->setAnchorPoint(Point(0,0.5));
+		this->addChild(leftPer);
 
-	auto gold = Label::create(ChineseWord("jinbei")+":"
-		+String::createWithFormat("%d",
+		auto middPer = Sprite::create("progress_middle.png");
+		middPer->setPosition(105,740);
+		middPer->setAnchorPoint(Point(0,0.5));
+		middPer->setScale(per/100.0f*95,1);
+		this->addChild(middPer);
+
+		auto rightPer = Sprite::create("progress_right.png");
+		rightPer->setPosition(105+per/100.0f*95-2,740);
+		rightPer->setAnchorPoint(Point(0,0.5));
+		this->addChild(rightPer);
+	}
+	auto perNum = Label::create(String::createWithFormat("%d",per)->_string	+"%","Arial",20);
+	perNum->setPosition(153,741);
+	perNum->setAnchorPoint(Point(0.5, 0.5));
+	this->addChild(perNum);
+
+	auto goldBg = Sprite::create("gold_bg.png");
+	goldBg->setPosition(288,748);
+	goldBg->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(goldBg);
+
+	auto goldIcon = Sprite::create("gold.png");
+	goldIcon->setPosition(234,748);
+	goldIcon->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(goldIcon);
+
+	auto goldBuy = Sprite::create("buy_gold.png");
+	goldBuy->setPosition(337,754);
+	goldBuy->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(goldBuy);
+
+//	auto scoreAdd = Label::create(ChineseWord("jiacheng")+":"
+//		+String::createWithFormat("%d",
+//		(int)(GAMEDATA::getInstance()->getScoreAddPer(level)*100))->_string
+//		+"%","Arial",24);
+//	scoreAdd->setPosition(30,750);
+//	scoreAdd->setAnchorPoint(Point(0, 0.5));
+//	this->addChild(scoreAdd);
+
+	auto gold = Label::create(String::createWithFormat("%d",
 		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
-	gold->setPosition(30,720);
+	gold->setPosition(252,749);
 	gold->setAnchorPoint(Point(0, 0.5));
 	this->addChild(gold);
 
@@ -78,7 +119,7 @@ bool MenuLayer::init(){
 			musicTog->setSelectedIndex(1);
 		}
 	auto musicMenu = Menu::create(musicTog,NULL);
-	musicMenu->setPosition(349,751);
+	musicMenu->setPosition(427,688);
 	MenuItemImage* soundEffectOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
 	MenuItemImage* soundEffectOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");
 	MenuItemToggle* soundEffectTog = MenuItemToggle::createWithTarget(this,menu_selector(MenuLayer::getSoudState),soundEffectOn,soundEffectOff,NULL);
@@ -91,7 +132,7 @@ bool MenuLayer::init(){
 			soundEffectTog->setSelectedIndex(1);
 		}
 	auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
-	soundEffectMenu->setPosition(427,751);
+	soundEffectMenu->setPosition(427,762);
 	this->addChild(musicMenu);
 	this->addChild(soundEffectMenu);
 
@@ -138,6 +179,17 @@ bool MenuLayer::init(){
 	};
 
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		if(CallAndroidMethod::getInstance()->isSignToday()){
+			CCLOG("result:%d",2);
+		}else{
+			CCLOG("result:%d",1);
+			auto signIn = SignIn::getInstance();
+			this->addChild(signIn,5);
+		}
+    #endif
+
 	return true;
 }
 

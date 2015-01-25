@@ -48,17 +48,20 @@
 <key>shijian</key>
 <string>时间增加10秒</string>
 
-<key>dengji</key>
-<string>等级</string>
+<key>signin</key>
+<string>签到奖励</string>
 
-<key>jindu</key>
-<string>进度</string>
+<key>day</key>
+<string>日</string>
 
-<key>jiacheng</key>
-<string>得分加成</string>
+<key>upgrade</key>
+<string>升级</string>
 
-<key>jinbei</key>
-<string>金币</string>
+<key>upgradeprize</key>
+<string>升级奖励</string>
+
+<key>addscoreper</key>
+<string>额外分数</string>
 
 </dict>
 

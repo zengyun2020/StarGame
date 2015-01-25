@@ -2,6 +2,7 @@
 #define _GAMEOVERLAYER_H_
 
 #include "cocos2d.h"
+#include "Upgrade.h"
 
 using namespace cocos2d;
 
@@ -23,6 +24,7 @@ private:
 	int curScore;
 	int rankNumTemp;
 	float rotation;
+	bool hasShowUpgrade;
 	LabelAtlas* labelScore;
 	Sprite* currentRoundScore;
 	LabelAtlas* rankNum;
@@ -30,5 +32,6 @@ private:
 	LabelAtlas* beatNum;
 	Sprite* beatPer;
 	MenuItemImage* startBtn;
+	Upgrade* upgrade;
 };
 #endif

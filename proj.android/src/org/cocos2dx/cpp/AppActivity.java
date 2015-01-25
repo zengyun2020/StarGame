@@ -47,6 +47,7 @@ public class AppActivity extends Cocos2dxActivity {
 		NetWorkService.init(this);
 		PayService.init(this);
 		NativeNotifyService.init(this);
+		SignInService.init(this);
 		if(TbuCloud.markUserType(getApplicationContext()) == 0){
 			   TbuCloud.markUserPay(getApplicationContext(), 0);
 		}

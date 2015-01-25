@@ -11,6 +11,9 @@ public:
 	void showMoreGame();
 	void pay(int payPoint);
 	void startNativeNotify();
+	bool isSignToday();
+	int getCurrentSignDayas();
+	void sign();
 	void markPersonInfo(const char tag1,const char tag2);
 	static CallAndroidMethod* getInstance();
 private:
