@@ -339,7 +339,7 @@ void StarMatrix::refreshScore(){
 
 
 bool StarMatrix::isEnded(){
-	if(getLeftStarNum()<=20){return true;}
+	//if(getLeftStarNum()<=20){return true;}
 	bool bRet = true;
 	for(int i=0;i<ROW_NUM;i++){
 		for(int j=0;j<COL_NUM;j++){
