@@ -152,116 +152,11 @@ void TopMenu::usePropsTime(){
 	}
 }
 
-void TopMenu::goBack(){
-	if(gamePause!=nullptr){
-		GameLayer::_PauseTime =false;
-		Audio::getInstance()->playClick();
-		gamePause->removeFromParentAndCleanup(true);
-	}
-	Director::getInstance()->replaceScene(HelloWorld::createScene());
-}
-
-void TopMenu::ResumeGame(){
-	if(gamePause!=nullptr){
-		Audio::getInstance()->playClick();
-		GameLayer::_PauseTime =false;
-		gamePause->removeFromParentAndCleanup(true);
-	}
-}
-
-
 void TopMenu::PauseGame(){
 	Audio::getInstance()->playClick();
 	GameLayer::_PauseTime =true;
-	gamePause = GamePauseLayer::create();
+	gamePause = GamePauseLayer::create(this);
 	this->addChild(gamePause,1);
-
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	MenuItemImage* exitBtn = MenuItemImage::create(
-		"exit_normal.png","exit_click.png",CC_CALLBACK_0(TopMenu::goBack,this)
-		);
-
-	MenuItemImage* soundBtnOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
-	MenuItemImage* soundBtnOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");  
-	MenuItemToggle* soundTog = MenuItemToggle::createWithTarget(this,menu_selector(TopMenu::getSoudState),soundBtnOn,soundBtnOff,NULL);  
-	if (GAMEDATA::getInstance()->getSoundEffect())  
-        {  
-            soundTog->setSelectedIndex(0);  
-        }   
-        else  
-        {  
-            soundTog->setSelectedIndex(1);  
-        }  
-
-
-	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
-	MenuItemImage* musicBtnOff = MenuItemImage::create("bg_music_close.png","bg_music_close.png");  
-	MenuItemToggle* musicTog = MenuItemToggle::createWithTarget(this,menu_selector(TopMenu::getMusicState),musicBtnOn,musicBtnOff,NULL);  
-	 if (CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())  
-        {  
-            musicTog->setSelectedIndex(0);  
-        }   
-        else  
-        {  
-            musicTog->setSelectedIndex(1);  
-        }  
-
-	Menu* otherMenu = Menu::create(soundTog,musicTog,exitBtn, NULL);
-	otherMenu->alignItemsHorizontallyWithPadding (25);
-	otherMenu->setPosition(visibleSize.width/2+65,visibleSize.height/2-250);
-	gamePause->addChild(otherMenu,2);
-
-		MenuItemImage* resumeBtn = MenuItemImage::create(
-		"continue_normal.png","continue_click.png",CC_CALLBACK_0(TopMenu::ResumeGame,this)
-		);
-		auto scale1 = ScaleTo::create(1,1.25);
-	auto scale2 = ScaleTo::create(1,1);
-	auto seq =Sequence::create(scale1,scale2,nullptr);
-	resumeBtn->runAction(RepeatForever::create(seq));
-	Menu* resumeMenu = Menu::create(resumeBtn, NULL);
-	resumeMenu->alignItemsHorizontallyWithPadding (50);
-	resumeMenu->setPosition(visibleSize.width/2-130,visibleSize.height/2-250);
-	gamePause->addChild(resumeMenu,2);
-}
-
-
-void TopMenu::getSoudState(CCObject* pSender){
-	 //创建临时CCMenuItemToggle  
-    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;  
-    //根据CCMenuItemToggle的选项来决定音乐的开关  
-    if (temp->getSelectedIndex()==1)  
-    {   
-		Audio::getInstance()->playClick();
-		GAMEDATA::getInstance()->setSoundEffect(false);
-		GAMEDATA::getInstance()->saveSoundEffect();
-    }  
-    if (temp->getSelectedIndex()==0)  
-    {  
-		GAMEDATA::getInstance()->setSoundEffect(true);
-		GAMEDATA::getInstance()->saveSoundEffect();
-    }  
-}
-
-void TopMenu::getMusicState(CCObject* pSender){
-	 //创建临时CCMenuItemToggle  
-    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;  
-    //根据CCMenuItemToggle的选项来决定音乐的开关  
-    if (temp->getSelectedIndex()==1)  
-    {   
-		Audio::getInstance()->playClick();
-        //暂停播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic(); 
-		GAMEDATA::getInstance()->setMusicState(false);
-		GAMEDATA::getInstance()->saveMusicState();
-
-    }  
-    if (temp->getSelectedIndex()==0)  
-    {  
-        //继续播放音乐  
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic(); 
-		GAMEDATA::getInstance()->setMusicState(true);
-		GAMEDATA::getInstance()->saveMusicState();
-    }  
 }
 
 

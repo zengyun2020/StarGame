@@ -13,11 +13,11 @@ public:
 	void usePropsBomb();
 	void usePropsTime();
 	void PauseGame();
-	void ResumeGame();
-	void getSoudState(CCObject* pSender);
-	void getMusicState(CCObject* pSender);
+	//void ResumeGame();
+	//void getSoudState(CCObject* pSender);
+	//void getMusicState(CCObject* pSender);
 	void updatePropsNum();
-	void goBack();
+	//void goBack();
 	void stopScaleAction();
 	void cleanScore();
 
