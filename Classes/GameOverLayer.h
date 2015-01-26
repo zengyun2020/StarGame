@@ -25,6 +25,7 @@ private:
 	int rankNumTemp;
 	float rotation;
 	bool hasShowUpgrade;
+	bool canClick;
 	LabelAtlas* labelScore;
 	Sprite* currentRoundScore;
 	LabelAtlas* rankNum;

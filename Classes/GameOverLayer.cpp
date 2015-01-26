@@ -21,6 +21,7 @@ bool GameOverLayer::init(){
 	curScore = GAMEDATA::getInstance()->getCurScore();
 	scoreNum = 0;
 	animTime = 0;
+	canClick = false;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	/*��ʼ������*/
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
@@ -208,6 +209,7 @@ void GameOverLayer::update(float delta){
 		GAMEDATA::getInstance()->saveCurExpNum();
 		GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+GAMEDATA::getInstance()->getPrizeGoldNum()+upgradePrizeGoldNum);
 		GAMEDATA::getInstance()->saveGoldNum();
+		canClick = true;
 	}
 }
 
@@ -215,17 +217,21 @@ void GameOverLayer::continueGame(){
 	if(upgrade->isVisible()){
 		return;
 	}
-	Audio::getInstance()->playClick();
-	GAMEDATA::getInstance()->init();
-	Director::getInstance()->replaceScene(TransitionSlideInL::create(1,GameScene::create()));
+	if(canClick){
+		Audio::getInstance()->playClick();
+		GAMEDATA::getInstance()->init();
+		Director::getInstance()->replaceScene(TransitionSlideInL::create(1,GameScene::create()));
+	}
 }
 
 void GameOverLayer::back(){
 	if(upgrade->isVisible()){
 		return;
 	}
-	Audio::getInstance()->playClick();
-	Director::getInstance()->replaceScene(TransitionFade::create(1,HelloWorld::createScene()));
+	if(canClick){
+		Audio::getInstance()->playClick();
+		Director::getInstance()->replaceScene(TransitionFade::create(1,HelloWorld::createScene()));
+	}
 }
 
 void GameOverLayer::getSoudState(CCObject* pSender){

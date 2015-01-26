@@ -47,11 +47,7 @@ bool Upgrade::init(){
 	addScorePer->setPosition(335,370);
 	this->addChild(addScorePer);
 
-	auto itemGold1 = Sprite::create("gold.png");
-	itemGold1->setPosition(115,322);
-	this->addChild(itemGold1);
-
-	auto goldNum = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getUpgradePrizeNum())->_string,"Arial",24);
+	auto goldNum = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getUpgradePrizeNum(levelNum))->_string,"Arial",24);
 	goldNum->setPosition(159,322);
 	this->addChild(goldNum);
 

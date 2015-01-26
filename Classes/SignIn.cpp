@@ -184,5 +184,8 @@ void SignIn::hideSelf(){
 	if(GAMEDATA::getInstance()->isFirstLogin()){
 		GAMEDATA::getInstance()->init();
 		Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+	}else{
+		this->setVisible(false);
+		this->removeFromParentAndCleanup(true);
 	}
 }
