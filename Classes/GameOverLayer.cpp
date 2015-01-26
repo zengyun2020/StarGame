@@ -10,6 +10,7 @@
 #include "SimpleAudioEngine.h"
 #include "Audio.h"
 #include "Upgrade.h"
+#include "Chinese.h"
 
 using namespace cocos2d;
 
@@ -27,41 +28,49 @@ bool GameOverLayer::init(){
 	this->addChild(background,-1);
 
 	Sprite* title = Sprite::create("title.png");
-	title->setPosition(240,632);
-	this->addChild(title,0);
+	title->setPosition(135,680);
+	title->setScale(0.5);
+	this->addChild(title);
 
-	labelScore = LabelAtlas::create("2000", "game_result_score_num.png", 39.0f, 69.0f, '0');
-	labelScore->setPosition(Point(185, 400));
+	float addScorePer = GAMEDATA::getInstance()->getScoreAddPer(GAMEDATA::getInstance()->getUserLevel());
+	auto addScoreNumTxt = Label::create(ChineseWord("addscorenum")
+			+String::createWithFormat(":%d",(int)(addScorePer*curScore))->_string,"Arial",24);
+	addScoreNumTxt->setPosition(240,530);
+	this->addChild(addScoreNumTxt);
+
+	curScore = curScore+(int)(addScorePer*curScore);
+
+	auto prizeGoldNum = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getPrizeGoldNum())->_string,"Arial",24);
+	prizeGoldNum->setPosition(240,355);
+	this->addChild(prizeGoldNum);
+
+	labelScore = LabelAtlas::create("", "game_result_score_num.png", 39.0f, 69.0f, '0');
+	labelScore->setPosition(Point(199, 480));
 	labelScore->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
 	this->addChild(labelScore);
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
-
-	currentRoundScore = Sprite::create("game_result_score.png");
-	currentRoundScore->setPosition(266,382);
-	currentRoundScore->setAnchorPoint(Point(0.5,0.5));
-	this->addChild(currentRoundScore,1);
 
 	rankNum = LabelAtlas::create("2000", "game_result_rank_num.png", 19.0f, 33.0f, '0');
 	rank = Sprite::create("game_result_rank.png");
 	rankNumTemp = PLAYERRANK::getInstance()->getRankList(curScore);
 	if(rankNumTemp > 0 && rankNumTemp < 10){
-		rankNum->setPosition(Point(241-480, 309));
+		rankNum->setPosition(Point(266-480, 309));
 		rank->setPosition(230-480,309);
 	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
-		rankNum->setPosition(Point(247.5-480, 309));
+		rankNum->setPosition(Point(260.5-480, 309));
 		rank->setPosition(220.5-480,309);
 	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
-		rankNum->setPosition(Point(262-480, 309));
+		rankNum->setPosition(Point(270-480, 309));
 		rank->setPosition(211-480,309);
 	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
 		rankNum->setPosition(Point(266.5-480, 309));
 		rank->setPosition(201.5-480,309);
 	}else if(rankNumTemp >= 10000 && rankNumTemp < 100000){
-		rankNum->setPosition(Point(276-480, 309));
+		rankNum->setPosition(Point(269-480, 309));
 		rank->setPosition(192-480,309);
 	}
 	rankNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
-	rankNum->setString(cocos2d::String::createWithFormat(": %d",PLAYERRANK::getInstance()->getRankList(curScore))->_string);
+	rankNum->setString(cocos2d::String::createWithFormat(": %d",rankNumTemp)->_string);
 
 	beatPer = Sprite::create("game_result_beat.png");
 	beatPer->setPosition(-240,256);
@@ -138,19 +147,19 @@ void GameOverLayer::showRank(float dt){
 	rank->setVisible(true);
 	rankNum->setVisible(true);
 	if(rankNumTemp > 0 && rankNumTemp < 10){
-		rankNum->runAction(MoveTo::create(0.5f,Point(241,309)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(266,309)));
 		rank->runAction(MoveTo::create(0.5f,Point(230,309)));
 	}else if(rankNumTemp >= 10 && rankNumTemp < 100){
-		rankNum->runAction(MoveTo::create(0.5f,Point(247.5, 309)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(260.5, 309)));
 		rank->runAction(MoveTo::create(0.5f,Point(220.5,309)));
 	}else if(rankNumTemp >= 100 && rankNumTemp < 1000){
-		rankNum->runAction(MoveTo::create(0.5f,Point(262, 309)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(270, 309)));
 		rank->runAction(MoveTo::create(0.5f,Point(211,309)));
 	}else if(rankNumTemp >= 1000 && rankNumTemp < 10000){
 		rankNum->runAction(MoveTo::create(0.5f,Point(266.5, 309)));
 		rank->runAction(MoveTo::create(0.5f,Point(201.5,309)));
 	}else if(rankNumTemp >= 10000 && rankNumTemp < 100000){
-		rankNum->runAction(MoveTo::create(0.5f,Point(276, 309)));
+		rankNum->runAction(MoveTo::create(0.5f,Point(269, 309)));
 		rank->runAction(MoveTo::create(0.5f,Point(192,309)));
 	}
 }
@@ -174,25 +183,7 @@ void GameOverLayer::update(float delta){
 	if(scoreNum > curScore){
 		scoreNum = curScore;
 	}
-	if((int)scoreNum > 0 && (int)scoreNum < 10){
-		labelScore->setPosition(Point(185, 400));
-		currentRoundScore->setPosition(Point(266,392));
-	}else if((int)scoreNum >= 10 && (int)scoreNum < 100){
-		labelScore->setPosition(Point(178, 400));
-		currentRoundScore->setPosition(Point(281,392));
-	}else if((int)scoreNum >= 100 && (int)scoreNum < 1000){
-		labelScore->setPosition(Point(178, 400));
-		currentRoundScore->setPosition(Point(304,392));
-	}else if((int)scoreNum >= 1000 && (int)scoreNum < 10000){
-		labelScore->setPosition(Point(180, 400));
-		currentRoundScore->setPosition(Point(330,392));
-	}else if((int)scoreNum >= 10000 && (int)scoreNum < 100000){
-		labelScore->setPosition(Point(178, 400));
-		currentRoundScore->setPosition(Point(348,392));
-	}else if((int)scoreNum >= 100000 && (int)scoreNum < 1000000){
-		labelScore->setPosition(Point(183, 400));
-		currentRoundScore->setPosition(Point(363,392));
-	}
+	labelScore->setPosition(Point(199, 480));
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
 
 	rotation = 360*animTime/60;

@@ -10,7 +10,10 @@ class MenuLayer : public Layer{
 public:
 	virtual bool init();
 	CREATE_FUNC(MenuLayer);
-	void startGame();
+	bool startGame(Touch* touch,Event* event);
+	void autoStartGame(float dt);
+	bool showAbout(Touch* touch,Event* event);
+	bool showLevel(Touch* touch,Event* event);
 	void stopAction();
 	void startAction();
 	void getSoudState(CCObject* pSender);
@@ -27,5 +30,6 @@ private:
 	Menu* confirmMenu;
 	Menu* cancelMenu;
 	SignIn* signIn;
+	Sprite* title;
 };
 #endif

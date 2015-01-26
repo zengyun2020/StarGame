@@ -3,6 +3,7 @@
 #include "Chinese.h"
 #include "SimpleAudioEngine.h"
 #include "Audio.h"
+#include "GameData.h"
 
 USING_NS_CC;
 
@@ -35,7 +36,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		glview = GLViewImpl::create(ChineseWord("title"));
         director->setOpenGLView(glview);
     }
-
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	glview->setFrameSize(480, 800);
 #endif
@@ -54,6 +54,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     auto scene = HelloWorld::createScene();
+	GAMEDATA::getInstance()->setFirstLogin(true);
 
     // run
     director->runWithScene(scene);

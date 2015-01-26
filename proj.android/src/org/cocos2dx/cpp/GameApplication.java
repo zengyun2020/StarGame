@@ -9,7 +9,10 @@ import com.tallbigup.buffett.plugin.configuration.Configuration;
 import com.tallbigup.buffett.plugin.deviceinfo.DeviceInfo;
 import com.tallbigup.star.R;
 
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.ComponentName;
+import android.content.Context;
 import android.util.Log;
 
 public class GameApplication extends Application{
@@ -27,7 +30,12 @@ public class GameApplication extends Application{
 		instance = this;
 		gameInfo = GameInfoUtil.getInstance();
 		gameInfo.init(this);
-		setLayout();		
+		setLayout();
+		
+		init();
+	}
+	
+	public void init(){		
 		GamePay.getInstance().init(getApplicationContext(), GamePay.MM_POJIE_PAY_TYPE, false, GamePay.SKY_PAY_TYPE, 7005194, 9970, "羊年消星星");
 		
 		TbuCloud.initCloud(getApplicationContext(), new TbuCallback() {
@@ -78,5 +86,14 @@ public class GameApplication extends Application{
 	
 	public String getPlayerId(){
 		return playerId;
+	}
+	
+	public boolean isAppVisible(Context activity) {
+        ActivityManager am = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+        ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+        if (cn.getPackageName().equals(activity.getPackageName())) {
+            return true;
+        }
+        return false;
 	}
 }

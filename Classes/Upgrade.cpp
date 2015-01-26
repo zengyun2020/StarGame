@@ -20,10 +20,14 @@ bool Upgrade::init(){
 		return false;
 	}
 
-	auto bg = Sprite::create("quit_bg.png");
+	auto bg = Sprite::create("bg_mainscene.jpg");
 	bg->setPosition(240,400);
-	bg->setScale(1,2);
 	this->addChild(bg);
+
+	auto shineBg = Sprite::create("game_result_shine_bg.png");
+	shineBg->setPosition(240,400);
+	this->addChild(shineBg);
+//	shineBg->runAction(RepeatForever::create(RotateBy::create(3,360)));
 
 	auto title = Label::create(ChineseWord("upgrade"),"Arial",48);
 	title->setPosition(240,528);
@@ -47,7 +51,7 @@ bool Upgrade::init(){
 	itemGold1->setPosition(115,322);
 	this->addChild(itemGold1);
 
-	auto goldNum = Label::create(String::createWithFormat("%d",1000)->_string,"Arial",24);
+	auto goldNum = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getUpgradePrizeNum())->_string,"Arial",24);
 	goldNum->setPosition(159,322);
 	this->addChild(goldNum);
 
@@ -57,17 +61,14 @@ bool Upgrade::init(){
 	addScorePerNum->setPosition(335,322);
 	this->addChild(addScorePerNum);
 
-	MenuItemImage* confirmBtn = MenuItemImage::create(
-			"quit_confirm_up.png","quit_confirm_down.png",CC_CALLBACK_0(Upgrade::hideSelf,this)
-			);
-	auto confirmMenu = Menu::create(confirmBtn, NULL);
-	confirmMenu->setPosition(240,280);
-	this->addChild(confirmMenu);
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(Upgrade::hideSelf,this);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
 
 	return true;
 }
 
-void Upgrade::hideSelf(){
+bool Upgrade::hideSelf(Touch* touch,Event* event){
 	this->setVisible(false);
 	this->removeFromParentAndCleanup(true);
 }

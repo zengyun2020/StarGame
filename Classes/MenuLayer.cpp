@@ -12,6 +12,8 @@
 #include "GameData.h"
 #include "CallAndroidMethod.h"
 #include "SignIn.h"
+#include "About.h"
+#include "UserLevelInfo.h"
 
 using namespace cocostudio::timeline;
 
@@ -19,83 +21,68 @@ bool MenuLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
-	
-	CSLoader* instance = CSLoader::getInstance();
-	instance->registReaderObject("MenuSceneHandlerReader",(ObjectFactory::Instance)MenuSceneHandlerReader::getInstance);
-	auto rootNode = CSLoader::createNode("MenuLayer.csb");
-	this->addChild(rootNode);
+
+	auto bg = Sprite::create("bg_mainscene.jpg");
+	bg->setPosition(240,400);
+	this->addChild(bg);
+
+	title = Sprite::create("title.png");
+	title->setPosition(240,560);
+	title->setScale(0.8);
+	title->setVisible(true);
+	this->addChild(title);
+
+	auto startGameBtn = Sprite::create("start_game.png");
+	startGameBtn->setPosition(240,282);
+	this->addChild(startGameBtn);
+	auto scaleSmall = ScaleTo::create(0.8,0.7);
+	auto scaleBig = ScaleTo::create(0.8,1);
+	auto delay = DelayTime::create(0);
+	auto seq = Sequence::create(scaleSmall,delay,scaleBig,delay->clone(),NULL);
+	startGameBtn->runAction(RepeatForever::create(seq));
+
+	auto startGamelistener = EventListenerTouchOneByOne::create();
+	startGamelistener->onTouchBegan = CC_CALLBACK_2(MenuLayer::startGame,this);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(startGamelistener,startGameBtn);
 
 	//backgroud music
 	Audio::getInstance()->playBGM();
-	//播放开始按钮动画
-	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
-	rootNode->runAction(action); 
-	action->gotoFrameAndPlay(0,100,true);
 
 	// 飘雪粒子效果
 	ParticleSnow* effect = ParticleSnow::create();
 	effect->setTotalParticles(100);
-	rootNode->addChild(effect);
-
-	auto playerIcon = Sprite::create("player_icon.png");
-	playerIcon->setPosition(51,756);
-	playerIcon->setAnchorPoint(Point(0.5,0.5));
-	this->addChild(playerIcon);
+	this->addChild(effect);
 
 	int level = GAMEDATA::getInstance()->getUserLevel();
-	auto userLevel = Label::create("LV "
-		+String::createWithFormat("%d",level)->_string,"Arial",36);
-	userLevel->setColor(ccc3(233, 168, 16));
-	userLevel->setPosition(103,770);
-	userLevel->setAnchorPoint(Point(0,0.5));
-	this->addChild(userLevel);
+	auto about = Label::create(ChineseWord("about"),"Arial",36);
+	about->setPosition(450,40);
+	about->setAnchorPoint(Point(1,0.5));
+	this->addChild(about);
 
-	auto proBg = Sprite::create("progress_bg.png");
-	proBg->setPosition(100,740);
-	proBg->setAnchorPoint(Point(0,0.5));
-	this->addChild(proBg);
+	auto aboutListener = EventListenerTouchOneByOne::create();
+	aboutListener->onTouchBegan = CC_CALLBACK_2(MenuLayer::showAbout,this);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(aboutListener,about);
 
 	int per = (int)((float)GAMEDATA::getInstance()->getCurExpNum()/GAMEDATA::getInstance()->getFullExpNum(level)*100);
-	if(per > 0){
-		auto leftPer = Sprite::create("progress_left.png");
-		leftPer->setPosition(100,740);
-		leftPer->setAnchorPoint(Point(0,0.5));
-		this->addChild(leftPer);
-
-		auto middPer = Sprite::create("progress_middle.png");
-		middPer->setPosition(105,740);
-		middPer->setAnchorPoint(Point(0,0.5));
-		middPer->setScale(per/100.0f*95,1);
-		this->addChild(middPer);
-
-		auto rightPer = Sprite::create("progress_right.png");
-		rightPer->setPosition(105+per/100.0f*95-2,740);
-		rightPer->setAnchorPoint(Point(0,0.5));
-		this->addChild(rightPer);
-	}
-	auto perNum = Label::create(String::createWithFormat("%d",per)->_string	+"%","Arial",20);
-	perNum->setPosition(153,741);
-	perNum->setAnchorPoint(Point(0.5, 0.5));
+	auto perNum = Label::create("LV"
+			+String::createWithFormat("%d/",level)->_string+String::createWithFormat("%d",per)->_string	+"%","Arial",36);
+	perNum->setPosition(30,40);
+	perNum->setAnchorPoint(Point(0, 0.5));
 	this->addChild(perNum);
 
-	auto goldBg = Sprite::create("gold_bg.png");
-	goldBg->setPosition(288,748);
-	goldBg->setAnchorPoint(Point(0.5,0.5));
-	this->addChild(goldBg);
-
-	auto goldIcon = Sprite::create("gold.png");
-	goldIcon->setPosition(234,748);
-	goldIcon->setAnchorPoint(Point(0.5,0.5));
-	this->addChild(goldIcon);
+	auto levelListener = EventListenerTouchOneByOne::create();
+	levelListener->onTouchBegan = CC_CALLBACK_2(MenuLayer::showLevel,this);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(levelListener,perNum);
 
 	auto goldBuy = Sprite::create("buy_gold.png");
-	goldBuy->setPosition(337,754);
+	goldBuy->setPosition(240,760);
+	goldBuy->setScale(2);
 	goldBuy->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(goldBuy);
 
-	auto gold = Label::create(String::createWithFormat("%d",
-		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
-	gold->setPosition(252,749);
+	auto gold = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",
+		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",36);
+	gold->setPosition(30,760);
 	gold->setAnchorPoint(Point(0, 0.5));
 	this->addChild(gold);
 
@@ -111,7 +98,7 @@ bool MenuLayer::init(){
 			musicTog->setSelectedIndex(1);
 		}
 	auto musicMenu = Menu::create(musicTog,NULL);
-	musicMenu->setPosition(427,688);
+	musicMenu->setPosition(349,760);
 	MenuItemImage* soundEffectOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
 	MenuItemImage* soundEffectOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");
 	MenuItemToggle* soundEffectTog = MenuItemToggle::createWithTarget(this,menu_selector(MenuLayer::getSoudState),soundEffectOn,soundEffectOff,NULL);
@@ -124,7 +111,7 @@ bool MenuLayer::init(){
 			soundEffectTog->setSelectedIndex(1);
 		}
 	auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
-	soundEffectMenu->setPosition(427,762);
+	soundEffectMenu->setPosition(427,760);
 	this->addChild(musicMenu);
 	this->addChild(soundEffectMenu);
 
@@ -183,17 +170,59 @@ bool MenuLayer::init(){
 			this->addChild(signIn,5);
 		}
     #endif
-
+	schedule(schedule_selector(MenuLayer::autoStartGame), 0.2f, 0, 0);
 	return true;
 }
 
-void MenuLayer::startGame(){
-	if(signIn->isVisible()){
-		return;
+void MenuLayer::autoStartGame(float dt){
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		if(CallAndroidMethod::getInstance()->notSignToday()){
+
+		}else{
+			if(GAMEDATA::getInstance()->isFirstLogin()){
+				GAMEDATA::getInstance()->init();
+				Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+				GAMEDATA::getInstance()->setFirstLogin(false);
+			}
+		}
+    #endif
+}
+
+bool MenuLayer::startGame(Touch* touch,Event* event){
+	if(event->getCurrentTarget()->getBoundingBox().containsPoint(touch->getLocation())){
+		if(signIn->isVisible()){
+			return true;
+		}
+		Audio::getInstance()->playClick();
+		GAMEDATA::getInstance()->init();
+		Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+		return true;
 	}
-	Audio::getInstance()->playClick();
-	GAMEDATA::getInstance()->init();
-	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+	return false;
+}
+
+bool MenuLayer::showAbout(Touch* touch,Event* event){
+	if(event->getCurrentTarget()->getBoundingBox().containsPoint(touch->getLocation())){
+		if(signIn->isVisible() || quitBg->isVisible()){
+			return true;
+		}
+		auto about = About::getInstance();
+		this->addChild(about);
+		return true;
+	}
+	return false;
+}
+
+bool MenuLayer::showLevel(Touch* touch,Event* event){
+	if(event->getCurrentTarget()->getBoundingBox().containsPoint(touch->getLocation())){
+		if(signIn->isVisible() || quitBg->isVisible()){
+			return true;
+		}
+		auto userLevelInfo = UserLevelInfo::getInstance();
+		this->addChild(userLevelInfo);
+		return true;
+	}
+	return false;
 }
 
 void MenuLayer::showQuit(){

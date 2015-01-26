@@ -2,6 +2,7 @@
 #include "Chinese.h"
 #include "CallAndroidMethod.h"
 #include "GameData.h"
+#include "GameScene.h"
 
 SignIn* SignIn::_instance = nullptr;
 SignIn::SignIn(){
@@ -20,9 +21,13 @@ bool SignIn::init(){
 		return false;
 	}
 
-	auto bg = Sprite::create("sign_in_bg.png");
+	auto bg = Sprite::create("bg_mainscene.jpg");
 	bg->setPosition(240,400);
 	this->addChild(bg);
+
+	auto signInbg = Sprite::create("sign_in_bg.png");
+	signInbg->setPosition(240,400);
+	this->addChild(signInbg);
 
 	auto title = Label::create(ChineseWord("signin"),"Arial",48);
 	title->setPosition(240,504);
@@ -171,10 +176,13 @@ bool SignIn::init(){
 }
 
 void SignIn::hideSelf(){
-	this->setVisible(false);
-	this->removeFromParentAndCleanup(true);
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		CallAndroidMethod::getInstance()->sign();
 		GAMEDATA::getInstance()->setPrizeGoldNum(15+signDay*5);
     #endif
+
+	if(GAMEDATA::getInstance()->isFirstLogin()){
+		GAMEDATA::getInstance()->init();
+		Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+	}
 }

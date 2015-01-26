@@ -27,7 +27,7 @@ public:
 	/*?????*/
 	inline void setUserLevel(int userLevel){user_level = userLevel;}
 	inline int getUserLevel(){return user_level;}
-	/*???ýw????*/
+	/*???ï¿½w????*/
 	inline void setPrizeTimes(int prizeTimes){prize_times = prizeTimes;}
 	inline int getPrizeTimes(){return prize_times;}
 
@@ -55,16 +55,19 @@ public:
 	inline void setPrizeGoldNum(int prizeGoldNum){prize_gold_num = prizeGoldNum;}
 	inline int getPrizeGoldNum(){return prize_gold_num;}
 
+	inline void setFirstLogin(bool firstLogin){first_login = firstLogin;}
+	inline bool isFirstLogin(){return first_login;}
+
 	/*????????*/
 	int getJiangli(int size);
 
 	/*????????????????*/
 	int getFullExpNum(int userLevel);
 
-	/*??????¡Â???*/
+	/*??????ï¿½ï¿½???*/
 	float getScoreAddPer(int userLevel);
 
-	/*»ñÈ¡Éý¼¶½±Àø½ð±ÒÊýÁ¿*/
+	/*ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	int getUpgradePrizeNum(int urserLevel);
 
 	void saveHighestScore();
@@ -86,6 +89,7 @@ private:
 	void init();
 private:
 	static GAMEDATA* _instance;
+	bool first_login;
 	int cur_level;
 	int next_level;
 	int history_score;
@@ -106,5 +110,6 @@ private:
 	int prize_gold_num;
 	friend class MenuLayer;
 	friend class GameOverLayer;
+	friend class SignIn;
 };
 #endif

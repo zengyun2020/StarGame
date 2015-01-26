@@ -12,6 +12,7 @@ public:
 	void pay(int payPoint);
 	void startNativeNotify();
 	bool isSignToday();
+	bool notSignToday();
 	int getCurrentSignDayas();
 	void sign();
 	void markPersonInfo(const char tag1,const char tag2);

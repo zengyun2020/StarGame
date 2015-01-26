@@ -18,6 +18,10 @@ public class SignInService {
 		return SignManager.isSignToday(activity);
 	}
 	
+	public static boolean notSignToday(){
+		return !SignManager.isSignToday(activity);
+	}
+	
 	public static int getCurrentSignDays(){
 		return SignManager.getCurrentSignDays(activity);
 	}

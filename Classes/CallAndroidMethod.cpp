@@ -66,6 +66,21 @@ bool CallAndroidMethod::isSignToday(){
 		return false;
 }
 
+bool CallAndroidMethod::notSignToday(){
+	CCLOG(">>>>>>>>>>>>>>notSignToday");
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	    CCLOG("android platform");
+		JniMethodInfo methodInfo;
+		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/SignInService","notSignToday","()Z");
+		if(isHave){
+			return JniHelper::getEnv()->CallStaticBooleanMethod(methodInfo.classID,methodInfo.methodID);
+		}else{
+			return false;
+		}
+	#endif
+		return false;
+}
+
 int CallAndroidMethod::getCurrentSignDayas(){
 	CCLOG(">>>>>>>>>>>>>>getCurrentSignDayas");
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨

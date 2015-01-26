@@ -38,7 +38,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
           ../../Classes/CallAndroidMethod.cpp\
           ../../Classes/MenuScenePayHandler.cpp\
           ../../Classes/SignIn.cpp\
-          ../../Classes/Upgrade.cpp
+          ../../Classes/Upgrade.cpp\
+          ../../Classes/About.cpp\
+          ../../Classes/UserLevelInfo.cpp
           
 
 

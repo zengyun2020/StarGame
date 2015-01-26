@@ -40,7 +40,7 @@ void MenuSceneHandler::startGame(cocos2d::Ref* object, cocos2d::ui::Widget::Touc
 	else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED){
 	}
 	else if(type == cocos2d::ui::Widget::TouchEventType::ENDED){
-		layer->startGame();
+//		layer->startGame();
 	}
 }
 
