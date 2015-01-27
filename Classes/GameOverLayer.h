@@ -15,8 +15,6 @@ public:
 	void back();
 	void getSoudState(CCObject* pSender);
 	void getMusicState(CCObject* pSender);
-	void showRank(float dt);
-	void showBeat(float dt);
 	GameOverLayer getInstance();
 private:
 	float scoreNum;
@@ -27,11 +25,6 @@ private:
 	bool hasShowUpgrade;
 	bool canClick;
 	LabelAtlas* labelScore;
-	Sprite* currentRoundScore;
-	LabelAtlas* rankNum;
-	Sprite* rank;
-	LabelAtlas* beatNum;
-	Sprite* beatPer;
 	MenuItemImage* startBtn;
 	Upgrade* upgrade;
 };

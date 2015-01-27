@@ -39,8 +39,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
           ../../Classes/MenuScenePayHandler.cpp\
           ../../Classes/SignIn.cpp\
           ../../Classes/Upgrade.cpp\
-          ../../Classes/About.cpp\
-          ../../Classes/UserLevelInfo.cpp
+          ../../Classes/About.cpp
           
 
 

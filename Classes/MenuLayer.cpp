@@ -13,7 +13,6 @@
 #include "CallAndroidMethod.h"
 #include "SignIn.h"
 #include "About.h"
-#include "UserLevelInfo.h"
 
 using namespace cocostudio::timeline;
 
@@ -54,7 +53,7 @@ bool MenuLayer::init(){
 	this->addChild(effect);
 
 	int level = GAMEDATA::getInstance()->getUserLevel();
-	auto about = Label::create(ChineseWord("about"),"Arial",36);
+	auto about = Label::create(ChineseWord("about"),"Arial",24);
 	about->setPosition(450,40);
 	about->setAnchorPoint(Point(1,0.5));
 	this->addChild(about);
@@ -65,14 +64,10 @@ bool MenuLayer::init(){
 
 	int per = (int)((float)GAMEDATA::getInstance()->getCurExpNum()/GAMEDATA::getInstance()->getFullExpNum(level)*100);
 	auto perNum = Label::create("LV"
-			+String::createWithFormat("%d/",level)->_string+String::createWithFormat("%d",per)->_string	+"%","Arial",36);
+			+String::createWithFormat("%d/",level)->_string+String::createWithFormat("%d",per)->_string	+"%","Arial",24);
 	perNum->setPosition(30,40);
 	perNum->setAnchorPoint(Point(0, 0.5));
 	this->addChild(perNum);
-
-	auto levelListener = EventListenerTouchOneByOne::create();
-	levelListener->onTouchBegan = CC_CALLBACK_2(MenuLayer::showLevel,this);
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(levelListener,perNum);
 
 	auto goldBuy = Sprite::create("buy_gold.png");
 	goldBuy->setPosition(240,760);
@@ -179,7 +174,7 @@ void MenuLayer::autoStartGame(float dt){
 		if(CallAndroidMethod::getInstance()->notSignToday()){
 
 		}else{
-			if(GAMEDATA::getInstance()->isFirstLogin()){
+			if(GAMEDATA::getInstance()->isFirstLogin() && GAMEDATA::getInstance()->getUserLevel() <=1){
 				GAMEDATA::getInstance()->init();
 				Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
 				GAMEDATA::getInstance()->setFirstLogin(false);
@@ -208,18 +203,7 @@ bool MenuLayer::showAbout(Touch* touch,Event* event){
 		}
 		auto about = About::getInstance();
 		this->addChild(about);
-		return true;
-	}
-	return false;
-}
-
-bool MenuLayer::showLevel(Touch* touch,Event* event){
-	if(event->getCurrentTarget()->getBoundingBox().containsPoint(touch->getLocation())){
-		if(signIn->isVisible() || quitBg->isVisible()){
-			return true;
-		}
-		auto userLevelInfo = UserLevelInfo::getInstance();
-		this->addChild(userLevelInfo);
+		about->setVisible(true);
 		return true;
 	}
 	return false;

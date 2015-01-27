@@ -3,15 +3,13 @@
 #include "CallAndroidMethod.h"
 #include "GameData.h"
 
-Upgrade* Upgrade::_instance = nullptr;
+Upgrade* Upgrade::_instance = 0;
 Upgrade::Upgrade(){
 	this->init();
 }
 
 Upgrade* Upgrade::getInstance(){
-	if(_instance == 0){
-		_instance = new Upgrade();
-	}
+	_instance = new Upgrade();
 	return _instance;
 }
 
@@ -20,6 +18,7 @@ bool Upgrade::init(){
 		return false;
 	}
 
+	animTime = 0;
 	auto bg = Sprite::create("bg_mainscene.jpg");
 	bg->setPosition(240,400);
 	this->addChild(bg);
@@ -60,11 +59,20 @@ bool Upgrade::init(){
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(Upgrade::hideSelf,this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
-
+	scheduleUpdate();
 	return true;
 }
 
 bool Upgrade::hideSelf(Touch* touch,Event* event){
-	this->setVisible(false);
-	this->removeFromParentAndCleanup(true);
+	if(animTime > 20){
+		this->setVisible(false);
+		this->removeFromParentAndCleanup(true);
+	}
+	return true;
+}
+
+void Upgrade::update(float dt){
+	if(this->isVisible()){
+		animTime += dt/0.05;
+	}
 }

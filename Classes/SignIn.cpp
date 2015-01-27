@@ -181,7 +181,7 @@ void SignIn::hideSelf(){
 		GAMEDATA::getInstance()->setPrizeGoldNum(15+signDay*5);
     #endif
 
-	if(GAMEDATA::getInstance()->isFirstLogin()){
+	if(GAMEDATA::getInstance()->isFirstLogin() && GAMEDATA::getInstance()->getUserLevel() <=1){
 		GAMEDATA::getInstance()->init();
 		Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
 	}else{

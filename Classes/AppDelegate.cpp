@@ -78,5 +78,7 @@ void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
     // if you use SimpleAudioEngine, it must resume here
-     CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+    if(GAMEDATA::getInstance()->getMusicState()){
+        CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+    }
 }

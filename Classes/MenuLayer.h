@@ -13,7 +13,6 @@ public:
 	bool startGame(Touch* touch,Event* event);
 	void autoStartGame(float dt);
 	bool showAbout(Touch* touch,Event* event);
-	bool showLevel(Touch* touch,Event* event);
 	void stopAction();
 	void startAction();
 	void getSoudState(CCObject* pSender);

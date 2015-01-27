@@ -125,15 +125,22 @@ void GameLayer::showLinkNum(int size){
 	linkNum->setVisible(true);
 }
 
-void GameLayer::showEveryScore(int score,int index,Point point){
+void GameLayer::showEveryScore(int size,int score,int index,Point point){
 	//显示分数
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,-20*index));
 	this->addChild(everyScore);
-	everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),[=](){
-		Audio::getInstance()->playScore();
-		this->refreshMenu(score);
-	});
+	if(size >= 7){
+		everyScore->floatInScore((0.6),[=](){
+			Audio::getInstance()->playScore();
+			this->refreshMenu(score);
+		});
+	}else{
+		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),[=](){
+			Audio::getInstance()->playScore();
+			this->refreshMenu(score);
+		});
+	}
 }
 
 void GameLayer::hideLinkNum(){
@@ -227,7 +234,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 3;
+	GameLayer::totalTime = 5;
 }
 
 int GameLayer::getTime(){

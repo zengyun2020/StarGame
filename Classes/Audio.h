@@ -19,5 +19,6 @@ public:
 	void prepare();
 private:
 	static Audio* m_instance;
+	int scoreId;
 };
 #endif

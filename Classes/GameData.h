@@ -58,6 +58,9 @@ public:
 	inline void setFirstLogin(bool firstLogin){first_login = firstLogin;}
 	inline bool isFirstLogin(){return first_login;}
 
+	inline void setTotalScore(int totalScore){total_score = totalScore;}
+	inline int getTotalScore(){return total_score;}
+
 	/*????????*/
 	int getJiangli(int size);
 
@@ -83,7 +86,7 @@ public:
 	void saveMusicState();
 	void saveCurExpNum();
 	void savePrizeGoldNum();
-
+	void saveTotalScore();
 private:
 	GAMEDATA();
 	void init();
@@ -108,6 +111,7 @@ private:
 	int cur_exp_num;
 	float score_add_per;
 	int prize_gold_num;
+	int total_score;
 	friend class MenuLayer;
 	friend class GameOverLayer;
 	friend class SignIn;

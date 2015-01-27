@@ -16,6 +16,6 @@ public class NativeNotifyService {
 	public static void startNativeNotify(){
 		Log.i("MCH",">>>>>startNativeNotify");
 		NotifyManager.setNextNotification(activity, 
-				1000*60, "羊年消星星", "有活动案啦，都来抢金币吧");
+				1000*60*60*12, "羊年消星星", "有活动案啦，都来抢金币吧");
 	}
 }

@@ -61,10 +61,10 @@
 <string>升级奖励</string>
 
 <key>addscoreper</key>
-<string>额外分数</string>
+<string>额外收集愿望</string>
 
 <key>addscorenum</key>
-<string>额外等级分数</string>
+<string>额外收集愿望</string>
 
 <key>gold</key>
 <string>金币</string>
@@ -74,6 +74,46 @@
 
 <key>userinfo</key>
 <string>玩家信息</string>
+
+<key>abouttitle11</key>
+<string>您已经收集了</string>
+
+<key>abouttitle12</key>
+<string>个愿望</string>
+
+<key>abouttitle21</key>
+<string>可以让女神开心</string>
+
+<key>abouttitle22</key>
+<string>小时</string>
+
+<key>aboutdesc1</key>
+<string>每颗星都蕴含着一个心愿，</string>
+<key>aboutdesc2</key>
+<string>收集星星的过程就是在成全心愿。</string>
+<key>aboutdesc3</key>
+<string>那些密密麻麻的心情，</string>
+<key>aboutdesc4</key>
+<string>就这样被细细地隐藏在，</string>
+<key>aboutdesc5</key>
+<string>颗颗璀璨的小星里。</string>
+<key>aboutdesc6</key>
+<string>每收集1000个心愿，</string>
+<key>aboutdesc7</key>
+<string>就能够让女神开心1小时,</string>
+<key>aboutdesc8</key>
+<string>还在等什么?</string>
+<key>aboutdesc9</key>
+<string>成为万千女神钟爱的暖男吧！</string>
+
+<key>nvshenkaixin</key>
+<string>女神又可以开心</string>
+
+<key>xiaoshi</key>
+<string>小时</string>
+
+<key>shouji</key>
+<string>开始收集愿望</string>
 
 </dict>
 

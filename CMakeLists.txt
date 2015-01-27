@@ -144,7 +144,6 @@ set(GAME_SRC
   Classes/SignIn.cpp
   Classes/Upgrade.cpp
   Classes/About.cpp
-  Classes/UserLevelInfo.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -179,7 +178,6 @@ set(GAME_HEADERS
   Classes/SignIn.h
   Classes/Upgrade.h
   Classes/About.h
-  Classes/UserLevelInfo.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

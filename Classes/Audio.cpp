@@ -37,22 +37,22 @@ void Audio::playClick(){
 
 void Audio::playScore(){
 	if(GAMEDATA::getInstance()->getSoundEffect()){
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/coin.ogg",false);}
+		scoreId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/coin.ogg",false);}
 }
 
 void Audio::playCombo(int size){
 	if(GAMEDATA::getInstance()->getSoundEffect()){
-	if(size < 5)
-		return;
-	if(size >= 10){
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/combo_3.ogg",false);
-	}else if(size >= 7){
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/combo_2.ogg",false);
-	}else {
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/combo_1.ogg",false);
-	}}
+		if(size < 5)
+			return;
+		if(size >= 9){
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/combo_3.ogg");
+		}else if(size >= 7){
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/combo_2.ogg");
+		}else {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/combo_1.ogg");
+		}
+	}
 }
-
 
 
 void Audio::playNextGameRound(){

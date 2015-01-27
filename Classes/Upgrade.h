@@ -8,12 +8,13 @@ class Upgrade : public Node{
 public:
 	static Upgrade* getInstance();
 	virtual bool init();
+	virtual void update(float delta);
 	CREATE_FUNC(Upgrade);
 	bool hideSelf(Touch* touch,Event* event);
 
 private:
 	static Upgrade* _instance;
-	int signDay;
+	float animTime;
 private:
 	Upgrade();
 
