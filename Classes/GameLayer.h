@@ -32,7 +32,7 @@ public:
 	void doGameOver();
 	void loadGame(float dt);
 	void updateCustom(float dt);
-	void initTime();  //閲嶇疆娓告垙鏃堕棿
+	void initTime();  //重置游戏时间
 	void setTime(int time);
 	int getTime();
 	void plusTime(int time);
@@ -43,10 +43,10 @@ private:
 	TopMenu* menu;
 	StarMatrix* matrix;
 	Label* linkNum;
-	Label* gameTime;//娓告垙鏃堕棿鏄剧ず
+	Label* gameTime;//游戏时间显示
 	FloatWord* gameOverWord;
 public :
-	static int totalTime;//娓告垙鏃堕棿
+	static int totalTime;//游戏时间
 	static bool _PauseTime;
 	static bool needPluse;
 	static bool gameOver;

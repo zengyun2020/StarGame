@@ -41,8 +41,6 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
 
-
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 	MenuItemImage* PauseBtn = MenuItemImage::create(
 		"pause.png","pause.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
 		);
@@ -50,9 +48,7 @@ bool TopMenu::init(){
 	menuPause->alignItemsHorizontally();
 	menuPause->setPosition(visibleSize.width/2-190,visibleSize.height/2+300);
 	this->addChild(menuPause);
-
-
-	// ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½Ü°ï¿½ï¿½ï¿½
+	
 	 BombBtn = MenuItemImage::create(
 		"bomb_normal.png","bomb_click.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
@@ -114,7 +110,7 @@ void TopMenu::usePropsBomb(){
 			BombBtn->runAction(RepeatForever::create(seq1));
 		}
 	}else{
-		//å¼¹å‡ºæ”¯ä»˜
+		//µ¯³öÖ§¸¶
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		CallAndroidMethod::getInstance()->pay(3);
 #endif

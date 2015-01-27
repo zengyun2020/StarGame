@@ -4,30 +4,21 @@
 class GAMEDATA{
 public:
 	static GAMEDATA* getInstance();
-	/*??????*/
 	void setCurLevel(int level);
 	inline int getCurLevel(){return cur_level;}
-	/*??????*/
 	inline int getNextLevel(){return next_level;}
-	/*????*/
 	inline void setHistoryScore(int score){history_score = score;}
 	inline int getHistoryScore(){return history_score;}
-	/*???????*/
 	inline void setCurScore(int score){cur_score = score;}
 	inline int getCurScore(){return cur_score;}
-	/*??????*/
 	inline int getNextScore(){return next_score;}
 	inline int getScoreByLevel(int level);
-	/*???????*/
 	inline void setGoldNum(int goldNum){gold_num = goldNum;}
 	inline int getGoldNum(){return gold_num;}
-	/*?????????*/
 	inline void setPowerStoneNum(int powerStoneNum){power_stone_num = powerStoneNum;}
 	inline int getPowerStoneNum(){return power_stone_num;}
-	/*?????*/
 	inline void setUserLevel(int userLevel){user_level = userLevel;}
 	inline int getUserLevel(){return user_level;}
-	/*???�w????*/
 	inline void setPrizeTimes(int prizeTimes){prize_times = prizeTimes;}
 	inline int getPrizeTimes(){return prize_times;}
 
@@ -64,16 +55,12 @@ public:
 	inline void setPaySuccess(bool paySuccess){pay_success = paySuccess;}
 	inline bool isPaySuccess(){return pay_success;}
 
-	/*????????*/
 	int getJiangli(int size);
 
-	/*????????????????*/
 	int getFullExpNum(int userLevel);
 
-	/*??????��???*/
 	float getScoreAddPer(int userLevel);
 
-	/*��ȡ���������������*/
 	int getUpgradePrizeNum(int urserLevel);
 
 	void saveHighestScore();

@@ -75,7 +75,7 @@ void StarMatrix::onTouch(const Point& p){
 		}
 		genSelectedList(s);
 		//deleteSelectedList();
-		//é•¿åº¦å°äºç­‰äº1åˆ™è¿”å›
+		//³¤¶ÈĞ¡ÓÚµÈÓÚ1Ôò·µ»Ø
 		if(selectedList.size() <= 1){
 			m_layer->hideLinkNum();
 			selectedList.at(0)->setSelected(false);
@@ -126,10 +126,10 @@ Point StarMatrix::getPositionByIndex(int i,int j){
 }
 
 Star* StarMatrix::getStarByTouch(const Point& p){
-	int k = (p.y)/Star::STAR_HEIGHT;//è¿™é‡Œè¦ç”¨Kè½¬ä¸€ä¸‹int ä¸ç„¶å¾—ä¸åˆ°æ­£ç¡®ç»“æœ
+	int k = (p.y)/Star::STAR_HEIGHT;//ÕâÀïÒªÓÃK×ªÒ»ÏÂint ²»È»µÃ²»µ½ÕıÈ·½á¹û
 	int i = ROW_NUM - 1 - k + 2;
 	int j = p.x/Star::STAR_WIDTH;
-	if(i >= 0 && i < ROW_NUM && 
+	if(i >= 0 && i < ROW_NUM &&
 		j >= 0 && j < COL_NUM &&
 		stars[i][j] != nullptr){
 			CCLOG("i=%d,j=%d",i,j);
@@ -139,7 +139,7 @@ Star* StarMatrix::getStarByTouch(const Point& p){
 	}
 }
 
-//æ¶ˆé™¤æ£€æŸ¥
+//Ïû³ı¼ì²é
 void StarMatrix::genSelectedList(Star* s){
 	selectedList.clear();
 	deque<Star*> travelList;
@@ -150,22 +150,22 @@ void StarMatrix::genSelectedList(Star* s){
 		Star* linkStar = nullptr;
 		int index_i = star->getIndexI();
 		int index_j = star->getIndexJ();
-		//ä¸Š
+		//ÉÏ
 		if(index_i-1 >= 0 && (linkStar = stars[index_i-1][index_j]) ){
 			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
 				travelList.push_back(stars[index_i-1][index_j]);
 		}
-		//ä¸‹
+		//ÏÂ
 		if(index_i+1 < ROW_NUM  && (linkStar = stars[index_i+1][index_j]) ){
 			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
 				travelList.push_back(stars[index_i+1][index_j]);
 		}
-		//å·¦
+		//×ó
 		if(index_j-1 >= 0 && (linkStar = stars[index_i][index_j-1]) ){
 			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
 				travelList.push_back(stars[index_i][index_j-1]);
 		}
-		//å³
+		//ÓÒ
 		if(index_j+1 < COL_NUM && (linkStar = stars[index_i][index_j+1]) ){
 			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
 				travelList.push_back(stars[index_i][index_j+1]);
@@ -178,49 +178,49 @@ void StarMatrix::genSelectedList(Star* s){
 		it = travelList.begin();
 	}
 }
-//äº§ç”Ÿç‚¸å¼¹çš„æ¶ˆé™¤é˜Ÿåˆ—
+//²úÉúÕ¨µ¯µÄÏû³ı¶ÓÁĞ
 void StarMatrix::genBombList(Star* s){
 	selectedList.clear();
 	selectedList.push_back(s);
 	Star* linkStar = nullptr;
 	int index_i = s->getIndexI();
 	int index_j = s->getIndexJ();
-	//ä¸Š
+	//ÉÏ
 	if(index_i-1 >= 0 && (linkStar = stars[index_i-1][index_j]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i-1][index_j]);
 	}
-	//å·¦ä¸Š
+	//×óÉÏ
 	if(index_i-1 >= 0 && index_j-1 >= 0&& (linkStar = stars[index_i-1][index_j-1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i-1][index_j-1]);
 	}
-	//å³ä¸Š
+	//ÓÒÉÏ
 	if(index_i-1 >= 0 && index_j+1 <= COL_NUM && (linkStar = stars[index_i-1][index_j+1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i-1][index_j+1]);
 	}
-	//ä¸‹
+	//ÏÂ
 	if(index_i+1 < ROW_NUM  && (linkStar = stars[index_i+1][index_j]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i+1][index_j]);
 	}
-	//å·¦ä¸‹
+	//×óÏÂ
 	if(index_i+1 < ROW_NUM  && index_j-1 >= 0 && (linkStar = stars[index_i+1][index_j-1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i+1][index_j-1]);
 	}
-	//å³ä¸‹
+	//ÓÒÏÂ
 	if(index_i+1 < ROW_NUM  &&  index_j+1 <= COL_NUM && (linkStar = stars[index_i+1][index_j+1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i+1][index_j+1]);
 	}
-	//å·¦
+	//×ó
 	if(index_j-1 >= 0 && (linkStar = stars[index_i][index_j-1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i][index_j-1]);
 	}
-	//å³
+	//ÓÒ
 	if(index_j+1 < COL_NUM && (linkStar = stars[index_i][index_j+1]) ){
 		if(!linkStar->isSelected())
 			selectedList.push_back(stars[index_i][index_j+1]);
@@ -229,22 +229,22 @@ void StarMatrix::genBombList(Star* s){
 
 
 void StarMatrix::deleteSelectedList(){
-	//æ’­æ”¾æ¶ˆé™¤éŸ³æ•ˆ
+	//²¥·ÅÏû³ıÒôĞ§
 	Audio::getInstance()->playPop();
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
 		Star* star = *it;
 		m_layer->showEveryScore(selectedListSize,30+(selectedListSize-selectedList.size())*5,selectedListSize-selectedList.size(),star->getPosition());
 		selectedList.pop_front();
-		//ç²’å­æ•ˆæœ
+		//Á£×ÓĞ§¹û
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
 		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
 		star->removeFromParentAndCleanup(true);
-	
+
 		return;
 	}
 	clearOneByOne =false;
-	//COMBOæ•ˆæœ
+	//COMBOĞ§¹û
 	showComboEffect(selectedListSize,this);
 	refreshScore();
 	m_layer->showLinkNum(selectedListSize);
@@ -254,24 +254,24 @@ void StarMatrix::deleteSelectedList(){
 	if(isEnded()){
 		acceptTouch=false;
 		GameLayer::_PauseTime=true;// pause time
-		m_layer->floatLeftStarMsg(getLeftStarNum());//é€šçŸ¥layerå¼¹å‡ºå‰©ä½™æ˜Ÿæ˜Ÿçš„ä¿¡æ¯
+		m_layer->floatLeftStarMsg(getLeftStarNum());//Í¨Öªlayerµ¯³öÊ£ÓàĞÇĞÇµÄĞÅÏ¢
 		CCLOG("ENDED");
 	}
 }
 
 void StarMatrix::deleteBombList(){
-	//æ’­æ”¾æ¶ˆé™¤éŸ³æ•ˆ
+	//²¥·ÅÏû³ıÒôĞ§
 	Audio::getInstance()->playPropBomb();
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
 		Star* star = *it;
 		selectedList.pop_front();
-		//ç²’å­æ•ˆæœ
+		//Á£×ÓĞ§¹û
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
 		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
 		star->removeFromParentAndCleanup(true);
 	}
-	//COMBOæ•ˆæœ
+	//COMBOĞ§¹û
 	selectedListSize=0;
 	acceptTouch =true;
 	adjustMatrix();
@@ -282,7 +282,7 @@ void StarMatrix::deleteBombList(){
 }
 
 void StarMatrix::adjustMatrix(){
-	//å‚ç›´æ–¹å‘è°ƒæ•´
+	//´¹Ö±·½Ïòµ÷Õû
 	for(int i = ROW_NUM-1;i>=0;i--){
 		for(int j = COL_NUM-1;j>=0;j--){
 			if(stars[i][j] == nullptr){
@@ -309,7 +309,7 @@ void StarMatrix::adjustMatrix(){
 			}
 		}
 	}
-	//æ°´å¹³æ–¹å‘è°ƒæ•´
+	//Ë®Æ½·½Ïòµ÷Õû
 	for(int j = 0;j < COL_NUM;j++){
 		if(stars[ROW_NUM-1][j] == nullptr){
 			int des = 0;
@@ -335,7 +335,7 @@ void StarMatrix::adjustMatrix(){
 
 
 void StarMatrix::refreshScore(){
-	
+
 }
 
 
@@ -347,16 +347,16 @@ bool StarMatrix::isEnded(){
 			if(stars[i][j] == nullptr)
 				continue;
 			int curColor = stars[i][j]->getColor();
-			//ä¸Š
+			//ÉÏ
 			if(i-1>=0 && stars[i-1][j]!=nullptr && stars[i-1][j]->getColor() ==  curColor)
 				return false;
-			//ä¸‹
+			//ÏÂ
 			if(i+1<ROW_NUM && stars[i+1][j]!=nullptr && stars[i+1][j]->getColor() == curColor)
 				return false;
-			//å·¦
+			//×ó
 			if(j-1>=0 && stars[i][j-1]!=nullptr && stars[i][j-1]->getColor() == curColor)
 				return false;
-			//å³
+			//ÓÒ
 			if(j+1<COL_NUM && stars[i][j+1]!=nullptr && stars[i][j+1]->getColor() == curColor)
 				return false;
 		}
@@ -365,7 +365,7 @@ bool StarMatrix::isEnded(){
 }
 
 void StarMatrix::clearMatrixOneByOne(){
-	//æ’­æ”¾æ¶ˆé™¤éŸ³æ•ˆ
+	//²¥·ÅÏû³ıÒôĞ§
 	Audio::getInstance()->playPop();
 	for(int i=0;i<ROW_NUM;i++){
 		for(int j=0;j<COL_NUM;j++){
@@ -377,9 +377,9 @@ void StarMatrix::clearMatrixOneByOne(){
 			return;
 		}
 	}
-	//èƒ½å¤Ÿæ‰§è¡Œåˆ°è¿™ä¸€å¥è¯´æ˜Matrixå…¨ä¸ºç©ºï¼Œä¸åœ¨éœ€è¦æ¸…ç©º
+	//ÄÜ¹»Ö´ĞĞµ½ÕâÒ»¾äËµÃ÷MatrixÈ«Îª¿Õ£¬²»ÔÚĞèÒªÇå¿Õ
 	needClear = false;
-	//è½¬åˆ°ä¸‹ä¸€å…³
+	//×ªµ½ÏÂÒ»¹Ø
 	GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
 	m_layer->gotoNextLevel();
 	/*if(GAMEDATA::getInstance()->getCurScore() >= GAMEDATA::getInstance()->getNextScore()){

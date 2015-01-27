@@ -14,7 +14,7 @@ CallAndroidMethod* CallAndroidMethod::getInstance(){
 
 void CallAndroidMethod::showMoreGame(){
 	CCLOG(">>>>>>>>>>>>>>showMoreGame");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
 		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/NetWorkService","showMoreGame","()V");
@@ -25,8 +25,7 @@ void CallAndroidMethod::showMoreGame(){
 }
 
 void CallAndroidMethod::pay(int payPoint){
-	CCLOG(">>>>>>>>>>>>>>pay");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
 		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/PayService","pay","(II)V");
@@ -41,7 +40,7 @@ void CallAndroidMethod::pay(int payPoint){
 
 void CallAndroidMethod::startNativeNotify(){
 	CCLOG(">>>>>>>>>>>>>>startNativeNotify");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
 		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/NativeNotifyService","startNativeNotify","()V");
@@ -53,7 +52,7 @@ void CallAndroidMethod::startNativeNotify(){
 
 bool CallAndroidMethod::isSignToday(){
 	CCLOG(">>>>>>>>>>>>>>isSignToday");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
 		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/SignInService","isSignToday","()Z");
@@ -68,7 +67,7 @@ bool CallAndroidMethod::isSignToday(){
 
 bool CallAndroidMethod::notSignToday(){
 	CCLOG(">>>>>>>>>>>>>>notSignToday");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
 		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/SignInService","notSignToday","()Z");
@@ -83,7 +82,7 @@ bool CallAndroidMethod::notSignToday(){
 
 int CallAndroidMethod::getCurrentSignDayas(){
 	CCLOG(">>>>>>>>>>>>>>getCurrentSignDayas");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
 		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/SignInService","getCurrentSignDays","()I");
@@ -98,7 +97,7 @@ int CallAndroidMethod::getCurrentSignDayas(){
 
 void CallAndroidMethod::sign(){
 	CCLOG(">>>>>>>>>>>>>>sign");
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) //�жϵ�ǰ�Ƿ�ΪAndroidƽ̨
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
 	    CCLOG("android platform");
 		JniMethodInfo methodInfo;
 		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/SignInService","sign","()V");

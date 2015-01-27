@@ -1,4 +1,4 @@
-ï»¿#include "GameLayer.h"
+#include "GameLayer.h"
 #include "GameData.h"
 #include "Chinese.h"
 #include "StarMatrix.h"
@@ -63,14 +63,14 @@ void GameLayer::loadGame(float dt){
 }
 
 
-//æ˜¾ç¤ºæ˜Ÿæ˜ŸçŸ©é˜µ
+//ÏÔÊ¾ĞÇĞÇ¾ØÕó
 void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
     GameLayer::_PauseTime=false;//resume time
 }
 
-//æ›´æ–°æ–¹æ³•ï¼ŒscheduleUpdate,æ¯å¸§è°ƒç”¨
+//¸üĞÂ·½·¨£¬scheduleUpdate,Ã¿Ö¡µ÷ÓÃ
 void GameLayer::update(float delta){
 	if(needPluse){
 		linkNum->setString(ChineseWord("shijian"));
@@ -126,7 +126,7 @@ void GameLayer::showLinkNum(int size){
 }
 
 void GameLayer::showEveryScore(int size,int score,int index,Point point){
-	//æ˜¾ç¤ºåˆ†æ•°
+	//ÏÔÊ¾·ÖÊı
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,-20*index));
 	this->addChild(everyScore);
@@ -219,7 +219,7 @@ void GameLayer::gotoNextLevel(){
 
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
-	//TODO å¤æ´»è®¡è´¹ç‚¹æ¥å…¥
+	//TODO ¸´»î¼Æ·Ñµã½ÓÈë
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	if(GAMEDATA::getInstance()->getReviveNum()>0){
 		CallAndroidMethod::getInstance()->pay(6);
@@ -256,10 +256,10 @@ void GameLayer::updateCustom(float dt){
 	}
 
 	if(totalTime<=5 && totalTime>=0){
-		Audio::getInstance()->playBeep();//å€’è®¡æ—¶æŠ¥è­¦
+		Audio::getInstance()->playBeep();//µ¹¼ÆÊ±±¨¾¯
 	}
 	if(totalTime == 0){
-		//æ—¶é—´ç»“æŸï¼Œå¼¹å‡ºæ¸¸æˆç»“ç®—ç•Œé¢
+		//Ê±¼ä½áÊø£¬µ¯³öÓÎÏ·½áËã½çÃæ
 		gotoGameOver();
 	}
 	if(totalTime<0){

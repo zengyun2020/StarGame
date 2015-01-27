@@ -48,7 +48,7 @@ bool MenuLayer::init(){
 	//backgroud music
 	Audio::getInstance()->playBGM();
 
-	// é£˜é›ªç²’å­æ•ˆæœ
+	// Æ®Ñ©Á£×ÓĞ§¹û
 	ParticleSnow* effect = ParticleSnow::create();
 	effect->setTotalParticles(100);
 	this->addChild(effect);
@@ -138,7 +138,7 @@ bool MenuLayer::init(){
 	this->addChild(cancelMenu,3);
 
 	this->setKeypadEnabled(true);
-	//ç›‘å¬ç‰©ç†æŒ‰é”®
+	//¼àÌıÎïÀí°´¼ü
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyReleased = [=](EventKeyboard::KeyCode code, Event * e){
 		switch (code)
@@ -259,19 +259,19 @@ void MenuLayer::stopAction(){
 
 void MenuLayer::getSoudState(CCObject* pSender){
 	Audio::getInstance()->playClick();
-	 //åˆ›å»ºä¸´æ—¶CCMenuItemToggle
+	 //´´½¨ÁÙÊ±CCMenuItemToggle
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
-    //æ ¹æ®CCMenuItemToggleçš„é€‰é¡¹æ¥å†³å®šéŸ³ä¹çš„å¼€å…³
+    //¸ù¾İCCMenuItemToggleµÄÑ¡ÏîÀ´¾ö¶¨ÒôÀÖµÄ¿ª¹Ø
     if (temp->getSelectedIndex()==1)
     {
-        //æš‚åœæ’­æ”¾éŸ³ä¹
+        //ÔİÍ£²¥·ÅÒôÀÖ
         CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 		GAMEDATA::getInstance()->setSoundEffect(false);
 	    GAMEDATA::getInstance()->saveSoundEffect();
     }
     if (temp->getSelectedIndex()==0)
     {
-        //ç»§ç»­æ’­æ”¾éŸ³ä¹
+        //¼ÌĞø²¥·ÅÒôÀÖ
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
 		GAMEDATA::getInstance()->setSoundEffect(true);
 	    GAMEDATA::getInstance()->saveSoundEffect();
@@ -280,19 +280,19 @@ void MenuLayer::getSoudState(CCObject* pSender){
 
 void MenuLayer::getMusicState(CCObject* pSender){
 	Audio::getInstance()->playClick();
-	 //åˆ›å»ºä¸´æ—¶CCMenuItemToggle
+	 //´´½¨ÁÙÊ±CCMenuItemToggle
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
-    //æ ¹æ®CCMenuItemToggleçš„é€‰é¡¹æ¥å†³å®šéŸ³ä¹çš„å¼€å…³
+    //¸ù¾İCCMenuItemToggleµÄÑ¡ÏîÀ´¾ö¶¨ÒôÀÖµÄ¿ª¹Ø
     if (temp->getSelectedIndex()==1)
     {
-        //æš‚åœæ’­æ”¾éŸ³ä¹
+        //ÔİÍ£²¥·ÅÒôÀÖ
         CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
         GAMEDATA::getInstance()->setMusicState(false);
         GAMEDATA::getInstance()->saveMusicState();
     }
     if (temp->getSelectedIndex()==0)
     {
-        //ç»§ç»­æ’­æ”¾éŸ³ä¹
+        //¼ÌĞø²¥·ÅÒôÀÖ
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
         GAMEDATA::getInstance()->setMusicState(true);
         GAMEDATA::getInstance()->saveMusicState();

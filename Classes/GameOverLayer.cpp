@@ -24,7 +24,7 @@ bool GameOverLayer::init(){
 	canClick = false;
 	hasShowUpgrade = false;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	/*��ʼ������*/
+
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
@@ -58,20 +58,20 @@ bool GameOverLayer::init(){
 
 	labelScore = LabelAtlas::create("", "game_result_score_num.png", 39.0f, 69.0f, '0');
 	labelScore->setPosition(Point(240, 480));
-	labelScore->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
+	labelScore->setAnchorPoint(Point(0.5, 0.5));
 	this->addChild(labelScore);
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
 
-	LabelAtlas* beatNum = LabelAtlas::create("", "game_result_rank_num.png", 19.0f, 33.0f, '0');
+	LabelAtlas* beatNum = LabelAtlas::create("", "rank_num.png", 19.0f, 33.0f, '0');
 	beatNum->setPosition(Point(254, 256));
-	beatNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
+	beatNum->setAnchorPoint(Point(0.5, 0.5));
     beatNum->setString(cocos2d::String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankPer(curScore))->_string);
 
 	this->addChild(beatPerTxt);
 	this->addChild(beatNum);
 
 	startBtn = MenuItemImage::create(
-		"game_result_retry_normal.png","game_result_retry_click.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
+		"retry_normal.png","retry_click.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
 		);
 	startBtn->setScale(1.2);
 	Menu* menu1 = Menu::create(startBtn,NULL);
@@ -115,7 +115,6 @@ bool GameOverLayer::init(){
 		this->addChild(soundEffectMenu);
 		this->scheduleUpdate();
 
-		CCLog(">>>>>>>>>>>>>>>>>>>>>>>new upgrade");
 		upgrade = 0;
 		upgrade = Upgrade::getInstance();
 		upgrade->setVisible(false);
@@ -154,13 +153,15 @@ void GameOverLayer::update(float delta){
 					GAMEDATA::getInstance()->setCurExpNum(0);
 
 					upgrade->setVisible(true);
-					CCLog(">>>>>>>>>>>>>>>>>>>>>>>set upgrade visible");
 				}else{
 					GAMEDATA::getInstance()->setCurExpNum(curExpNum+1);
 				}
 				GAMEDATA::getInstance()->saveCurExpNum();
 				GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+GAMEDATA::getInstance()->getPrizeGoldNum()+upgradePrizeGoldNum);
 				GAMEDATA::getInstance()->saveGoldNum();
+
+				GAMEDATA::getInstance()->setTotalScore(GAMEDATA::getInstance()->getTotalScore()+curScore);
+				GAMEDATA::getInstance()->saveTotalScore();
 			}
 			canClick = true;
 		}
@@ -179,9 +180,7 @@ void GameOverLayer::continueGame(){
 }
 
 void GameOverLayer::back(){
-	CCLog(">>>>>>>>>>>>>>>>>>>>>>>");
 	if(upgrade->isVisible()){
-		CCLog(">>>>>>>>>>>>>>>>>>>>>>>upgrade is visible");
 		return;
 	}
 	if(canClick){
@@ -192,19 +191,19 @@ void GameOverLayer::back(){
 
 void GameOverLayer::getSoudState(CCObject* pSender){
 	Audio::getInstance()->playClick();
-		 //创建临时CCMenuItemToggle
+		 //������ʱCCMenuItemToggle
 	    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
-	    //根据CCMenuItemToggle的选项来决定音乐的开关
+	    //����CCMenuItemToggle��ѡ�����������ֵĿ���
 	    if (temp->getSelectedIndex()==1)
 	    {
-	        //暂停播放音乐
+	        //��ͣ��������
 	        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 			GAMEDATA::getInstance()->setSoundEffect(false);
 		    GAMEDATA::getInstance()->saveSoundEffect();
 	    }
 	    if (temp->getSelectedIndex()==0)
 	    {
-	        //继续播放音乐
+	        //������������
 	        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
 			GAMEDATA::getInstance()->setSoundEffect(true);
 		    GAMEDATA::getInstance()->saveSoundEffect();
@@ -213,19 +212,19 @@ void GameOverLayer::getSoudState(CCObject* pSender){
 
 void GameOverLayer::getMusicState(CCObject* pSender){
 	Audio::getInstance()->playClick();
-		 //创建临时CCMenuItemToggle
+		 //������ʱCCMenuItemToggle
 	CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
-	//根据CCMenuItemToggle的选项来决定音乐的开关
+	//����CCMenuItemToggle��ѡ�����������ֵĿ���
 	if (temp->getSelectedIndex()==1)
 	{
-		//暂停播放音乐
+		//��ͣ��������
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 		GAMEDATA::getInstance()->setMusicState(false);
 		GAMEDATA::getInstance()->saveMusicState();
 	}
 	if (temp->getSelectedIndex()==0)
 	{
-		//继续播放音乐
+		//������������
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 		GAMEDATA::getInstance()->setMusicState(true);
 		GAMEDATA::getInstance()->saveMusicState();
