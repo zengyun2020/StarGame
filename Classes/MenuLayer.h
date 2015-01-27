@@ -30,5 +30,6 @@ private:
 	Menu* cancelMenu;
 	SignIn* signIn;
 	Sprite* title;
+	bool hasShowQuitPay;
 };
 #endif

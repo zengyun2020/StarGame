@@ -61,6 +61,9 @@ public:
 	inline void setTotalScore(int totalScore){total_score = totalScore;}
 	inline int getTotalScore(){return total_score;}
 
+	inline void setPaySuccess(bool paySuccess){pay_success = paySuccess;}
+	inline bool isPaySuccess(){return pay_success;}
+
 	/*????????*/
 	int getJiangli(int size);
 
@@ -87,6 +90,7 @@ public:
 	void saveCurExpNum();
 	void savePrizeGoldNum();
 	void saveTotalScore();
+	void savePaySuccess();
 private:
 	GAMEDATA();
 	void init();
@@ -112,6 +116,7 @@ private:
 	float score_add_per;
 	int prize_gold_num;
 	int total_score;
+	bool pay_success;
 	friend class MenuLayer;
 	friend class GameOverLayer;
 	friend class SignIn;

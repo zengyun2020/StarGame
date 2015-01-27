@@ -29,6 +29,7 @@ void GAMEDATA::init(){
 	setCurExpNum(UserDefault::getInstance()->getIntegerForKey("curExpNum",0));
 	setPrizeGoldNum(UserDefault::getInstance()->getIntegerForKey("prizeGoldNum",15));
 	setTotalScore(UserDefault::getInstance()->getIntegerForKey("totalScore",0));
+	setPaySuccess(UserDefault::getInstance()->getBoolForKey("paySuccess",false));
 }
 
 void GAMEDATA::setCurLevel(int level){
@@ -147,4 +148,8 @@ void GAMEDATA::savePrizeGoldNum(){
 
 void GAMEDATA::saveTotalScore(){
 	UserDefault::getInstance()->setIntegerForKey("totalScore", getTotalScore());
+}
+
+void GAMEDATA::savePaySuccess(){
+	UserDefault::getInstance()->setBoolForKey("paySuccess", isPaySuccess());
 }

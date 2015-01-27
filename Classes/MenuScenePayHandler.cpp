@@ -13,11 +13,15 @@ MenuScenePayHandler* MenuScenePayHandler::getInstance()
 }
 
 void MenuScenePayHandler::payCallback(int requestId,int resultId){
+	if(resultId == 0){
+		GAMEDATA::getInstance()->setPaySuccess(true);
+		GAMEDATA::getInstance()->savePaySuccess();
+	}
 	//request_id = requestId;
 	switch (requestId)
 	{
 	case 1:
-		//ÐÂÊÖÀñ°ü
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		GameLayer::_PauseTime=false;
 		if(resultId==0){
 			GAMEDATA::getInstance()->setAddTimeNum(5+GAMEDATA::getInstance()->getAddTimeNum());
@@ -30,7 +34,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		GAMEDATA::getInstance()->setHasShowRegisterPay(true);
 		break;
 	case 2:
-		//¼ÓÊ±
+		//ï¿½ï¿½Ê±
 		GameLayer::_PauseTime=false;
 		if(resultId==0){
 			GAMEDATA::getInstance()->setAddTimeNum(10+GAMEDATA::getInstance()->getAddTimeNum());
@@ -38,7 +42,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			TopMenu::getInstance()->updatePropsNum();}
 		break;
 	case 3:
-		//Õ¨µ¯
+		//Õ¨ï¿½ï¿½
 		GameLayer::_PauseTime=false;
 		if(resultId==0){
 			GAMEDATA::getInstance()->setBombNum(10+GAMEDATA::getInstance()->getBombNum());
@@ -46,7 +50,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			TopMenu::getInstance()->updatePropsNum();}
 		break;
 	case 4:
-		//ÔÝÍ£½çÃæ
+		//ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 		if(resultId==0){
 			GAMEDATA::getInstance()->setAddTimeNum(5+GAMEDATA::getInstance()->getAddTimeNum());
 			GAMEDATA::getInstance()->saveAddTimeNum();
@@ -67,11 +71,11 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			GameLayer::gameOver=true;
 		}
 
-		//¸´»î
+		//ï¿½ï¿½ï¿½ï¿½
 		break;
 	case 6:
 		GameLayer::_PauseTime=false;
-		//Ãâ·Ñ¸´»î
+		//ï¿½ï¿½Ñ¸ï¿½ï¿½ï¿½
 		if(resultId==0){
 			GAMEDATA::getInstance()->setReviveNum(GAMEDATA::getInstance()->getReviveNum()-1);
 			GAMEDATA::getInstance()->saveAddTimeNum();

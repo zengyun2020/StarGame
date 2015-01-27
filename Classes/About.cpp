@@ -23,25 +23,23 @@ bool About::init(){
 	bg->setPosition(240,400);
 	this->addChild(bg);
 
-	auto smallTitle11 = Label::create(ChineseWord("abouttitle11")+String::createWithFormat("%d",
-			1000)->_string+ChineseWord("abouttitle12"),"Arial",36);
+	auto smallTitle11 = Label::create(ChineseWord("abouttitle11"),"Arial",36);
 	smallTitle11->setPosition(60,718);
 	smallTitle11->setAnchorPoint(Point(0,0.5));
 	this->addChild(smallTitle11);
 
-	auto smallTitle12 = Label::create(ChineseWord("abouttitle11")+String::createWithFormat("%d",
+	auto smallTitle12 = Label::create(String::createWithFormat("%d",
 			1000)->_string+ChineseWord("abouttitle12"),"Arial",36);
 	smallTitle12->setPosition(60,668);
 	smallTitle12->setAnchorPoint(Point(0,0.5));
 	this->addChild(smallTitle12);
 
-	auto smallTitle21 = Label::create(ChineseWord("abouttitle21")+String::createWithFormat("%d",
-			1)->_string+ChineseWord("abouttitle22"),"Arial",36);
+	auto smallTitle21 = Label::create(ChineseWord("abouttitle21"),"Arial",36);
 	smallTitle21->setPosition(60,618);
 	smallTitle21->setAnchorPoint(Point(0,0.5));
 	this->addChild(smallTitle21);
 
-	auto smallTitle22 = Label::create(ChineseWord("abouttitle21")+String::createWithFormat("%d",
+	auto smallTitle22 = Label::create(String::createWithFormat("%d",
 			1)->_string+ChineseWord("abouttitle22"),"Arial",36);
 	smallTitle22->setPosition(60,568);
 	smallTitle22->setAnchorPoint(Point(0,0.5));

@@ -21,6 +21,7 @@ bool MenuLayer::init(){
 		return false;
 	}
 
+	hasShowQuitPay = false;
 	auto bg = Sprite::create("bg_mainscene.jpg");
 	bg->setPosition(240,400);
 	this->addChild(bg);
@@ -210,10 +211,24 @@ bool MenuLayer::showAbout(Touch* touch,Event* event){
 }
 
 void MenuLayer::showQuit(){
-	quitBg->setVisible(true);
-	quitDesc->setVisible(true);
-	confirmMenu->setVisible(true);
-	cancelMenu->setVisible(true);
+	if(GAMEDATA::getInstance()->isPaySuccess()){
+		quitBg->setVisible(true);
+		quitDesc->setVisible(true);
+		confirmMenu->setVisible(true);
+		cancelMenu->setVisible(true);
+	}else{
+		if(hasShowQuitPay){
+			quitBg->setVisible(true);
+			quitDesc->setVisible(true);
+			confirmMenu->setVisible(true);
+			cancelMenu->setVisible(true);
+		}else{
+			hasShowQuitPay = true;
+			#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+				CallAndroidMethod::getInstance()->pay(1);
+    		#endif
+		}
+	}
 }
 
 void MenuLayer::quit(){
