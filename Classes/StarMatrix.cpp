@@ -67,6 +67,7 @@ void StarMatrix::onTouch(const Point& p){
 		if(BombClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
+			TopMenu::getInstance()->refreshGold();
 			TopMenu::getInstance()->updatePropsNum();
 			TopMenu::getInstance()->stopScaleAction();
 			useBombAuto(s);

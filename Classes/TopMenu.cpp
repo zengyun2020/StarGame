@@ -104,6 +104,10 @@ void TopMenu::cleanScore(){
 	highestScore->setString(cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string);
 }
 
+void TopMenu::refreshGold(){
+	playerGold->setString(("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getGoldNum())->_string);
+}
+
 void TopMenu::usePropsBomb(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
@@ -145,7 +149,8 @@ void TopMenu::usePropsTime(){
 				GameLayer::needPluse =true;  
 				GAMEDATA::getInstance()->setGoldNum(gold-800);
 				GAMEDATA::getInstance()->saveGoldNum();
-				propTimeNum->setString(String::createWithFormat("%d",800)->_string );
+				propTimeNum->setString(String::createWithFormat("%d",800)->_string);
+				refreshGold();
 			});
 			
 		}

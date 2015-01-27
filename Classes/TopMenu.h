@@ -16,7 +16,7 @@ public:
 	void updatePropsNum();
 	void stopScaleAction();
 	void cleanScore();
-
+	void refreshGold();
 private:
 	static TopMenu* _instance;
 	Label* highestScore;

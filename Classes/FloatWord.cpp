@@ -66,11 +66,11 @@ void FloatWord::floatInTime(const float speed,const float delayTime,std::functio
 	_label->runAction(action);
 }
 
-void FloatWord::floatInScore(const float delay,std::function<void()> callback){
+void FloatWord::floatInScore(const float delay,Point cp1,Point cp2,std::function<void()> callback){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	  ccBezierConfig bezier;
-    bezier.controlPoint_1 = Point(50, 50);
-    bezier.controlPoint_2 = Point(100, 100);
+    bezier.controlPoint_1 = cp1;
+    bezier.controlPoint_2 = cp2;
     bezier.endPosition = Point(visibleSize.width/2,visibleSize.height/2 +300);
 	auto delayEvent=DelayTime::create(delay);
     auto bezierAction = BezierTo::create(1.5f, bezier);

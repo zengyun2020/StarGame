@@ -130,13 +130,23 @@ void GameLayer::showEveryScore(int size,int score,int index,Point point){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,-20*index));
 	this->addChild(everyScore);
+	Point cp1 =Point(50,50);
+	Point cp2= Point(100,100);
+	if(point.x > visibleSize.width/2){
+		cp1 =Point(50,50);
+		cp2= Point(100,150);
+	}else{
+		cp1 =Point(430,50);
+		cp2= Point(340,150);
+	}
+	
 	if(size >= 7){
-		everyScore->floatInScore((0.6),[=](){
+		everyScore->floatInScore((0.6),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
 			this->refreshMenu(score);
 		});
 	}else{
-		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),[=](){
+		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
 			this->refreshMenu(score);
 		});
@@ -234,7 +244,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 15;
+	GameLayer::totalTime = 60;
 }
 
 int GameLayer::getTime(){
