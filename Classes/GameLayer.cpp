@@ -51,7 +51,7 @@ void GameLayer::loadGame(float dt){
 
 	initTime();
 	gameTime = Label::create("","Arial",24);
-	gameTime->setPosition(visibleSize.width/2-180,visibleSize.height-50);
+	gameTime->setPosition(visibleSize.width/2+190,visibleSize.height/2+350);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
 
@@ -120,23 +120,33 @@ void GameLayer::showLinkNum(int size){
 	   result += 30+i*5;
 	}
 	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") + 
-		String::createWithFormat("%d",result)->_string + ChineseWord("fen");
+		String::createWithFormat("%d",result)->_string + ChineseWord("abouttitle12");
 	linkNum->setString(s);
 	linkNum->setVisible(true);
 }
 
-void GameLayer::showEveryScore(int size,int score,int index,Point point){
-	//ÏÔÊ¾·ÖÊý
+
+void GameLayer::showEveryScore(int size,int score,int index,Point point,bool leftType){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,-20*index));
 	this->addChild(everyScore);
+	Point cp1 =Point(50,50);
+	Point cp2= Point(100,100);
+	if(leftType){
+		cp1 =Point(430,50);
+		cp2= Point(340,150);
+	}else{	
+		cp1 =Point(50,50);
+		cp2= Point(100,150);
+	}
+	
 	if(size >= 7){
-		everyScore->floatInScore((0.6),[=](){
+		everyScore->floatInScore((0.6),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
 			this->refreshMenu(score);
 		});
 	}else{
-		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),[=](){
+		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
 			this->refreshMenu(score);
 		});
@@ -165,12 +175,6 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 				[=](){
 					hideLinkNum();
 					matrix->setNeedClear(true);
-					GAMEDATA* data = GAMEDATA::getInstance();
-					data->setCurScore(data->getCurScore() + jiangLiScore);
-					if(data->getCurScore() > data->getHistoryScore()){
-						data->setHistoryScore(data->getCurScore());
-					}
-					refreshMenu(0);
 				});
 	if(leftNum<10){
 	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
@@ -178,6 +182,19 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	this->addChild(leftStarMsg2);
 	leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
 	} 
+	FloatWord* prize=FloatWord::create(String::createWithFormat("%d",jiangLiScore)->_string,32,Point(visibleSize.width/2,visibleSize.height/2 - 80));
+	prize->setVisible(false);
+	this->addChild(prize);
+	prize->floatInPrize(1.5,[=](){
+	prize->setVisible(true);
+	},0.5,[=](){
+	GAMEDATA* data = GAMEDATA::getInstance();
+					data->setCurScore(data->getCurScore() + jiangLiScore);
+					if(data->getCurScore() > data->getHistoryScore()){
+						data->setHistoryScore(data->getCurScore());
+					}
+					refreshMenu(0);
+	});
 	/*Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
 	this->addChild(msg1);
@@ -234,7 +251,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 5;
+	GameLayer::totalTime = 60;
 }
 
 int GameLayer::getTime(){

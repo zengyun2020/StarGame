@@ -40,7 +40,7 @@ bool GameOverLayer::init(){
 
 	float addScorePer = GAMEDATA::getInstance()->getScoreAddPer(GAMEDATA::getInstance()->getUserLevel());
 	auto addScoreNumTxt = Label::create(ChineseWord("addscorenum")
-			+String::createWithFormat(":%d",(int)(addScorePer*curScore))->_string,"Arial",24);
+		+String::createWithFormat(":%d",(int)(addScorePer*curScore))->_string,"Arial",24);
 	addScoreNumTxt->setPosition(240,530);
 	this->addChild(addScoreNumTxt);
 
@@ -51,8 +51,8 @@ bool GameOverLayer::init(){
 	this->addChild(prizeGoldNum);
 
 	auto happy = Label::create(ChineseWord("nvshenkaixin")+
-			String::createWithFormat("%d",curScore/1000)->_string+"."+
-			String::createWithFormat("%d",(curScore%1000)/100)->_string+ChineseWord("xiaoshi"),"Arial",28);
+		String::createWithFormat("%d",curScore/1000)->_string+"."+
+		String::createWithFormat("%d",(curScore%1000)/100)->_string+ChineseWord("xiaoshi"),"Arial",28);
 	happy->setPosition(240,309);
 	this->addChild(happy);
 
@@ -64,6 +64,7 @@ bool GameOverLayer::init(){
 
 	LabelAtlas* beatNum = LabelAtlas::create("", "rank_num.png", 19.0f, 33.0f, '0');
 	beatNum->setPosition(Point(254, 256));
+
 	beatNum->setAnchorPoint(Point(0.5, 0.5));
     beatNum->setString(cocos2d::String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankPer(curScore))->_string);
 
@@ -86,39 +87,39 @@ bool GameOverLayer::init(){
 	this->addChild(menu2);
 
 	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
-		MenuItemImage* musicBtnOff = MenuItemImage::create("bg_music_close.png","bg_music_close.png");
-		MenuItemToggle* musicTog = MenuItemToggle::createWithTarget(this,menu_selector(GameOverLayer::getMusicState),musicBtnOn,musicBtnOff,NULL);
-		if (CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
-		{
-			musicTog->setSelectedIndex(0);
-		}
-		else
-		{
-			musicTog->setSelectedIndex(1);
-		}
-		auto musicMenu = Menu::create(musicTog,NULL);
-		musicMenu->setPosition(184,150);
-		MenuItemImage* soundEffectOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
-		MenuItemImage* soundEffectOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");
-		MenuItemToggle* soundEffectTog = MenuItemToggle::createWithTarget(this,menu_selector(GameOverLayer::getSoudState),soundEffectOn,soundEffectOff,NULL);
-		 if (GAMEDATA::getInstance()->getSoundEffect())
-			{
-			    soundEffectTog->setSelectedIndex(0);
-			}
-			else
-			{
-				soundEffectTog->setSelectedIndex(1);
-			}
-		auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
-		soundEffectMenu->setPosition(296,150);
-		this->addChild(musicMenu);
-		this->addChild(soundEffectMenu);
-		this->scheduleUpdate();
+	MenuItemImage* musicBtnOff = MenuItemImage::create("bg_music_close.png","bg_music_close.png");
+	MenuItemToggle* musicTog = MenuItemToggle::createWithTarget(this,menu_selector(GameOverLayer::getMusicState),musicBtnOn,musicBtnOff,NULL);
+	if (CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+	{
+		musicTog->setSelectedIndex(0);
+	}
+	else
+	{
+		musicTog->setSelectedIndex(1);
+	}
+	auto musicMenu = Menu::create(musicTog,NULL);
+	musicMenu->setPosition(184,150);
+	MenuItemImage* soundEffectOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
+	MenuItemImage* soundEffectOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");
+	MenuItemToggle* soundEffectTog = MenuItemToggle::createWithTarget(this,menu_selector(GameOverLayer::getSoudState),soundEffectOn,soundEffectOff,NULL);
+	if (GAMEDATA::getInstance()->getSoundEffect())
+	{
+		soundEffectTog->setSelectedIndex(0);
+	}
+	else
+	{
+		soundEffectTog->setSelectedIndex(1);
+	}
+	auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
+	soundEffectMenu->setPosition(296,150);
+	this->addChild(musicMenu);
+	this->addChild(soundEffectMenu);
+	this->scheduleUpdate();
 
-		upgrade = 0;
-		upgrade = Upgrade::getInstance();
-		upgrade->setVisible(false);
-		this->addChild(upgrade);
+	upgrade = 0;
+	upgrade = Upgrade::getInstance();
+	upgrade->setVisible(false);
+	this->addChild(upgrade);
 	return true;
 }
 
@@ -191,7 +192,6 @@ void GameOverLayer::back(){
 
 void GameOverLayer::getSoudState(CCObject* pSender){
 	Audio::getInstance()->playClick();
-		 //������ʱCCMenuItemToggle
 	    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
 	    //����CCMenuItemToggle��ѡ�����������ֵĿ���
 	    if (temp->getSelectedIndex()==1)
@@ -212,7 +212,6 @@ void GameOverLayer::getSoudState(CCObject* pSender){
 
 void GameOverLayer::getMusicState(CCObject* pSender){
 	Audio::getInstance()->playClick();
-		 //������ʱCCMenuItemToggle
 	CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
 	//����CCMenuItemToggle��ѡ�����������ֵĿ���
 	if (temp->getSelectedIndex()==1)

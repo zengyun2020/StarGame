@@ -74,7 +74,7 @@ int GAMEDATA::getJiangli(int size){
 		{6, 1280},
 		{7, 1020},
 		{8, 720},
-		{9, 380}
+		{9, 380},
 	};
 	if(size>9 || size<0){
 		return 0;

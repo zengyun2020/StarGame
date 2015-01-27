@@ -10,8 +10,8 @@ public:
 	void floatOut(const float delay,std::function<void()> callback);
 	void floatInOut(const float speed,const float delay,std::function<void()> callback);
 	void floatInTime(const float speed,const float delay,std::function<void()> callback);
-	void floatInScore(const float delay,std::function<void()> callback);
-
+	void floatInScore(const float delay,Point cp1,Point cp2,std::function<void()> callback);
+	void floatInPrize(const float delay,std::function<void()> callback1,const float speed,std::function<void()> callback2);
 private:
 	int _fontSize;
 	Point _begin;

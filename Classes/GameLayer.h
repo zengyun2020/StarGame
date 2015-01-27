@@ -22,7 +22,7 @@ public:
 	virtual bool onTouchBegan(Touch* touch,Event* event);
 	void refreshMenu(int score);
 	void showLinkNum(int size);
-	void showEveryScore(int size,int score,int index,Point point);
+	void showEveryScore(int size,int score,int index,Point point,bool leftType);
 	void showGameTime(int time);
 	void hideLinkNum();
 	void floatLeftStarMsg(int leftNum);

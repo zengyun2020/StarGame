@@ -41,6 +41,11 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
 
+	playerGold =Label::create(ChineseWord("gold")+String::createWithFormat(":%d",
+		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
+	playerGold->setPosition(visibleSize.width/2-180,visibleSize.height-50);
+	this->addChild(playerGold);
+
 	MenuItemImage* PauseBtn = MenuItemImage::create(
 		"pause.png","pause.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
 		);
@@ -94,6 +99,11 @@ void TopMenu::cleanScore(){
 	sprintf(buf,"%d",0);
 	curScore->setString(buf);
 	highestScore->setString(cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getHistoryScore())->_string);
+	refreshGold();
+}
+
+void TopMenu::refreshGold(){
+	playerGold->setString(("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getGoldNum())->_string);
 }
 
 void TopMenu::usePropsBomb(){
@@ -137,7 +147,8 @@ void TopMenu::usePropsTime(){
 				GameLayer::needPluse =true;  
 				GAMEDATA::getInstance()->setGoldNum(gold-800);
 				GAMEDATA::getInstance()->saveGoldNum();
-				propTimeNum->setString(String::createWithFormat("%d",800)->_string );
+				propTimeNum->setString(String::createWithFormat("%d",800)->_string);
+				refreshGold();
 			});
 			
 		}

@@ -13,23 +13,18 @@ public:
 	void usePropsBomb();
 	void usePropsTime();
 	void PauseGame();
-	//void ResumeGame();
-	//void getSoudState(CCObject* pSender);
-	//void getMusicState(CCObject* pSender);
 	void updatePropsNum();
-	//void goBack();
 	void stopScaleAction();
 	void cleanScore();
-
+	void refreshGold();
 private:
 	static TopMenu* _instance;
 	Label* highestScore;
-	//Label* level;
-	//Label* targetScore;
 	Label* curScore;
 	Layer* gamePause;
 	Label* propBombNum;
 	Label* propTimeNum;
+	Label* playerGold;
 	MenuItemImage* BombBtn;
 	MenuItemImage* TimeBtn;
 	FloatWord* plusTimeWord;

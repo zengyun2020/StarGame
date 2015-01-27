@@ -41,6 +41,7 @@ private:
 	bool needClear;
 	bool clearOneByOne;
 	bool acceptTouch;
+	bool touchLeft;
 	
 	float clearSumTime;
 	int selectedListSize;
