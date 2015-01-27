@@ -36,7 +36,7 @@ bool TopMenu::init(){
 
 	curScore = Label::create(
 		cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getCurScore())->_string,
-		"Verdana-Bold",50	
+		"Verdana-Bold",50
 		);
 	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
@@ -53,7 +53,7 @@ bool TopMenu::init(){
 	menuPause->alignItemsHorizontally();
 	menuPause->setPosition(visibleSize.width/2-190,visibleSize.height/2+300);
 	this->addChild(menuPause);
-	
+
 	 BombBtn = MenuItemImage::create(
 		"bomb_normal.png","bomb_click.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
@@ -67,14 +67,14 @@ bool TopMenu::init(){
 
 	propBombNum = Label::create(
 		cocos2d::String::createWithFormat("%d",500)->_string,
-		"Verdana-Bold",18	
+		"Verdana-Bold",18
 		);
 	propBombNum->setPosition(visibleSize.width/2+150,visibleSize.height/2+280);
 	this->addChild(propBombNum);
 
 	propTimeNum = Label::create(
 		cocos2d::String::createWithFormat("%d",800)->_string,
-		"Verdana-Bold",18	
+		"Verdana-Bold",18
 		);
 	propTimeNum->setPosition(visibleSize.width/2+223,visibleSize.height/2+280);
 	this->addChild(propTimeNum);
@@ -120,7 +120,7 @@ void TopMenu::usePropsBomb(){
 			BombBtn->runAction(RepeatForever::create(seq1));
 		}
 	}else{
-		//µ¯³öÖ§¸¶
+		//ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		CallAndroidMethod::getInstance()->pay(3);
 #endif
@@ -144,13 +144,13 @@ void TopMenu::usePropsTime(){
 			plusTimeWord =FloatWord::create("+10"+ChineseWord("miao"),12,Point(visibleSize.width/2+175,visibleSize.height/2+300));
 			this->addChild(plusTimeWord);
 			plusTimeWord->floatInTime(0.5,0,[=](){
-				GameLayer::needPluse =true;  
+				GameLayer::needPluse =true;
 				GAMEDATA::getInstance()->setGoldNum(gold-800);
 				GAMEDATA::getInstance()->saveGoldNum();
 				propTimeNum->setString(String::createWithFormat("%d",800)->_string);
 				refreshGold();
 			});
-			
+
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -168,6 +168,6 @@ void TopMenu::PauseGame(){
 
 
 void TopMenu::updatePropsNum(){
-	propTimeNum->setString(String::createWithFormat("%d",500)->_string );
-	propBombNum->setString(String::createWithFormat("%d",800)->_string );
+	propTimeNum->setString(String::createWithFormat("%d",800)->_string );
+	propBombNum->setString(String::createWithFormat("%d",500)->_string );
 }
