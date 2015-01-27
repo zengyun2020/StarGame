@@ -17,7 +17,7 @@ void GAMEDATA::init(){
 	setCurScore(0);
 	setHistoryScore(UserDefault::getInstance()->getIntegerForKey("highestScore",0));
 	setUserLevel(UserDefault::getInstance()->getIntegerForKey("userLevel",0));
-	setGoldNum(UserDefault::getInstance()->getIntegerForKey("goldNum",3000));
+	setGoldNum(UserDefault::getInstance()->getIntegerForKey("goldNum",1000));
 	setPowerStoneNum(UserDefault::getInstance()->getIntegerForKey("powerStoneNum",0));
 	setPrizeTimes(UserDefault::getInstance()->getIntegerForKey("prizeTimes",3));
 	setAddTimeNum(UserDefault::getInstance()->getIntegerForKey("addTimeNum",1));

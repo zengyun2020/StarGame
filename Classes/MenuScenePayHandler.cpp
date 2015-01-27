@@ -21,7 +21,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 	switch (requestId)
 	{
 	case 1:
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
 		GameLayer::_PauseTime=false;
 		if(resultId==0){
 			GAMEDATA::getInstance()->setAddTimeNum(5+GAMEDATA::getInstance()->getAddTimeNum());
@@ -75,7 +75,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		break;
 	case 6:
 		GameLayer::_PauseTime=false;
-		//ï¿½ï¿½Ñ¸ï¿½ï¿½ï¿½
+		//ï¿½ï¿½Ñ¸ï¿½ï¿½ï¿?
 		if(resultId==0){
 			GAMEDATA::getInstance()->setReviveNum(GAMEDATA::getInstance()->getReviveNum()-1);
 			GAMEDATA::getInstance()->saveAddTimeNum();

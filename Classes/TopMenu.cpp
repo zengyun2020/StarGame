@@ -65,17 +65,17 @@ bool TopMenu::init(){
 	this->addChild(menu);
 
 	propBombNum = Label::create(
-		cocos2d::String::createWithFormat("%d",30)->_string,
+		cocos2d::String::createWithFormat("%d",500)->_string,
 		"Verdana-Bold",18	
 		);
-	propBombNum->setPosition(visibleSize.width/2+145,visibleSize.height/2+280);
+	propBombNum->setPosition(visibleSize.width/2+150,visibleSize.height/2+280);
 	this->addChild(propBombNum);
 
 	propTimeNum = Label::create(
-		cocos2d::String::createWithFormat("%d",30)->_string,
+		cocos2d::String::createWithFormat("%d",800)->_string,
 		"Verdana-Bold",18	
 		);
-	propTimeNum->setPosition(visibleSize.width/2+215,visibleSize.height/2+280);
+	propTimeNum->setPosition(visibleSize.width/2+223,visibleSize.height/2+280);
 	this->addChild(propTimeNum);
 
 
@@ -103,7 +103,7 @@ void TopMenu::cleanScore(){
 void TopMenu::usePropsBomb(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
-	if(gold>=30){
+	if(gold>=500){
 		if(!(StarMatrix::BombClick)){
 			StarMatrix::BombClick =true;
 			auto scale1 = ScaleTo::create(1.0f,0.6,0.6,0);
@@ -132,16 +132,16 @@ void TopMenu::stopScaleAction(){
 void TopMenu::usePropsTime(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
-	if(gold>=30){
+	if(gold>=800){
 		if(!(StarMatrix::BombClick) && GameLayer::totalTime>1){
 			Size visibleSize = Director::getInstance()->getVisibleSize();
 			plusTimeWord =FloatWord::create("+10"+ChineseWord("miao"),12,Point(visibleSize.width/2+175,visibleSize.height/2+300));
 			this->addChild(plusTimeWord);
 			plusTimeWord->floatInTime(0.5,0,[=](){
 				GameLayer::needPluse =true;  
-				GAMEDATA::getInstance()->setGoldNum(gold-30);
+				GAMEDATA::getInstance()->setGoldNum(gold-800);
 				GAMEDATA::getInstance()->saveGoldNum();
-				propTimeNum->setString(String::createWithFormat("%d",30)->_string );
+				propTimeNum->setString(String::createWithFormat("%d",800)->_string );
 			});
 			
 		}
@@ -161,6 +161,6 @@ void TopMenu::PauseGame(){
 
 
 void TopMenu::updatePropsNum(){
-	propTimeNum->setString(String::createWithFormat("%d",30)->_string );
-	propBombNum->setString(String::createWithFormat("%d",30)->_string );
+	propTimeNum->setString(String::createWithFormat("%d",500)->_string );
+	propBombNum->setString(String::createWithFormat("%d",800)->_string );
 }

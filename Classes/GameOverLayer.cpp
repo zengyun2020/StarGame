@@ -51,7 +51,8 @@ bool GameOverLayer::init(){
 	this->addChild(prizeGoldNum);
 
 	auto happy = Label::create(ChineseWord("nvshenkaixin")+
-			String::createWithFormat("%d",curScore/1000)->_string+ChineseWord("xiaoshi"),"Arial",36);
+			String::createWithFormat("%d",curScore/1000)->_string+"."+
+			String::createWithFormat("%d",(curScore%1000)/100)->_string+ChineseWord("xiaoshi"),"Arial",28);
 	happy->setPosition(240,309);
 	this->addChild(happy);
 
@@ -61,7 +62,7 @@ bool GameOverLayer::init(){
 	this->addChild(labelScore);
 	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
 
-	LabelAtlas* beatNum = LabelAtlas::create("", "game_result_score_num.png", 19.0f, 33.0f, '0');
+	LabelAtlas* beatNum = LabelAtlas::create("", "game_result_rank_num.png", 19.0f, 33.0f, '0');
 	beatNum->setPosition(Point(254, 256));
 	beatNum->setAnchorPoint(Point(0.5, 0.5));//ԭ����ê����(0,0)
     beatNum->setString(cocos2d::String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankPer(curScore))->_string);

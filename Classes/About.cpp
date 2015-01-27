@@ -28,8 +28,10 @@ bool About::init(){
 	smallTitle11->setAnchorPoint(Point(0,0.5));
 	this->addChild(smallTitle11);
 
+	int totalScore = GAMEDATA::getInstance()->getTotalScore();
+
 	auto smallTitle12 = Label::create(String::createWithFormat("%d",
-			1000)->_string+ChineseWord("abouttitle12"),"Arial",36);
+			totalScore)->_string+ChineseWord("abouttitle12"),"Arial",36);
 	smallTitle12->setPosition(60,668);
 	smallTitle12->setAnchorPoint(Point(0,0.5));
 	this->addChild(smallTitle12);
@@ -40,7 +42,8 @@ bool About::init(){
 	this->addChild(smallTitle21);
 
 	auto smallTitle22 = Label::create(String::createWithFormat("%d",
-			1)->_string+ChineseWord("abouttitle22"),"Arial",36);
+			totalScore/1000)->_string+"."+String::createWithFormat("%d",
+					(totalScore%1000)/100)->_string+ChineseWord("abouttitle22"),"Arial",36);
 	smallTitle22->setPosition(60,568);
 	smallTitle22->setAnchorPoint(Point(0,0.5));
 	this->addChild(smallTitle22);
