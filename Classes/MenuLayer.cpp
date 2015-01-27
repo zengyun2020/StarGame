@@ -77,7 +77,7 @@ bool MenuLayer::init(){
 	this->addChild(goldBuy);
 
 	auto gold = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",
-		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",36);
+		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
 	gold->setPosition(30,760);
 	gold->setAnchorPoint(Point(0, 0.5));
 	this->addChild(gold);

@@ -51,7 +51,7 @@ void GameLayer::loadGame(float dt){
 
 	initTime();
 	gameTime = Label::create("","Arial",24);
-	gameTime->setPosition(visibleSize.width/2-180,visibleSize.height-50);
+	gameTime->setPosition(visibleSize.width/2+190,visibleSize.height/2+350);
 	showGameTime(totalTime);
 	this->addChild(gameTime,0);
 
@@ -120,7 +120,7 @@ void GameLayer::showLinkNum(int size){
 	   result += 30+i*5;
 	}
 	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") + 
-		String::createWithFormat("%d",result)->_string + ChineseWord("fen");
+		String::createWithFormat("%d",result)->_string + ChineseWord("abouttitle12");
 	linkNum->setString(s);
 	linkNum->setVisible(true);
 }
@@ -234,7 +234,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 5;
+	GameLayer::totalTime = 15;
 }
 
 int GameLayer::getTime(){

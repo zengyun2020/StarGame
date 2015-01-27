@@ -42,7 +42,11 @@ bool TopMenu::init(){
 	this->addChild(curScore);
 
 
-		// ������ͣ����
+	playerGold =Label::create(ChineseWord("gold")+String::createWithFormat(":%d",
+		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
+	playerGold->setPosition(visibleSize.width/2-180,visibleSize.height-50);
+	this->addChild(playerGold);
+
 	MenuItemImage* PauseBtn = MenuItemImage::create(
 		"pause.png","pause.png",CC_CALLBACK_0(TopMenu::PauseGame,this)
 		);
