@@ -79,5 +79,14 @@ void FloatWord::floatInScore(const float delay,Point cp1,Point cp2,std::function
 	});
 	Sequence* action = Sequence::create(delayEvent,bezierAction,removeC,CallFunc::create(callback),NULL);
 	_label->runAction(action);
+}
 
+void FloatWord::floatInPrize(const float delay,std::function<void()> callback1,const float speed,std::function<void()> callback2){
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	MoveTo* moveIn = MoveTo::create(speed,Point(visibleSize.width/2,visibleSize.height/2 +300));
+	auto removeC = CallFunc::create([this](){
+		this->removeFromParentAndCleanup(true);
+	});
+	Sequence* action = Sequence::create(DelayTime::create(delay),CallFunc::create(callback1),moveIn,removeC,CallFunc::create(callback2),NULL);
+	_label->runAction(action);
 }

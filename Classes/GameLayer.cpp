@@ -175,12 +175,6 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 				[=](){
 					hideLinkNum();
 					matrix->setNeedClear(true);
-					GAMEDATA* data = GAMEDATA::getInstance();
-					data->setCurScore(data->getCurScore() + jiangLiScore);
-					if(data->getCurScore() > data->getHistoryScore()){
-						data->setHistoryScore(data->getCurScore());
-					}
-					refreshMenu(0);
 				});
 	if(leftNum<10){
 	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
@@ -188,6 +182,19 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	this->addChild(leftStarMsg2);
 	leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
 	} 
+	FloatWord* prize=FloatWord::create(String::createWithFormat("%d",jiangLiScore)->_string,32,Point(visibleSize.width/2,visibleSize.height/2 - 80));
+	prize->setVisible(false);
+	this->addChild(prize);
+	prize->floatInPrize(1.5,[=](){
+	prize->setVisible(true);
+	},0.5,[=](){
+	GAMEDATA* data = GAMEDATA::getInstance();
+					data->setCurScore(data->getCurScore() + jiangLiScore);
+					if(data->getCurScore() > data->getHistoryScore()){
+						data->setHistoryScore(data->getCurScore());
+					}
+					refreshMenu(0);
+	});
 	/*Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
 	this->addChild(msg1);
