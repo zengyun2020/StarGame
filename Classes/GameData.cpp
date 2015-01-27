@@ -63,7 +63,7 @@ int GAMEDATA::getScoreByLevel(int level){
 }
 
 int GAMEDATA::getJiangli(int size){
-	static const int jiangli[10][2] =
+	static const int jiangli[20][2] =
 	{
 		{0, 2000},
 		{1, 1980},
@@ -74,7 +74,17 @@ int GAMEDATA::getJiangli(int size){
 		{6, 1280},
 		{7, 1020},
 		{8, 720},
-		{9, 380}
+		{9, 380},
+		{10, 380},
+		{11, 380},
+		{12, 380},
+		{13, 380},
+		{14, 380},
+		{15, 380},
+		{16, 380},
+		{17, 380},
+		{18, 380},
+		{19, 380},
 	};
 	if(size>9 || size<0){
 		return 0;
