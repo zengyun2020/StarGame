@@ -61,7 +61,13 @@ void StarMatrix::updateStar(float delta){
 }
 
 void StarMatrix::onTouch(const Point& p){
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Star* s = getStarByTouch(p);
+	if(p.x>visibleSize.width/2){
+	   StarMatrix::touchLeft=false;
+	}else{
+	 StarMatrix::touchLeft=true;
+	}
 	if(s && acceptTouch){
 		clearOneByOne = true;
 		if(BombClick){
@@ -235,7 +241,7 @@ void StarMatrix::deleteSelectedList(){
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
 		Star* star = *it;
-		m_layer->showEveryScore(selectedListSize,30+(selectedListSize-selectedList.size())*5,selectedListSize-selectedList.size(),star->getPosition());
+		m_layer->showEveryScore(selectedListSize,30+(selectedListSize-selectedList.size())*5,selectedListSize-selectedList.size(),star->getPosition(),touchLeft);
 		selectedList.pop_front();
 		//粒子效果
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
