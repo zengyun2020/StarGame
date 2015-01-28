@@ -23,12 +23,12 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
-		
-//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-//	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
-//		GameLayer::_PauseTime=true;
-//		CallAndroidMethod::getInstance()->pay(1);}
-//#endif
+
+	//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	//	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
+	//		GameLayer::_PauseTime=true;
+	//		CallAndroidMethod::getInstance()->pay(1);}
+	//#endif
 	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
 	return true;
 }
@@ -67,14 +67,14 @@ void GameLayer::loadGame(float dt){
 void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
-    GameLayer::_PauseTime=false;//resume time
+	GameLayer::_PauseTime=false;//resume time
 }
 
 //更新方法，scheduleUpdate,每帧调用
 void GameLayer::update(float delta){
 	if(needPluse){
 		linkNum->setString(ChineseWord("shijian"));
-						linkNum->setVisible(true);
+		linkNum->setVisible(true);
 		plusTime(10);
 		needPluse =false;
 	}
@@ -83,8 +83,8 @@ void GameLayer::update(float delta){
 	}
 
 	if(gameOver){
-		doGameOver();
 		gameOver =false;
+		doGameOver();	
 	}
 	if(needRevive){
 		doRevive();
@@ -117,7 +117,7 @@ void GameLayer::showLinkNum(int size){
 	}
 	int result=0;
 	for(int i=0;i<size;i++){
-	   result += 30+i*5;
+		result += 30+i*5;
 	}
 	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") + 
 		String::createWithFormat("%d",result)->_string + ChineseWord("abouttitle12");
@@ -139,7 +139,7 @@ void GameLayer::showEveryScore(int size,int score,int index,Point point,bool lef
 		cp1 =Point(50,50);
 		cp2= Point(100,150);
 	}
-	
+
 	if(size >= 7){
 		everyScore->floatInScore((0.6),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
@@ -172,42 +172,43 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	this->addChild(leftStarMsg1);
 	int jiangLiScore = GAMEDATA::getInstance()->getJiangli(leftNum);
 	leftStarMsg1->floatInOut(0.5f,1.0f,
-				[=](){
-					hideLinkNum();
-					matrix->setNeedClear(true);
-				});
-	if(leftNum<10){
-	FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
-		50,Point(visibleSize.width,visibleSize.height/2 - 50));
-	this->addChild(leftStarMsg2);
-	leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
-	} 
-	FloatWord* prize=FloatWord::create(String::createWithFormat("%d",jiangLiScore)->_string,32,Point(visibleSize.width/2,visibleSize.height/2 - 80));
-	prize->setVisible(false);
-	this->addChild(prize);
-	prize->floatInPrize(1.5,[=](){
-	prize->setVisible(true);
-	},0.5,[=](){
-	GAMEDATA* data = GAMEDATA::getInstance();
-					data->setCurScore(data->getCurScore() + jiangLiScore);
-					if(data->getCurScore() > data->getHistoryScore()){
-						data->setHistoryScore(data->getCurScore());
-					}
-					refreshMenu(0);
-	});
-	/*Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
-	this->addChild(msg1);
-	msg1->floatInOut(0.5f,1.0f,
 		[=](){
 			hideLinkNum();
 			matrix->setNeedClear(true);
+	});
+	if(leftNum<10){
+		FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
+			50,Point(visibleSize.width,visibleSize.height/2 - 50));
+		this->addChild(leftStarMsg2);
+		leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
+		FloatWord* prize=FloatWord::create(String::createWithFormat("%d",jiangLiScore)->_string,32,Point(visibleSize.width/2,visibleSize.height/2 - 80));
+		prize->setVisible(false);
+		this->addChild(prize);
+		prize->floatInPrize(1.5,[=](){
+			prize->setVisible(true);
+		},0.5,[=](){
 			GAMEDATA* data = GAMEDATA::getInstance();
-			data->setCurScore(data->getCurScore());
+			data->setCurScore(data->getCurScore() + jiangLiScore);
 			if(data->getCurScore() > data->getHistoryScore()){
 				data->setHistoryScore(data->getCurScore());
 			}
 			refreshMenu(0);
+		});
+	} 
+
+	/*Size visibleSize = Director::getInstance()->getVisibleSize();
+	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
+	this->addChild(msg1);
+	msg1->floatInOut(0.5f,1.0f,
+	[=](){
+	hideLinkNum();
+	matrix->setNeedClear(true);
+	GAMEDATA* data = GAMEDATA::getInstance();
+	data->setCurScore(data->getCurScore());
+	if(data->getCurScore() > data->getHistoryScore()){
+	data->setHistoryScore(data->getCurScore());
+	}
+	refreshMenu(0);
 	});*/
 }
 
@@ -237,13 +238,13 @@ void GameLayer::gotoNextLevel(){
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
 	//TODO 复活计费点接入
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	if(GAMEDATA::getInstance()->getReviveNum()>0){
 		CallAndroidMethod::getInstance()->pay(6);
 	}else{
 		CallAndroidMethod::getInstance()->pay(5);
 	}
-    #endif
+#endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	gameOver=true;
 	needRevive=false;

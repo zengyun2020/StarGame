@@ -103,7 +103,7 @@ void TopMenu::cleanScore(){
 }
 
 void TopMenu::refreshGold(){
-	playerGold->setString(("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getGoldNum())->_string);
+	playerGold->setString(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getGoldNum())->_string);
 }
 
 void TopMenu::usePropsBomb(){
