@@ -23,7 +23,7 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
-		
+
 //#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 //	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
 //		GameLayer::_PauseTime=true;
@@ -63,14 +63,14 @@ void GameLayer::loadGame(float dt){
 }
 
 
-//ÏÔÊ¾ÐÇÐÇ¾ØÕó
+//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½
 void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
     GameLayer::_PauseTime=false;//resume time
 }
 
-//¸üÐÂ·½·¨£¬scheduleUpdate,Ã¿Ö¡µ÷ÓÃ
+//ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½scheduleUpdate,Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½
 void GameLayer::update(float delta){
 	if(needPluse){
 		linkNum->setString(ChineseWord("shijian"));
@@ -119,7 +119,7 @@ void GameLayer::showLinkNum(int size){
 	for(int i=0;i<size;i++){
 	   result += 30+i*5;
 	}
-	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") + 
+	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") +
 		String::createWithFormat("%d",result)->_string + ChineseWord("abouttitle12");
 	linkNum->setString(s);
 	linkNum->setVisible(true);
@@ -135,13 +135,13 @@ void GameLayer::showEveryScore(int size,int score,int index,Point point,bool lef
 	if(leftType){
 		cp1 =Point(430,50);
 		cp2= Point(340,150);
-	}else{	
+	}else{
 		cp1 =Point(50,50);
 		cp2= Point(100,150);
 	}
-	
+
 	if(size >= 7){
-		everyScore->floatInScore((0.6),cp1,cp2,[=](){
+		everyScore->floatInScore((0.8),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
 			this->refreshMenu(score);
 		});
@@ -167,7 +167,7 @@ void GameLayer::showGameTime(int time){
 
 void GameLayer::floatLeftStarMsg(int leftNum){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* leftStarMsg1 = FloatWord::create(ChineseWord("shengyu") + String::createWithFormat("%d",leftNum)->_string +ChineseWord("ge"), 
+	FloatWord* leftStarMsg1 = FloatWord::create(ChineseWord("shengyu") + String::createWithFormat("%d",leftNum)->_string +ChineseWord("ge"),
 		50,Point(visibleSize.width,visibleSize.height/2));
 	this->addChild(leftStarMsg1);
 	int jiangLiScore = GAMEDATA::getInstance()->getJiangli(leftNum);
@@ -181,7 +181,7 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 		50,Point(visibleSize.width,visibleSize.height/2 - 50));
 	this->addChild(leftStarMsg2);
 	leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
-	} 
+	}
 	FloatWord* prize=FloatWord::create(String::createWithFormat("%d",jiangLiScore)->_string,32,Point(visibleSize.width/2,visibleSize.height/2 - 80));
 	prize->setVisible(false);
 	this->addChild(prize);
@@ -236,7 +236,7 @@ void GameLayer::gotoNextLevel(){
 
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
-	//TODO ¸´»î¼Æ·Ñµã½ÓÈë
+	//TODO ï¿½ï¿½ï¿½ï¿½Æ·Ñµï¿½ï¿½ï¿½ï¿½
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	if(GAMEDATA::getInstance()->getReviveNum()>0){
 		CallAndroidMethod::getInstance()->pay(6);
@@ -251,7 +251,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 60;
+	GameLayer::totalTime = 5;
 }
 
 int GameLayer::getTime(){
@@ -273,10 +273,10 @@ void GameLayer::updateCustom(float dt){
 	}
 
 	if(totalTime<=5 && totalTime>=0){
-		Audio::getInstance()->playBeep();//µ¹¼ÆÊ±±¨¾¯
+		Audio::getInstance()->playBeep();//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 	}
 	if(totalTime == 0){
-		//Ê±¼ä½áÊø£¬µ¯³öÓÎÏ·½áËã½çÃæ
+		//Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		gotoGameOver();
 	}
 	if(totalTime<0){

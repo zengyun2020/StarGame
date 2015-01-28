@@ -41,7 +41,7 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
 
-	playerGold =Label::create(ChineseWord("gold")+String::createWithFormat(":%d",
+	playerGold =Label::create(ChineseWord("jinbei")+String::createWithFormat(":%d",
 		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
 	playerGold->setPosition(visibleSize.width/2-180,visibleSize.height-50);
 	this->addChild(playerGold);

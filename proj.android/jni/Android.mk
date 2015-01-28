@@ -27,10 +27,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
   					../../Classes/StarParticle.cpp \
   					../../Classes/TopMenu.cpp\
 					../../Classes/Audio.cpp\
-					../../Classes/MenuSceneHandler.cpp\
-					../../Classes/MenuSceneHandlerReader.cpp\
-					../../Classes/GameOver.cpp\
-					../../Classes/GameOverReader.cpp\
 					../../Classes/GameOverScene.cpp\
 					../../Classes/GameOverLayer.cpp\
 					../../Classes/PlayerRank.cpp\

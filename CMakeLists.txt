@@ -131,10 +131,6 @@ set(GAME_SRC
   Classes/GameOverScene.cpp
   Classes/GameOverLayer.cpp
   Classes/Audio.cpp  
-  Classes/MenuSceneHandler.cpp
-  Classes/MenuSceneHandlerReader.cpp
-  Classes/GameOver.cpp
-  Classes/GameOverReader.cpp
   Classes/GameOverScene.cpp
   Classes/GameOverLayer.cpp
   Classes/PlayerRank.cpp
@@ -165,10 +161,6 @@ set(GAME_HEADERS
   Classes/GameOverScene.h
   Classes/GameOverLayer.h
   Classes/Audio.h
-  Classes/MenuSceneHandler.h
-  Classes/MenuSceneHandlerReader.h
-  Classes/GameOver.h
-  Classes/GameOverReader.h
   Classes/GameOverScene.h
   Classes/GameOverLayer.h
   Classes/PlayerRank.h

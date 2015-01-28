@@ -5,7 +5,6 @@
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
-#include "GameOverReader.h"
 #include "PlayerRank.h"
 #include "SimpleAudioEngine.h"
 #include "Audio.h"
@@ -19,10 +18,14 @@ bool GameOverLayer::init(){
 		return false;
 	}
 	curScore = GAMEDATA::getInstance()->getCurScore();
+	float addScorePer = GAMEDATA::getInstance()->getScoreAddPer(GAMEDATA::getInstance()->getUserLevel());
 	scoreNum = 0;
 	animTime = 0;
 	canClick = false;
 	hasShowUpgrade = false;
+	hasShowBeat = false;
+	hasShowHappy = false;
+	hasShowPrizeGold = false;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
@@ -34,42 +37,42 @@ bool GameOverLayer::init(){
 	title->setScale(0.5);
 	this->addChild(title);
 
-	Sprite* beatPerTxt = Sprite::create("game_result_beat.png");
-	beatPerTxt->setPosition(240,256);
-	beatPerTxt->setAnchorPoint(Point(0.5, 0.5));
+	auto addScore = Label::create(ChineseWord("addscoreper")+String::createWithFormat(":%d",(int)(addScorePer*curScore))->_string,"Verdana-Bold",24);
+	addScore->setPosition(240,530);
+	this->addChild(addScore);
 
-	float addScorePer = GAMEDATA::getInstance()->getScoreAddPer(GAMEDATA::getInstance()->getUserLevel());
-	auto addScoreNumTxt = Label::create(ChineseWord("addscorenum")
-		+String::createWithFormat(":%d",(int)(addScorePer*curScore))->_string,"Arial",24);
-	addScoreNumTxt->setPosition(240,530);
-	this->addChild(addScoreNumTxt);
+	curScore = curScore + (int)(addScorePer*curScore);
+	labelScore = LabelAtlas::create("2000","game_result_score_num.png",39.0f,69.0f,'0');
+	labelScore->setPosition(240,480);
+	labelScore->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(labelScore);
+	labelScore->setString("0");
 
-	curScore = curScore+((int)(addScorePer*curScore));
+	prizeGold = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getPrizeGoldNum())->_string,"Verdana-Bold",24);
+	prizeGold->setPosition(-240,390);
+	this->addChild(prizeGold);
 
-	auto prizeGoldNum = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getPrizeGoldNum())->_string,"Arial",24);
-	prizeGoldNum->setPosition(240,355);
-	this->addChild(prizeGoldNum);
-
-	auto happy = Label::create(ChineseWord("nvshenkaixin")+
-		String::createWithFormat("%d",curScore/1000)->_string+"."+
-		String::createWithFormat("%d",(curScore%1000)/100)->_string+ChineseWord("xiaoshi"),"Arial",28);
-	happy->setPosition(240,309);
+	happy = Label::create(ChineseWord("nvshenkaixin")+String::createWithFormat("%d",curScore/1000)->_string
+			+"."+String::createWithFormat("%d",(curScore%1000)/100)->_string+ChineseWord("xiaoshi"),"Verdana-Bold",36);
+	happy->setPosition(-240,309);
 	this->addChild(happy);
 
-	labelScore = LabelAtlas::create("", "game_result_score_num.png", 39.0f, 69.0f, '0');
-	labelScore->setPosition(Point(240, 480));
-	labelScore->setAnchorPoint(Point(0.5, 0.5));
-	this->addChild(labelScore);
-	labelScore->setString(cocos2d::String::createWithFormat(": %d",(int)scoreNum)->_string);
+	beatDesc = Sprite::create("game_result_beat.png");
+	beatDesc->setPosition(-240,256);
+	this->addChild(beatDesc);
 
-	LabelAtlas* beatNum = LabelAtlas::create("", "rank_num.png", 19.0f, 33.0f, '0');
-	beatNum->setPosition(Point(254, 256));
-
-	beatNum->setAnchorPoint(Point(0.5, 0.5));
-    beatNum->setString(cocos2d::String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankPer(curScore))->_string);
-
-	this->addChild(beatPerTxt);
+	beatNum = LabelAtlas::create("2000","rank_num.png",19.0f,33.0f,'0');
+	beatNum->setPosition(-240,256);
+	beatNum->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(beatNum);
+	beatNum->setString(String::createWithFormat("%d",PLAYERRANK::getInstance()->getRankPer(curScore))->_string);
+
+	MenuItemImage* backBtn = MenuItemImage::create(
+		"exit_normal.png","exit_click.png",CC_CALLBACK_0(GameOverLayer::back,this)
+		);
+	Menu* menu2 = Menu::create(backBtn,NULL);
+	menu2->setPosition(408,150);
+	this->addChild(menu2,2);
 
 	startBtn = MenuItemImage::create(
 		"retry_normal.png","retry_click.png",CC_CALLBACK_0(GameOverLayer::continueGame,this)
@@ -77,14 +80,7 @@ bool GameOverLayer::init(){
 	startBtn->setScale(1.2);
 	Menu* menu1 = Menu::create(startBtn,NULL);
 	menu1->setPosition(72,150);
-	this->addChild(menu1);
-
-	MenuItemImage* backBtn = MenuItemImage::create(
-		"exit_normal.png","exit_click.png",CC_CALLBACK_0(GameOverLayer::back,this)
-		);
-	Menu* menu2 = Menu::create(backBtn,NULL);
-	menu2->setPosition(408,150);
-	this->addChild(menu2);
+	this->addChild(menu1,2);
 
 	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
 	MenuItemImage* musicBtnOff = MenuItemImage::create("bg_music_close.png","bg_music_close.png");
@@ -112,14 +108,14 @@ bool GameOverLayer::init(){
 	}
 	auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
 	soundEffectMenu->setPosition(296,150);
-	this->addChild(musicMenu);
-	this->addChild(soundEffectMenu);
+	this->addChild(musicMenu,2);
+	this->addChild(soundEffectMenu,2);
 	this->scheduleUpdate();
 
 	upgrade = 0;
 	upgrade = Upgrade::getInstance();
 	upgrade->setVisible(false);
-	this->addChild(upgrade);
+	this->addChild(upgrade,3);
 	return true;
 }
 
@@ -139,7 +135,23 @@ void GameOverLayer::update(float delta){
 		rotation = 360*animTime/60;
 		startBtn->setRotation(rotation);
 
-		if(animTime > 80){
+		if(animTime > 40 && !hasShowBeat){
+			hasShowBeat = true;
+			beatDesc->runAction(MoveTo::create(0.4f,Point(240,256)));
+			beatNum->runAction(MoveTo::create(0.4f,Point(240,256)));
+		}
+
+		if(animTime > 52 && !hasShowPrizeGold){
+			hasShowPrizeGold = true;
+			prizeGold->runAction(MoveTo::create(0.4f,Point(240,390)));
+		}
+
+		if(animTime > 46 && !hasShowHappy){
+			hasShowHappy = true;
+			happy->runAction(MoveTo::create(0.4f,Point(240,309)));
+		}
+
+		if(animTime > 70){
 			if(hasShowUpgrade){
 
 			}else{

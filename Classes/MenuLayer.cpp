@@ -5,7 +5,6 @@
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
 #include "cocostudio/WidgetReader/ButtonReader/ButtonReader.h"
-#include "MenuSceneHandlerReader.h"
 #include "MenuScenePayHandler.h"
 #include "SimpleAudioEngine.h"
 #include "Chinese.h"
@@ -48,7 +47,7 @@ bool MenuLayer::init(){
 	//backgroud music
 	Audio::getInstance()->playBGM();
 
-	// Æ®Ñ©Á£×ÓĞ§¹û
+	// Æ®Ñ©ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½
 	ParticleSnow* effect = ParticleSnow::create();
 	effect->setTotalParticles(100);
 	this->addChild(effect);
@@ -138,7 +137,7 @@ bool MenuLayer::init(){
 	this->addChild(cancelMenu,3);
 
 	this->setKeypadEnabled(true);
-	//¼àÌıÎïÀí°´¼ü
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyReleased = [=](EventKeyboard::KeyCode code, Event * e){
 		switch (code)
@@ -248,30 +247,30 @@ void MenuLayer::cancel(){
 }
 
 void MenuLayer::startAction(){
-	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
+	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb");
 	action->resume();
 }
 
 void MenuLayer::stopAction(){
-	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb"); 
+	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb");
 	action->stop();
 }
 
 void MenuLayer::getSoudState(CCObject* pSender){
 	Audio::getInstance()->playClick();
-	 //´´½¨ÁÙÊ±CCMenuItemToggle
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±CCMenuItemToggle
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
-    //¸ù¾İCCMenuItemToggleµÄÑ¡ÏîÀ´¾ö¶¨ÒôÀÖµÄ¿ª¹Ø
+    //ï¿½ï¿½ï¿½ï¿½CCMenuItemToggleï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÄ¿ï¿½ï¿½ï¿½
     if (temp->getSelectedIndex()==1)
     {
-        //ÔİÍ£²¥·ÅÒôÀÖ
+        //ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 		GAMEDATA::getInstance()->setSoundEffect(false);
 	    GAMEDATA::getInstance()->saveSoundEffect();
     }
     if (temp->getSelectedIndex()==0)
     {
-        //¼ÌĞø²¥·ÅÒôÀÖ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
 		GAMEDATA::getInstance()->setSoundEffect(true);
 	    GAMEDATA::getInstance()->saveSoundEffect();
@@ -280,19 +279,19 @@ void MenuLayer::getSoudState(CCObject* pSender){
 
 void MenuLayer::getMusicState(CCObject* pSender){
 	Audio::getInstance()->playClick();
-	 //´´½¨ÁÙÊ±CCMenuItemToggle
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±CCMenuItemToggle
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
-    //¸ù¾İCCMenuItemToggleµÄÑ¡ÏîÀ´¾ö¶¨ÒôÀÖµÄ¿ª¹Ø
+    //ï¿½ï¿½ï¿½ï¿½CCMenuItemToggleï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÄ¿ï¿½ï¿½ï¿½
     if (temp->getSelectedIndex()==1)
     {
-        //ÔİÍ£²¥·ÅÒôÀÖ
+        //ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
         GAMEDATA::getInstance()->setMusicState(false);
         GAMEDATA::getInstance()->saveMusicState();
     }
     if (temp->getSelectedIndex()==0)
     {
-        //¼ÌĞø²¥·ÅÒôÀÖ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
         GAMEDATA::getInstance()->setMusicState(true);
         GAMEDATA::getInstance()->saveMusicState();
