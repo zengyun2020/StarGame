@@ -68,7 +68,7 @@ void StarMatrix::onTouch(const Point& p){
 	}else{
 	 StarMatrix::touchLeft=true;
 	}
-	if(s && acceptTouch){
+	if(s && acceptTouch && GameLayer::totalTime>0){
 		clearOneByOne = true;
 		if(BombClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);

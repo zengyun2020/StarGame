@@ -24,11 +24,11 @@ bool GameLayer::init(){
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
 
-//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-//	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
-//		GameLayer::_PauseTime=true;
-//		CallAndroidMethod::getInstance()->pay(1);}
-//#endif
+	//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	//	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
+	//		GameLayer::_PauseTime=true;
+	//		CallAndroidMethod::getInstance()->pay(1);}
+	//#endif
 	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
 	return true;
 }
@@ -67,14 +67,14 @@ void GameLayer::loadGame(float dt){
 void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
-    GameLayer::_PauseTime=false;//resume time
+	GameLayer::_PauseTime=false;//resume time
 }
 
 //ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½scheduleUpdate,Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½
 void GameLayer::update(float delta){
 	if(needPluse){
 		linkNum->setString(ChineseWord("shijian"));
-						linkNum->setVisible(true);
+		linkNum->setVisible(true);
 		plusTime(10);
 		needPluse =false;
 	}
@@ -83,8 +83,8 @@ void GameLayer::update(float delta){
 	}
 
 	if(gameOver){
-		doGameOver();
 		gameOver =false;
+		doGameOver();	
 	}
 	if(needRevive){
 		doRevive();
@@ -117,7 +117,7 @@ void GameLayer::showLinkNum(int size){
 	}
 	int result=0;
 	for(int i=0;i<size;i++){
-	   result += 30+i*5;
+		result += 30+i*5;
 	}
 	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") +
 		String::createWithFormat("%d",result)->_string + ChineseWord("abouttitle12");
@@ -172,6 +172,7 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	this->addChild(leftStarMsg1);
 	int jiangLiScore = GAMEDATA::getInstance()->getJiangli(leftNum);
 	leftStarMsg1->floatInOut(0.5f,1.0f,
+<<<<<<< HEAD
 				[=](){
 					hideLinkNum();
 					matrix->setNeedClear(true);
@@ -199,15 +200,45 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
 	this->addChild(msg1);
 	msg1->floatInOut(0.5f,1.0f,
+=======
+>>>>>>> origin/master
 		[=](){
 			hideLinkNum();
 			matrix->setNeedClear(true);
+	});
+	if(leftNum<10){
+		FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
+			50,Point(visibleSize.width,visibleSize.height/2 - 50));
+		this->addChild(leftStarMsg2);
+		leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
+		FloatWord* prize=FloatWord::create(String::createWithFormat("%d",jiangLiScore)->_string,32,Point(visibleSize.width/2,visibleSize.height/2 - 80));
+		prize->setVisible(false);
+		this->addChild(prize);
+		prize->floatInPrize(1.5,[=](){
+			prize->setVisible(true);
+		},0.5,[=](){
 			GAMEDATA* data = GAMEDATA::getInstance();
-			data->setCurScore(data->getCurScore());
+			data->setCurScore(data->getCurScore() + jiangLiScore);
 			if(data->getCurScore() > data->getHistoryScore()){
 				data->setHistoryScore(data->getCurScore());
 			}
 			refreshMenu(0);
+		});
+	} 
+
+	/*Size visibleSize = Director::getInstance()->getVisibleSize();
+	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
+	this->addChild(msg1);
+	msg1->floatInOut(0.5f,1.0f,
+	[=](){
+	hideLinkNum();
+	matrix->setNeedClear(true);
+	GAMEDATA* data = GAMEDATA::getInstance();
+	data->setCurScore(data->getCurScore());
+	if(data->getCurScore() > data->getHistoryScore()){
+	data->setHistoryScore(data->getCurScore());
+	}
+	refreshMenu(0);
 	});*/
 }
 
@@ -236,14 +267,19 @@ void GameLayer::gotoNextLevel(){
 
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
+<<<<<<< HEAD
 	//TODO ï¿½ï¿½ï¿½ï¿½Æ·Ñµï¿½ï¿½ï¿½ï¿½
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+=======
+	//TODO ¸´»î¼Æ·Ñµã½ÓÈë
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+>>>>>>> origin/master
 	if(GAMEDATA::getInstance()->getReviveNum()>0){
 		CallAndroidMethod::getInstance()->pay(6);
 	}else{
 		CallAndroidMethod::getInstance()->pay(5);
 	}
-    #endif
+#endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	gameOver=true;
 	needRevive=false;
