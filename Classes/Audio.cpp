@@ -13,9 +13,9 @@ Audio* Audio::getInstance(){
 void Audio::playBGM(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Music/music.ogg",true);
 	if(GAMEDATA::getInstance()->getMusicState()){
-		  CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic(); 
+		  CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 	}else{
-	  CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic(); 
+	  CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 	}
 }
 
@@ -90,6 +90,21 @@ void Audio::playLanding(){
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/landing.ogg",false);}
 }
 
+void Audio::playUpgrade(){
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/upgrade.ogg",false);}
+}
+
+void Audio::playAddScore(){
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/add_score.ogg",false);}
+}
+
+void Audio::playSignin(){
+	if(GAMEDATA::getInstance()->getSoundEffect()){
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/sign_in.ogg",false);}
+}
+
 
 void Audio::prepare(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/music.ogg");
@@ -105,5 +120,8 @@ void Audio::prepare(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/clear.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/beep.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/landing.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/upgrade.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/coin.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/sign_in.ogg");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/add_score.ogg");
 }

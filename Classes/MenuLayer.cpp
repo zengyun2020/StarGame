@@ -160,6 +160,7 @@ bool MenuLayer::init(){
 			CCLOG("result:%d",2);
 		}else{
 			CCLOG("result:%d",1);
+			Audio::getInstance()->playSignin();
 			signIn->setVisible(true);
 			this->addChild(signIn,5);
 		}

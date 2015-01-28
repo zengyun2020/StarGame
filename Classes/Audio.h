@@ -17,6 +17,9 @@ public:
 	void playBeep();//倒计时
 	void playLanding();//加载
 	void prepare();
+	void playAddScore();
+	void playUpgrade();
+	void playSignin();
 private:
 	static Audio* m_instance;
 	int scoreId;

@@ -26,6 +26,7 @@ bool GameOverLayer::init(){
 	hasShowBeat = false;
 	hasShowHappy = false;
 	hasShowPrizeGold = false;
+	hasPlaySound = false;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
@@ -125,6 +126,10 @@ void GameOverLayer::update(float delta){
 		if(animTime >= 60000000){
 			animTime = 6000;
 		}
+		if(!hasPlaySound){
+			hasPlaySound = true;
+			Audio::getInstance()->playAddScore();
+		}
 		scoreNum = animTime/40 * curScore;
 		if(scoreNum > curScore){
 			scoreNum = curScore;
@@ -165,6 +170,7 @@ void GameOverLayer::update(float delta){
 					GAMEDATA::getInstance()->saveUserLevel();
 					GAMEDATA::getInstance()->setCurExpNum(0);
 
+					Audio::getInstance()->playUpgrade();
 					upgrade->setVisible(true);
 				}else{
 					GAMEDATA::getInstance()->setCurExpNum(curExpNum+1);

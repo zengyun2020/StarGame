@@ -27,6 +27,7 @@ private:
 	bool hasShowBeat;
 	bool hasShowPrizeGold;
 	bool hasShowHappy;
+	bool hasPlaySound;
 	Node* upgrade;
 	MenuItemImage* startBtn;
 	LabelAtlas* labelScore;
