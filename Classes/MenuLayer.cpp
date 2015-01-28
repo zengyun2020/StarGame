@@ -166,6 +166,10 @@ bool MenuLayer::init(){
 		}
     #endif
 	schedule(schedule_selector(MenuLayer::autoStartGame), 0.2f, 0, 0);
+
+	aboutLayer = About::getInstance();
+	this->addChild(aboutLayer);
+	aboutLayer->setVisible(false);
 	return true;
 }
 
@@ -201,8 +205,6 @@ bool MenuLayer::showAbout(Touch* touch,Event* event){
 		if(signIn->isVisible() || quitBg->isVisible()){
 			return true;
 		}
-		aboutLayer = About::getInstance();
-		this->addChild(aboutLayer);
 		aboutLayer->setVisible(true);
 		return true;
 	}

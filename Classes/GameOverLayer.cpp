@@ -126,10 +126,6 @@ void GameOverLayer::update(float delta){
 		if(animTime >= 60000000){
 			animTime = 6000;
 		}
-		if(!hasPlaySound){
-			hasPlaySound = true;
-			Audio::getInstance()->playAddScore();
-		}
 		scoreNum = animTime/40 * curScore;
 		if(scoreNum > curScore){
 			scoreNum = curScore;
