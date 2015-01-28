@@ -201,15 +201,18 @@ bool MenuLayer::showAbout(Touch* touch,Event* event){
 		if(signIn->isVisible() || quitBg->isVisible()){
 			return true;
 		}
-		auto about = About::getInstance();
-		this->addChild(about);
-		about->setVisible(true);
+		aboutLayer = About::getInstance();
+		this->addChild(aboutLayer);
+		aboutLayer->setVisible(true);
 		return true;
 	}
 	return false;
 }
 
 void MenuLayer::showQuit(){
+	if(aboutLayer->isVisible()){
+		return;
+	}
 	if(GAMEDATA::getInstance()->isPaySuccess()){
 		quitBg->setVisible(true);
 		quitDesc->setVisible(true);

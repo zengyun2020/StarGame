@@ -182,6 +182,7 @@ void SignIn::hideSelf(){
     #endif
 
 	if(GAMEDATA::getInstance()->isFirstLogin() && GAMEDATA::getInstance()->getUserLevel() <=1){
+		GAMEDATA::getInstance()->setFirstLogin(false);
 		GAMEDATA::getInstance()->init();
 		Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
 	}else{

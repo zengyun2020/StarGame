@@ -31,5 +31,6 @@ private:
 	SignIn* signIn;
 	Sprite* title;
 	bool hasShowQuitPay;
+	Node* aboutLayer;
 };
 #endif

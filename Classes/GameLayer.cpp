@@ -84,7 +84,7 @@ void GameLayer::update(float delta){
 
 	if(gameOver){
 		gameOver =false;
-		doGameOver();	
+		doGameOver();
 	}
 	if(needRevive){
 		doRevive();
@@ -172,7 +172,6 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	this->addChild(leftStarMsg1);
 	int jiangLiScore = GAMEDATA::getInstance()->getJiangli(leftNum);
 	leftStarMsg1->floatInOut(0.5f,1.0f,
-<<<<<<< HEAD
 				[=](){
 					hideLinkNum();
 					matrix->setNeedClear(true);
@@ -200,8 +199,6 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
 	this->addChild(msg1);
 	msg1->floatInOut(0.5f,1.0f,
-=======
->>>>>>> origin/master
 		[=](){
 			hideLinkNum();
 			matrix->setNeedClear(true);
@@ -224,7 +221,7 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 			}
 			refreshMenu(0);
 		});
-	} 
+	}
 
 	/*Size visibleSize = Director::getInstance()->getVisibleSize();
 	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
@@ -267,13 +264,7 @@ void GameLayer::gotoNextLevel(){
 
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
-<<<<<<< HEAD
-	//TODO ï¿½ï¿½ï¿½ï¿½Æ·Ñµï¿½ï¿½ï¿½ï¿½
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-=======
-	//TODO ¸´»î¼Æ·Ñµã½ÓÈë
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
->>>>>>> origin/master
 	if(GAMEDATA::getInstance()->getReviveNum()>0){
 		CallAndroidMethod::getInstance()->pay(6);
 	}else{
