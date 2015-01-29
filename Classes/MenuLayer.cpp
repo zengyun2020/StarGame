@@ -10,7 +10,6 @@
 #include "Chinese.h"
 #include "GameData.h"
 #include "CallAndroidMethod.h"
-#include "SignIn.h"
 #include "About.h"
 
 using namespace cocostudio::timeline;
@@ -25,7 +24,7 @@ bool MenuLayer::init(){
 	bg->setPosition(240,400);
 	this->addChild(bg);
 
-	title = Sprite::create("title.png");
+	title = BlinkTitle::create("title.png");
 	title->setPosition(240,560);
 	title->setScale(0.8);
 	title->setVisible(true);

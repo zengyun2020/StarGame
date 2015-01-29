@@ -66,18 +66,6 @@
     <ClCompile Include="..\Classes\GameOverScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameOver.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameOverReader.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MenuSceneHandler.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MenuSceneHandlerReader.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\PlayerRank.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -97,6 +85,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\About.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BlinkTitle.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,18 +146,6 @@
     <ClInclude Include="..\Classes\GameOverScene.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameOver.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameOverReader.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MenuSceneHandler.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MenuSceneHandlerReader.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\PlayerRank.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -186,6 +165,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\About.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BlinkTitle.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

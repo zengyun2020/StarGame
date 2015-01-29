@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "SignIn.h"
+#include "BlinkTitle.h"
 
 using namespace cocos2d;
 
@@ -29,7 +30,7 @@ private:
 	Menu* confirmMenu;
 	Menu* cancelMenu;
 	SignIn* signIn;
-	Sprite* title;
+	BlinkTitle* title;
 	bool hasShowQuitPay;
 	Node* aboutLayer;
 };
