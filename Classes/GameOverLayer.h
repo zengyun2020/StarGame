@@ -28,12 +28,31 @@ private:
 	bool hasShowPrizeGold;
 	bool hasShowHappy;
 	bool hasPlaySound;
+	bool hasShowScore;
+	bool hasShowBtn;
 	Node* upgrade;
 	MenuItemImage* startBtn;
+	Menu* startMenu;
+	Menu* backMenu;
+	MenuItemImage* musicBtnOn;
+	MenuItemImage* musicBtnOff;
+	MenuItemImage* soundEffectOn;
+	MenuItemImage* soundEffectOff;
 	LabelAtlas* labelScore;
 	LabelAtlas* beatNum;
-	Sprite* beatDesc;
-	Label* prizeGold;
-	Label* happy;
+	Sprite* beatDesc1;
+	Sprite* beatDesc2;
+	Sprite* beatPerTxt;
+	LabelAtlas* prizeGold;
+	LabelAtlas* happyNum1;
+	LabelAtlas* happyNum2;
+	Sprite* goldIcon;
+	Sprite* happy1;
+	Sprite* happy2;
+	Sprite* happyPoint;
+	Sprite* addScoreTxt;
+	LabelAtlas* addScore;
+	int addScoreNum;
+
 };
 #endif

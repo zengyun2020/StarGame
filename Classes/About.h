@@ -9,7 +9,8 @@ public:
 	static About* getInstance();
 	virtual bool init();
 	CREATE_FUNC(About);
-	bool hideSelf(Touch* touch,Event* event);
+	void hideSelf();
+	void startGame();
 
 private:
 	static About* _instance;

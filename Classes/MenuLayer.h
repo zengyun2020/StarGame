@@ -13,15 +13,15 @@ public:
 	CREATE_FUNC(MenuLayer);
 	bool startGame(Touch* touch,Event* event);
 	void autoStartGame(float dt);
-	bool showAbout(Touch* touch,Event* event);
-	void stopAction();
-	void startAction();
+	void showAbout();
 	void getSoudState(CCObject* pSender);
 	void getMusicState(CCObject* pSender);
 	void quit();
 	void cancel();
 	void showQuit();
 	void setSignIn(bool signIn);
+	void pay();
+	void refreshGold();
 private:
 	Menu* menuBgMusic;
 	Menu* menuSoundEffect;
@@ -33,5 +33,6 @@ private:
 	BlinkTitle* title;
 	bool hasShowQuitPay;
 	Node* aboutLayer;
+	LabelAtlas* gold;
 };
 #endif

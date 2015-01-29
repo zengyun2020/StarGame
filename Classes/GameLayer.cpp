@@ -24,11 +24,12 @@ bool GameLayer::init(){
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
 
-	//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	//	if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
-	//		GameLayer::_PauseTime=true;
-	//		CallAndroidMethod::getInstance()->pay(1);}
-	//#endif
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		if(!GAMEDATA::getInstance()->hasShowRegisterPay() && GAMEDATA::getInstance()->getUserLevel()>=2){
+			GameLayer::_PauseTime=true;
+			CallAndroidMethod::getInstance()->pay(6);
+		}
+	#endif
 	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
 	return true;
 }
@@ -140,7 +141,12 @@ void GameLayer::showEveryScore(int size,int score,int index,Point point,bool lef
 		cp2= Point(100,150);
 	}
 
-	if(size >= 7){
+	if(size >= 9){
+		everyScore->floatInScore((1.2),cp1,cp2,[=](){
+			Audio::getInstance()->playScore();
+			this->refreshMenu(score);
+		});
+	}else if(size >= 7){
 		everyScore->floatInScore((0.8),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
 			this->refreshMenu(score);

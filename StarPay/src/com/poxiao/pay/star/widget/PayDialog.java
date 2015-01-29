@@ -62,19 +62,15 @@ public class PayDialog extends Dialog {
 
 		switch (payPoint) {
 		case 1:
-			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_1);
 			payTitle.setBackgroundResource(R.drawable.pay_title_1);
 			break;
 		case 2:
-			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_2);
 			payTitle.setBackgroundResource(R.drawable.pay_title_1);
 			break;
 		case 3:
-			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_3);
 			payTitle.setBackgroundResource(R.drawable.pay_title_1);
 			break;
 		case 4:
-			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_4);
 			payTitle.setBackgroundResource(R.drawable.pay_title_1);
 			break;
 		case 5:
@@ -83,6 +79,18 @@ public class PayDialog extends Dialog {
 			break;
 		case 6:
 			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_6);
+			payTitle.setBackgroundResource(R.drawable.pay_title_1);
+			break;
+		case 7:
+			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_7);
+			payTitle.setBackgroundResource(R.drawable.pay_title_1);
+			break;
+		case 8:
+			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_8);
+			payTitle.setBackgroundResource(R.drawable.pay_title_1);
+			break;
+		case 9:
+			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_9);
 			payTitle.setBackgroundResource(R.drawable.pay_title_5);
 			revive.setVisibility(View.VISIBLE);
 			if(reviveNum == 4){
@@ -90,9 +98,9 @@ public class PayDialog extends Dialog {
 			}else if(reviveNum == 3){
 				revive.setBackgroundResource(R.drawable.reborn_3);
 			}else if(reviveNum == 2){
-				revive.setBackgroundResource(R.drawable.reborn_3);
+				revive.setBackgroundResource(R.drawable.reborn_2);
 			}else if(reviveNum == 1){
-				revive.setBackgroundResource(R.drawable.reborn_3);
+				revive.setBackgroundResource(R.drawable.reborn_1);
 			}
 			break;
 		}

@@ -23,38 +23,68 @@ bool Upgrade::init(){
 	bg->setPosition(240,400);
 	this->addChild(bg);
 
-	auto shineBg = Sprite::create("game_result_shine_bg.png");
+	auto shineBg = Sprite::create("upgrade_shine_bg.png");
 	shineBg->setPosition(240,400);
 	this->addChild(shineBg);
-//	shineBg->runAction(RepeatForever::create(RotateBy::create(3,360)));
+	shineBg->runAction(RepeatForever::create(RotateBy::create(3,360)));
 
-	auto title = Label::create(ChineseWord("upgrade"),"Arial",48);
-	title->setPosition(240,528);
+	auto title = Sprite::create("upgrade_title.png");
+	title->setPosition(240,521);
 	this->addChild(title);
 
 	int levelNum = GAMEDATA::getInstance()->getUserLevel()+1;
 
-	auto level = Label::create("LV "+String::createWithFormat("%d",levelNum)->_string,"Arial",72);
-	level->setPosition(240,449);
+	auto levelTxt = Sprite::create("upgrade_lv.png");
+	auto level = LabelAtlas::create(String::createWithFormat("%d",levelNum)->_string,"upgrade_level_num.png",50,92,48);
+	level->setAnchorPoint(Point(0.5,0.5));
+	if(levelNum < 10){
+		levelTxt->setPosition(197,400);
+		level->setPosition(283,400);
+	}else if(levelNum < 100){
+		levelTxt->setPosition(175,400);
+		level->setPosition(305,400);
+	}else{
+		levelTxt->setPosition(150,400);
+		level->setPosition(330,400);
+	}
+	this->addChild(levelTxt);
 	this->addChild(level);
 
-	auto upgradePrize = Label::create(ChineseWord("upgradeprize"),"Arial",36);
-	upgradePrize->setPosition(145,370);
+	auto upgradePrize = Sprite::create("upgrade_prize.png");
+	upgradePrize->setPosition(40,287);
+	upgradePrize->setAnchorPoint(Point(0,0.5));
 	this->addChild(upgradePrize);
 
-	auto addScorePer = Label::create(ChineseWord("addscoreper"),"Arial",36);
-	addScorePer->setPosition(335,370);
+	auto goldPack = Sprite::create("gold_pack.png");
+	goldPack->setPosition(114,224);
+	goldPack->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(goldPack);
+
+	auto addScorePer = Sprite::create("upgrade_add_per.png");
+	addScorePer->setPosition(440,287);
+	addScorePer->setAnchorPoint(Point(1,0.5));
 	this->addChild(addScorePer);
 
-	auto goldNum = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getUpgradePrizeNum(levelNum))->_string,"Arial",24);
-	goldNum->setPosition(159,322);
+	auto goldNum = LabelAtlas::create(String::createWithFormat("%d",GAMEDATA::getInstance()->getUpgradePrizeNum(levelNum))->_string,
+			"game_result_gold_num.png",15,27,48);
+	goldNum->setPosition(114,180);
+	goldNum->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(goldNum);
 
-	auto addScorePerNum = Label::create(String::createWithFormat("%d",
-					(int)(GAMEDATA::getInstance()->getScoreAddPer(levelNum)*100))->_string
-					+"%","Arial",24);
-	addScorePerNum->setPosition(335,322);
-	this->addChild(addScorePerNum);
+	int perNum = (int)(GAMEDATA::getInstance()->getScoreAddPer(levelNum)*100);
+	auto addPer = LabelAtlas::create(String::createWithFormat("%d",perNum)->_string,
+			"add_score_per_num.png",25,44,48);
+	auto per = Sprite::create("upgrade_per.png");
+	addPer->setAnchorPoint(Point(0.5,0.5));
+	if(perNum < 10){
+		addPer->setPosition(340-18,202);
+		per->setPosition(340+18,202);
+	}else{
+		addPer->setPosition(340-28,202);
+		per->setPosition(340+28,202);
+	}
+	this->addChild(addPer);
+	this->addChild(per);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(Upgrade::hideSelf,this);

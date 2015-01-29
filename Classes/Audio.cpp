@@ -95,11 +95,6 @@ void Audio::playUpgrade(){
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/upgrade.ogg",false);}
 }
 
-void Audio::playAddScore(){
-	if(GAMEDATA::getInstance()->getSoundEffect()){
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/add_score.ogg",false);}
-}
-
 void Audio::playSignin(){
 	if(GAMEDATA::getInstance()->getSoundEffect()){
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Music/sign_in.ogg",false);}
@@ -123,5 +118,4 @@ void Audio::prepare(){
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/upgrade.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/coin.ogg");
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/sign_in.ogg");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Music/add_score.ogg");
 }

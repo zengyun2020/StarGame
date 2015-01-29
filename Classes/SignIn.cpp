@@ -3,6 +3,10 @@
 #include "CallAndroidMethod.h"
 #include "GameData.h"
 #include "GameScene.h"
+#include "SimpleAudioEngine.h"
+#include "Chinese.h"
+#include "About.h"
+#include "Audio.h"
 
 SignIn* SignIn::_instance = nullptr;
 SignIn::SignIn(){
@@ -25,157 +29,280 @@ bool SignIn::init(){
 	bg->setPosition(240,400);
 	this->addChild(bg);
 
+	int level = GAMEDATA::getInstance()->getUserLevel();
+	auto aboutBtn = MenuItemImage::create(
+		"about_btn_normal.png","about_btn_click.png",CC_CALLBACK_0(SignIn::showAbout,this)
+		);
+	auto aboutMenu = Menu::create(aboutBtn, NULL);
+	aboutMenu->setPosition(427,50);
+	this->addChild(aboutMenu);
+
+	int per = (int)((float)GAMEDATA::getInstance()->getCurExpNum()/GAMEDATA::getInstance()->getFullExpNum(level)*100);
+
+	auto levelTxt = Sprite::create("level.png");
+	levelTxt->setAnchorPoint(Point(0,0.5));
+	levelTxt->setPosition(30,40);
+	this->addChild(levelTxt);
+
+	auto levelNum = LabelAtlas::create(String::createWithFormat("%d",level)->_string,"level_num.png",15,22,48);
+	levelNum->setAnchorPoint(Point(0,0.5));
+	levelNum->setPosition(64,40);
+	this->addChild(levelNum);
+
+	auto line = Sprite::create("line.png");
+	line->setAnchorPoint(Point(0,0.5));
+	auto perNum = LabelAtlas::create(String::createWithFormat("%d",per)->_string,"level_num.png",15,22,48);
+	perNum->setAnchorPoint(Point(0,0.5));
+	auto perTxt = Sprite::create("per.png");
+	perTxt->setAnchorPoint(Point(0,0.5));
+	this->addChild(line);
+	this->addChild(perNum);
+	this->addChild(perTxt);
+	if(level < 10){
+		line->setPosition(81,40);
+		perNum->setPosition(90,40);
+		if(per < 10){
+			perTxt->setPosition(105,40);
+		}else{
+			perTxt->setPosition(120,40);
+		}
+	}else if(level < 100){
+		line->setPosition(96,40);
+		perNum->setPosition(105,40);
+		if(per < 10){
+			perTxt->setPosition(120,40);
+		}else{
+			perTxt->setPosition(135,40);
+		}
+	}else{
+		line->setPosition(111,40);
+		perNum->setPosition(120,40);
+		if(per < 10){
+			perTxt->setPosition(135,40);
+		}else{
+			perTxt->setPosition(150,40);
+		}
+	}
+
+	auto goldBuyBtn = MenuItemImage::create(
+		"gold_buy_normal.png","gold_buy_click.png",CC_CALLBACK_0(SignIn::pay,this)
+		);
+	auto goldBuyMenu = Menu::create(goldBuyBtn, NULL);
+	goldBuyMenu->setPosition(53,760);
+	goldBuyMenu->setAnchorPoint(Point(0,0.5));
+	this->addChild(goldBuyMenu);
+
+	gold = LabelAtlas::create(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string,"gold_num.png",18,26,48);
+	gold->setPosition(95,752);
+	gold->setAnchorPoint(Point(0, 0.5));
+	this->addChild(gold);
+
+	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
+	MenuItemImage* musicBtnOff = MenuItemImage::create("bg_music_close.png","bg_music_close.png");
+	MenuItemToggle* musicTog = MenuItemToggle::createWithTarget(this,menu_selector(SignIn::getMusicState),musicBtnOn,musicBtnOff,NULL);
+	 if (CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+		{
+			musicTog->setSelectedIndex(0);
+		}
+		else
+		{
+			musicTog->setSelectedIndex(1);
+		}
+	auto musicMenu = Menu::create(musicTog,NULL);
+	musicMenu->setPosition(349,760);
+	MenuItemImage* soundEffectOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
+	MenuItemImage* soundEffectOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");
+	MenuItemToggle* soundEffectTog = MenuItemToggle::createWithTarget(this,menu_selector(SignIn::getSoudState),soundEffectOn,soundEffectOff,NULL);
+	 if (GAMEDATA::getInstance()->getSoundEffect())
+		{
+			soundEffectTog->setSelectedIndex(0);
+		}
+		else
+		{
+			soundEffectTog->setSelectedIndex(1);
+		}
+	auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
+	soundEffectMenu->setPosition(427,760);
+	this->addChild(musicMenu);
+	this->addChild(soundEffectMenu);
+
 	auto signInbg = Sprite::create("sign_in_bg.png");
 	signInbg->setPosition(240,400);
 	this->addChild(signInbg);
 
-	auto title = Label::create(ChineseWord("signin"),"Arial",48);
-	title->setPosition(240,504);
+	auto title = Sprite::create("sign_in_title.png");
+	title->setPosition(240,542);
 	this->addChild(title);
 
-	auto itemBg1 = Sprite::create("sign_in_item_bg.png");
-	itemBg1->setPosition(70,410);
+	auto itemBg1 = Sprite::create("sign_in_item_bg_1.png");
+	itemBg1->setPosition(70,442);
 	this->addChild(itemBg1);
 
-	auto itemTitle1 = Label::create(String::createWithFormat("%d",1)->_string+ChineseWord("day"),"Arial",24);
-	itemTitle1->setPosition(70,436);
-	this->addChild(itemTitle1);
+	auto day1 = LabelAtlas::create("1","game_result_gold_num.png",15,27,48);
+	day1->setPosition(60.5,480.5);
+	day1->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(day1);
 
-	auto itemGold1 = Sprite::create("gold.png");
-	itemGold1->setPosition(56,390);
-	this->addChild(itemGold1);
+	auto dayTxt1 = Sprite::create("sign_in_day.png");
+	dayTxt1->setPosition(77.5,480.5);
+	this->addChild(dayTxt1);
 
-	auto itemGoldNum1 = Label::create(String::createWithFormat("%d",15)->_string,"Arial",24);
-	itemGoldNum1->setPosition(84,390);
+	auto goldPack1 = Sprite::create("sign_in_gold_pack.png");
+	goldPack1->setPosition(70,442);
+	this->addChild(goldPack1);
+
+	auto itemGoldNum1 = LabelAtlas::create("15","game_result_gold_num.png",15,27,48);
+	itemGoldNum1->setPosition(70,403.5);
+	itemGoldNum1->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(itemGoldNum1);
 
-	auto hasSign1 = Sprite::create("sign_in_has_sign.png");
-	hasSign1->setPosition(70,410);
-	this->addChild(hasSign1);
-
-	auto itemBg2 = Sprite::create("sign_in_item_bg.png");
-	itemBg2->setPosition(155,410);
+	auto itemBg2 = Sprite::create("sign_in_item_bg_1.png");
+	itemBg2->setPosition(155,442);
 	this->addChild(itemBg2);
 
-	auto itemTitle2 = Label::create(String::createWithFormat("%d",2)->_string+ChineseWord("day"),"Arial",24);
-	itemTitle2->setPosition(155,436);
-	this->addChild(itemTitle2);
+	auto day2 = LabelAtlas::create("2","game_result_gold_num.png",15,27,48);
+	day2->setPosition(155-9.5,480.5);
+	day2->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(day2);
 
-	auto itemGold2 = Sprite::create("gold.png");
-	itemGold2->setPosition(141,390);
-	this->addChild(itemGold2);
+	auto dayTxt2 = Sprite::create("sign_in_day.png");
+	dayTxt2->setPosition(155+7.5,480.5);
+	this->addChild(dayTxt2);
 
-	auto itemGoldNum2 = Label::create(String::createWithFormat("%d",20)->_string,"Arial",24);
-	itemGoldNum2->setPosition(169,390);
+	auto goldPack2 = Sprite::create("sign_in_gold_pack.png");
+	goldPack2->setPosition(155,442);
+	this->addChild(goldPack2);
+
+	auto itemGoldNum2 = LabelAtlas::create("20","game_result_gold_num.png",15,27,48);
+	itemGoldNum2->setPosition(155,403.5);
+	itemGoldNum2->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(itemGoldNum2);
 
-	auto hasSign2 = Sprite::create("sign_in_has_sign.png");
-	hasSign2->setPosition(155,410);
-	this->addChild(hasSign2);
-
-	auto itemBg3 = Sprite::create("sign_in_item_bg.png");
-	itemBg3->setPosition(240,410);
+	auto itemBg3 = Sprite::create("sign_in_item_bg_1.png");
+	itemBg3->setPosition(240,442);
 	this->addChild(itemBg3);
 
-	auto itemTitle3 = Label::create(String::createWithFormat("%d",3)->_string+ChineseWord("day"),"Arial",24);
-	itemTitle3->setPosition(240,436);
-	this->addChild(itemTitle3);
+	auto day3 = LabelAtlas::create("3","game_result_gold_num.png",15,27,48);
+	day3->setPosition(240-9.5,480.5);
+	day3->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(day3);
 
-	auto itemGold3 = Sprite::create("gold.png");
-	itemGold3->setPosition(226,390);
-	this->addChild(itemGold3);
+	auto dayTxt3 = Sprite::create("sign_in_day.png");
+	dayTxt3->setPosition(240+7.5,480.5);
+	this->addChild(dayTxt3);
 
-	auto itemGoldNum3 = Label::create(String::createWithFormat("%d",25)->_string,"Arial",24);
-	itemGoldNum3->setPosition(254,390);
+	auto goldPack3 = Sprite::create("sign_in_gold_pack.png");
+	goldPack3->setPosition(240,442);
+	this->addChild(goldPack3);
+
+	auto itemGoldNum3 = LabelAtlas::create("25","game_result_gold_num.png",15,27,48);
+	itemGoldNum3->setPosition(240,403.5);
+	itemGoldNum3->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(itemGoldNum3);
 
-	auto hasSign3 = Sprite::create("sign_in_has_sign.png");
-	hasSign3->setPosition(240,410);
-	this->addChild(hasSign3);
-
-	auto itemBg4 = Sprite::create("sign_in_item_bg.png");
-	itemBg4->setPosition(325,410);
+	auto itemBg4 = Sprite::create("sign_in_item_bg_1.png");
+	itemBg4->setPosition(325,442);
 	this->addChild(itemBg4);
 
-	auto itemTitle4 = Label::create(String::createWithFormat("%d",4)->_string+ChineseWord("day"),"Arial",24);
-	itemTitle4->setPosition(325,436);
-	this->addChild(itemTitle4);
+	auto day4 = LabelAtlas::create("4","game_result_gold_num.png",15,27,48);
+	day4->setPosition(325-9.5,480.5);
+	day4->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(day4);
 
-	auto itemGold4 = Sprite::create("gold.png");
-	itemGold4->setPosition(311,390);
-	this->addChild(itemGold4);
+	auto dayTxt4 = Sprite::create("sign_in_day.png");
+	dayTxt4->setPosition(325+7.5,480.5);
+	this->addChild(dayTxt4);
 
-	auto itemGoldNum4 = Label::create(String::createWithFormat("%d",30)->_string,"Arial",24);
-	itemGoldNum4->setPosition(339,390);
+	auto goldPack4 = Sprite::create("sign_in_gold_pack.png");
+	goldPack4->setPosition(325,442);
+	this->addChild(goldPack4);
+
+	auto itemGoldNum4 = LabelAtlas::create("30","game_result_gold_num.png",15,27,48);
+	itemGoldNum4->setPosition(325,403.5);
+	itemGoldNum4->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(itemGoldNum4);
 
-	auto hasSign4 = Sprite::create("sign_in_has_sign.png");
-	hasSign4->setPosition(325,410);
-	this->addChild(hasSign4);
-
-	auto itemBg5 = Sprite::create("sign_in_item_bg.png");
-	itemBg5->setPosition(410,410);
+	auto itemBg5 = Sprite::create("sign_in_item_bg_1.png");
+	itemBg5->setPosition(410,442);
 	this->addChild(itemBg5);
 
-	auto itemTitle5 = Label::create(String::createWithFormat("%d",5)->_string+ChineseWord("day"),"Arial",24);
-	itemTitle5->setPosition(410,436);
-	this->addChild(itemTitle5);
+	auto day5 = LabelAtlas::create("5","game_result_gold_num.png",15,27,48);
+	day5->setPosition(410-9.5,480.5);
+	day5->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(day5);
 
-	auto itemGold5 = Sprite::create("gold.png");
-	itemGold5->setPosition(396,390);
-	this->addChild(itemGold5);
+	auto dayTxt5 = Sprite::create("sign_in_day.png");
+	dayTxt5->setPosition(410+7.5,480.5);
+	this->addChild(dayTxt5);
 
-	auto itemGoldNum5 = Label::create(String::createWithFormat("%d",35)->_string,"Arial",24);
-	itemGoldNum5->setPosition(424,390);
+	auto goldPack5 = Sprite::create("sign_in_gold_pack.png");
+	goldPack5->setPosition(410,442);
+	this->addChild(goldPack5);
+
+	auto itemGoldNum5 = LabelAtlas::create("35","game_result_gold_num.png",15,27,48);
+	itemGoldNum5->setPosition(410,403.5);
+	itemGoldNum5->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(itemGoldNum5);
 
-	auto hasSign5 = Sprite::create("sign_in_has_sign.png");
-	hasSign5->setPosition(410,410);
-	this->addChild(hasSign5);
+	auto signedBg = Sprite::create("sign_in_item_bg_2.png");
+	auto hasSignMark = Sprite::create("sign_in_has_sign.png");
+	this->addChild(signedBg);
+	this->addChild(hasSignMark);
 
-	hasSign1->setVisible(false);
-	hasSign2->setVisible(false);
-	hasSign3->setVisible(false);
-	hasSign4->setVisible(false);
-	hasSign5->setVisible(false);
+	auto desc1 = Sprite::create("sign_in_desc_1.png");
+	desc1->setPosition(205.5,346);
+	this->addChild(desc1);
+
+	auto desc2 = Sprite::create("sign_in_gold_pack.png");
+	desc2->setPosition(286.5,346);
+	this->addChild(desc2);
 
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		signDay = CallAndroidMethod::getInstance()->getCurrentSignDayas();
-		CCLOG("signDay=%d",signDay);
 		if(signDay == 0){
-			hasSign1->setVisible(true);
+			prizeGoldNum = 15;
+			signedBg->setPosition(70,442);
+			hasSignMark->setPosition(102,496);
 		}else if(signDay == 1){
-			hasSign1->setVisible(true);
-			hasSign2->setVisible(true);
+			prizeGoldNum = 20;
+			signedBg->setPosition(155,442);
+			hasSignMark->setPosition(187,496);
 		}else if(signDay == 2){
-			hasSign1->setVisible(true);
-			hasSign2->setVisible(true);
-			hasSign3->setVisible(true);
+			prizeGoldNum = 25;
+			signedBg->setPosition(240,442);
+			hasSignMark->setPosition(272,496);
 		}else if(signDay == 3){
-			hasSign1->setVisible(true);
-			hasSign2->setVisible(true);
-			hasSign3->setVisible(true);
-			hasSign4->setVisible(true);
+			prizeGoldNum = 30;
+			signedBg->setPosition(325,442);
+			hasSignMark->setPosition(357,496);
 		}else if(signDay >= 4){
-			hasSign1->setVisible(true);
-			hasSign2->setVisible(true);
-			hasSign3->setVisible(true);
-			hasSign4->setVisible(true);
-			hasSign5->setVisible(true);
+			prizeGoldNum = 35;
+			signedBg->setPosition(410,442);
+			hasSignMark->setPosition(442,496);
 		}
     #endif
 
+	auto prizeGold = LabelAtlas::create(String::createWithFormat("%d",prizeGoldNum)->_string,"game_result_gold_num.png",15,27,48);
+	prizeGold->setAnchorPoint(Point(0.5,0.5));
+	prizeGold->setPosition(321,346);
+	this->addChild(prizeGold);
+
 	MenuItemImage* confirmBtn = MenuItemImage::create(
-			"quit_confirm_up.png","quit_confirm_down.png",CC_CALLBACK_0(SignIn::hideSelf,this)
+			"sign_in_confirm_up.png","sign_in_confirm_down.png",CC_CALLBACK_0(SignIn::hideSelf,this)
 			);
 	auto confirmMenu = Menu::create(confirmBtn, NULL);
-	confirmMenu->setPosition(240,301);
+	confirmMenu->setPosition(240,276);
 	this->addChild(confirmMenu);
+
+	aboutLayer = About::getInstance();
+	this->addChild(aboutLayer);
+	aboutLayer->setVisible(false);
 
 	return true;
 }
 
 void SignIn::hideSelf(){
+	Audio::getInstance()->playClick();
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		CallAndroidMethod::getInstance()->sign();
 		GAMEDATA::getInstance()->setPrizeGoldNum(15+signDay*5);
@@ -190,3 +317,62 @@ void SignIn::hideSelf(){
 		this->removeFromParentAndCleanup(true);
 	}
 }
+
+void SignIn::pay(){
+	Audio::getInstance()->playClick();
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->pay(10);
+    #endif
+}
+
+void SignIn::showAbout(){
+	Audio::getInstance()->playClick();
+	aboutLayer->setVisible(true);
+}
+
+void SignIn::refreshGold(){
+	gold->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string);
+}
+
+void SignIn::getSoudState(CCObject* pSender){
+	Audio::getInstance()->playClick();
+	 //������ʱCCMenuItemToggle
+    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
+    //����CCMenuItemToggle��ѡ�����������ֵĿ���
+    if (temp->getSelectedIndex()==1)
+    {
+        //��ͣ��������
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+		GAMEDATA::getInstance()->setSoundEffect(false);
+	    GAMEDATA::getInstance()->saveSoundEffect();
+    }
+    if (temp->getSelectedIndex()==0)
+    {
+        //������������
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
+		GAMEDATA::getInstance()->setSoundEffect(true);
+	    GAMEDATA::getInstance()->saveSoundEffect();
+    }
+}
+
+void SignIn::getMusicState(CCObject* pSender){
+	Audio::getInstance()->playClick();
+	 //������ʱCCMenuItemToggle
+    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
+    //����CCMenuItemToggle��ѡ�����������ֵĿ���
+    if (temp->getSelectedIndex()==1)
+    {
+        //��ͣ��������
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+        GAMEDATA::getInstance()->setMusicState(false);
+        GAMEDATA::getInstance()->saveMusicState();
+    }
+    if (temp->getSelectedIndex()==0)
+    {
+        //������������
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+        GAMEDATA::getInstance()->setMusicState(true);
+        GAMEDATA::getInstance()->saveMusicState();
+    }
+}
+

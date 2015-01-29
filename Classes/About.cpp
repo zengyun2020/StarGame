@@ -1,6 +1,8 @@
 #include "About.h"
 #include "Chinese.h"
 #include "GameData.h"
+#include "Audio.h"
+#include "GameScene.h"
 
 About* About::_instance = nullptr;
 About::About(){
@@ -93,18 +95,36 @@ bool About::init(){
 	titleDesc9->setAnchorPoint(Point(0,0.5));
 	this->addChild(titleDesc9);
 
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = CC_CALLBACK_2(About::hideSelf,this);
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this);
+	auto backBtn = MenuItemImage::create(
+		"about_back_normal.png","about_back_click.png",CC_CALLBACK_0(About::hideSelf,this)
+		);
+	auto backMenu = Menu::create(backBtn, NULL);
+	backMenu->setPosition(100,70);
+	backMenu->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(backMenu);
+
+	auto startBtn = MenuItemImage::create(
+		"about_start_normal.png","about_start_click.png",CC_CALLBACK_0(About::startGame,this)
+		);
+	auto startMenu = Menu::create(startBtn, NULL);
+	startMenu->setPosition(320,70);
+	startMenu->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(startMenu);
 
 	return true;
 }
 
-bool About::hideSelf(Touch* touch,Event* event){
+void About::hideSelf(){
 	if(!isVisible()){
-		return false;
+		return;
 	}
+	Audio::getInstance()->playClick();
 	this->setVisible(false);
 	this->removeFromParentAndCleanup(true);
-	return true;
+}
+
+void About::startGame(){
+	Audio::getInstance()->playClick();
+	GAMEDATA::getInstance();
+	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
 }

@@ -41,9 +41,17 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
 
-	playerGold =Label::create(ChineseWord("jinbei")+String::createWithFormat(":%d",
+	auto goldBuyBtn = MenuItemImage::create(
+		"gold_buy_normal.png","gold_buy_click.png",CC_CALLBACK_0(TopMenu::pay,this)
+		);
+	auto goldBuyMenu = Menu::create(goldBuyBtn, NULL);
+	goldBuyMenu->setPosition(visibleSize.width/2-185,visibleSize.height-50);
+	this->addChild(goldBuyMenu);
+
+	playerGold =Label::create(String::createWithFormat("%d",
 		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
-	playerGold->setPosition(visibleSize.width/2-180,visibleSize.height-50);
+	playerGold->setPosition(visibleSize.width/2-147,visibleSize.height-56);
+	playerGold->setAnchorPoint(Point(0,0.5));
 	this->addChild(playerGold);
 
 	MenuItemImage* PauseBtn = MenuItemImage::create(
@@ -83,6 +91,13 @@ bool TopMenu::init(){
 	return true;
 }
 
+void TopMenu::pay(){
+	Audio::getInstance()->playClick();
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->pay(12);
+    #endif
+}
+
 void TopMenu::refresh(int score){
 	GAMEDATA* data = GAMEDATA::getInstance();
 	data->setCurScore(data->getCurScore() + score);
@@ -103,7 +118,7 @@ void TopMenu::cleanScore(){
 }
 
 void TopMenu::refreshGold(){
-	playerGold->setString(ChineseWord("gold")+String::createWithFormat(":%d",GAMEDATA::getInstance()->getGoldNum())->_string);
+	playerGold->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string);
 }
 
 void TopMenu::usePropsBomb(){
@@ -122,7 +137,7 @@ void TopMenu::usePropsBomb(){
 	}else{
 		//����֧��
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		CallAndroidMethod::getInstance()->pay(3);
+		CallAndroidMethod::getInstance()->pay(13);
 #endif
 
 	}
@@ -154,7 +169,7 @@ void TopMenu::usePropsTime(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		CallAndroidMethod::getInstance()->pay(2);
+		CallAndroidMethod::getInstance()->pay(13);
 #endif
 	}
 }

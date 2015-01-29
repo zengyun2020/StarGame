@@ -10,10 +10,18 @@ public:
 	virtual bool init();
 	CREATE_FUNC(SignIn);
 	void hideSelf();
+	void showAbout();
+	void getSoudState(CCObject* pSender);
+	void getMusicState(CCObject* pSender);
+	void pay();
+	void refreshGold();
 
 private:
 	static SignIn* _instance;
+	Node* aboutLayer;
 	int signDay;
+	int prizeGoldNum;
+	LabelAtlas* gold;
 private:
 	SignIn();
 

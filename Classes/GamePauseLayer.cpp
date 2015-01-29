@@ -29,15 +29,16 @@ bool GamePauseLayer::init(TopMenu* topNode){
 	this->addChild(background,0);
 
 	Sprite* prop_des = Sprite::create("props_describe.png");
-	prop_des->setPosition(visibleSize.width/2+50,visibleSize.height/2+250);
+	prop_des->setPosition(60,650);
+	prop_des->setAnchorPoint(Point(0,0.5));
 	this->addChild(prop_des,0);
 
 	MenuItemImage* payBtn = MenuItemImage::create(
-		"props_btn.png","props_btn.png",CC_CALLBACK_0(GamePauseLayer::payProps,this)
+		"game_pause_buy_gold.png","game_pause_buy_gold.png",CC_CALLBACK_0(GamePauseLayer::payProps,this)
 		);
 	Menu* payMenu = Menu::create(payBtn, NULL);
 	payMenu->alignItemsHorizontally();
-	payMenu->setPosition(visibleSize.width/2,visibleSize.height/2);
+	payMenu->setPosition(240,400);
 	this->addChild(payMenu,0);
 	MenuItemImage* exitBtn = MenuItemImage::create(
 		"exit_normal.png","exit_click.png",CC_CALLBACK_0(GamePauseLayer::goBack,this)
@@ -87,7 +88,7 @@ bool GamePauseLayer::init(TopMenu* topNode){
 
 void GamePauseLayer::payProps(){
 	Audio::getInstance()->playClick();
-	CallAndroidMethod::getInstance()->pay(4);
+	CallAndroidMethod::getInstance()->pay(11);
 }
 
 void GamePauseLayer::goBack(){
@@ -104,9 +105,9 @@ void GamePauseLayer::ResumeGame(){
 	}
 
 void GamePauseLayer::getSoudState(CCObject* pSender){
-	 //´´½¨ÁÙÊ±CCMenuItemToggle  
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±CCMenuItemToggle  
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;  
-    //¸ù¾İCCMenuItemToggleµÄÑ¡ÏîÀ´¾ö¶¨ÒôÀÖµÄ¿ª¹Ø  
+    //ï¿½ï¿½ï¿½ï¿½CCMenuItemToggleï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÄ¿ï¿½ï¿½ï¿½  
     if (temp->getSelectedIndex()==1)  
     {   
 		Audio::getInstance()->playClick();
@@ -121,13 +122,13 @@ void GamePauseLayer::getSoudState(CCObject* pSender){
 }
 
 void GamePauseLayer::getMusicState(CCObject* pSender){
-	 //´´½¨ÁÙÊ±CCMenuItemToggle  
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±CCMenuItemToggle  
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;  
-    //¸ù¾İCCMenuItemToggleµÄÑ¡ÏîÀ´¾ö¶¨ÒôÀÖµÄ¿ª¹Ø  
+    //ï¿½ï¿½ï¿½ï¿½CCMenuItemToggleï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÄ¿ï¿½ï¿½ï¿½  
     if (temp->getSelectedIndex()==1)  
     {   
 		Audio::getInstance()->playClick();
-        //ÔİÍ£²¥·ÅÒôÀÖ  
+        //ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
         CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic(); 
 		GAMEDATA::getInstance()->setMusicState(false);
 		GAMEDATA::getInstance()->saveMusicState();
@@ -135,7 +136,7 @@ void GamePauseLayer::getMusicState(CCObject* pSender){
     }  
     if (temp->getSelectedIndex()==0)  
     {  
-        //¼ÌĞø²¥·ÅÒôÀÖ  
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic(); 
 		GAMEDATA::getInstance()->setMusicState(true);
 		GAMEDATA::getInstance()->saveMusicState();

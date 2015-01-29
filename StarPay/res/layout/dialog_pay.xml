@@ -29,12 +29,12 @@
 	
 	        <ImageButton
 	            android:id="@+id/pay_cancel"
-	            android:layout_width="13dp"
-	            android:layout_height="12dp"
+	            android:layout_width="26dp"
+	            android:layout_height="26dp"
 	            android:layout_alignParentRight="true"
 	            android:layout_alignParentTop="true"
-	            android:layout_marginTop="9dp"
-	            android:layout_marginRight="18dp"
+	            android:layout_marginTop="6dp"
+	            android:layout_marginRight="10dp"
 	            android:background="@drawable/pay_cancel_up" />
 	
 	        <ImageView
@@ -44,7 +44,7 @@
 	            android:layout_centerHorizontal="true"
 	            android:layout_alignParentTop="true"
 	            android:layout_marginTop="43dp"
-	            android:background="@drawable/pay_tip_goods_1" />
+	            android:background="@drawable/pay_tip_goods_5" />
 	        
 	        <ImageView
 	            android:id="@+id/revive_num"

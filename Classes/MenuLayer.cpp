@@ -52,31 +52,70 @@ bool MenuLayer::init(){
 	this->addChild(effect);
 
 	int level = GAMEDATA::getInstance()->getUserLevel();
-	auto about = Label::create(ChineseWord("about"),"Arial",24);
-	about->setPosition(450,40);
-	about->setAnchorPoint(Point(1,0.5));
-	this->addChild(about);
-
-	auto aboutListener = EventListenerTouchOneByOne::create();
-	aboutListener->onTouchBegan = CC_CALLBACK_2(MenuLayer::showAbout,this);
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(aboutListener,about);
+	auto aboutBtn = MenuItemImage::create(
+		"about_btn_normal.png","about_btn_click.png",CC_CALLBACK_0(MenuLayer::showAbout,this)
+		);
+	auto aboutMenu = Menu::create(aboutBtn, NULL);
+	aboutMenu->setPosition(427,50);
+	this->addChild(aboutMenu);
 
 	int per = (int)((float)GAMEDATA::getInstance()->getCurExpNum()/GAMEDATA::getInstance()->getFullExpNum(level)*100);
-	auto perNum = Label::create("LV"
-			+String::createWithFormat("%d/",level)->_string+String::createWithFormat("%d",per)->_string	+"%","Arial",24);
-	perNum->setPosition(30,40);
-	perNum->setAnchorPoint(Point(0, 0.5));
+
+	auto levelTxt = Sprite::create("level.png");
+	levelTxt->setAnchorPoint(Point(0,0.5));
+	levelTxt->setPosition(30,40);
+	this->addChild(levelTxt);
+
+	auto levelNum = LabelAtlas::create(String::createWithFormat("%d",level)->_string,"level_num.png",15,22,48);
+	levelNum->setAnchorPoint(Point(0,0.5));
+	levelNum->setPosition(64,40);
+	this->addChild(levelNum);
+
+	auto line = Sprite::create("line.png");
+	line->setAnchorPoint(Point(0,0.5));
+	auto perNum = LabelAtlas::create(String::createWithFormat("%d",per)->_string,"level_num.png",15,22,48);
+	perNum->setAnchorPoint(Point(0,0.5));
+	auto perTxt = Sprite::create("per.png");
+	perTxt->setAnchorPoint(Point(0,0.5));
+	this->addChild(line);
 	this->addChild(perNum);
+	this->addChild(perTxt);
+	if(level < 10){
+		line->setPosition(81,40);
+		perNum->setPosition(90,40);
+		if(per < 10){
+			perTxt->setPosition(105,40);
+		}else{
+			perTxt->setPosition(120,40);
+		}
+	}else if(level < 100){
+		line->setPosition(96,40);
+		perNum->setPosition(105,40);
+		if(per < 10){
+			perTxt->setPosition(120,40);
+		}else{
+			perTxt->setPosition(135,40);
+		}
+	}else{
+		line->setPosition(111,40);
+		perNum->setPosition(120,40);
+		if(per < 10){
+			perTxt->setPosition(135,40);
+		}else{
+			perTxt->setPosition(150,40);
+		}
+	}
 
-	auto goldBuy = Sprite::create("buy_gold.png");
-	goldBuy->setPosition(240,760);
-	goldBuy->setScale(2);
-	goldBuy->setAnchorPoint(Point(0.5,0.5));
-	this->addChild(goldBuy);
+	auto goldBuyBtn = MenuItemImage::create(
+		"gold_buy_normal.png","gold_buy_click.png",CC_CALLBACK_0(MenuLayer::pay,this)
+		);
+	auto goldBuyMenu = Menu::create(goldBuyBtn, NULL);
+	goldBuyMenu->setPosition(53,760);
+	goldBuyMenu->setAnchorPoint(Point(0,0.5));
+	this->addChild(goldBuyMenu);
 
-	auto gold = Label::create(ChineseWord("gold")+String::createWithFormat(":%d",
-		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
-	gold->setPosition(30,760);
+	gold = LabelAtlas::create(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string,"gold_num.png",18,26,48);
+	gold->setPosition(95,752);
 	gold->setAnchorPoint(Point(0, 0.5));
 	this->addChild(gold);
 
@@ -187,6 +226,13 @@ void MenuLayer::autoStartGame(float dt){
     #endif
 }
 
+void MenuLayer::pay(){
+	Audio::getInstance()->playClick();
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->pay(7);
+    #endif
+}
+
 bool MenuLayer::startGame(Touch* touch,Event* event){
 	if(event->getCurrentTarget()->getBoundingBox().containsPoint(touch->getLocation())){
 		if(signIn->isVisible()){
@@ -200,15 +246,12 @@ bool MenuLayer::startGame(Touch* touch,Event* event){
 	return false;
 }
 
-bool MenuLayer::showAbout(Touch* touch,Event* event){
-	if(event->getCurrentTarget()->getBoundingBox().containsPoint(touch->getLocation())){
-		if(signIn->isVisible() || quitBg->isVisible()){
-			return true;
-		}
-		aboutLayer->setVisible(true);
-		return true;
+void MenuLayer::showAbout(){
+	if(signIn->isVisible() || quitBg->isVisible()){
+		return;
 	}
-	return false;
+	Audio::getInstance()->playClick();
+	aboutLayer->setVisible(true);
 }
 
 void MenuLayer::showQuit(){
@@ -229,7 +272,7 @@ void MenuLayer::showQuit(){
 		}else{
 			hasShowQuitPay = true;
 			#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-				CallAndroidMethod::getInstance()->pay(1);
+				CallAndroidMethod::getInstance()->pay(8);
     		#endif
 		}
 	}
@@ -251,14 +294,8 @@ void MenuLayer::cancel(){
 	cancelMenu->setVisible(false);
 }
 
-void MenuLayer::startAction(){
-	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb");
-	action->resume();
-}
-
-void MenuLayer::stopAction(){
-	ActionTimeline *action = CSLoader::createTimeline("MenuLayer.csb");
-	action->stop();
+void MenuLayer::refreshGold(){
+	gold->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string);
 }
 
 void MenuLayer::getSoudState(CCObject* pSender){
