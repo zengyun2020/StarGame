@@ -18,20 +18,25 @@ bool GameLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
+	needInitPause = true;
 	TopMenu::getInstance()->cleanScore();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
+	schedule(schedule_selector(GameLayer::showPay), 1.0f, 0, 0);
+	schedule(schedule_selector(GameLayer::loadGame), 2.5f, 0, 0);
+	return true;
+}
 
+void GameLayer::showPay(float dt){
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		if(!GAMEDATA::getInstance()->hasShowRegisterPay() && GAMEDATA::getInstance()->getUserLevel()>=2){
+			needInitPause = false;
 			GameLayer::_PauseTime=true;
 			CallAndroidMethod::getInstance()->pay(6);
 		}
 	#endif
-	schedule(schedule_selector(GameLayer::loadGame), 1.5f, 0, 0);
-	return true;
 }
 
 
@@ -68,7 +73,9 @@ void GameLayer::loadGame(float dt){
 void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
-	GameLayer::_PauseTime=false;//resume time
+	if(needInitPause){
+		GameLayer::_PauseTime=false;//resume time
+	}
 }
 
 //���·�����scheduleUpdate,ÿ֡����
@@ -284,7 +291,7 @@ void GameLayer::gotoGameOver(){
 }
 
 void GameLayer::initTime(){
-	GameLayer::totalTime = 5;
+	GameLayer::totalTime = 60;
 }
 
 int GameLayer::getTime(){

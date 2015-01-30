@@ -31,8 +31,9 @@ public:
 	void doRevive();
 	void doGameOver();
 	void loadGame(float dt);
+	void showPay(float dt);
 	void updateCustom(float dt);
-	void initTime();  //жьжцсно╥й╠╪Д
+	void initTime();  //О©╫О©╫О©╫О©╫О©╫О©╫о╥й╠О©╫О©╫
 	void setTime(int time);
 	int getTime();
 	void plusTime(int time);
@@ -43,10 +44,11 @@ private:
 	TopMenu* menu;
 	StarMatrix* matrix;
 	Label* linkNum;
-	Label* gameTime;//сно╥й╠╪Дотй╬
+	Label* gameTime;//О©╫О©╫о╥й╠О©╫О©╫О©╫О©╫й╬
 	FloatWord* gameOverWord;
+	bool needInitPause;
 public :
-	static int totalTime;//сно╥й╠╪Д
+	static int totalTime;//О©╫О©╫о╥й╠О©╫О©╫
 	static bool _PauseTime;
 	static bool needPluse;
 	static bool gameOver;

@@ -4,16 +4,8 @@
 #include "Audio.h"
 #include "GameScene.h"
 
-About* About::_instance = nullptr;
 About::About(){
 	this->init();
-}
-
-About* About::getInstance(){
-	if(_instance == 0){
-		_instance = new About();
-	}
-	return _instance;
 }
 
 bool About::init(){
@@ -115,9 +107,6 @@ bool About::init(){
 }
 
 void About::hideSelf(){
-	if(!isVisible()){
-		return;
-	}
 	Audio::getInstance()->playClick();
 	this->setVisible(false);
 	this->removeFromParentAndCleanup(true);

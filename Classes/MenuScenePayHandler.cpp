@@ -3,6 +3,7 @@
 #include "GameData.h"
 #include "MenuLayer.h"
 #include "SignIn.h"
+#include "Gold.h"
 
 static MenuScenePayHandler* _instance = nullptr;
 MenuScenePayHandler* MenuScenePayHandler::getInstance()
@@ -90,27 +91,21 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		if(resultId==0){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+50000);
 			GAMEDATA::getInstance()->saveGoldNum();
-			auto layer = MenuLayer::create();
-			layer->refreshGold();
-			SignIn::getInstance()->refreshGold();
-			layer = NULL;
+			Gold::getInstance()->refreshGold();
 		}
 		break;
 	case 8:
 		if(resultId==0){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+60000);
 			GAMEDATA::getInstance()->saveGoldNum();
-			auto layer = MenuLayer::create();
-			layer->refreshGold();
-			SignIn::getInstance()->refreshGold();
-			layer = NULL;
+			Gold::getInstance()->refreshGold();
 		}
 		break;
 	case 10:
 		if(resultId==0){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+50000);
 			GAMEDATA::getInstance()->saveGoldNum();
-			SignIn::getInstance()->refreshGold();
+			Gold::getInstance()->refreshGold();
 		}
 		break;
 	case 11:
@@ -118,9 +113,6 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+50000);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			auto layer = MenuLayer::create();
-			layer->refreshGold();
-			layer = NULL;
 		}
 		break;
 	case 12:

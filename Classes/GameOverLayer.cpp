@@ -208,7 +208,6 @@ void GameOverLayer::update(float delta){
 		if(scoreNum > curScore){
 			scoreNum = curScore;
 		}
-		labelScore->setPosition(Point(240, 493));
 		labelScore->setString(cocos2d::String::createWithFormat("%d",(int)scoreNum)->_string);
 
 		rotation = 360*animTime/60;
@@ -247,7 +246,7 @@ void GameOverLayer::update(float delta){
 			soundEffectOff->runAction(FadeTo::create(2.2f,255));
 		}
 
-		if(animTime > 77){
+		if(animTime > 82){
 			if(hasShowUpgrade){
 
 			}else{

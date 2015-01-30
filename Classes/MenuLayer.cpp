@@ -11,6 +11,7 @@
 #include "GameData.h"
 #include "CallAndroidMethod.h"
 #include "About.h"
+#include "Gold.h"
 
 using namespace cocostudio::timeline;
 
@@ -114,9 +115,7 @@ bool MenuLayer::init(){
 	goldBuyMenu->setAnchorPoint(Point(0,0.5));
 	this->addChild(goldBuyMenu);
 
-	gold = LabelAtlas::create(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string,"gold_num.png",18,26,48);
-	gold->setPosition(95,752);
-	gold->setAnchorPoint(Point(0, 0.5));
+	gold = Gold::getInstance();
 	this->addChild(gold);
 
 	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
@@ -151,12 +150,12 @@ bool MenuLayer::init(){
 	quitBg = Sprite::create("quit_bg.png");
 	quitBg->setPosition(240,116);
 	quitBg->setVisible(false);
-	this->addChild(quitBg);
+	this->addChild(quitBg,10);
 
 	quitDesc = Sprite::create("quit_desc.png");
 	quitDesc->setPosition(240,144);
 	quitDesc->setVisible(false);
-	this->addChild(quitDesc);
+	this->addChild(quitDesc,10);
 
 	MenuItemImage* confirmBtn = MenuItemImage::create(
 		"quit_confirm_up.png","quit_confirm_down.png",CC_CALLBACK_0(MenuLayer::quit,this)
@@ -164,7 +163,7 @@ bool MenuLayer::init(){
 	confirmMenu = Menu::create(confirmBtn, NULL);
 	confirmMenu->setPosition(316,71);
 	confirmMenu->setVisible(false);
-	this->addChild(confirmMenu,3);
+	this->addChild(confirmMenu,10);
 
 	MenuItemImage* cancelBtn = MenuItemImage::create(
 		"quit_cancel_up.png","quit_cancel_down.png",CC_CALLBACK_0(MenuLayer::cancel,this)
@@ -172,7 +171,7 @@ bool MenuLayer::init(){
 	cancelMenu = Menu::create(cancelBtn, NULL);
 	cancelMenu->setPosition(164,71);
 	cancelMenu->setVisible(false);
-	this->addChild(cancelMenu,3);
+	this->addChild(cancelMenu,10);
 
 	this->setKeypadEnabled(true);
 	//����������
@@ -206,10 +205,130 @@ bool MenuLayer::init(){
     #endif
 	schedule(schedule_selector(MenuLayer::autoStartGame), 0.2f, 0, 0);
 
-	aboutLayer = About::getInstance();
-	this->addChild(aboutLayer);
-	aboutLayer->setVisible(false);
+	aboutBg = Sprite::create("bg_mainscene.jpg");
+	aboutBg->setPosition(240,400);
+	this->addChild(aboutBg);
+
+	smallTitle11 = Label::create(ChineseWord("abouttitle11"),"Arial",36);
+	smallTitle11->setPosition(60,718);
+	smallTitle11->setAnchorPoint(Point(0,0.5));
+	this->addChild(smallTitle11);
+
+	int totalScore = GAMEDATA::getInstance()->getTotalScore();
+
+	smallTitle12 = Label::create(String::createWithFormat("%d",
+			totalScore)->_string+ChineseWord("abouttitle12"),"Arial",36);
+	smallTitle12->setPosition(60,668);
+	smallTitle12->setAnchorPoint(Point(0,0.5));
+	this->addChild(smallTitle12);
+
+	smallTitle21 = Label::create(ChineseWord("abouttitle21"),"Arial",36);
+	smallTitle21->setPosition(60,618);
+	smallTitle21->setAnchorPoint(Point(0,0.5));
+	this->addChild(smallTitle21);
+
+	smallTitle22 = Label::create(String::createWithFormat("%d",
+			totalScore/1000)->_string+"."+String::createWithFormat("%d",
+					(totalScore%1000)/100)->_string+ChineseWord("abouttitle22"),"Arial",36);
+	smallTitle22->setPosition(60,568);
+	smallTitle22->setAnchorPoint(Point(0,0.5));
+	this->addChild(smallTitle22);
+
+	titleDesc1 = Label::create(ChineseWord("aboutdesc1"),"Arial",24);
+	titleDesc1->setPosition(60,478);
+	titleDesc1->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc1);
+
+	titleDesc2 = Label::create(ChineseWord("aboutdesc2"),"Arial",24);
+	titleDesc2->setPosition(60,438);
+	titleDesc2->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc2);
+
+	titleDesc3 = Label::create(ChineseWord("aboutdesc3"),"Arial",24);
+	titleDesc3->setPosition(60,398);
+	titleDesc3->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc3);
+
+	titleDesc4 = Label::create(ChineseWord("aboutdesc4"),"Arial",24);
+	titleDesc4->setPosition(60,358);
+	titleDesc4->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc4);
+
+	titleDesc5 = Label::create(ChineseWord("aboutdesc5"),"Arial",24);
+	titleDesc5->setPosition(60,318);
+	titleDesc5->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc5);
+
+	titleDesc6 = Label::create(ChineseWord("aboutdesc6"),"Arial",24);
+	titleDesc6->setPosition(60,278);
+	titleDesc6->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc6);
+
+	titleDesc7 = Label::create(ChineseWord("aboutdesc7"),"Arial",24);
+	titleDesc7->setPosition(60,238);
+	titleDesc7->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc7);
+
+	titleDesc8 = Label::create(ChineseWord("aboutdesc8"),"Arial",24);
+	titleDesc8->setPosition(60,198);
+	titleDesc8->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc8);
+
+	titleDesc9 = Label::create(ChineseWord("aboutdesc9"),"Arial",24);
+	titleDesc9->setPosition(60,158);
+	titleDesc9->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc9);
+
+	auto backBtn = MenuItemImage::create(
+		"about_back_normal.png","about_back_click.png",CC_CALLBACK_0(MenuLayer::hideAbout,this)
+		);
+	backMenu = Menu::create(backBtn, NULL);
+	backMenu->setPosition(100,70);
+	backMenu->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(backMenu);
+
+	auto startBtn = MenuItemImage::create(
+		"about_start_normal.png","about_start_click.png",CC_CALLBACK_0(MenuLayer::startGameT,this)
+		);
+	startMenu = Menu::create(startBtn, NULL);
+	startMenu->setPosition(320,70);
+	startMenu->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(startMenu);
+	setAboutVisible(false);
+
 	return true;
+}
+
+void MenuLayer::hideAbout(){
+	setAboutVisible(false);
+}
+
+void MenuLayer::startGameT(){
+	if(signIn->isVisible()){
+		return;
+	}
+	Audio::getInstance()->playClick();
+	GAMEDATA::getInstance()->init();
+	Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+}
+
+void MenuLayer::setAboutVisible(bool visible){
+	aboutBg->setVisible(visible);
+	smallTitle11->setVisible(visible);
+	smallTitle12->setVisible(visible);
+	smallTitle21->setVisible(visible);
+	smallTitle22->setVisible(visible);
+	titleDesc1->setVisible(visible);
+	titleDesc2->setVisible(visible);
+	titleDesc3->setVisible(visible);
+	titleDesc4->setVisible(visible);
+	titleDesc5->setVisible(visible);
+	titleDesc6->setVisible(visible);
+	titleDesc7->setVisible(visible);
+	titleDesc8->setVisible(visible);
+	titleDesc9->setVisible(visible);
+	backMenu->setVisible(visible);
+	startMenu->setVisible(visible);
 }
 
 void MenuLayer::autoStartGame(float dt){
@@ -247,15 +366,12 @@ bool MenuLayer::startGame(Touch* touch,Event* event){
 }
 
 void MenuLayer::showAbout(){
-	if(signIn->isVisible() || quitBg->isVisible()){
-		return;
-	}
 	Audio::getInstance()->playClick();
-	aboutLayer->setVisible(true);
+	setAboutVisible(true);
 }
 
 void MenuLayer::showQuit(){
-	if(aboutLayer->isVisible()){
+	if(signIn->isVisible() || aboutBg->isVisible()){
 		return;
 	}
 	if(GAMEDATA::getInstance()->isPaySuccess()){
@@ -292,10 +408,6 @@ void MenuLayer::cancel(){
 	quitDesc->setVisible(false);
 	confirmMenu->setVisible(false);
 	cancelMenu->setVisible(false);
-}
-
-void MenuLayer::refreshGold(){
-	gold->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string);
 }
 
 void MenuLayer::getSoudState(CCObject* pSender){

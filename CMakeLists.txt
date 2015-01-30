@@ -141,6 +141,7 @@ set(GAME_SRC
   Classes/Upgrade.cpp
   Classes/About.cpp
   Classes/BlinkTitle.cpp
+  Classes/Gold.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -172,6 +173,7 @@ set(GAME_HEADERS
   Classes/Upgrade.h
   Classes/About.h
   Classes/BlinkTitle.h
+  Classes/Gold.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

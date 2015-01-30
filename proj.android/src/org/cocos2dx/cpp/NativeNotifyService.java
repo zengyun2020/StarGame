@@ -1,7 +1,6 @@
 package org.cocos2dx.cpp;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.tallbigup.android.gds.nativenotify.NotifyManager;
 
@@ -14,8 +13,7 @@ public class NativeNotifyService {
 	}
 	
 	public static void startNativeNotify(){
-		Log.i("MCH",">>>>>startNativeNotify");
 		NotifyManager.setNextNotification(activity, 
-				1000*60*60*12, "羊年消星星", "有活动案啦，都来抢金币吧");
+				1000*60*60*12, "羊年消星星", "消灭星星，收集愿望，让生活更开心！");
 	}
 }

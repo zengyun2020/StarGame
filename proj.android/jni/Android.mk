@@ -36,7 +36,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
           ../../Classes/SignIn.cpp\
           ../../Classes/Upgrade.cpp\
           ../../Classes/About.cpp\
-          ../../Classes/BlinkTitle.cpp
+          ../../Classes/BlinkTitle.cpp\
+          ../../Classes/Gold.cpp
           
 
 

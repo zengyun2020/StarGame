@@ -5,8 +5,8 @@
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
 #include "Chinese.h"
-#include "About.h"
 #include "Audio.h"
+#include "Gold.h"
 
 SignIn* SignIn::_instance = nullptr;
 SignIn::SignIn(){
@@ -30,12 +30,6 @@ bool SignIn::init(){
 	this->addChild(bg);
 
 	int level = GAMEDATA::getInstance()->getUserLevel();
-	auto aboutBtn = MenuItemImage::create(
-		"about_btn_normal.png","about_btn_click.png",CC_CALLBACK_0(SignIn::showAbout,this)
-		);
-	auto aboutMenu = Menu::create(aboutBtn, NULL);
-	aboutMenu->setPosition(427,50);
-	this->addChild(aboutMenu);
 
 	int per = (int)((float)GAMEDATA::getInstance()->getCurExpNum()/GAMEDATA::getInstance()->getFullExpNum(level)*100);
 
@@ -92,9 +86,7 @@ bool SignIn::init(){
 	goldBuyMenu->setAnchorPoint(Point(0,0.5));
 	this->addChild(goldBuyMenu);
 
-	gold = LabelAtlas::create(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string,"gold_num.png",18,26,48);
-	gold->setPosition(95,752);
-	gold->setAnchorPoint(Point(0, 0.5));
+	gold = Gold::getInstance();
 	this->addChild(gold);
 
 	MenuItemImage* musicBtnOn = MenuItemImage::create("bg_music_open.png","bg_music_open.png");
@@ -294,10 +286,6 @@ bool SignIn::init(){
 	confirmMenu->setPosition(240,276);
 	this->addChild(confirmMenu);
 
-	aboutLayer = About::getInstance();
-	this->addChild(aboutLayer);
-	aboutLayer->setVisible(false);
-
 	return true;
 }
 
@@ -323,15 +311,6 @@ void SignIn::pay(){
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		CallAndroidMethod::getInstance()->pay(10);
     #endif
-}
-
-void SignIn::showAbout(){
-	Audio::getInstance()->playClick();
-	aboutLayer->setVisible(true);
-}
-
-void SignIn::refreshGold(){
-	gold->setString(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string);
 }
 
 void SignIn::getSoudState(CCObject* pSender){
