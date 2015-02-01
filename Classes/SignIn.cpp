@@ -286,7 +286,136 @@ bool SignIn::init(){
 	confirmMenu->setPosition(240,276);
 	this->addChild(confirmMenu);
 
+	auto aboutBtn = MenuItemImage::create(
+		"about_btn_normal.png","about_btn_click.png",CC_CALLBACK_0(SignIn::showAbout,this)
+		);
+	auto aboutMenu = Menu::create(aboutBtn, NULL);
+	aboutMenu->setPosition(427,50);
+	this->addChild(aboutMenu);
+
+	aboutBg = Sprite::create("bg_mainscene.jpg");
+	aboutBg->setPosition(240,400);
+	this->addChild(aboutBg);
+
+	smallTitle11 = Label::create(ChineseWord("abouttitle11"),"Arial",36);
+	smallTitle11->setPosition(60,718);
+	smallTitle11->setAnchorPoint(Point(0,0.5));
+	this->addChild(smallTitle11);
+
+	int totalScore = GAMEDATA::getInstance()->getTotalScore();
+
+	smallTitle12 = Label::create(String::createWithFormat("%d",
+			totalScore)->_string+ChineseWord("abouttitle12"),"Arial",36);
+	smallTitle12->setPosition(60,668);
+	smallTitle12->setAnchorPoint(Point(0,0.5));
+	this->addChild(smallTitle12);
+
+	smallTitle21 = Label::create(ChineseWord("abouttitle21"),"Arial",36);
+	smallTitle21->setPosition(60,618);
+	smallTitle21->setAnchorPoint(Point(0,0.5));
+	this->addChild(smallTitle21);
+
+	smallTitle22 = Label::create(String::createWithFormat("%d",
+			totalScore/1000)->_string+"."+String::createWithFormat("%d",
+					(totalScore%1000)/100)->_string+ChineseWord("abouttitle22"),"Arial",36);
+	smallTitle22->setPosition(60,568);
+	smallTitle22->setAnchorPoint(Point(0,0.5));
+	this->addChild(smallTitle22);
+
+	titleDesc1 = Label::create(ChineseWord("aboutdesc1"),"Arial",24);
+	titleDesc1->setPosition(60,478);
+	titleDesc1->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc1);
+
+	titleDesc2 = Label::create(ChineseWord("aboutdesc2"),"Arial",24);
+	titleDesc2->setPosition(60,438);
+	titleDesc2->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc2);
+
+	titleDesc3 = Label::create(ChineseWord("aboutdesc3"),"Arial",24);
+	titleDesc3->setPosition(60,398);
+	titleDesc3->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc3);
+
+	titleDesc4 = Label::create(ChineseWord("aboutdesc4"),"Arial",24);
+	titleDesc4->setPosition(60,358);
+	titleDesc4->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc4);
+
+	titleDesc5 = Label::create(ChineseWord("aboutdesc5"),"Arial",24);
+	titleDesc5->setPosition(60,318);
+	titleDesc5->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc5);
+
+	titleDesc6 = Label::create(ChineseWord("aboutdesc6"),"Arial",24);
+	titleDesc6->setPosition(60,278);
+	titleDesc6->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc6);
+
+	titleDesc7 = Label::create(ChineseWord("aboutdesc7"),"Arial",24);
+	titleDesc7->setPosition(60,238);
+	titleDesc7->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc7);
+
+	titleDesc8 = Label::create(ChineseWord("aboutdesc8"),"Arial",24);
+	titleDesc8->setPosition(60,198);
+	titleDesc8->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc8);
+
+	titleDesc9 = Label::create(ChineseWord("aboutdesc9"),"Arial",24);
+	titleDesc9->setPosition(60,158);
+	titleDesc9->setAnchorPoint(Point(0,0.5));
+	this->addChild(titleDesc9);
+
+	auto backBtn = MenuItemImage::create(
+		"about_back_normal.png","about_back_click.png",CC_CALLBACK_0(SignIn::hideAbout,this)
+		);
+	backMenu = Menu::create(backBtn, NULL);
+	backMenu->setPosition(100,70);
+	backMenu->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(backMenu);
+
+	auto startBtn = MenuItemImage::create(
+		"about_start_normal.png","about_start_click.png",CC_CALLBACK_0(SignIn::startGameT,this)
+		);
+	startMenu = Menu::create(startBtn, NULL);
+	startMenu->setPosition(320,70);
+	startMenu->setAnchorPoint(Point(0.5,0.5));
+	this->addChild(startMenu);
+	setAboutVisible(false);
+
 	return true;
+}
+
+void SignIn::showAbout(){
+	setAboutVisible(true);
+}
+
+void SignIn::hideAbout(){
+	setAboutVisible(false);
+}
+
+void SignIn::startGameT(){
+	hideSelf();
+}
+
+void SignIn::setAboutVisible(bool visible){
+	aboutBg->setVisible(visible);
+	smallTitle11->setVisible(visible);
+	smallTitle12->setVisible(visible);
+	smallTitle21->setVisible(visible);
+	smallTitle22->setVisible(visible);
+	titleDesc1->setVisible(visible);
+	titleDesc2->setVisible(visible);
+	titleDesc3->setVisible(visible);
+	titleDesc4->setVisible(visible);
+	titleDesc5->setVisible(visible);
+	titleDesc6->setVisible(visible);
+	titleDesc7->setVisible(visible);
+	titleDesc8->setVisible(visible);
+	titleDesc9->setVisible(visible);
+	backMenu->setVisible(visible);
+	startMenu->setVisible(visible);
 }
 
 void SignIn::hideSelf(){

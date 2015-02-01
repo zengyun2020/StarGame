@@ -44,6 +44,12 @@ bool GamePauseLayer::init(TopMenu* topNode){
 		"exit_normal.png","exit_click.png",CC_CALLBACK_0(GamePauseLayer::goBack,this)
 		);
 
+	auto scaleSmall = ScaleTo::create(0.8,0.7);
+	auto scaleBig = ScaleTo::create(0.8,1);
+	auto delay = DelayTime::create(0);
+	auto seq2 = Sequence::create(scaleSmall,delay,scaleBig,delay->clone(),NULL);
+	payBtn->runAction(RepeatForever::create(seq2));
+
 	MenuItemImage* soundBtnOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
 	MenuItemImage* soundBtnOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");  
 	MenuItemToggle* soundTog = MenuItemToggle::createWithTarget(this,menu_selector(GamePauseLayer::getSoudState),soundBtnOn,soundBtnOff,NULL);  
@@ -75,7 +81,7 @@ bool GamePauseLayer::init(TopMenu* topNode){
 		MenuItemImage* resumeBtn = MenuItemImage::create(
 		"continue_normal.png","continue_click.png",CC_CALLBACK_0(GamePauseLayer::ResumeGame,this)
 		);
-		auto scale1 = ScaleTo::create(1,1.25);
+	auto scale1 = ScaleTo::create(1,1.25);
 	auto scale2 = ScaleTo::create(1,1);
 	auto seq =Sequence::create(scale1,scale2,nullptr);
 	resumeBtn->runAction(RepeatForever::create(seq));
