@@ -198,9 +198,11 @@ bool MenuLayer::init(){
 			CCLOG("result:%d",2);
 		}else{
 			CCLOG("result:%d",1);
-			Audio::getInstance()->playSignin();
-			signIn->setVisible(true);
-			this->addChild(signIn,5);
+			if(GAMEDATA::getInstance()->isFirstLogin()){
+				Audio::getInstance()->playSignin();
+				signIn->setVisible(true);
+				this->addChild(signIn,5);
+			}
 		}
     #endif
 	schedule(schedule_selector(MenuLayer::autoStartGame), 0.2f, 0, 0);
@@ -360,6 +362,7 @@ bool MenuLayer::startGame(Touch* touch,Event* event){
 		Audio::getInstance()->playClick();
 		GAMEDATA::getInstance()->init();
 		Director::getInstance()->replaceScene(TransitionFade::create(1,GameScene::create()));
+		GAMEDATA::getInstance()->setFirstLogin(false);
 		return true;
 	}
 	return false;

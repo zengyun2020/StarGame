@@ -31,7 +31,7 @@ bool GameLayer::init(){
 
 void GameLayer::showPay(float dt){
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		if(!GAMEDATA::getInstance()->hasShowRegisterPay() && GAMEDATA::getInstance()->getUserLevel()>=2){
+		if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
 			needInitPause = false;
 			GameLayer::_PauseTime=true;
 			CallAndroidMethod::getInstance()->pay(6);
@@ -270,6 +270,7 @@ void GameLayer::doGameOver(){
 void GameLayer::gotoNextLevel(){
 	refreshMenu(0);
 	//floatLevelWord();
+	_PauseTime = false;
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	matrix->setAcceptTouch(true);
 	Audio::getInstance()->playNextGameRound();

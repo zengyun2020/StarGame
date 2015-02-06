@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="MhljDemo" basedir="." default="build-one-project">    
+<project name="Star" basedir="." default="build-one-project">    
 
     <loadproperties srcFile="local.properties" />
 
