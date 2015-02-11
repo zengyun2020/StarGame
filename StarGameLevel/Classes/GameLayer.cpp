@@ -7,11 +7,9 @@
 #include "GameOverScene.h"
 #include "CallAndroidMethod.h"
 
-bool GameLayer::_PauseTime=false;
-bool GameLayer::needPluse = false;
+
 bool GameLayer::needRevive =false;
 bool GameLayer::gameOver =false;
-int  GameLayer::totalTime =60;
 
 
 bool GameLayer::init(){
@@ -55,37 +53,35 @@ void GameLayer::loadGame(float dt){
 	linkNum->setVisible(false);
 	this->addChild(linkNum,1);
 
-	initTime();
-	gameTime = Label::create("","Arial",24);
-	gameTime->setPosition(visibleSize.width/2+190,visibleSize.height/2+350);
-	showGameTime(totalTime);
-	this->addChild(gameTime,0);
 
 	menu = TopMenu::getInstance();
 	this->addChild(menu, 2);
+
+	props = PropsMenu::getInstance();
+	this->addChild(props);
 
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	Audio::getInstance()->playReadyGo();
 }
 
+void GameLayer::floatTargetScoreWord(){
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	_targetScore = FloatWord::create(
+		ChineseWord("mubiao") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen"),
+		50, Point(visibleSize.width,visibleSize.height/3)
+		);
+	this->addChild(_targetScore,1);
+	//_targetScore->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
+}
 
-//��ʾ���Ǿ���
+
+
 void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
-	if(needInitPause){
-		GameLayer::_PauseTime=false;//resume time
-	}
 }
 
-//���·�����scheduleUpdate,ÿ֡����
 void GameLayer::update(float delta){
-	if(needPluse){
-		linkNum->setString(ChineseWord("shijian"));
-		linkNum->setVisible(true);
-		plusTime(10);
-		needPluse =false;
-	}
 	if(matrix){
 		matrix->updateStar(delta);
 	}
@@ -95,7 +91,7 @@ void GameLayer::update(float delta){
 		doGameOver();
 	}
 	if(needRevive){
-		doRevive();
+		//doRevive();
 		needRevive=false;
 	}
 	if(StarMatrix::BombClick){
@@ -170,13 +166,6 @@ void GameLayer::hideLinkNum(){
 	linkNum->setVisible(false);
 }
 
-void GameLayer::showGameTime(int time){
-	string s = ChineseWord("shengyu") + String::createWithFormat("%d",time)->_string + ChineseWord("miao");
-	if(gameTime){
-		gameTime->setString(s);
-	}
-}
-
 
 void GameLayer::floatLeftStarMsg(int leftNum){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -208,54 +197,8 @@ void GameLayer::floatLeftStarMsg(int leftNum){
 					}
 					refreshMenu(0);
 	});
-	/*Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
-	this->addChild(msg1);
-	msg1->floatInOut(0.5f,1.0f,
-		[=](){
-			hideLinkNum();
-			matrix->setNeedClear(true);
-	});
-	if(leftNum<10){
-		FloatWord* leftStarMsg2 = FloatWord::create(ChineseWord("jiangli") + String::createWithFormat("%d",jiangLiScore)->_string + ChineseWord("fen"),
-			50,Point(visibleSize.width,visibleSize.height/2 - 50));
-		this->addChild(leftStarMsg2);
-		leftStarMsg2->floatInOut(0.5f,1.0f,nullptr);
-		FloatWord* prize=FloatWord::create(String::createWithFormat("%d",jiangLiScore)->_string,32,Point(visibleSize.width/2,visibleSize.height/2 - 80));
-		prize->setVisible(false);
-		this->addChild(prize);
-		prize->floatInPrize(1.5,[=](){
-			prize->setVisible(true);
-		},0.5,[=](){
-			GAMEDATA* data = GAMEDATA::getInstance();
-			data->setCurScore(data->getCurScore() + jiangLiScore);
-			if(data->getCurScore() > data->getHistoryScore()){
-				data->setHistoryScore(data->getCurScore());
-			}
-			refreshMenu(0);
-		});
-	}
-
-	/*Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* msg1 = FloatWord::create(ChineseWord("di")+cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel()+1)->_string+ChineseWord("mu"),50,Point(0,visibleSize.height/2 - 50));
-	this->addChild(msg1);
-	msg1->floatInOut(0.5f,1.0f,
-	[=](){
-	hideLinkNum();
-	matrix->setNeedClear(true);
-	GAMEDATA* data = GAMEDATA::getInstance();
-	data->setCurScore(data->getCurScore());
-	if(data->getCurScore() > data->getHistoryScore()){
-	data->setHistoryScore(data->getCurScore());
-	}
-	refreshMenu(0);
-	});*/
 }
 
-
-void GameLayer::doRevive(){
-	setTime(20);
-}
 
 void GameLayer::doGameOver(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -269,8 +212,6 @@ void GameLayer::doGameOver(){
 
 void GameLayer::gotoNextLevel(){
 	refreshMenu(0);
-	//floatLevelWord();
-	_PauseTime = false;
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	matrix->setAcceptTouch(true);
 	Audio::getInstance()->playNextGameRound();
@@ -291,37 +232,6 @@ void GameLayer::gotoGameOver(){
 #endif
 }
 
-void GameLayer::initTime(){
-	GameLayer::totalTime = 60;
-}
-
-int GameLayer::getTime(){
-	return totalTime;
-}
-
-void GameLayer::setTime(int time){
-	GameLayer::totalTime = time;
-}
-
-void GameLayer::plusTime(int time){
-	Audio::getInstance()->playPropPlusTime();
-	GameLayer::totalTime += time;
-}
-
 void GameLayer::updateCustom(float dt){
-	if(!_PauseTime){
-		totalTime--;
-	}
 
-	if(totalTime<=5 && totalTime>=0){
-		Audio::getInstance()->playBeep();//����ʱ����
-	}
-	if(totalTime == 0){
-		//ʱ�������������Ϸ�������
-		gotoGameOver();
-	}
-	if(totalTime<0){
-		totalTime=0;
-	}
-	showGameTime(totalTime);
 }

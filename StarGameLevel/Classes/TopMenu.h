@@ -10,25 +10,18 @@ public:
 	virtual bool init();
 	CREATE_FUNC(TopMenu);
 	void refresh(int score);
-	void usePropsBomb();
-	void usePropsTime();
 	void PauseGame();
-	void updatePropsNum();
-	void stopScaleAction();
 	void cleanScore();
 	void refreshGold();
 	void pay();
 private:
 	static TopMenu* _instance;
-	Label* highestScore;
+	//Label* highestScore;
+	Label* level;
+	Label* targetScore;
 	Label* curScore;
 	Layer* gamePause;
-	Label* propBombNum;
-	Label* propTimeNum;
 	Label* playerGold;
-	MenuItemImage* BombBtn;
-	MenuItemImage* TimeBtn;
-	FloatWord* plusTimeWord;
 private:
 	TopMenu();
 

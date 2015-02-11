@@ -98,7 +98,6 @@ void GamePauseLayer::payProps(){
 }
 
 void GamePauseLayer::goBack(){
-		GameLayer::_PauseTime =false;
 		Audio::getInstance()->playClick();
 		this->removeFromParentAndCleanup(true);
 	Director::getInstance()->replaceScene(HelloWorld::createScene());
@@ -106,14 +105,11 @@ void GamePauseLayer::goBack(){
 
 void GamePauseLayer::ResumeGame(){
 		Audio::getInstance()->playClick();
-		GameLayer::_PauseTime =false;
 		this->removeFromParentAndCleanup(true);
 	}
 
 void GamePauseLayer::getSoudState(CCObject* pSender){
-	 //������ʱCCMenuItemToggle  
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;  
-    //����CCMenuItemToggle��ѡ�����������ֵĿ���  
     if (temp->getSelectedIndex()==1)  
     {   
 		Audio::getInstance()->playClick();
@@ -128,13 +124,10 @@ void GamePauseLayer::getSoudState(CCObject* pSender){
 }
 
 void GamePauseLayer::getMusicState(CCObject* pSender){
-	 //������ʱCCMenuItemToggle  
     CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;  
-    //����CCMenuItemToggle��ѡ�����������ֵĿ���  
     if (temp->getSelectedIndex()==1)  
     {   
 		Audio::getInstance()->playClick();
-        //��ͣ��������  
         CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic(); 
 		GAMEDATA::getInstance()->setMusicState(false);
 		GAMEDATA::getInstance()->saveMusicState();
@@ -142,7 +135,6 @@ void GamePauseLayer::getMusicState(CCObject* pSender){
     }  
     if (temp->getSelectedIndex()==0)  
     {  
-        //������������  
         CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic(); 
 		GAMEDATA::getInstance()->setMusicState(true);
 		GAMEDATA::getInstance()->saveMusicState();

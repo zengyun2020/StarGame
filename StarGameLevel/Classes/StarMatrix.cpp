@@ -68,14 +68,12 @@ void StarMatrix::onTouch(const Point& p){
 	}else{
 	 StarMatrix::touchLeft=true;
 	}
-	if(s && acceptTouch && GameLayer::totalTime>0){
+	if(s && acceptTouch){
 		clearOneByOne = true;
 		if(BombClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			TopMenu::getInstance()->updatePropsNum();
-			TopMenu::getInstance()->stopScaleAction();
 			useBombAuto(s);
 			BombClick =false;
 			return;
@@ -260,7 +258,6 @@ void StarMatrix::deleteSelectedList(){
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
-		GameLayer::_PauseTime=true;// pause time
 		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 		CCLOG("ENDED");
 	}
