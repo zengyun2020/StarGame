@@ -153,3 +153,12 @@ void GAMEDATA::saveTotalScore(){
 void GAMEDATA::savePaySuccess(){
 	UserDefault::getInstance()->setBoolForKey("paySuccess", isPaySuccess());
 }
+
+
+void GAMEDATA::setLastLevelScore(int score){
+	lastLevelScore =score;
+}
+
+int GAMEDATA::getLastLevelScore(){
+	return lastLevelScore;
+}

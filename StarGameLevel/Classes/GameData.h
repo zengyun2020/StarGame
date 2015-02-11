@@ -78,6 +78,10 @@ public:
 	void savePrizeGoldNum();
 	void saveTotalScore();
 	void savePaySuccess();
+
+	void setLastLevelScore(int score);
+	int getLastLevelScore();
+
 private:
 	GAMEDATA();
 	void init();
@@ -104,6 +108,7 @@ private:
 	int prize_gold_num;
 	int total_score;
 	bool pay_success;
+	int lastLevelScore;
 	friend class MenuLayer;
 	friend class GameOverLayer;
 	friend class SignIn;

@@ -313,17 +313,14 @@ void GameOverLayer::back(){
 void GameOverLayer::getSoudState(CCObject* pSender){
 	Audio::getInstance()->playClick();
 	    CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
-	    //����CCMenuItemToggle��ѡ�����������ֵĿ���
 	    if (temp->getSelectedIndex()==1)
 	    {
-	        //��ͣ��������
 	        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 			GAMEDATA::getInstance()->setSoundEffect(false);
 		    GAMEDATA::getInstance()->saveSoundEffect();
 	    }
 	    if (temp->getSelectedIndex()==0)
 	    {
-	        //������������
 	        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
 			GAMEDATA::getInstance()->setSoundEffect(true);
 		    GAMEDATA::getInstance()->saveSoundEffect();
@@ -333,17 +330,14 @@ void GameOverLayer::getSoudState(CCObject* pSender){
 void GameOverLayer::getMusicState(CCObject* pSender){
 	Audio::getInstance()->playClick();
 	CCMenuItemToggle* temp=(CCMenuItemToggle*)pSender;
-	//����CCMenuItemToggle��ѡ�����������ֵĿ���
 	if (temp->getSelectedIndex()==1)
 	{
-		//��ͣ��������
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 		GAMEDATA::getInstance()->setMusicState(false);
 		GAMEDATA::getInstance()->saveMusicState();
 	}
 	if (temp->getSelectedIndex()==0)
 	{
-		//������������
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 		GAMEDATA::getInstance()->setMusicState(true);
 		GAMEDATA::getInstance()->saveMusicState();

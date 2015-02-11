@@ -32,7 +32,6 @@ void GameLayer::showPay(float dt){
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
 			needInitPause = false;
-			GameLayer::_PauseTime=true;
 			CallAndroidMethod::getInstance()->pay(6);
 		}
 	#endif
@@ -85,6 +84,13 @@ void GameLayer::showStarMatrix(float dt){
 	this->addChild(matrix);
 }
 
+void GameLayer::doRevive(){
+	GAMEDATA::getInstance()->setCurScore(GAMEDATA::getInstance()->getLastLevelScore());
+	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
+	matrix->setAcceptTouch(true);
+	Audio::getInstance()->playNextGameRound();
+}
+
 void GameLayer::update(float delta){
 	if(matrix){
 		matrix->updateStar(delta);
@@ -95,7 +101,7 @@ void GameLayer::update(float delta){
 		doGameOver();
 	}
 	if(needRevive){
-		//doRevive();
+		doRevive();
 		needRevive=false;
 	}
 	if(StarMatrix::BombClick){
@@ -219,6 +225,7 @@ void GameLayer::doGameOver(){
 void GameLayer::gotoNextLevel(){
 	removeMissonComplet();
 	refreshMenu(0);
+	GAMEDATA::getInstance()->setLastLevelScore(GAMEDATA::getInstance()->getCurScore());
 	floatLevelWord();
 }
 

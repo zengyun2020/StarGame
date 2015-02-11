@@ -11,7 +11,7 @@ LOCAL_MODULE := cocos2dcpp_shared
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
-					hellocpp/PayProxy.cpp \
+                   hellocpp/PayProxy.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/HelloWorldScene.cpp \
   					../../Classes/MenuLayer.cpp \
@@ -31,18 +31,16 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../Classes/GameOverLayer.cpp\
 					../../Classes/PlayerRank.cpp\
 					../../Classes/GamePauseLayer.cpp\
-          ../../Classes/CallAndroidMethod.cpp\
-          ../../Classes/MenuScenePayHandler.cpp\
-          ../../Classes/SignIn.cpp\
-          ../../Classes/Upgrade.cpp\
-          ../../Classes/About.cpp\
-          ../../Classes/BlinkTitle.cpp\
-          ../../Classes/Gold.cpp
-          
+					../../Classes/CallAndroidMethod.cpp\
+					../../Classes/MenuScenePayHandler.cpp\
+					../../Classes/SignIn.cpp\
+					../../Classes/Upgrade.cpp\
+					../../Classes/About.cpp\
+					../../Classes/BlinkTitle.cpp\
+					../../Classes/Gold.cpp\
+					../../Classes/PropsMenu.cpp
 
-
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes\
-              E:\cocosspace\StarGame\cocos2d\cocos\platform\android\jni
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 
