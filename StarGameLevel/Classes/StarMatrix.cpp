@@ -132,7 +132,7 @@ Point StarMatrix::getPositionByIndex(int i,int j){
 
 Star* StarMatrix::getStarByTouch(const Point& p){
 	int k = (p.y)/Star::STAR_HEIGHT;//这里要用K转一下int 不然得不到正确结果
-	int i = ROW_NUM - 1 - k + 2;
+	int i = ROW_NUM - 1 - k + 4;
 	int j = p.x/Star::STAR_WIDTH;
 	if(i >= 0 && i < ROW_NUM &&
 		j >= 0 && j < COL_NUM &&

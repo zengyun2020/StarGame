@@ -9,6 +9,8 @@ public:
 	virtual bool init();
 	CREATE_FUNC(PropsMenu);
 	void pay();
+	void usePropsBomb();
+	void usePropsTime();
 private:
 	static PropsMenu* _instance;
 private:

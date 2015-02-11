@@ -24,6 +24,30 @@ bool PropsMenu::init(){
 		return false;
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
+		auto BombBtn = MenuItemImage::create(
+		"bomb_normal.png","bomb_click.png",CC_CALLBACK_0(PropsMenu::usePropsBomb,this)
+		);
+	 auto TimeBtn = MenuItemImage::create(
+		"time_normal.png","time_click.png",CC_CALLBACK_0(PropsMenu::usePropsTime,this)
+		);
+	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
+	menu->alignItemsHorizontally();
+	menu->setPosition(visibleSize.width/2+155,visibleSize.height/2-300);
+	this->addChild(menu);
+
+	auto propBombNum = Label::create(
+		cocos2d::String::createWithFormat("%d",500)->_string,
+		"Verdana-Bold",18
+		);
+	propBombNum->setPosition(visibleSize.width/2+150,visibleSize.height/2-280);
+	this->addChild(propBombNum);
+
+	auto propTimeNum = Label::create(
+		cocos2d::String::createWithFormat("%d",800)->_string,
+		"Verdana-Bold",18
+		);
+	propTimeNum->setPosition(visibleSize.width/2+223,visibleSize.height/2-280);
+	this->addChild(propTimeNum);
 	return true;
 }
 
@@ -35,3 +59,11 @@ void PropsMenu::pay(){
 #endif
 }
 
+
+void PropsMenu::usePropsBomb(){
+    //TODO
+}
+
+void PropsMenu::usePropsTime(){
+    //TODO
+}
