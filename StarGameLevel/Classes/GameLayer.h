@@ -5,7 +5,7 @@
 #include "FloatWord.h"
 #include "TopMenu.h"
 #include "StarMatrix.h"
-#include "PropsMenu.h"
+#include "TopMenu.h"
 
 using namespace cocos2d;
 class StarMatrix;
@@ -33,12 +33,10 @@ public:
 	void showPay(float dt);
 	void showMissionComplete();
 	void removeMissonComplet();
-	
 private:
 	FloatWord* _levelMsg;
 	FloatWord* _targetScore;
 	TopMenu* menu;
-	PropsMenu* props;
 	StarMatrix* matrix;
 	Label* linkNum;
 	FloatWord* gameOverWord;

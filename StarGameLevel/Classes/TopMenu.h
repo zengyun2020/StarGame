@@ -16,6 +16,9 @@ public:
 	void pay();
 	void payGift();
 	void refreshTargetScore();
+	void usePropsBomb();
+	void usePropsRainBow();
+	void usePropsMagic();
 private:
 	static TopMenu* _instance;
 	//Label* highestScore;

@@ -56,9 +56,6 @@ void GameLayer::loadGame(float dt){
 	menu = TopMenu::getInstance();
 	this->addChild(menu, 2);
 
-	props = PropsMenu::getInstance();
-	this->addChild(props);
-
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	Audio::getInstance()->playReadyGo();
 }
@@ -263,3 +260,5 @@ void GameLayer::removeMissonComplet(){
 	missionComplete->removeFromParentAndCleanup(true);
 	hasShowMission=false;
 }
+
+

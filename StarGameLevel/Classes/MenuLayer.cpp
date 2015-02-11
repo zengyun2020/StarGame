@@ -293,7 +293,7 @@ bool MenuLayer::init(){
 	startMenu->setAnchorPoint(Point(0.5,0.5));
 	this->addChild(startMenu);
 	setAboutVisible(false);
-
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("hammer.plist");
 	return true;
 }
 

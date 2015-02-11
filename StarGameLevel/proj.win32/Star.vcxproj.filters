@@ -93,9 +93,6 @@
     <ClCompile Include="..\Classes\Gold.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PropsMenu.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -177,9 +174,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Gold.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PropsMenu.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

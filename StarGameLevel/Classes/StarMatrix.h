@@ -17,7 +17,7 @@ public:
 	void setAcceptTouch(bool b);
 	void initMatrix();
 	void useBombAuto(Star* s);
-
+	Animation* createAnimation(std::string prefixName, int framesNum, float delay);
 private:
 
 	Point getPositionByIndex(int i,int j);
@@ -26,6 +26,7 @@ private:
 	void genBombList(Star* s);//产生道具炸弹须要消除的队列
 	void deleteSelectedList();
 	void deleteBombList();
+	void doHammer(Star* s);
 	void adjustMatrix();
 	bool isEnded();
 	void clearMatrixOneByOne();
@@ -41,7 +42,7 @@ private:
 	bool clearOneByOne;
 	bool acceptTouch;
 	bool touchLeft;
-	
+	Sprite* animSprite;
 	float clearSumTime;
 	int selectedListSize;
 public :

@@ -64,9 +64,9 @@ void StarMatrix::onTouch(const Point& p){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Star* s = getStarByTouch(p);
 	if(p.x>visibleSize.width/2){
-	   StarMatrix::touchLeft=false;
+		StarMatrix::touchLeft=false;
 	}else{
-	 StarMatrix::touchLeft=true;
+		StarMatrix::touchLeft=true;
 	}
 	if(s && acceptTouch){
 		clearOneByOne = true;
@@ -74,7 +74,7 @@ void StarMatrix::onTouch(const Point& p){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			useBombAuto(s);
+			doHammer(s);
 			BombClick =false;
 			return;
 		}
@@ -96,6 +96,29 @@ void StarMatrix::onTouch(const Point& p){
 void StarMatrix::useBombAuto(Star* s){
 	genBombList(s);
 	deleteBombList();
+}
+
+void StarMatrix::doHammer(Star* s){
+	selectedList.clear();
+	selectedList.push_back(s);
+	//播放消除音效
+	Audio::getInstance()->playPropBomb();
+	selectedList.pop_front();
+	m_layer->showEveryScore(selectedListSize,5+(selectedListSize-selectedList.size())*5,selectedListSize-selectedList.size(),s->getPosition(),touchLeft);
+	//粒子效果
+	showStarParticleEffect(s->getColor(),s->getPosition(),this);
+	stars[s->getIndexI()][s->getIndexJ()] = nullptr;
+	s->removeFromParentAndCleanup(true);
+	m_layer->showLinkNum(selectedListSize);
+
+	selectedListSize=0;
+	acceptTouch =true;
+	adjustMatrix();
+	if(isEnded()){
+		acceptTouch=false;
+		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
+		CCLOG("ENDED");
+	}
 }
 
 void StarMatrix::setNeedClear(bool b){
@@ -400,3 +423,23 @@ int StarMatrix::getLeftStarNum(){
 	}
 	return ret;
 }
+
+
+Animation* StarMatrix::createAnimation(std::string prefixName, int framesNum, float delay)
+{
+	Vector<SpriteFrame*> animFrames;
+	for (int i = 1; i <= framesNum; i++)
+	{
+		char buffer[20] = { 0 };
+		sprintf(buffer, "_%i.png",i);
+		std::string str =  prefixName + buffer;
+		auto frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(str);
+		animFrames.pushBack(frame);
+	}
+	return Animation::createWithSpriteFrames(animFrames, delay);
+}
+
+//auto anim = createAnimation("anim_hammer",5,0.2);
+//   Animate* mate =Animate::create(anim);
+//   animSprite->setPosition(240,400);
+//   animSprite->runAction(RepeatForever::create(mate));

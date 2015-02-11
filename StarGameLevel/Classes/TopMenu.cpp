@@ -84,6 +84,21 @@ bool TopMenu::init(){
 	menuGift->alignItemsHorizontally();
 	menuGift->setPosition(visibleSize.width/2+170,visibleSize.height-100);
 	this->addChild(menuGift);
+
+	auto bombBtn = MenuItemImage::create(
+		"item_hammer.png","item_hammer.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
+		);
+	auto magicBtn = MenuItemImage::create(
+		"item_magic.png","item_magic.png",CC_CALLBACK_0(TopMenu::usePropsMagic,this)
+		);
+	auto rainbowBtn = MenuItemImage::create(
+		"item_rearrange.png","item_rearrange.png",CC_CALLBACK_0(TopMenu::usePropsRainBow,this)
+		);
+	Menu* menu = Menu::create(bombBtn,magicBtn,rainbowBtn, NULL);
+	menu->alignItemsHorizontallyWithPadding(100);
+	menu->setPosition(visibleSize.width/2,visibleSize.height/2-352);
+	this->addChild(menu);
+
 	return true;
 }
 
@@ -136,3 +151,15 @@ void TopMenu::PauseGame(){
 	this->addChild(gamePause,1);
 }
 
+void TopMenu::usePropsBomb(){
+	Audio::getInstance()->playClick();
+	StarMatrix::BombClick=true;
+}
+
+void TopMenu::usePropsMagic(){
+    //TODO
+}
+
+void TopMenu::usePropsRainBow(){
+    //TODO
+}
