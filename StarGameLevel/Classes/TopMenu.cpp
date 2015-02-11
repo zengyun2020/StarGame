@@ -82,7 +82,6 @@ bool TopMenu::init(){
 void TopMenu::pay(){
 	Audio::getInstance()->playClick();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	GameLayer::_PauseTime =true;
 	CallAndroidMethod::getInstance()->pay(12);
 #endif
 }
