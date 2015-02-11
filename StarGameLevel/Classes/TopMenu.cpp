@@ -60,13 +60,13 @@ bool TopMenu::init(){
 		"gold_buy_normal.png","gold_buy_click.png",CC_CALLBACK_0(TopMenu::pay,this)
 		);
 	auto goldBuyMenu = Menu::create(goldBuyBtn, NULL);
-	goldBuyMenu->setPosition(visibleSize.width/2+150,visibleSize.height-50);
+	goldBuyMenu->setPosition(visibleSize.width/2+200,visibleSize.height-50);
 	this->addChild(goldBuyMenu);
 
 	playerGold =Label::create(String::createWithFormat("%d",
 		GAMEDATA::getInstance()->getGoldNum())->_string,"Arial",24);
-	playerGold->setPosition(visibleSize.width/2+190,visibleSize.height-56);
-	playerGold->setAnchorPoint(Point(0,0.5));
+	playerGold->setPosition(visibleSize.width/2+170,visibleSize.height-56);
+	playerGold->setAnchorPoint(Point(1,0.5));
 	this->addChild(playerGold);
 
 	MenuItemImage* PauseBtn = MenuItemImage::create(

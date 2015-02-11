@@ -20,8 +20,8 @@ bool Gold::init(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	playerGold = LabelAtlas::create(String::createWithFormat("%d",GAMEDATA::getInstance()->getGoldNum())->_string,"gold_num.png",18,26,48);
-	playerGold->setPosition(95,752);
-	playerGold->setAnchorPoint(Point(0, 0.5));
+	playerGold->setPosition(410,755);
+	playerGold->setAnchorPoint(Point(1, 0.5));
 	this->addChild(playerGold);
 	return true;
 }

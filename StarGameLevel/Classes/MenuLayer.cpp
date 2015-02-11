@@ -109,8 +109,8 @@ bool MenuLayer::init(){
 		"gold_buy_normal.png","gold_buy_click.png",CC_CALLBACK_0(MenuLayer::pay,this)
 		);
 	auto goldBuyMenu = Menu::create(goldBuyBtn, NULL);
-	goldBuyMenu->setPosition(53,760);
-	goldBuyMenu->setAnchorPoint(Point(0,0.5));
+	goldBuyMenu->setPosition(447,760);
+	goldBuyMenu->setAnchorPoint(Point(1,0));
 	this->addChild(goldBuyMenu);
 
 	gold = Gold::getInstance();
@@ -128,7 +128,7 @@ bool MenuLayer::init(){
 			musicTog->setSelectedIndex(1);
 		}
 	auto musicMenu = Menu::create(musicTog,NULL);
-	musicMenu->setPosition(349,760);
+	musicMenu->setPosition(53,760);
 	MenuItemImage* soundEffectOn = MenuItemImage::create("sound_effect_on.png","sound_effect_on.png");
 	MenuItemImage* soundEffectOff = MenuItemImage::create("sound_effect_close.png","sound_effect_close.png");
 	MenuItemToggle* soundEffectTog = MenuItemToggle::createWithTarget(this,menu_selector(MenuLayer::getSoudState),soundEffectOn,soundEffectOff,NULL);
@@ -141,7 +141,7 @@ bool MenuLayer::init(){
 			soundEffectTog->setSelectedIndex(1);
 		}
 	auto soundEffectMenu = Menu::create(soundEffectTog,NULL);
-	soundEffectMenu->setPosition(427,760);
+	soundEffectMenu->setPosition(124,760);
 	this->addChild(musicMenu);
 	this->addChild(soundEffectMenu);
 
