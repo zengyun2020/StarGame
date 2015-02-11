@@ -75,3 +75,4 @@ Device-Release/
 /StarPay/*.properties
 *.properties
 /proj.android/libs/armeabi/libcocos2dcpp.so
+/StarPay/project.properties
