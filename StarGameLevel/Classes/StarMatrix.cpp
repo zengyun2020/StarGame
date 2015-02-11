@@ -380,15 +380,13 @@ void StarMatrix::clearMatrixOneByOne(){
 	//能够执行到这一句说明Matrix全为空，不在需要清空
 	needClear = false;
 	//转到下一关
-	GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
-	m_layer->gotoNextLevel();
-	/*if(GAMEDATA::getInstance()->getCurScore() >= GAMEDATA::getInstance()->getNextScore()){
-	GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
-	m_layer->gotoNextLevel();
+	if(GAMEDATA::getInstance()->getCurScore() >= GAMEDATA::getInstance()->getNextScore()){
+		GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
+		m_layer->gotoNextLevel();
 	}else{
-	m_layer->gotoGameOver();
-	CCLOG("GAME OVER");
-	}*/
+		m_layer->gotoGameOver();
+		CCLOG("GAME OVER");
+	}
 }
 
 int StarMatrix::getLeftStarNum(){

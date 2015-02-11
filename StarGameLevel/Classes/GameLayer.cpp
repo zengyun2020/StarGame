@@ -64,16 +64,20 @@ void GameLayer::loadGame(float dt){
 	Audio::getInstance()->playReadyGo();
 }
 
-void GameLayer::floatTargetScoreWord(){
+void GameLayer::floatLevelWord(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	_targetScore = FloatWord::create(
-		ChineseWord("mubiao") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextScore())->_string + ChineseWord("fen"),
-		50, Point(visibleSize.width,visibleSize.height/3)
+	_levelMsg = FloatWord::create(
+		ChineseWord("guanqia") + cocos2d::String::createWithFormat(": %d",GAMEDATA::getInstance()->getNextLevel())->_string,
+		50, Point(visibleSize.width,visibleSize.height/3*2)
 		);
-	this->addChild(_targetScore,1);
-	//_targetScore->floatIn(0.5f,CC_CALLBACK_0(GameLayer::removeFloatWord,this));
+	this->addChild(_levelMsg,1);
+	_levelMsg->floatInOut(0.5f,1.0f,[=](){
+		schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
+		matrix->setAcceptTouch(true);
+		Audio::getInstance()->playNextGameRound();
+	});
+	Audio::getInstance()->playReadyGo();
 }
-
 
 
 void GameLayer::showStarMatrix(float dt){
@@ -215,9 +219,7 @@ void GameLayer::doGameOver(){
 
 void GameLayer::gotoNextLevel(){
 	refreshMenu(0);
-	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
-	matrix->setAcceptTouch(true);
-	Audio::getInstance()->playNextGameRound();
+	floatLevelWord();
 }
 
 void GameLayer::gotoGameOver(){
@@ -248,6 +250,6 @@ void GameLayer::showMissionComplete(){
 }
 
 void GameLayer::removeMissonComplet(){
-
+	missionComplete->removeAllChildrenWithCleanup(true);
 
 }
