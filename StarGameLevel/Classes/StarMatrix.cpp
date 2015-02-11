@@ -251,7 +251,6 @@ void StarMatrix::deleteSelectedList(){
 	clearOneByOne =false;
 	//COMBOÐ§¹û
 	showComboEffect(selectedListSize,this);
-	refreshScore();
 	m_layer->showLinkNum(selectedListSize);
 	selectedListSize=0;
 	acceptTouch =true;
@@ -338,9 +337,6 @@ void StarMatrix::adjustMatrix(){
 }
 
 
-void StarMatrix::refreshScore(){
-
-}
 
 
 bool StarMatrix::isEnded(){

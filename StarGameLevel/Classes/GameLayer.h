@@ -14,7 +14,6 @@ class GameLayer : public Layer{
 public:
 	virtual bool init();
 	CREATE_FUNC(GameLayer);
-	
 	void floatLevelWord();
 	void floatTargetScoreWord();
 	void removeFloatWord();
@@ -32,7 +31,8 @@ public:
 	void doGameOver();
 	void loadGame(float dt);
 	void showPay(float dt);
-	void updateCustom(float dt);
+	void showMissionComplete();
+	void removeMissonComplet();
 	
 private:
 	FloatWord* _levelMsg;
@@ -42,7 +42,9 @@ private:
 	StarMatrix* matrix;
 	Label* linkNum;
 	FloatWord* gameOverWord;
+	Sprite* missionComplete;
 	bool needInitPause;
+	bool hasShowMission;
 public :
 	static bool gameOver;
 	static bool needRevive;

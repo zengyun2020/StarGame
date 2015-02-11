@@ -37,7 +37,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		director->setOpenGLView(glview);
 	}
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	glview->setFrameSize(320, 480);
+	glview->setFrameSize(480, 800);
 #endif
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	if(visibleSize.height/visibleSize.width > 800/480){

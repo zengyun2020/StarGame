@@ -27,7 +27,6 @@ private:
 	void deleteSelectedList();
 	void deleteBombList();
 	void adjustMatrix();
-	void refreshScore();
 	bool isEnded();
 	void clearMatrixOneByOne();
 	int getLeftStarNum();

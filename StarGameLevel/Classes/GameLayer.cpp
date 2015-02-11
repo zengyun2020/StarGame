@@ -17,6 +17,7 @@ bool GameLayer::init(){
 		return false;
 	}
 	needInitPause = true;
+	hasShowMission =false;
 	TopMenu::getInstance()->cleanScore();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
@@ -39,7 +40,6 @@ void GameLayer::showPay(float dt){
 
 
 void GameLayer::loadGame(float dt){
-	schedule(schedule_selector(GameLayer::updateCustom), 1.0f, kRepeatForever, 0);
 
 	matrix = nullptr;
 	this->scheduleUpdate();
@@ -113,6 +113,11 @@ bool GameLayer::onTouchBegan(Touch* touch,Event* event){
 
 void GameLayer::refreshMenu(int score){
 	menu->refresh(score);
+	GAMEDATA* data = GAMEDATA::getInstance();
+	if(data->getCurScore()+score>=GAMEDATA::getInstance()->getNextScore()&&!hasShowMission){
+		hasShowMission =true;
+		showMissionComplete();
+	}
 }
 
 void GameLayer::showLinkNum(int size){
@@ -143,23 +148,21 @@ void GameLayer::showEveryScore(int size,int score,int index,Point point,bool lef
 		cp1 =Point(50,50);
 		cp2= Point(100,150);
 	}
-
 	if(size >= 9){
 		everyScore->floatInScore((1.2),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
-			this->refreshMenu(score);
+			
 		});
 	}else if(size >= 7){
 		everyScore->floatInScore((0.8),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
-			this->refreshMenu(score);
 		});
 	}else{
 		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
-			this->refreshMenu(score);
 		});
 	}
+	this->refreshMenu(score);
 }
 
 void GameLayer::hideLinkNum(){
@@ -232,6 +235,19 @@ void GameLayer::gotoGameOver(){
 #endif
 }
 
-void GameLayer::updateCustom(float dt){
+void GameLayer::showMissionComplete(){
+	auto visibleSize =  Director::getInstance()->getVisibleSize();
+	missionComplete=Sprite::create("missionComplete.png");
+	missionComplete->setPosition(visibleSize.width/2,visibleSize.height/2);
+	missionComplete->setScale(0.2f);
+	this->addChild(missionComplete);
+	auto scale = ScaleTo::create(1.0f,0.5f);
+	auto move = MoveTo::create(1.0f,Point(visibleSize.width/2-200,visibleSize.height/2+260));
+	auto seq = Sequence::create(scale,move,NULL);
+	missionComplete->runAction(seq);
+}
+
+void GameLayer::removeMissonComplet(){
+
 
 }
