@@ -239,7 +239,7 @@ void StarMatrix::deleteSelectedList(){
 
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
 		Star* star = *it;
-		m_layer->showEveryScore(selectedListSize,30+(selectedListSize-selectedList.size())*5,selectedListSize-selectedList.size(),star->getPosition(),touchLeft);
+		m_layer->showEveryScore(selectedListSize,5+(selectedListSize-selectedList.size())*5,selectedListSize-selectedList.size(),star->getPosition(),touchLeft);
 		selectedList.pop_front();
 		//Á£×ÓÐ§¹û
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);

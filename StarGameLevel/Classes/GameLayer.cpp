@@ -130,7 +130,7 @@ void GameLayer::showLinkNum(int size){
 	}
 	int result=0;
 	for(int i=0;i<size;i++){
-		result += 30+i*5;
+		result += 5+i*5;
 	}
 	string s = String::createWithFormat("%d",size)->_string + ChineseWord("lianji") +
 		String::createWithFormat("%d",result)->_string + ChineseWord("abouttitle12");
@@ -141,28 +141,27 @@ void GameLayer::showLinkNum(int size){
 
 void GameLayer::showEveryScore(int size,int score,int index,Point point,bool leftType){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,-20*index));
+	FloatWord* everyScore=FloatWord::create(String::createWithFormat("%d",score)->_string,32,Point(point.x,point.y));
 	this->addChild(everyScore);
 	Point cp1 =Point(50,50);
 	Point cp2= Point(100,100);
 	if(leftType){
-		cp1 =Point(430,50);
-		cp2= Point(340,150);
+		cp1 =Point(430,500);
+		cp2= Point(330,600);
 	}else{
-		cp1 =Point(50,50);
-		cp2= Point(100,150);
+		cp1 =Point(50,500);
+		cp2= Point(150,600);
 	}
 	if(size >= 9){
-		everyScore->floatInScore((1.2),cp1,cp2,[=](){
+		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME)*2,cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
-			
 		});
 	}else if(size >= 7){
-		everyScore->floatInScore((0.8),cp1,cp2,[=](){
+		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME)*2,cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
 		});
 	}else{
-		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME),cp1,cp2,[=](){
+		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME)*2,cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
 		});
 	}
