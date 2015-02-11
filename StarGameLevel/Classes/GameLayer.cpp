@@ -218,6 +218,7 @@ void GameLayer::doGameOver(){
 }
 
 void GameLayer::gotoNextLevel(){
+	removeMissonComplet();
 	refreshMenu(0);
 	floatLevelWord();
 }
@@ -250,6 +251,6 @@ void GameLayer::showMissionComplete(){
 }
 
 void GameLayer::removeMissonComplet(){
-	missionComplete->removeAllChildrenWithCleanup(true);
-
+	missionComplete->removeFromParentAndCleanup(true);
+	hasShowMission=false;
 }

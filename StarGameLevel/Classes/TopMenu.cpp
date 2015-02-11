@@ -96,6 +96,8 @@ void TopMenu::refresh(int score){
 	char buf[64];
 	sprintf(buf,"%d",data->getCurScore());
 	curScore->setString(buf);
+	targetScore->setString(ChineseWord("mubiao") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextScore())->_string);
+	level->setString(ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string);
 }
 
 void TopMenu::cleanScore(){

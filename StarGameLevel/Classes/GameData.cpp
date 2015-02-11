@@ -52,7 +52,7 @@ int GAMEDATA::getScoreByLevel(int level){
 		score = 3000;
 	}
 	else if ( (level >=3) && (level <= 10) )
-	{
+	{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 		score = 3000 + 3000 * (level - 2);
 	}
 	else
