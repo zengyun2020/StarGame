@@ -44,7 +44,7 @@ bool GamePauseLayer::init(TopMenu* topNode){
 		"exit_normal.png","exit_click.png",CC_CALLBACK_0(GamePauseLayer::goBack,this)
 		);
 
-	auto scaleSmall = ScaleTo::create(0.8,0.7);
+	auto scaleSmall = ScaleTo::create(0.8,0.9);
 	auto scaleBig = ScaleTo::create(0.8,1);
 	auto delay = DelayTime::create(0);
 	auto seq2 = Sequence::create(scaleSmall,delay,scaleBig,delay->clone(),NULL);

@@ -43,20 +43,20 @@ bool GameOverLayer::init(){
 	addScore = LabelAtlas::create(String::createWithFormat("%d",addScoreNum)->_string,"add_score_per_num.png",25,44,48);
 	addScore->setAnchorPoint(Point(0.5,0.5));
 	if(addScoreNum < 10){
-		addScoreTxt->setPosition(227+480,542);
-		addScore->setPosition(311.5+480,546);
+		addScoreTxt->setPosition(227.5+480,542);
+		addScore->setPosition(311+480,546);
 	}else if(addScoreNum < 100){
-		addScoreTxt->setPosition(227-12.5+480,542);
-		addScore->setPosition(311.5+12.5+480,546);
+		addScoreTxt->setPosition(227.5-12.5+480,542);
+		addScore->setPosition(311+480,546);
 	}else if(addScoreNum < 1000){
-		addScoreTxt->setPosition(227-12.5*2+480,542);
-		addScore->setPosition(311.5+12.5*2+480,546);
+		addScoreTxt->setPosition(227.5-12.5*2+480,542);
+		addScore->setPosition(311+480,546);
 	}else if(addScoreNum < 10000){
-		addScoreTxt->setPosition(227-12.5*3+480,542);
-		addScore->setPosition(311.5+12.5*3+480,546);
+		addScoreTxt->setPosition(227.5-12.5*3+480,542);
+		addScore->setPosition(311+480,546);
 	}else if(addScoreNum < 100000){
-		addScoreTxt->setPosition(227-12.5*4+480,542);
-		addScore->setPosition(311.5+12.5*4+480,546);
+		addScoreTxt->setPosition(227.5-12.5*4+480,542);
+		addScore->setPosition(311+480,546);
 	}
 	this->addChild(addScoreTxt);
 	this->addChild(addScore);
@@ -78,25 +78,29 @@ bool GameOverLayer::init(){
 	this->addChild(prizeGold);
 
 	happy1 = Sprite::create("game_result_happy_1.png");
-	happy1->setPosition(177.5+480,309);
-	this->addChild(happy1);
-
 	happy2 = Sprite::create("game_result_happy_2.png");
-	happy2->setPosition(380+480,309);
-	this->addChild(happy2);
-
 	happyPoint = Sprite::create("game_result_happy_point.png");
-	happyPoint->setPosition(317.5+480,300);
-	this->addChild(happyPoint);
-
 	happyNum1 = LabelAtlas::create(String::createWithFormat("%d",curScore/1000)->_string,"add_score_per_num.png",25,44,48);
 	happyNum1->setAnchorPoint(Point(0.5,0.5));
-	happyNum1->setPosition(301+480,309);
-	this->addChild(happyNum1);
-
 	happyNum2 = LabelAtlas::create(String::createWithFormat("%d",(curScore%1000)/100)->_string,"add_score_per_num.png",25,44,48);
 	happyNum2->setAnchorPoint(Point(0.5,0.5));
-	happyNum2->setPosition(334+480,309);
+	if(curScore/1000 < 10){
+		happy1->setPosition(177.5+480,309);
+		happy2->setPosition(380+480,309);
+		happyPoint->setPosition(317.5+480,300);
+		happyNum1->setPosition(301+480,309);
+		happyNum2->setPosition(334+480,309);
+	}else{
+		happy1->setPosition(165+480,309);
+		happy2->setPosition(392.5+480,309);
+		happyPoint->setPosition(330+480,300);
+		happyNum1->setPosition(301+480,309);
+		happyNum2->setPosition(346.5+480,309);
+	}
+	this->addChild(happy1);
+	this->addChild(happy2);
+	this->addChild(happyPoint);
+	this->addChild(happyNum1);
 	this->addChild(happyNum2);
 
 	beatDesc1 = Sprite::create("game_result_beat_txt_1.png");
@@ -185,20 +189,20 @@ void GameOverLayer::update(float delta){
 				hasShowScore = true;
 				labelScore->runAction(MoveTo::create(0.3f,Point(240,493)));
 				if(addScoreNum < 10){
-					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227,542)));
-					addScore->runAction(MoveTo::create(0.3f,Point(311.5,546)));
+					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227.5,542)));
+					addScore->runAction(MoveTo::create(0.3f,Point(311,546)));
 				}else if(addScoreNum < 100){
-					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227-12.5,542)));
-					addScore->runAction(MoveTo::create(0.3f,Point(311.5+12.5,546)));
+					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227.5-12.5,542)));
+					addScore->runAction(MoveTo::create(0.3f,Point(311,546)));
 				}else if(addScoreNum < 1000){
-					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227-12.5*2,542)));
-					addScore->runAction(MoveTo::create(0.3f,Point(311.5+12.5*2,546)));
+					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227.5-12.5*2,542)));
+					addScore->runAction(MoveTo::create(0.3f,Point(311,546)));
 				}else if(addScoreNum < 10000){
-					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227-12.5*3,542)));
-					addScore->runAction(MoveTo::create(0.3f,Point(311.5+12.5*3,546)));
+					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227.5-12.5*3,542)));
+					addScore->runAction(MoveTo::create(0.3f,Point(311,546)));
 				}else if(addScoreNum < 100000){
-					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227-12.5*4,542)));
-					addScore->runAction(MoveTo::create(0.3f,Point(311.5+12.5*4,546)));
+					addScoreTxt->runAction(MoveTo::create(0.3f,Point(227.5-12.5*4,542)));
+					addScore->runAction(MoveTo::create(0.3f,Point(311,546)));
 				}
 			}
 		}
@@ -229,11 +233,19 @@ void GameOverLayer::update(float delta){
 
 		if(animTime >= 47 && !hasShowHappy){
 			hasShowHappy = true;
-			happy1->runAction(MoveTo::create(0.4f,Point(177.5,309)));
-			happy2->runAction(MoveTo::create(0.4f,Point(380,309)));
-			happyPoint->runAction(MoveTo::create(0.4f,Point(317.5,300)));
-			happyNum1->runAction(MoveTo::create(0.4f,Point(301,309)));
-			happyNum2->runAction(MoveTo::create(0.4f,Point(334,309)));
+			if(curScore/1000 < 10){
+				happy1->runAction(MoveTo::create(0.4f,Point(177.5,309)));
+				happy2->runAction(MoveTo::create(0.4f,Point(380,309)));
+				happyPoint->runAction(MoveTo::create(0.4f,Point(317.5,300)));
+				happyNum1->runAction(MoveTo::create(0.4f,Point(301,309)));
+				happyNum2->runAction(MoveTo::create(0.4f,Point(334,309)));
+			}else{
+				happy1->runAction(MoveTo::create(0.4f,Point(165,309)));
+				happy2->runAction(MoveTo::create(0.4f,Point(392.5,309)));
+				happyPoint->runAction(MoveTo::create(0.4f,Point(330,300)));
+				happyNum1->runAction(MoveTo::create(0.4f,Point(301,309)));
+				happyNum2->runAction(MoveTo::create(0.4f,Point(346.5,309)));
+			}
 		}
 
 		if(animTime >= 59 && !hasShowBtn){
