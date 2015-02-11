@@ -31,23 +31,23 @@ bool PropsMenu::init(){
 		"time_normal.png","time_click.png",CC_CALLBACK_0(PropsMenu::usePropsTime,this)
 		);
 	Menu* menu = Menu::create(BombBtn,TimeBtn, NULL);
-	menu->alignItemsHorizontally();
-	menu->setPosition(visibleSize.width/2+155,visibleSize.height/2-300);
+	menu->alignItemsHorizontallyWithPadding(100);
+	menu->setPosition(visibleSize.width/2,visibleSize.height/2-352);
 	this->addChild(menu);
 
-	auto propBombNum = Label::create(
-		cocos2d::String::createWithFormat("%d",500)->_string,
-		"Verdana-Bold",18
-		);
-	propBombNum->setPosition(visibleSize.width/2+150,visibleSize.height/2-280);
-	this->addChild(propBombNum);
+	//auto propBombNum = Label::create(
+	//	cocos2d::String::createWithFormat("%d",500)->_string,
+	//	"Verdana-Bold",18
+	//	);
+	//propBombNum->setPosition(visibleSize.width/2+150,visibleSize.height/2-280);
+	//this->addChild(propBombNum);
 
-	auto propTimeNum = Label::create(
-		cocos2d::String::createWithFormat("%d",800)->_string,
-		"Verdana-Bold",18
-		);
-	propTimeNum->setPosition(visibleSize.width/2+223,visibleSize.height/2-280);
-	this->addChild(propTimeNum);
+	//auto propTimeNum = Label::create(
+	//	cocos2d::String::createWithFormat("%d",800)->_string,
+	//	"Verdana-Bold",18
+	//	);
+	//propTimeNum->setPosition(visibleSize.width/2+223,visibleSize.height/2-280);
+	//this->addChild(propTimeNum);
 	return true;
 }
 
