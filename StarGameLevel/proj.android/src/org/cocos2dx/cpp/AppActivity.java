@@ -56,7 +56,6 @@ public class AppActivity extends Cocos2dxActivity {
 		TbuCloud.markAppOpened(AppActivity.this);
 		if(NotifyManager.isStartByNotifaction(getIntent())){
 			Log.i("MCH","start by click notify ...");
-			//TODO 根据需求添加
 		}
 		NotifyManager.cleanNofitifcation(this, getIntent());
 	}
