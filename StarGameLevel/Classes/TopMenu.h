@@ -14,6 +14,7 @@ public:
 	void cleanScore();
 	void refreshGold();
 	void pay();
+	void payGift();
 private:
 	static TopMenu* _instance;
 	//Label* highestScore;

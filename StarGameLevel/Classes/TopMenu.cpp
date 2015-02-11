@@ -76,10 +76,25 @@ bool TopMenu::init(){
 	menuPause->alignItemsHorizontally();
 	menuPause->setPosition(visibleSize.width/2-200,visibleSize.height/2+350);
 	this->addChild(menuPause);
+
+	MenuItemImage* giftBtn = MenuItemImage::create(
+		"box.png","box.png",CC_CALLBACK_0(TopMenu::payGift,this)
+		);
+	Menu* menuGift = Menu::create(giftBtn, NULL);
+	menuGift->alignItemsHorizontally();
+	menuGift->setPosition(visibleSize.width/2+170,visibleSize.height-100);
+	this->addChild(menuGift);
 	return true;
 }
 
 void TopMenu::pay(){
+	Audio::getInstance()->playClick();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	CallAndroidMethod::getInstance()->pay(12);
+#endif
+}
+
+void TopMenu::payGift(){
 	Audio::getInstance()->playClick();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	CallAndroidMethod::getInstance()->pay(12);

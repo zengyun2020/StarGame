@@ -10,7 +10,8 @@ public:
 	CREATE_FUNC(PropsMenu);
 	void pay();
 	void usePropsBomb();
-	void usePropsTime();
+	void usePropsRainBow();
+	void usePropsMagic();
 private:
 	static PropsMenu* _instance;
 private:
