@@ -123,6 +123,7 @@ bool GameLayer::onTouchBegan(Touch* touch,Event* event){
 
 void GameLayer::refreshMenu(int score){
 	menu->refresh(score);
+	menu->refreshTargetScore();
 	GAMEDATA* data = GAMEDATA::getInstance();
 	if(data->getCurScore()+score>=GAMEDATA::getInstance()->getNextScore()&&!hasShowMission){
 		hasShowMission =true;
@@ -161,17 +162,19 @@ void GameLayer::showEveryScore(int size,int score,int index,Point point,bool lef
 	if(size >= 9){
 		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME)*2,cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
+			this->refreshMenu(score);
 		});
 	}else if(size >= 7){
 		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME)*2,cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
+			this->refreshMenu(score);
 		});
 	}else{
 		everyScore->floatInScore((StarMatrix::ONE_CLEAR_TIME)*2,cp1,cp2,[=](){
 			Audio::getInstance()->playScore();
+			this->refreshMenu(score);
 		});
 	}
-	this->refreshMenu(score);
 }
 
 void GameLayer::hideLinkNum(){
