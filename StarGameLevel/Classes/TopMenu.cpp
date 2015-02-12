@@ -94,10 +94,10 @@ bool TopMenu::init(){
 	 rainbowBtn = MenuItemImage::create(
 		"item_rearrange.png","item_rearrange.png",CC_CALLBACK_0(TopMenu::usePropsRainBow,this)
 		);
-	Menu* menu = Menu::create(hammerBtn,magicBtn,rainbowBtn, NULL);
-	menu->alignItemsHorizontallyWithPadding(100);
-	menu->setPosition(visibleSize.width/2,visibleSize.height/2-352);
-	this->addChild(menu);
+	props = Menu::create(hammerBtn,magicBtn,rainbowBtn, NULL);
+	props->alignItemsHorizontallyWithPadding(100);
+	props->setPosition(visibleSize.width/2,visibleSize.height/2-352);
+	this->addChild(props);
 
 
 	propInfo =Label::create("","Verdana-Bold",18);
@@ -175,11 +175,27 @@ void TopMenu::usePropsBomb(){
 }
 
 void TopMenu::usePropsMagic(){
-    //TODO
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+   	Audio::getInstance()->playClick();
+	StarMatrix::MagicClick=true;
+	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-150,visibleSize.height/2-352)));
+	hammerBtn->setVisible(false);
+	rainbowBtn->setVisible(false);
+	propInfo->setString(ChineseWord("pen"));
+	propInfo->setVisible(true);
+	cancel->setVisible(true);
 }
 
 void TopMenu::usePropsRainBow(){
-    //TODO
+  	Size visibleSize = Director::getInstance()->getVisibleSize();
+   	Audio::getInstance()->playClick();
+	StarMatrix::RainBowClick=true;
+	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-300,visibleSize.height/2-352)));
+	hammerBtn->setVisible(false);
+	magicBtn->setVisible(false);
+	propInfo->setString(ChineseWord("rainbow"));
+	propInfo->setVisible(true);
+	cancel->setVisible(true);
 }
 
 void TopMenu::usePropsHammer(){
@@ -193,9 +209,12 @@ void TopMenu::usePropsHammer(){
 }
 
 void TopMenu::cancelUseProp(){
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+	props->setPosition(visibleSize.width/2,visibleSize.height/2-352);
 	StarMatrix::removeAnim=true;
 	propInfo->setVisible(false);
 	cancel->setVisible(false);
 	magicBtn->setVisible(true);
 	rainbowBtn->setVisible(true);
+	hammerBtn->setVisible(true);
 }

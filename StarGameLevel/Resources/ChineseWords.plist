@@ -119,7 +119,14 @@
 <string>金币</string>
 
 <key>hammmer</key>
-<string>魔法锤:玩家点击后可消除任意一个星星</string>
+<string>魔法锤:玩家点击后,可消除任意一个星星</string>
+
+<key>pen</key>
+<string>魔法笔:玩家点击后,可将任意一块方块变成自己想要的颜色</string>
+
+<key>rainbow</key>
+<string>重新排列:玩家点击后,所有星星重新排列</string>
+
 
 </dict>
 

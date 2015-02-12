@@ -33,6 +33,7 @@ public:
 	void showPay(float dt);
 	void showMissionComplete();
 	void removeMissonComplet();
+	void hidePropInfos();
 private:
 	FloatWord* _levelMsg;
 	FloatWord* _targetScore;

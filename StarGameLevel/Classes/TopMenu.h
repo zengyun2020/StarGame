@@ -34,6 +34,7 @@ private:
 	MenuItemImage* rainbowBtn;
 	Label* propInfo;
 	Menu* cancel;
+	Menu* props;
 private:
 	TopMenu();
 

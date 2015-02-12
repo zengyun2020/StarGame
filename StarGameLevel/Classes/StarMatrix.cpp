@@ -92,8 +92,7 @@ void StarMatrix::onTouch(const Point& p){
 
 			if(hammerSprite->getPosition()==s->getPosition()){
 				doHammer(s);
-				removeHammer();
-				HammerClick =false;
+				m_layer->hidePropInfos();
 			}else{
 				setHammerPosition(s);
 			}
@@ -485,6 +484,7 @@ void StarMatrix::showHammerAnim(){
 }
 
 void StarMatrix::removeHammer(){
+	isShowAnim=false;
 	hammerSprite->removeFromParent();
 }
 
@@ -504,6 +504,7 @@ void StarMatrix::update(float dt){
 		if(HammerClick){
 			HammerClick=false;
 			removeHammer();	
+			removeAnim=false;
 		}
 	}
 }

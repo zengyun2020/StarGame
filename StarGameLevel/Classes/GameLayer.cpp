@@ -261,4 +261,7 @@ void GameLayer::removeMissonComplet(){
 	hasShowMission=false;
 }
 
+void GameLayer::hidePropInfos(){
+	menu->cancelUseProp();
+}
 
