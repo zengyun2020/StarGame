@@ -34,7 +34,7 @@ private:
 	int getLeftStarNum();
 	void showHammerAnim();
 	void setHammerPosition(Star* s);
-	void removeHammer();
+	void removeAnimSprite();
 	Star* getHammerStar();//使用道具时默认显示位置
 public:
 	const static int ROW_NUM = 10;
@@ -47,7 +47,7 @@ private:
 	bool clearOneByOne;
 	bool acceptTouch;
 	bool touchLeft;
-	Sprite* hammerSprite;
+	Sprite* animSprite;
 	float clearSumTime;
 	int selectedListSize;
 	bool isShowAnim;

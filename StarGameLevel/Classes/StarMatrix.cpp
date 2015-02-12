@@ -33,7 +33,7 @@ bool StarMatrix::init(GameLayer* layer){
 	acceptTouch = true;
 	clearSumTime = 0;
 	selectedListSize = 0;
-	hammerSprite=nullptr;
+	animSprite=nullptr;
 	memset(stars, 0, sizeof(Star*) * ROW_NUM * COL_NUM);
 	initMatrix();
 	scheduleUpdate();
@@ -90,7 +90,7 @@ void StarMatrix::onTouch(const Point& p){
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
 
-			if(hammerSprite->getPosition()==s->getPosition()){
+			if(animSprite->getPosition()==s->getPosition()){
 				doHammer(s);
 				m_layer->hidePropInfos();
 			}else{
@@ -474,23 +474,23 @@ Star* StarMatrix::getHammerStar(){
 
 //ÏÔÊ¾´¸×Ó¶¯»­
 void StarMatrix::showHammerAnim(){
-   hammerSprite=Sprite::create();
-   this->addChild(hammerSprite);
+   animSprite=Sprite::create();
+   this->addChild(animSprite);
    auto anim = createAnimation("anim_hammer",5,0.2);
    Animate* mate =Animate::create(anim);
    Star* s= getHammerStar();
-   hammerSprite->setPosition(s->getPosition());
-   hammerSprite->runAction(RepeatForever::create(mate));
+   animSprite->setPosition(s->getPosition());
+   animSprite->runAction(RepeatForever::create(mate));
 }
 
-void StarMatrix::removeHammer(){
+void StarMatrix::removeAnimSprite(){
 	isShowAnim=false;
-	hammerSprite->removeFromParent();
+	animSprite->removeFromParent();
 }
 
 void StarMatrix::setHammerPosition(Star* s){
-	if(nullptr!=hammerSprite)
-		hammerSprite->setPosition(s->getPosition());
+	if(nullptr!=animSprite)
+		animSprite->setPosition(s->getPosition());
 }
 
 void StarMatrix::update(float dt){
