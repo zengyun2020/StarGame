@@ -118,6 +118,9 @@
 <key>jinbei</key>
 <string>金币</string>
 
+<key>hammmer</key>
+<string>魔法锤:玩家点击后可消除任意一个星星</string>
+
 </dict>
 
 </array>

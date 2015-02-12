@@ -56,12 +56,6 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
 
-	propInfo =Label::create("","Verdana-Bold",24);
-	propInfo->setPosition(visibleSize.width/2,visibleSize.height/2 -352);
-	propInfo->setVisible(false);
-	this->addChild(propInfo);
-
-
 	auto goldBuyBtn = MenuItemImage::create(
 		"gold_buy_normal.png","gold_buy_click.png",CC_CALLBACK_0(TopMenu::pay,this)
 		);
@@ -104,6 +98,16 @@ bool TopMenu::init(){
 	menu->alignItemsHorizontallyWithPadding(100);
 	menu->setPosition(visibleSize.width/2,visibleSize.height/2-352);
 	this->addChild(menu);
+
+
+	propInfo =Label::create("","Verdana-Bold",18);
+	propInfo->setPosition(visibleSize.width/2,visibleSize.height/2 -352);
+	propInfo->setAlignment(TextHAlignment::CENTER);
+	propInfo->setLineBreakWithoutSpace(true);
+	propInfo->setWidth(220);
+	propInfo->setVisible(false);
+	this->addChild(propInfo);
+
 
 	 MenuItemImage* cancelBtn = MenuItemImage::create(
 		"btn_cancel.png","btn_cancel.png",CC_CALLBACK_0(TopMenu::cancelUseProp,this)
@@ -183,7 +187,7 @@ void TopMenu::usePropsHammer(){
 	StarMatrix::HammerClick=true;
 	magicBtn->setVisible(false);
 	rainbowBtn->setVisible(false);
-	propInfo->setString("LLLLLLLLLLLLLLLLLL");
+	propInfo->setString(ChineseWord("hammmer"));
 	propInfo->setVisible(true);
 	cancel->setVisible(true);
 }
