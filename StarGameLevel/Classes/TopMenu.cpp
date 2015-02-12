@@ -56,6 +56,12 @@ bool TopMenu::init(){
 	curScore->setPosition(visibleSize.width/2,visibleSize.height/2 +300);
 	this->addChild(curScore);
 
+	propInfo =Label::create("","Verdana-Bold",24);
+	propInfo->setPosition(visibleSize.width/2,visibleSize.height/2 -352);
+	propInfo->setVisible(false);
+	this->addChild(propInfo);
+
+
 	auto goldBuyBtn = MenuItemImage::create(
 		"gold_buy_normal.png","gold_buy_click.png",CC_CALLBACK_0(TopMenu::pay,this)
 		);
@@ -85,19 +91,27 @@ bool TopMenu::init(){
 	menuGift->setPosition(visibleSize.width/2+170,visibleSize.height-100);
 	this->addChild(menuGift);
 
-	auto bombBtn = MenuItemImage::create(
-		"item_hammer.png","item_hammer.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
+	 hammerBtn = MenuItemImage::create(
+		"item_hammer.png","item_hammer.png",CC_CALLBACK_0(TopMenu::usePropsHammer,this)
 		);
-	auto magicBtn = MenuItemImage::create(
+	 magicBtn = MenuItemImage::create(
 		"item_magic.png","item_magic.png",CC_CALLBACK_0(TopMenu::usePropsMagic,this)
 		);
-	auto rainbowBtn = MenuItemImage::create(
+	 rainbowBtn = MenuItemImage::create(
 		"item_rearrange.png","item_rearrange.png",CC_CALLBACK_0(TopMenu::usePropsRainBow,this)
 		);
-	Menu* menu = Menu::create(bombBtn,magicBtn,rainbowBtn, NULL);
+	Menu* menu = Menu::create(hammerBtn,magicBtn,rainbowBtn, NULL);
 	menu->alignItemsHorizontallyWithPadding(100);
 	menu->setPosition(visibleSize.width/2,visibleSize.height/2-352);
 	this->addChild(menu);
+
+	 MenuItemImage* cancelBtn = MenuItemImage::create(
+		"btn_cancel.png","btn_cancel.png",CC_CALLBACK_0(TopMenu::cancelUseProp,this)
+		);
+	cancel = Menu::create(cancelBtn, NULL);
+	cancel->setPosition(visibleSize.width/2+180,visibleSize.height/2-352);
+	cancel->setVisible(false);
+	this->addChild(cancel);
 
 	return true;
 }
@@ -162,4 +176,22 @@ void TopMenu::usePropsMagic(){
 
 void TopMenu::usePropsRainBow(){
     //TODO
+}
+
+void TopMenu::usePropsHammer(){
+	Audio::getInstance()->playClick();
+	StarMatrix::HammerClick=true;
+	magicBtn->setVisible(false);
+	rainbowBtn->setVisible(false);
+	propInfo->setString("LLLLLLLLLLLLLLLLLL");
+	propInfo->setVisible(true);
+	cancel->setVisible(true);
+}
+
+void TopMenu::cancelUseProp(){
+	StarMatrix::removeAnim=true;
+	propInfo->setVisible(false);
+	cancel->setVisible(false);
+	magicBtn->setVisible(true);
+	rainbowBtn->setVisible(true);
 }

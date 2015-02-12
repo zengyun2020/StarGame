@@ -6,6 +6,10 @@
 #include <ctime>
 
 bool StarMatrix::BombClick = false;
+bool StarMatrix::HammerClick= false;
+bool StarMatrix::MagicClick = false;
+bool StarMatrix::RainBowClick = false;
+bool StarMatrix::removeAnim = false;
 float StarMatrix::ONE_CLEAR_TIME = 0.08f;
 
 StarMatrix* StarMatrix::create(GameLayer* layer){
@@ -25,11 +29,14 @@ bool StarMatrix::init(GameLayer* layer){
 	m_layer = layer;
 	needClear = false;
 	clearOneByOne = false;
+	isShowAnim = false;
 	acceptTouch = true;
 	clearSumTime = 0;
 	selectedListSize = 0;
+	hammerSprite=nullptr;
 	memset(stars, 0, sizeof(Star*) * ROW_NUM * COL_NUM);
 	initMatrix();
+	scheduleUpdate();
 	return true;
 }
 
@@ -74,8 +81,22 @@ void StarMatrix::onTouch(const Point& p){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			doHammer(s);
+			useBombAuto(s);
 			BombClick =false;
+			return;
+		}
+		if(HammerClick){
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
+			GAMEDATA::getInstance()->saveGoldNum();
+			TopMenu::getInstance()->refreshGold();
+
+			if(hammerSprite->getPosition()==s->getPosition()){
+				doHammer(s);
+				removeHammer();
+				HammerClick =false;
+			}else{
+				setHammerPosition(s);
+			}
 			return;
 		}
 		genSelectedList(s);
@@ -439,7 +460,50 @@ Animation* StarMatrix::createAnimation(std::string prefixName, int framesNum, fl
 	return Animation::createWithSpriteFrames(animFrames, delay);
 }
 
-//auto anim = createAnimation("anim_hammer",5,0.2);
-//   Animate* mate =Animate::create(anim);
-//   animSprite->setPosition(240,400);
-//   animSprite->runAction(RepeatForever::create(mate));
+
+Star* StarMatrix::getHammerStar(){
+	//先检查第五列,依次向左
+	for(int i=4;i>0;i--){
+		for(int j=5;j>0;j--){
+			if(stars[i][j] == nullptr)
+				continue;
+			//找到目标
+			return stars[i][j];
+		}
+	}
+}
+
+//显示锤子动画
+void StarMatrix::showHammerAnim(){
+   hammerSprite=Sprite::create();
+   this->addChild(hammerSprite);
+   auto anim = createAnimation("anim_hammer",5,0.2);
+   Animate* mate =Animate::create(anim);
+   Star* s= getHammerStar();
+   hammerSprite->setPosition(s->getPosition());
+   hammerSprite->runAction(RepeatForever::create(mate));
+}
+
+void StarMatrix::removeHammer(){
+	hammerSprite->removeFromParent();
+}
+
+void StarMatrix::setHammerPosition(Star* s){
+	if(nullptr!=hammerSprite)
+		hammerSprite->setPosition(s->getPosition());
+}
+
+void StarMatrix::update(float dt){
+	if(HammerClick){
+		if(!isShowAnim){
+			isShowAnim=true;
+			showHammerAnim();
+		} 
+	}
+	if(removeAnim){
+		if(HammerClick){
+			HammerClick=false;
+			removeHammer();	
+		}
+	}
+}

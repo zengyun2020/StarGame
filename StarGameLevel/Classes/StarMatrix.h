@@ -18,6 +18,7 @@ public:
 	void initMatrix();
 	void useBombAuto(Star* s);
 	Animation* createAnimation(std::string prefixName, int framesNum, float delay);
+	void update(float dt);
 private:
 
 	Point getPositionByIndex(int i,int j);
@@ -31,6 +32,10 @@ private:
 	bool isEnded();
 	void clearMatrixOneByOne();
 	int getLeftStarNum();
+	void showHammerAnim();
+	void setHammerPosition(Star* s);
+	void removeHammer();
+	Star* getHammerStar();//使用道具时默认显示位置
 public:
 	const static int ROW_NUM = 10;
 	const static int COL_NUM = 10;
@@ -42,11 +47,16 @@ private:
 	bool clearOneByOne;
 	bool acceptTouch;
 	bool touchLeft;
-	Sprite* animSprite;
+	Sprite* hammerSprite;
 	float clearSumTime;
 	int selectedListSize;
+	bool isShowAnim;
 public :
-	static bool BombClick;
+	static bool BombClick;//使用炸弹
+	static bool MagicClick;//使用魔法
+	static bool RainBowClick;//使用重排
+	static bool HammerClick;//使用锤子
 	static float ONE_CLEAR_TIME;
+	static bool removeAnim;
 };
 #endif

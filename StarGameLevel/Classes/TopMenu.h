@@ -16,9 +16,11 @@ public:
 	void pay();
 	void payGift();
 	void refreshTargetScore();
-	void usePropsBomb();
-	void usePropsRainBow();
-	void usePropsMagic();
+	void usePropsBomb();//使用炸弹
+	void usePropsHammer();//使用锤子
+	void usePropsRainBow();//使用重排
+	void usePropsMagic();//使用染色
+	void cancelUseProp();
 private:
 	static TopMenu* _instance;
 	//Label* highestScore;
@@ -27,6 +29,11 @@ private:
 	Label* curScore;
 	Layer* gamePause;
 	Label* playerGold;
+	MenuItemImage* hammerBtn;
+	MenuItemImage* magicBtn;
+	MenuItemImage* rainbowBtn;
+	Label* propInfo;
+	Menu* cancel;
 private:
 	TopMenu();
 
