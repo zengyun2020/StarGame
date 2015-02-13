@@ -54,6 +54,7 @@ void GameLayer::loadGame(float dt){
 
 	GAMEDATA::getInstance()->setCurLevel(0);
 	menu = TopMenu::getInstance();
+	menu->refreshTargetScore();
 	this->addChild(menu, 2);
 
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);

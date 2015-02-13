@@ -165,7 +165,7 @@ int GAMEDATA::getLastLevelScore(){
 
 
 int GAMEDATA::getIsBuySuperGift(){
-	UserDefault::getInstance()->getBoolForKey("superGift", false);
+	return UserDefault::getInstance()->getBoolForKey("superGift", false);
 }
 void GAMEDATA::setIsBuySuperGift(){
 	UserDefault::getInstance()->setBoolForKey("superGift", true);
