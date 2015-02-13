@@ -136,10 +136,6 @@ void StarMatrix::onTouch(const Point& p){
 	}
 }
 
-void StarMatrix::useBombAuto(Star* s){
-	genBombList(s);
-	deleteBombList();
-}
 
 void StarMatrix::doHammer(Star* s){
 	selectedList.clear();
@@ -170,6 +166,11 @@ void StarMatrix::doMagic(Star* s){
 
 void StarMatrix::doRainbow(){
 	//TODO
+}
+
+void StarMatrix::useBombAuto(Star* s){
+	genBombList(s);
+	deleteBombList();
 }
 
 void StarMatrix::setNeedClear(bool b){
@@ -340,7 +341,6 @@ void StarMatrix::deleteSelectedList(){
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
 		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
 		star->removeFromParentAndCleanup(true);
-
 		return;
 	}
 	clearOneByOne =false;
@@ -360,15 +360,14 @@ void StarMatrix::deleteSelectedList(){
 void StarMatrix::deleteBombList(){
 	//播放消除音效
 	Audio::getInstance()->playPropBomb();
-
 	for(auto it = selectedList.begin();it != selectedList.end();it++){
 		Star* star = *it;
-		selectedList.pop_front();
 		//粒子效果
 		showStarParticleEffect(star->getColor(),star->getPosition(),this);
 		stars[star->getIndexI()][star->getIndexJ()] = nullptr;
 		star->removeFromParentAndCleanup(true);
 	}
+	selectedList.clear();
 	//COMBO效果
 	selectedListSize=0;
 	acceptTouch =true;
@@ -435,7 +434,6 @@ void StarMatrix::adjustMatrix(){
 
 
 bool StarMatrix::isEnded(){
-	//if(getLeftStarNum()<=20){return true;}
 	bool bRet = true;
 	for(int i=0;i<ROW_NUM;i++){
 		for(int j=0;j<COL_NUM;j++){
