@@ -79,6 +79,9 @@ public:
 	void saveTotalScore();
 	void savePaySuccess();
 
+	int getIsBuySuperGift();
+	void setIsBuySuperGift();
+
 	void setLastLevelScore(int score);
 	int getLastLevelScore();
 

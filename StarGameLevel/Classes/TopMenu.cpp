@@ -89,20 +89,23 @@ bool TopMenu::init(){
 	menuGift->alignItemsHorizontally();
 	menuGift->setAnchorPoint(Point(0.5,0.5));
 	menuGift->setPosition(visibleSize.width/2+180,visibleSize.height-115);
+	if(!GAMEDATA::getInstance()->getIsBuySuperGift()){
+		menuGift->setVisible(false);
+	}
 	this->addChild(menuGift);
 
 
-	 hammerBtn = MenuItemImage::create(
+	hammerBtn = MenuItemImage::create(
 		"item_hammer_normal.png","item_hammer_click.png",CC_CALLBACK_0(TopMenu::usePropsHammer,this)
 		);
-	 magicBtn = MenuItemImage::create(
+	magicBtn = MenuItemImage::create(
 		"item_magic_normal.png","item_magic_click.png",CC_CALLBACK_0(TopMenu::usePropsMagic,this)
 		);
-	 rainbowBtn = MenuItemImage::create(
+	rainbowBtn = MenuItemImage::create(
 		"item_rearrange_normal.png","item_rearrange_click.png",CC_CALLBACK_0(TopMenu::usePropsRainBow,this)
 		);
-	 bombBtn = MenuItemImage::create(
-		 "bomb_normal.png","bomb_click.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
+	bombBtn = MenuItemImage::create(
+		"bomb_normal.png","bomb_click.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
 	props = Menu::create(hammerBtn,magicBtn,rainbowBtn,bombBtn, NULL);
 	props->alignItemsHorizontallyWithPadding(60);
@@ -139,7 +142,7 @@ bool TopMenu::init(){
 	this->addChild(propInfo);
 
 
-	 MenuItemImage* cancelBtn = MenuItemImage::create(
+	MenuItemImage* cancelBtn = MenuItemImage::create(
 		"btn_cancel_normal.png","btn_cancel_click.png",CC_CALLBACK_0(TopMenu::cancelUseProp,this)
 		);
 	cancelBtn->setScaleX(0.6f);
@@ -211,6 +214,10 @@ void TopMenu::usePropsHammer(){
 			propInfo->setString(ChineseWord("hammmer"));
 			propInfo->setVisible(true);
 			cancel->setVisible(true);
+			price_hammer->setVisible(false);
+			price_magic->setVisible(false);
+			price_rainbow->setVisible(false);
+			price_bomb->setVisible(false);
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -233,6 +240,10 @@ void TopMenu::usePropsMagic(){
 			propInfo->setString(ChineseWord("pen"));
 			propInfo->setVisible(true);
 			cancel->setVisible(true);
+			price_hammer->setVisible(false);
+			price_magic->setVisible(false);
+			price_rainbow->setVisible(false);
+			price_bomb->setVisible(false);
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -255,6 +266,10 @@ void TopMenu::usePropsRainBow(){
 			propInfo->setString(ChineseWord("rainbow"));
 			propInfo->setVisible(true);
 			cancel->setVisible(true);
+			price_hammer->setVisible(false);
+			price_magic->setVisible(false);
+			price_rainbow->setVisible(false);
+			price_bomb->setVisible(false);
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -277,6 +292,10 @@ void TopMenu::usePropsBomb(){
 			propInfo->setString(ChineseWord("bomb"));
 			propInfo->setVisible(true);
 			cancel->setVisible(true);
+			price_hammer->setVisible(false);
+			price_magic->setVisible(false);
+			price_rainbow->setVisible(false);
+			price_bomb->setVisible(false);
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -286,7 +305,7 @@ void TopMenu::usePropsBomb(){
 }
 
 void TopMenu::cancelUseProp(){
-    Size visibleSize = Director::getInstance()->getVisibleSize();
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 	props->setPosition(visibleSize.width/2,visibleSize.height/2-352);
 	StarMatrix::removeAnim=true;
 	propInfo->setVisible(false);
@@ -295,6 +314,10 @@ void TopMenu::cancelUseProp(){
 	rainbowBtn->setVisible(true);
 	hammerBtn->setVisible(true);
 	bombBtn->setVisible(true);
+	price_hammer->setVisible(true);
+	price_magic->setVisible(true);
+	price_rainbow->setVisible(true);
+	price_bomb->setVisible(true);
 }
 
 void  TopMenu::hideProps(){

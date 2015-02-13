@@ -162,3 +162,11 @@ void GAMEDATA::setLastLevelScore(int score){
 int GAMEDATA::getLastLevelScore(){
 	return lastLevelScore;
 }
+
+
+void GAMEDATA::getIsBuySuperGift(){
+	UserDefault::getInstance()->getBoolForKey("superGift", false);
+}
+void GAMEDATA::setIsBuySuperGift(){
+	UserDefault::getInstance()->setBoolForKey("superGift", true);
+}
