@@ -29,6 +29,7 @@ private:
 	void deleteBombList();
 	void doHammer(Star* s);
 	void doMagic(Star* s);
+	void doRainbow();
 	void adjustMatrix();
 	bool isEnded();
 	void clearMatrixOneByOne();
@@ -39,6 +40,7 @@ private:
 	void showBombAnim();
 	void setHammerPosition(Star* s);
 	void setMagicposition(Star* s);
+	void setBombPosition(Star* s);
 	void removeAnimSprite();
 	Star* getHammerStar();//使用道具时默认显示位置
 public:

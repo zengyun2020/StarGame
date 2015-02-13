@@ -32,6 +32,7 @@ private:
 	MenuItemImage* hammerBtn;
 	MenuItemImage* magicBtn;
 	MenuItemImage* rainbowBtn;
+	MenuItemImage* bombBtn;
 	Label* propInfo;
 	Menu* cancel;
 	Menu* props;

@@ -127,6 +127,8 @@
 <key>rainbow</key>
 <string>重新排列:玩家点击后,所有星星重新排列</string>
 
+<key>bomb</key>
+<string>大炸弹:玩家点击后,消除范围3X3的星星</string>
 
 </dict>
 

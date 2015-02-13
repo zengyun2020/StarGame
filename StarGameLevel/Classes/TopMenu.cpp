@@ -94,8 +94,11 @@ bool TopMenu::init(){
 	 rainbowBtn = MenuItemImage::create(
 		"item_rearrange.png","item_rearrange.png",CC_CALLBACK_0(TopMenu::usePropsRainBow,this)
 		);
-	props = Menu::create(hammerBtn,magicBtn,rainbowBtn, NULL);
-	props->alignItemsHorizontallyWithPadding(100);
+	 bombBtn = MenuItemImage::create(
+		 "item_redo.png","item_redo.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
+		);
+	props = Menu::create(hammerBtn,magicBtn,rainbowBtn,bombBtn, NULL);
+	props->alignItemsHorizontallyWithPadding(60);
 	props->setPosition(visibleSize.width/2,visibleSize.height/2-352);
 	this->addChild(props);
 
@@ -169,18 +172,25 @@ void TopMenu::PauseGame(){
 	this->addChild(gamePause,1);
 }
 
-void TopMenu::usePropsBomb(){
+void TopMenu::usePropsHammer(){
 	Audio::getInstance()->playClick();
-	StarMatrix::BombClick=true;
+	StarMatrix::HammerClick=true;
+	magicBtn->setVisible(false);
+	rainbowBtn->setVisible(false);
+	bombBtn->setVisible(false);
+	propInfo->setString(ChineseWord("hammmer"));
+	propInfo->setVisible(true);
+	cancel->setVisible(true);
 }
 
 void TopMenu::usePropsMagic(){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
    	Audio::getInstance()->playClick();
 	StarMatrix::MagicClick=true;
-	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-150,visibleSize.height/2-352)));
+	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-124,visibleSize.height/2-352)));
 	hammerBtn->setVisible(false);
 	rainbowBtn->setVisible(false);
+	bombBtn->setVisible(false);
 	propInfo->setString(ChineseWord("pen"));
 	propInfo->setVisible(true);
 	cancel->setVisible(true);
@@ -190,20 +200,24 @@ void TopMenu::usePropsRainBow(){
   	Size visibleSize = Director::getInstance()->getVisibleSize();
    	Audio::getInstance()->playClick();
 	StarMatrix::RainBowClick=true;
-	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-300,visibleSize.height/2-352)));
+	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-238,visibleSize.height/2-352)));
 	hammerBtn->setVisible(false);
 	magicBtn->setVisible(false);
+	bombBtn->setVisible(false);
 	propInfo->setString(ChineseWord("rainbow"));
 	propInfo->setVisible(true);
 	cancel->setVisible(true);
 }
 
-void TopMenu::usePropsHammer(){
-	Audio::getInstance()->playClick();
-	StarMatrix::HammerClick=true;
-	magicBtn->setVisible(false);
+void TopMenu::usePropsBomb(){
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+   	Audio::getInstance()->playClick();
+	StarMatrix::BombClick=true;
+	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-364,visibleSize.height/2-352)));
+	hammerBtn->setVisible(false);
 	rainbowBtn->setVisible(false);
-	propInfo->setString(ChineseWord("hammmer"));
+	magicBtn->setVisible(false);
+	propInfo->setString(ChineseWord("bomb"));
 	propInfo->setVisible(true);
 	cancel->setVisible(true);
 }
@@ -217,4 +231,5 @@ void TopMenu::cancelUseProp(){
 	magicBtn->setVisible(true);
 	rainbowBtn->setVisible(true);
 	hammerBtn->setVisible(true);
+	bombBtn->setVisible(true);
 }
