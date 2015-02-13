@@ -92,16 +92,16 @@ bool TopMenu::init(){
 
 
 	 hammerBtn = MenuItemImage::create(
-		"item_hammer.png","item_hammer.png",CC_CALLBACK_0(TopMenu::usePropsHammer,this)
+		"item_hammer_normal.png","item_hammer_click.png",CC_CALLBACK_0(TopMenu::usePropsHammer,this)
 		);
 	 magicBtn = MenuItemImage::create(
-		"item_magic.png","item_magic.png",CC_CALLBACK_0(TopMenu::usePropsMagic,this)
+		"item_magic_normal.png","item_magic_click.png",CC_CALLBACK_0(TopMenu::usePropsMagic,this)
 		);
 	 rainbowBtn = MenuItemImage::create(
-		"item_rearrange.png","item_rearrange.png",CC_CALLBACK_0(TopMenu::usePropsRainBow,this)
+		"item_rearrange_normal.png","item_rearrange_click.png",CC_CALLBACK_0(TopMenu::usePropsRainBow,this)
 		);
 	 bombBtn = MenuItemImage::create(
-		 "item_redo.png","item_redo.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
+		 "bomb_normal.png","bomb_click.png",CC_CALLBACK_0(TopMenu::usePropsBomb,this)
 		);
 	props = Menu::create(hammerBtn,magicBtn,rainbowBtn,bombBtn, NULL);
 	props->alignItemsHorizontallyWithPadding(60);
@@ -119,7 +119,7 @@ bool TopMenu::init(){
 
 
 	 MenuItemImage* cancelBtn = MenuItemImage::create(
-		"btn_cancel.png","btn_cancel.png",CC_CALLBACK_0(TopMenu::cancelUseProp,this)
+		"btn_cancel_normal.png","btn_cancel_click.png",CC_CALLBACK_0(TopMenu::cancelUseProp,this)
 		);
 	cancel = Menu::create(cancelBtn, NULL);
 	cancel->setPosition(visibleSize.width/2+180,visibleSize.height/2-352);
@@ -182,7 +182,7 @@ void TopMenu::usePropsHammer(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
 	if(gold>=500){
-		if(!(StarMatrix::HammerClick)){
+		if(!StarMatrix::HammerClick){
 			StarMatrix::HammerClick=true;
 			magicBtn->setVisible(false);
 			rainbowBtn->setVisible(false);
@@ -193,7 +193,6 @@ void TopMenu::usePropsHammer(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		GameLayer::_PauseTime =true;
 		CallAndroidMethod::getInstance()->pay(13);
 #endif
 	}
@@ -203,7 +202,7 @@ void TopMenu::usePropsMagic(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
 	if(gold>=500){
-		if(!(StarMatrix::MagicClick)){
+		if(!StarMatrix::MagicClick){
 			Size visibleSize = Director::getInstance()->getVisibleSize();
 			StarMatrix::MagicClick=true;
 			props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-124,visibleSize.height/2-352)));
@@ -216,7 +215,6 @@ void TopMenu::usePropsMagic(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		GameLayer::_PauseTime =true;
 		CallAndroidMethod::getInstance()->pay(13);
 #endif
 	}
@@ -226,7 +224,7 @@ void TopMenu::usePropsRainBow(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
 	if(gold>=500){
-		if(!(StarMatrix::RainBowClick)){
+		if(!StarMatrix::RainBowClick){
 			Size visibleSize = Director::getInstance()->getVisibleSize();
 			StarMatrix::RainBowClick=true;
 			props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-238,visibleSize.height/2-352)));
@@ -239,7 +237,6 @@ void TopMenu::usePropsRainBow(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		GameLayer::_PauseTime =true;
 		CallAndroidMethod::getInstance()->pay(13);
 #endif
 	}
@@ -262,7 +259,6 @@ void TopMenu::usePropsBomb(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		GameLayer::_PauseTime =true;
 		CallAndroidMethod::getInstance()->pay(13);
 #endif
 	}

@@ -82,34 +82,34 @@ void StarMatrix::onTouch(const Point& p){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
-				useBombAuto(s);
-				m_layer->hidePropInfos();
-			}else{
-				setBombPosition(s);
-			}
+			//if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
+			useBombAuto(s);
+			m_layer->hidePropInfos();
+			//}else{
+			//	setBombPosition(s);
+			//}
 			return;
 		}else if(HammerClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
-				doHammer(s);
-				m_layer->hidePropInfos();
-			}else{
-				setHammerPosition(s);
-			}
+			//if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
+			doHammer(s);
+			m_layer->hidePropInfos();
+			//}else{
+			//	setHammerPosition(s);
+			//}
 			return;
 		}else if(MagicClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
-				doMagic(s);
-				m_layer->hidePropInfos();
-			}else{
-				setMagicposition(s);
-			}
+			//if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
+			doMagic(s);
+			m_layer->hidePropInfos();
+			//}else{
+			//	setMagicposition(s);
+			//}
 			return;	
 		}else if(RainBowClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
@@ -159,7 +159,7 @@ void StarMatrix::doHammer(Star* s){
 }
 
 void StarMatrix::doMagic(Star* s){
-   s->changeColor(5);
+	s->changeColor(5);
 }
 
 void StarMatrix::doRainbow(){
@@ -527,68 +527,68 @@ Star* StarMatrix::getHammerStar(){
 }
 
 //显示锤子动画
-void StarMatrix::showHammerAnim(){
-	animSprite=Sprite::create();
-	animSprite->setAnchorPoint(Point(0,0));
-	this->addChild(animSprite);
-	auto anim = createAnimation("anim_hammer",5,0.2f);
-	Animate* mate =Animate::create(anim);
-	Star* s= getHammerStar();
-	animSprite->setPosition(s->getPosition());
-	int index_i = s->getIndexI();
-	int index_j = s->getIndexJ();
-	CCLOG("X= %d",index_i);
-	CCLOG("Y= %d",index_j);
-	animSprite->setTag(index_i*COL_NUM+index_j);
-	animSprite->runAction(RepeatForever::create(mate));
-}
+//void StarMatrix::showHammerAnim(){
+//	animSprite=Sprite::create();
+//	animSprite->setAnchorPoint(Point(0,0));
+//	this->addChild(animSprite);
+//	auto anim = createAnimation("anim_hammer",5,0.2f);
+//	Animate* mate =Animate::create(anim);
+//	Star* s= getHammerStar();
+//	animSprite->setPosition(s->getPosition());
+//	int index_i = s->getIndexI();
+//	int index_j = s->getIndexJ();
+//	CCLOG("X= %d",index_i);
+//	CCLOG("Y= %d",index_j);
+//	animSprite->setTag(index_i*COL_NUM+index_j);
+//	animSprite->runAction(RepeatForever::create(mate));
+//}
 //显示画笔动画
-void StarMatrix::showMagicAnim(){
-	animSprite=Sprite::create("anim_magic.png");
-	animSprite->setAnchorPoint(Point(0,0));
-	Star* s= getHammerStar();
-	animSprite->setPosition(s->getPosition());
-	int index_i = s->getIndexI();
-	int index_j = s->getIndexJ();
-	animSprite->setTag(index_i*COL_NUM+index_j);
-	this->addChild(animSprite);	
-	OvalConfig config;
-	config.a = 12;
-	config.b = 12;
-	config.centerPosition = animSprite->getPosition();
-	config.moveInAnticlockwise = true;
-	config.zOrder = make_pair(-1, 0);
-	auto moveAction = MoveOvalBy::create(1.0, config);
-	animSprite->runAction(RepeatForever::create(moveAction));
-}
+//void StarMatrix::showMagicAnim(){
+//	animSprite=Sprite::create("anim_magic.png");
+//	animSprite->setAnchorPoint(Point(0,0));
+//	Star* s= getHammerStar();
+//	animSprite->setPosition(s->getPosition());
+//	int index_i = s->getIndexI();
+//	int index_j = s->getIndexJ();
+//	animSprite->setTag(index_i*COL_NUM+index_j);
+//	this->addChild(animSprite);	
+//	OvalConfig config;
+//	config.a = 12;
+//	config.b = 12;
+//	config.centerPosition = animSprite->getPosition();
+//	config.moveInAnticlockwise = true;
+//	config.zOrder = make_pair(-1, 0);
+//	auto moveAction = MoveOvalBy::create(1.0, config);
+//	animSprite->runAction(RepeatForever::create(moveAction));
+//}
 //显示重排动画
-void StarMatrix::showRainbowAnim(){
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-    animSprite=Sprite::create("anim_redo.png");
-	animSprite->setAnchorPoint(Point(0.5,0.5));
-	animSprite->setPosition(visibleSize.width/2,visibleSize.height/2);
-	this->addChild(animSprite);
-	auto rotate = RotateBy::create(1,90);
-    animSprite->runAction(RepeatForever::create(rotate));
-}
+//void StarMatrix::showRainbowAnim(){
+//	auto visibleSize = Director::getInstance()->getVisibleSize();
+//    animSprite=Sprite::create("anim_redo.png");
+//	animSprite->setAnchorPoint(Point(0.5,0.5));
+//	animSprite->setPosition(visibleSize.width/2,visibleSize.height/2);
+//	this->addChild(animSprite);
+//	auto rotate = RotateBy::create(1,90);
+//    animSprite->runAction(RepeatForever::create(rotate));
+//}
 //显示炸弹动画
-void StarMatrix::showBombAnim(){
-	animSprite=Sprite::create("anim_redo.png");
-	animSprite->setAnchorPoint(Point(0,0));
-	Star* s= getHammerStar();
-	animSprite->setPosition(s->getPosition());
-	int index_i = s->getIndexI();
-	int index_j = s->getIndexJ();
-	animSprite->setTag(index_i*COL_NUM+index_j);
-	this->addChild(animSprite);
-	auto rotate = RotateBy::create(1,90);
-    animSprite->runAction(RepeatForever::create(rotate));
-}
+//void StarMatrix::showBombAnim(){
+//	animSprite=Sprite::create("anim_redo.png");
+//	animSprite->setAnchorPoint(Point(0,0));
+//	Star* s= getHammerStar();
+//	animSprite->setPosition(s->getPosition());
+//	int index_i = s->getIndexI();
+//	int index_j = s->getIndexJ();
+//	animSprite->setTag(index_i*COL_NUM+index_j);
+//	this->addChild(animSprite);
+//	auto rotate = RotateBy::create(1,90);
+//    animSprite->runAction(RepeatForever::create(rotate));
+//}
 
-void StarMatrix::removeAnimSprite(){
-	isShowAnim=false;
-	animSprite->removeFromParentAndCleanup(true);
-}
+//void StarMatrix::removeAnimSprite(){
+//	isShowAnim=false;
+//	animSprite->removeFromParentAndCleanup(true);
+//}
 
 void StarMatrix::setHammerPosition(Star* s){
 	if(nullptr!=animSprite){
@@ -626,40 +626,40 @@ void StarMatrix::setBombPosition(Star* s){
 }
 
 void StarMatrix::update(float dt){
-	if(!isShowAnim){
-		if(HammerClick){
-			isShowAnim=true;
-			showHammerAnim();
-		}else if(MagicClick){
-			isShowAnim=true;
-			showMagicAnim();
-		}else if(RainBowClick){
-			isShowAnim=true;
-			showRainbowAnim();
-		}else if(BombClick){
-			isShowAnim=true;
-			showRainbowAnim();
-		}
-	
-	}
+	//if(!isShowAnim){
+	//	if(HammerClick){
+	//		isShowAnim=true;
+	//		showHammerAnim();
+	//	}else if(MagicClick){
+	//		isShowAnim=true;
+	//		showMagicAnim();
+	//	}else if(RainBowClick){
+	//		isShowAnim=true;
+	//		showRainbowAnim();
+	//	}else if(BombClick){
+	//		isShowAnim=true;
+	//		showRainbowAnim();
+	//	}
+	//
+	//}
 	if(removeAnim){
 		if(HammerClick){
 			HammerClick=false;
-			removeAnimSprite();	
+			//removeAnimSprite();	
 			removeAnim=false;
 		}else if(MagicClick){
 			MagicClick=false;
-			removeAnimSprite();	
+			//removeAnimSprite();	
 			removeAnim=false;
 		}
 		else if(RainBowClick){
 			RainBowClick=false;
-			removeAnimSprite();	
+			//removeAnimSprite();	
 			removeAnim=false;
 		}
 		else if(BombClick){
 			BombClick=false;
-			removeAnimSprite();	
+			//removeAnimSprite();	
 			removeAnim=false;
 		}
 	}
