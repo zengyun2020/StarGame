@@ -180,52 +180,92 @@ void TopMenu::PauseGame(){
 
 void TopMenu::usePropsHammer(){
 	Audio::getInstance()->playClick();
-	StarMatrix::HammerClick=true;
-	magicBtn->setVisible(false);
-	rainbowBtn->setVisible(false);
-	bombBtn->setVisible(false);
-	propInfo->setString(ChineseWord("hammmer"));
-	propInfo->setVisible(true);
-	cancel->setVisible(true);
+	auto gold =GAMEDATA::getInstance()->getGoldNum();
+	if(gold>=500){
+		if(!(StarMatrix::HammerClick)){
+			StarMatrix::HammerClick=true;
+			magicBtn->setVisible(false);
+			rainbowBtn->setVisible(false);
+			bombBtn->setVisible(false);
+			propInfo->setString(ChineseWord("hammmer"));
+			propInfo->setVisible(true);
+			cancel->setVisible(true);
+		}
+	}else{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		GameLayer::_PauseTime =true;
+		CallAndroidMethod::getInstance()->pay(13);
+#endif
+	}
 }
 
 void TopMenu::usePropsMagic(){
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-   	Audio::getInstance()->playClick();
-	StarMatrix::MagicClick=true;
-	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-124,visibleSize.height/2-352)));
-	hammerBtn->setVisible(false);
-	rainbowBtn->setVisible(false);
-	bombBtn->setVisible(false);
-	propInfo->setString(ChineseWord("pen"));
-	propInfo->setVisible(true);
-	cancel->setVisible(true);
+	Audio::getInstance()->playClick();
+	auto gold =GAMEDATA::getInstance()->getGoldNum();
+	if(gold>=500){
+		if(!(StarMatrix::MagicClick)){
+			Size visibleSize = Director::getInstance()->getVisibleSize();
+			StarMatrix::MagicClick=true;
+			props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-124,visibleSize.height/2-352)));
+			hammerBtn->setVisible(false);
+			rainbowBtn->setVisible(false);
+			bombBtn->setVisible(false);
+			propInfo->setString(ChineseWord("pen"));
+			propInfo->setVisible(true);
+			cancel->setVisible(true);
+		}
+	}else{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		GameLayer::_PauseTime =true;
+		CallAndroidMethod::getInstance()->pay(13);
+#endif
+	}
 }
 
 void TopMenu::usePropsRainBow(){
-  	Size visibleSize = Director::getInstance()->getVisibleSize();
-   	Audio::getInstance()->playClick();
-	StarMatrix::RainBowClick=true;
-	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-238,visibleSize.height/2-352)));
-	hammerBtn->setVisible(false);
-	magicBtn->setVisible(false);
-	bombBtn->setVisible(false);
-	propInfo->setString(ChineseWord("rainbow"));
-	propInfo->setVisible(true);
-	cancel->setVisible(true);
+	Audio::getInstance()->playClick();
+	auto gold =GAMEDATA::getInstance()->getGoldNum();
+	if(gold>=500){
+		if(!(StarMatrix::RainBowClick)){
+			Size visibleSize = Director::getInstance()->getVisibleSize();
+			StarMatrix::RainBowClick=true;
+			props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-238,visibleSize.height/2-352)));
+			hammerBtn->setVisible(false);
+			magicBtn->setVisible(false);
+			bombBtn->setVisible(false);
+			propInfo->setString(ChineseWord("rainbow"));
+			propInfo->setVisible(true);
+			cancel->setVisible(true);
+		}
+	}else{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		GameLayer::_PauseTime =true;
+		CallAndroidMethod::getInstance()->pay(13);
+#endif
+	}
 }
 
 void TopMenu::usePropsBomb(){
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-   	Audio::getInstance()->playClick();
-	StarMatrix::BombClick=true;
-	props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-364,visibleSize.height/2-352)));
-	hammerBtn->setVisible(false);
-	rainbowBtn->setVisible(false);
-	magicBtn->setVisible(false);
-	propInfo->setString(ChineseWord("bomb"));
-	propInfo->setVisible(true);
-	cancel->setVisible(true);
+	Audio::getInstance()->playClick();
+	auto gold =GAMEDATA::getInstance()->getGoldNum();
+	if(gold>=500){
+		if(!(StarMatrix::BombClick)){
+			Size visibleSize = Director::getInstance()->getVisibleSize();
+			StarMatrix::BombClick=true;
+			props->runAction(MoveTo::create(0.2,Point(visibleSize.width/2-364,visibleSize.height/2-352)));
+			hammerBtn->setVisible(false);
+			rainbowBtn->setVisible(false);
+			magicBtn->setVisible(false);
+			propInfo->setString(ChineseWord("bomb"));
+			propInfo->setVisible(true);
+			cancel->setVisible(true);
+		}
+	}else{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		GameLayer::_PauseTime =true;
+		CallAndroidMethod::getInstance()->pay(13);
+#endif
+	}
 }
 
 void TopMenu::cancelUseProp(){
