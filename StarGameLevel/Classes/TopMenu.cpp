@@ -80,10 +80,16 @@ bool TopMenu::init(){
 	MenuItemImage* giftBtn = MenuItemImage::create(
 		"box.png","box.png",CC_CALLBACK_0(TopMenu::payGift,this)
 		);
+	auto scale1= ScaleTo::create(1.0f,1.2f);
+	auto scale2= ScaleTo::create(1.0f,1.0f);
+	auto seq =Sequence::create(scale1,scale2,nullptr);
+	giftBtn->runAction(RepeatForever::create(seq));
 	Menu* menuGift = Menu::create(giftBtn, NULL);
 	menuGift->alignItemsHorizontally();
-	menuGift->setPosition(visibleSize.width/2+170,visibleSize.height-100);
+	menuGift->setAnchorPoint(Point(0.5,0.5));
+	menuGift->setPosition(visibleSize.width/2+180,visibleSize.height-110);
 	this->addChild(menuGift);
+
 
 	 hammerBtn = MenuItemImage::create(
 		"item_hammer.png","item_hammer.png",CC_CALLBACK_0(TopMenu::usePropsHammer,this)
