@@ -37,7 +37,8 @@ private:
 	void showMagicAnim();
 	void showRainbowAnim();
 	void showBombAnim();
-	void setAnimPosition(Star* s);
+	void setHammerPosition(Star* s);
+	void setMagicposition(Star* s);
 	void removeAnimSprite();
 	Star* getHammerStar();//使用道具时默认显示位置
 public:

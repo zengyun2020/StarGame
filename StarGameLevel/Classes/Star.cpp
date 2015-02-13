@@ -57,6 +57,7 @@ void Star::updatePosition(float delta){
 }
 
 void Star::changeColor(int color){
+	this->color=color;
 	Texture2D* image = Director::getInstance()->getTextureCache()->addImage(getImage(color));
 	this->setTexture(image);
 }

@@ -93,7 +93,7 @@ void StarMatrix::onTouch(const Point& p){
 				doHammer(s);
 				m_layer->hidePropInfos();
 			}else{
-				setAnimPosition(s);
+				setHammerPosition(s);
 			}
 			return;
 		}else if(MagicClick){
@@ -101,7 +101,7 @@ void StarMatrix::onTouch(const Point& p){
 				doMagic(s);
 				m_layer->hidePropInfos();
 			}else{
-				setAnimPosition(s);
+				setMagicposition(s);
 			}
 			return;	
 		}
@@ -204,6 +204,7 @@ void StarMatrix::genSelectedList(Star* s){
 	deque<Star*> travelList;
 	travelList.push_back(s);
 	deque<Star*>::iterator it;
+	int color = s->getColor();
 	for(it= travelList.begin();it != travelList.end();){
 		Star* star = *it;
 		Star* linkStar = nullptr;
@@ -211,23 +212,43 @@ void StarMatrix::genSelectedList(Star* s){
 		int index_j = star->getIndexJ();
 		//ио
 		if(index_i-1 >= 0 && (linkStar = stars[index_i-1][index_j]) ){
-			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
-				travelList.push_back(stars[index_i-1][index_j]);
+			if(!linkStar->isSelected()){
+				if(star->getColor()==5&&linkStar->getColor()==color){
+					travelList.push_back(stars[index_i-1][index_j]);		
+				}else if((linkStar->getColor() == star->getColor()||linkStar->getColor()==5)){
+					travelList.push_back(stars[index_i-1][index_j]);				
+				}
+			}
 		}
 		//об
-		if(index_i+1 < ROW_NUM  && (linkStar = stars[index_i+1][index_j]) ){
-			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
-				travelList.push_back(stars[index_i+1][index_j]);
+		if(index_i+1 < ROW_NUM  && (linkStar = stars[index_i+1][index_j]) ){			
+			if(!linkStar->isSelected()){
+				if(star->getColor()==5&&linkStar->getColor()==color){
+					travelList.push_back(stars[index_i+1][index_j]);
+				}else if((linkStar->getColor() == star->getColor()||linkStar->getColor()==5)){
+					travelList.push_back(stars[index_i+1][index_j]);		
+				}
+			}
 		}
 		//вС
 		if(index_j-1 >= 0 && (linkStar = stars[index_i][index_j-1]) ){
-			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
-				travelList.push_back(stars[index_i][index_j-1]);
+			if(!linkStar->isSelected()){
+				if(star->getColor()==5&&linkStar->getColor()==color){
+					travelList.push_back(stars[index_i][index_j-1]);
+				}else if((linkStar->getColor() == star->getColor()||linkStar->getColor()==5)){
+					travelList.push_back(stars[index_i][index_j-1]);	
+				}
+			}
 		}
 		//ср
-		if(index_j+1 < COL_NUM && (linkStar = stars[index_i][index_j+1]) ){
-			if(!linkStar->isSelected() && linkStar->getColor() == star->getColor())
-				travelList.push_back(stars[index_i][index_j+1]);
+		if(index_j+1 < COL_NUM && (linkStar = stars[index_i][index_j+1]) ){				
+			if(!linkStar->isSelected()){
+				if(star->getColor()==5&&linkStar->getColor()==color){
+					travelList.push_back(stars[index_i][index_j+1]);
+				}else if((linkStar->getColor() == star->getColor()||linkStar->getColor()==5)){
+					travelList.push_back(stars[index_i][index_j+1]);
+				}
+			}
 		}
 		if(!star->isSelected()){
 			star->setSelected(true);
@@ -527,9 +548,30 @@ void StarMatrix::removeAnimSprite(){
 	animSprite->removeFromParentAndCleanup(true);
 }
 
-void StarMatrix::setAnimPosition(Star* s){
-	if(nullptr!=animSprite)
+void StarMatrix::setHammerPosition(Star* s){
+	if(nullptr!=animSprite){
 		animSprite->setPosition(s->getPosition());
+		int index_i = s->getIndexI();
+		int index_j = s->getIndexJ();
+		animSprite->setTag(index_i*COL_NUM+index_j);
+	}
+}
+
+void StarMatrix::setMagicposition(Star* s){
+	if(nullptr!=animSprite){
+		animSprite->stopAllActions();
+		animSprite->setPosition(s->getPosition());
+		int index_i = s->getIndexI();
+		int index_j = s->getIndexJ();
+		animSprite->setTag(index_i*COL_NUM+index_j);
+		OvalConfig config;
+		config.a = 12;
+		config.b = 12;
+		config.centerPosition = animSprite->getPosition();
+		config.moveInAnticlockwise = true;
+		config.zOrder = make_pair(-1, 0);
+		auto moveAction = MoveOvalBy::create(1.0, config);
+		animSprite->runAction(RepeatForever::create(moveAction));}
 }
 
 void StarMatrix::update(float dt){
