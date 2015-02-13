@@ -106,13 +106,32 @@ bool TopMenu::init(){
 		);
 	props = Menu::create(hammerBtn,magicBtn,rainbowBtn,bombBtn, NULL);
 	props->alignItemsHorizontallyWithPadding(60);
-	props->setPosition(visibleSize.width/2,visibleSize.height/2-352);
+	props->setPosition(visibleSize.width/2,visibleSize.height/2-346);
 	props->setVisible(false);
 	this->addChild(props);
 
+	price_hammer = Label::create("500","Arial",18);
+	price_hammer->setPosition(visibleSize.width/2-185,visibleSize.height/2 -385);
+	price_hammer->setVisible(false);
+	this->addChild(price_hammer);
+
+	price_magic = Label::create("500","Arial",18);
+	price_magic->setPosition(visibleSize.width/2-68,visibleSize.height/2 -385);
+	price_magic->setVisible(false);
+	this->addChild(price_magic);
+
+	price_rainbow = Label::create("500","Arial",18);
+	price_rainbow->setPosition(visibleSize.width/2+64,visibleSize.height/2 -385);
+	price_rainbow->setVisible(false);
+	this->addChild(price_rainbow);
+
+	price_bomb = Label::create("500","Arial",18);
+	price_bomb->setPosition(visibleSize.width/2+179,visibleSize.height/2 -385);
+	price_bomb->setVisible(false);
+	this->addChild(price_bomb);
 
 	propInfo =Label::create("","Verdana-Bold",18);
-	propInfo->setPosition(visibleSize.width/2-20,visibleSize.height/2 -352);
+	propInfo->setPosition(visibleSize.width/2-20,visibleSize.height/2 -355);
 	propInfo->setAlignment(TextHAlignment::CENTER);
 	propInfo->setLineBreakWithoutSpace(true);
 	propInfo->setWidth(220);
@@ -280,8 +299,16 @@ void TopMenu::cancelUseProp(){
 
 void  TopMenu::hideProps(){
 	props->setVisible(false);
+	price_hammer->setVisible(false);
+	price_magic->setVisible(false);
+	price_rainbow->setVisible(false);
+	price_bomb->setVisible(false);
 }
 
 void TopMenu::showProps(){
 	props->setVisible(true);
+	price_hammer->setVisible(true);
+	price_magic->setVisible(true);
+	price_rainbow->setVisible(true);
+	price_bomb->setVisible(true);
 }

@@ -38,6 +38,11 @@ private:
 	Label* propInfo;
 	Menu* cancel;
 	Menu* props;
+	Label* price_hammer;
+	Label* price_magic;
+	Label* price_rainbow;
+	Label* price_bomb;
+
 private:
 	TopMenu();
 
