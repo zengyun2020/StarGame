@@ -29,7 +29,7 @@ private:
 
 public:
 	const static int MOVE_SPEED = 400;
-	static const int COLOR_MAX_NUM = 4;
+	static const int COLOR_MAX_NUM = 5;
 	static const int STAR_WIDTH = 48;
 	static const int STAR_HEIGHT = 48;
 private:
