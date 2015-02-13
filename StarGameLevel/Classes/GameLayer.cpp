@@ -52,7 +52,7 @@ void GameLayer::loadGame(float dt){
 	linkNum->setVisible(false);
 	this->addChild(linkNum,1);
 
-
+	GAMEDATA::getInstance()->setCurLevel(0);
 	menu = TopMenu::getInstance();
 	this->addChild(menu, 2);
 
