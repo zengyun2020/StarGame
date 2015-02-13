@@ -80,14 +80,15 @@ bool TopMenu::init(){
 	MenuItemImage* giftBtn = MenuItemImage::create(
 		"box.png","box.png",CC_CALLBACK_0(TopMenu::payGift,this)
 		);
-	auto scale1= ScaleTo::create(1.0f,1.2f);
-	auto scale2= ScaleTo::create(1.0f,1.0f);
+	giftBtn->setScale(0.5f);
+	auto scale1= ScaleTo::create(1.0f,0.7f);
+	auto scale2= ScaleTo::create(1.0f,0.5f);
 	auto seq =Sequence::create(scale1,scale2,nullptr);
 	giftBtn->runAction(RepeatForever::create(seq));
 	Menu* menuGift = Menu::create(giftBtn, NULL);
 	menuGift->alignItemsHorizontally();
 	menuGift->setAnchorPoint(Point(0.5,0.5));
-	menuGift->setPosition(visibleSize.width/2+180,visibleSize.height-110);
+	menuGift->setPosition(visibleSize.width/2+180,visibleSize.height-115);
 	this->addChild(menuGift);
 
 
@@ -106,11 +107,12 @@ bool TopMenu::init(){
 	props = Menu::create(hammerBtn,magicBtn,rainbowBtn,bombBtn, NULL);
 	props->alignItemsHorizontallyWithPadding(60);
 	props->setPosition(visibleSize.width/2,visibleSize.height/2-352);
+	props->setVisible(false);
 	this->addChild(props);
 
 
 	propInfo =Label::create("","Verdana-Bold",18);
-	propInfo->setPosition(visibleSize.width/2,visibleSize.height/2 -352);
+	propInfo->setPosition(visibleSize.width/2-20,visibleSize.height/2 -352);
 	propInfo->setAlignment(TextHAlignment::CENTER);
 	propInfo->setLineBreakWithoutSpace(true);
 	propInfo->setWidth(220);
@@ -121,11 +123,11 @@ bool TopMenu::init(){
 	 MenuItemImage* cancelBtn = MenuItemImage::create(
 		"btn_cancel_normal.png","btn_cancel_click.png",CC_CALLBACK_0(TopMenu::cancelUseProp,this)
 		);
+	cancelBtn->setScaleX(0.6f);
 	cancel = Menu::create(cancelBtn, NULL);
 	cancel->setPosition(visibleSize.width/2+180,visibleSize.height/2-352);
 	cancel->setVisible(false);
 	this->addChild(cancel);
-
 	return true;
 }
 
@@ -274,4 +276,12 @@ void TopMenu::cancelUseProp(){
 	rainbowBtn->setVisible(true);
 	hammerBtn->setVisible(true);
 	bombBtn->setVisible(true);
+}
+
+void  TopMenu::hideProps(){
+	props->setVisible(false);
+}
+
+void TopMenu::showProps(){
+	props->setVisible(true);
 }

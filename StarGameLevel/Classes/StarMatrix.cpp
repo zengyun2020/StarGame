@@ -153,6 +153,7 @@ void StarMatrix::doHammer(Star* s){
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
+		m_layer->hideProps();
 		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 		CCLOG("ENDED");
 	}
@@ -357,6 +358,7 @@ void StarMatrix::deleteSelectedList(){
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
+		m_layer->hideProps();
 		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 		CCLOG("ENDED");
 	}
@@ -379,6 +381,7 @@ void StarMatrix::deleteBombList(){
 	adjustMatrix();
 	if(isEnded()){
 		acceptTouch=false;
+		m_layer->hideProps();
 		m_layer->floatLeftStarMsg(getLeftStarNum());
 	}
 }

@@ -34,6 +34,7 @@ public:
 	void showMissionComplete();
 	void removeMissonComplet();
 	void hidePropInfos();
+	void hideProps();
 private:
 	FloatWord* _levelMsg;
 	FloatWord* _targetScore;

@@ -70,6 +70,7 @@ void GameLayer::floatLevelWord(){
 	_levelMsg->floatInOut(0.5f,1.0f,[=](){
 		schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 		matrix->setAcceptTouch(true);
+		menu->showProps();
 		Audio::getInstance()->playNextGameRound();
 	});
 	Audio::getInstance()->playReadyGo();
@@ -79,6 +80,7 @@ void GameLayer::floatLevelWord(){
 void GameLayer::showStarMatrix(float dt){
 	matrix = StarMatrix::create(this);
 	this->addChild(matrix);
+	menu->showProps();
 }
 
 void GameLayer::doRevive(){
@@ -259,5 +261,9 @@ void GameLayer::removeMissonComplet(){
 
 void GameLayer::hidePropInfos(){
 	menu->cancelUseProp();
+}
+
+void GameLayer::hideProps(){
+	menu->hideProps();
 }
 

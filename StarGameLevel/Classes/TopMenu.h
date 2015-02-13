@@ -21,6 +21,8 @@ public:
 	void usePropsRainBow();//使用重排
 	void usePropsMagic();//使用染色
 	void cancelUseProp();
+	void hideProps();//隐藏所有道具
+	void showProps();
 private:
 	static TopMenu* _instance;
 	//Label* highestScore;
