@@ -115,10 +115,8 @@ void StarMatrix::onTouch(const Point& p){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
-				doRainbow();
-				m_layer->hidePropInfos();
-			}
+			doRainbow();
+			m_layer->hidePropInfos();
 			return;	
 		}
 		genSelectedList(s);
@@ -165,7 +163,14 @@ void StarMatrix::doMagic(Star* s){
 }
 
 void StarMatrix::doRainbow(){
-	//TODO
+	for(int i=0;i<ROW_NUM;i++){
+		for(int j=0;j<COL_NUM;j++){
+			if(stars[i][j] != nullptr){
+				auto col= random(0,3);
+				stars[i][j]->changeColor(col);
+			}      
+		}
+	}
 }
 
 void StarMatrix::useBombAuto(Star* s){
