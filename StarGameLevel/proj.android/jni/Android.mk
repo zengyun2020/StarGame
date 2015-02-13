@@ -38,7 +38,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../Classes/About.cpp\
 					../../Classes/BlinkTitle.cpp\
 					../../Classes/Gold.cpp\
-					../../Classes/PropsMenu.cpp
+					../../Classes/OvalActionInterval.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

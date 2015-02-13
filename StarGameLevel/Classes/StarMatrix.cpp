@@ -612,7 +612,7 @@ void StarMatrix::setMagicposition(Star* s){
 		config.centerPosition = animSprite->getPosition();
 		config.moveInAnticlockwise = true;
 		config.zOrder = make_pair(-1, 0);
-		auto moveAction = MoveOvalBy::create(1.0, config);
+		MoveOvalBy* moveAction = MoveOvalBy::create(1.0, config);
 		animSprite->runAction(RepeatForever::create(moveAction));}
 }
 
