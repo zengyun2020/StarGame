@@ -24,6 +24,8 @@ char* Star::getImage(int color){
 		return "red.png";
 	case PURPLE:
 		return "purple.png";
+	case MULTICOLOUR:
+		return "blue.png";
 	}
 }
 
@@ -52,4 +54,9 @@ void Star::updatePosition(float delta){
 			setPositionX(desPosition.x);
 		}
 	}
+}
+
+void Star::changeColor(int color){
+	Texture2D* image = Director::getInstance()->getTextureCache()->addImage(getImage(color));
+	this->setTexture(image);
 }

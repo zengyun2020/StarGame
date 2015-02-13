@@ -28,12 +28,16 @@ private:
 	void deleteSelectedList();
 	void deleteBombList();
 	void doHammer(Star* s);
+	void doMagic(Star* s);
 	void adjustMatrix();
 	bool isEnded();
 	void clearMatrixOneByOne();
 	int getLeftStarNum();
 	void showHammerAnim();
-	void setHammerPosition(Star* s);
+	void showMagicAnim();
+	void showRainbowAnim();
+	void showBombAnim();
+	void setAnimPosition(Star* s);
 	void removeAnimSprite();
 	Star* getHammerStar();//使用道具时默认显示位置
 public:

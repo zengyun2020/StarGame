@@ -10,7 +10,8 @@ public:
 		RED,
 		YELLOW,
 		PURPLE,
-		BLUE
+		BLUE,
+		MULTICOLOUR
 	};
 	static Star* create(int color);
 	bool isSelected();
@@ -22,6 +23,7 @@ public:
 	inline int getIndexI(){return index_i;}
 	inline int getIndexJ(){return index_j;}
 	inline void setIndex_ij(int i,int j){index_i = i;index_j = j;}
+	void changeColor(int color);
 private:
 	char* getImage(int color);
 

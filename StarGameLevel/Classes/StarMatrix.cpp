@@ -3,6 +3,7 @@
 #include "StarParticle.h"
 #include "ComboEffect.h"
 #include "Audio.h"
+#include "OvalActionInterval.h"
 #include <ctime>
 
 bool StarMatrix::BombClick = false;
@@ -84,19 +85,25 @@ void StarMatrix::onTouch(const Point& p){
 			useBombAuto(s);
 			BombClick =false;
 			return;
-		}
-		if(HammerClick){
+		}else if(HammerClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-
-			if(animSprite->getPosition()==s->getPosition()){
+			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
 				doHammer(s);
 				m_layer->hidePropInfos();
 			}else{
-				setHammerPosition(s);
+				setAnimPosition(s);
 			}
 			return;
+		}else if(MagicClick){
+			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
+				doMagic(s);
+				m_layer->hidePropInfos();
+			}else{
+				setAnimPosition(s);
+			}
+			return;	
 		}
 		genSelectedList(s);
 		//deleteSelectedList();
@@ -139,6 +146,10 @@ void StarMatrix::doHammer(Star* s){
 		m_layer->floatLeftStarMsg(getLeftStarNum());//通知layer弹出剩余星星的信息
 		CCLOG("ENDED");
 	}
+}
+
+void StarMatrix::doMagic(Star* s){
+   s->changeColor(5);
 }
 
 void StarMatrix::setNeedClear(bool b){
@@ -462,48 +473,84 @@ Animation* StarMatrix::createAnimation(std::string prefixName, int framesNum, fl
 
 Star* StarMatrix::getHammerStar(){
 	//先检查第五列,依次向左
-	for(int i=4;i>0;i--){
-		for(int j=5;j>0;j--){
-			if(stars[i][j] == nullptr)
-				continue;
-			//找到目标
-			return stars[i][j];
+	for(int j=4;j<COL_NUM;j++){
+		for(int i=5;i<ROW_NUM;i++){
+			if(stars[i][j] != nullptr)
+				return stars[i][j];	
 		}
 	}
+	return stars[9][0];
 }
 
 //显示锤子动画
 void StarMatrix::showHammerAnim(){
-   animSprite=Sprite::create();
-   this->addChild(animSprite);
-   auto anim = createAnimation("anim_hammer",5,0.2);
-   Animate* mate =Animate::create(anim);
-   Star* s= getHammerStar();
-   animSprite->setPosition(s->getPosition());
-   animSprite->runAction(RepeatForever::create(mate));
+	animSprite=Sprite::create();
+	animSprite->setAnchorPoint(Point(0,0));
+	this->addChild(animSprite);
+	auto anim = createAnimation("anim_hammer",5,0.2f);
+	Animate* mate =Animate::create(anim);
+	Star* s= getHammerStar();
+	animSprite->setPosition(s->getPosition());
+	int index_i = s->getIndexI();
+	int index_j = s->getIndexJ();
+	CCLOG("X= %d",index_i);
+	CCLOG("Y= %d",index_j);
+	animSprite->setTag(index_i*COL_NUM+index_j);
+	animSprite->runAction(RepeatForever::create(mate));
 }
+//显示画笔动画
+void StarMatrix::showMagicAnim(){
+	animSprite=Sprite::create("anim_magic.png");
+	animSprite->setAnchorPoint(Point(0,0));
+	Star* s= getHammerStar();
+	animSprite->setPosition(s->getPosition());
+	int index_i = s->getIndexI();
+	int index_j = s->getIndexJ();
+	animSprite->setTag(index_i*COL_NUM+index_j);
+	this->addChild(animSprite);	
+	OvalConfig config;
+	config.a = 12;
+	config.b = 12;
+	config.centerPosition = animSprite->getPosition();
+	config.moveInAnticlockwise = true;
+	config.zOrder = make_pair(-1, 0);
+	auto moveAction = MoveOvalBy::create(1.0, config);
+	animSprite->runAction(RepeatForever::create(moveAction));
+}
+//显示重排动画
+void StarMatrix::showRainbowAnim(){}
+//显示炸弹动画
+void StarMatrix::showBombAnim(){}
 
 void StarMatrix::removeAnimSprite(){
 	isShowAnim=false;
-	animSprite->removeFromParent();
+	animSprite->removeFromParentAndCleanup(true);
 }
 
-void StarMatrix::setHammerPosition(Star* s){
+void StarMatrix::setAnimPosition(Star* s){
 	if(nullptr!=animSprite)
 		animSprite->setPosition(s->getPosition());
 }
 
 void StarMatrix::update(float dt){
-	if(HammerClick){
-		if(!isShowAnim){
-			isShowAnim=true;
-			showHammerAnim();
-		} 
+	if(HammerClick&&!isShowAnim){
+		isShowAnim=true;
+		showHammerAnim();
 	}
+
+	if(MagicClick&&!isShowAnim){
+		isShowAnim=true;
+		showMagicAnim();
+	}
+
 	if(removeAnim){
 		if(HammerClick){
 			HammerClick=false;
-			removeHammer();	
+			removeAnimSprite();	
+			removeAnim=false;
+		}else if(MagicClick){
+			MagicClick=false;
+			removeAnimSprite();	
 			removeAnim=false;
 		}
 	}
