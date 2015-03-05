@@ -95,7 +95,8 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			TopMenu::getInstance()->showRePaly();
 		}else{
 		   //´ÓÍæ±¾¹Ý
-			TopMenu::getInstance()->showRePaly();
+			GameLayer::needRevive=false;
+			GameLayer::gameOver=true;
 		}
 		break;
 	case 11:

@@ -360,9 +360,11 @@ void TopMenu::showRePaly(){
 
 
 void TopMenu::rePlayResultSuccess(){
-
+	GameLayer::needRevive=true;
+    GameLayer::gameOver=false;
 }
 
 void TopMenu::rePlayResultFail(){
-
+	GameLayer::needRevive=false;
+    GameLayer::gameOver=true;
 }
