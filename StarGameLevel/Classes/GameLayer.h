@@ -48,5 +48,6 @@ private:
 public :
 	static bool gameOver;
 	static bool needRevive;
+	static bool goToNextLevel;
 };
 #endif

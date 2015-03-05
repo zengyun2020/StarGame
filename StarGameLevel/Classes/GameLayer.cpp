@@ -10,7 +10,7 @@
 
 bool GameLayer::needRevive =false;
 bool GameLayer::gameOver =false;
-
+bool GameLayer::goToNextLevel=false;
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -106,6 +106,10 @@ void GameLayer::update(float delta){
 	if(needRevive){
 		doRevive();
 		needRevive=false;
+	}
+	if(goToNextLevel){
+	    gotoNextLevel();
+		goToNextLevel=false;
 	}
 }
 
