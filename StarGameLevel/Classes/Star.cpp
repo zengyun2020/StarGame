@@ -25,7 +25,7 @@ char* Star::getImage(int color){
 	case PURPLE:
 		return "purple.png";
 	case MULTICOLOUR:
-		return "blue.png";
+		return "super_star.png";
 	}
 }
 
