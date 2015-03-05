@@ -82,34 +82,34 @@ void StarMatrix::onTouch(const Point& p){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-1000);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
+			/*if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){*/
 			useBombAuto(s);
 			m_layer->hidePropInfos();
-			}else{
+			/*}else{
 				setBombPosition(s);
-			}
+			}*/
 			return;
 		}else if(HammerClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-800);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
+		/*	if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){*/
 			doHammer(s);
 			m_layer->hidePropInfos();
-			}else{
+			/*}else{
 				setHammerPosition(s);
-			}
+			}*/
 			return;
 		}else if(MagicClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-800);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
-			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
+			/*if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){*/
 			doMagic(s);
 			m_layer->hidePropInfos();
-			}else{
+			/*}else{
 				setMagicposition(s);
-			}
+			}*/
 			return;	
 		}else if(RainBowClick){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-600);
@@ -631,37 +631,37 @@ void StarMatrix::update(float dt){
 	if(!isShowAnim){
 		if(HammerClick){
 			isShowAnim=true;
-			showHammerAnim();
+			//showHammerAnim();
 		}else if(MagicClick){
 			isShowAnim=true;
-			showMagicAnim();
+			//showMagicAnim();
 		}else if(RainBowClick){
 			isShowAnim=true;
-			showRainbowAnim();
+			//showRainbowAnim();
 		}else if(BombClick){
 			isShowAnim=true;
-			showRainbowAnim();
+			//showRainbowAnim();
 		}
 	
 	}
 	if(removeAnim){
 		if(HammerClick){
 			HammerClick=false;
-			removeAnimSprite();	
+			//removeAnimSprite();	
 			removeAnim=false;
 		}else if(MagicClick){
 			MagicClick=false;
-			removeAnimSprite();	
+			//removeAnimSprite();	
 			removeAnim=false;
 		}
 		else if(RainBowClick){
 			RainBowClick=false;
-			removeAnimSprite();	
+			//removeAnimSprite();	
 			removeAnim=false;
 		}
 		else if(BombClick){
 			BombClick=false;
-			removeAnimSprite();	
+			//removeAnimSprite();	
 			removeAnim=false;
 		}
 	}
