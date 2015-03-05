@@ -24,6 +24,17 @@ void CallAndroidMethod::showMoreGame(){
 	#endif
 }
 
+void CallAndroidMethod::quit(){
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CCLOG("android platform");
+		JniMethodInfo methodInfo;
+		bool isHave = JniHelper::getStaticMethodInfo(methodInfo,"org/cocos2dx/cpp/NetWorkService","quit","()V");
+		if(isHave){
+			JniHelper::getEnv()->CallStaticVoidMethod(methodInfo.classID,methodInfo.methodID);
+		}
+	#endif
+}
+
 void CallAndroidMethod::pay(int payPoint){
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	    CCLOG("android platform");

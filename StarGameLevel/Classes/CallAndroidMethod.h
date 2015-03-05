@@ -16,6 +16,7 @@ public:
 	int getCurrentSignDayas();
 	void sign();
 	void markPersonInfo(const char tag1,const char tag2);
+	void quit();
 	static CallAndroidMethod* getInstance();
 private:
 	CallAndroidMethod();

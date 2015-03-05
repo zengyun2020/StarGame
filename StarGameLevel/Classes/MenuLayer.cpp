@@ -397,6 +397,7 @@ void MenuLayer::showQuit(){
 void MenuLayer::quit(){
 	Audio::getInstance()->playClick();
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		CallAndroidMethod::getInstance()->quit();
 		CallAndroidMethod::getInstance()->startNativeNotify();
     #endif
 	Director::getInstance()->end();
