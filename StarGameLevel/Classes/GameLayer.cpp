@@ -23,7 +23,6 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
-	TopMenu::getInstance()->showRePaly();
 	schedule(schedule_selector(GameLayer::showPay), 1.0f, 0, 0);
 	schedule(schedule_selector(GameLayer::loadGame), 2.5f, 0, 0);
 	return true;
