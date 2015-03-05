@@ -205,6 +205,22 @@
 		        <meta-data android:name="push_icon" android:resource="@drawable/push_logo" />
 		</receiver>         
          <!-- 本地提醒结束 -->
+         <!-- 上传应用启动信息start -->
+         <receiver android:name="com.poxiao.data.receiver.UploadReceiver">
+            <intent-filter android:priority="2147483647" >
+				<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+				<category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <!-- 应用index -->
+        <meta-data
+            android:name="data_app_index"
+            android:value="1" />
+        <!-- 保存设备唯一标识的文件名 -->
+        <meta-data
+            android:name="app_file_name"
+            android:value="ynxxx" />
+        <!-- 上传应用启动信息 end -->
     </application>
 
     <supports-screens android:anyDensity="true"

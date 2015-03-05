@@ -374,24 +374,24 @@ void MenuLayer::showQuit(){
 	if(signIn->isVisible() || aboutBg->isVisible()){
 		return;
 	}
-	if(GAMEDATA::getInstance()->isPaySuccess()){
+//	if(GAMEDATA::getInstance()->isPaySuccess()){
 		quitBg->setVisible(true);
 		quitDesc->setVisible(true);
 		confirmMenu->setVisible(true);
 		cancelMenu->setVisible(true);
-	}else{
-		if(hasShowQuitPay){
-			quitBg->setVisible(true);
-			quitDesc->setVisible(true);
-			confirmMenu->setVisible(true);
-			cancelMenu->setVisible(true);
-		}else{
-			hasShowQuitPay = true;
-			#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-				CallAndroidMethod::getInstance()->pay(8);
-    		#endif
-		}
-	}
+//	}else{
+//		if(hasShowQuitPay){
+//			quitBg->setVisible(true);
+//			quitDesc->setVisible(true);
+//			confirmMenu->setVisible(true);
+//			cancelMenu->setVisible(true);
+//		}else{
+//			hasShowQuitPay = true;
+//			#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+//				CallAndroidMethod::getInstance()->pay(8);
+//    		#endif
+//		}
+//	}
 }
 
 void MenuLayer::quit(){

@@ -28,21 +28,22 @@ package org.cocos2dx.cpp;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import com.poxiao.data.GameDataManager;
+import com.poxiao.data.util.NetConnectUtil;
 import com.tallbigup.android.cloud.TbuCloud;
 import com.tallbigup.android.gds.nativenotify.NotifyManager;
+import com.tallbigup.buffett.plugin.deviceinfo.DeviceInfo;
 
 import android.os.Bundle;
 import android.util.Log;
 
 public class AppActivity extends Cocos2dxActivity {
-		
-	private GameInfoUtil gameInfo;
-	
+			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		gameInfo = GameInfoUtil.getInstance();
+		GameInfoUtil.getInstance();
 		
 		NetWorkService.init(this);
 		PayService.init(this);
@@ -58,5 +59,11 @@ public class AppActivity extends Cocos2dxActivity {
 			Log.i("MCH","start by click notify ...");
 		}
 		NotifyManager.cleanNofitifcation(this, getIntent());
+		
+		GameDataManager.init(this);
+		GameDataManager.onEnterGame(DeviceInfo.entrance, Integer.valueOf(DeviceInfo.version), DeviceInfo.imsi);
+		if(NetConnectUtil.isNetConnect(this)){
+			GameDataManager.upload();
+		}
 	}
 }
