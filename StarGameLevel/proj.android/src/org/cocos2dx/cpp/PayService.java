@@ -29,7 +29,7 @@ public class PayService {
 	}
 	
 	public static void pay(final int payPoint,final int reviveNum){
-		if(payPoint >= 10){
+		if(payPoint < 9){
 			final int tempPayPoint = 7;
 			activity.runOnUiThread(new Runnable(){
 
@@ -92,7 +92,7 @@ public class PayService {
 						});
 					}
 				}});
-		}else{
+		}else if(payPoint < 11){
 			activity.runOnUiThread(new Runnable(){
 
 				@Override
@@ -135,6 +135,69 @@ public class PayService {
 						});
 					}else{
 						GamePay.getInstance().pay(activity, payPoint, reviveNum, orderId, new GamePayCallback() {
+							
+							@Override
+							public void result(OrderResultInfo result) {
+								if(result.getResultCode() == 0){
+									JniPayCallbackHelper.payCallback(payPoint, 0);
+								}else if(result.getResultCode() == -3){
+									JniPayCallbackHelper.payCallback(payPoint, 1);
+								}else{
+									JniPayCallbackHelper.payCallback(payPoint, 1);
+								}
+							}
+						}, new MarkClickOkInterface() {
+							
+							@Override
+							public void clickOk() {
+							}
+						});
+					}
+				}});
+		}else if(payPoint == 11){
+			final int tempPayPoint = 9;
+			activity.runOnUiThread(new Runnable(){
+
+				@Override
+				public void run() {
+					final String orderId = String.valueOf(System.currentTimeMillis())+new Random().nextInt(100);
+					if(PAY.getMoney(tempPayPoint) > 0){
+						final int payCount = gameInfo.getData(GameInfoUtil.PAY_COUNT) + 1;
+						gameInfo.setData(GameInfoUtil.PAY_COUNT, payCount);
+						setPayInfo("request", tempPayPoint, playerId, PAY.getMoney(tempPayPoint), "0", PAY.getDesc(tempPayPoint), 
+								PAY.getDesc(tempPayPoint), payCount, orderId, "100", "请求支付");
+						
+						GamePay.getInstance().pay(activity, tempPayPoint, reviveNum, orderId, new GamePayCallback() {
+							
+							@Override
+							public void result(OrderResultInfo result) {
+								Log.e("MCH", "resultCode="+result.getResultCode());
+								if(result.getResultCode() == 0){
+									JniPayCallbackHelper.payCallback(payPoint, 0);
+									TbuCloud.markUserPay(activity, 1);
+									gameInfo.setData(GameInfoUtil.PAY_MONEY, gameInfo.getData(GameInfoUtil.PAY_MONEY)+PAY.getMoney(tempPayPoint));
+									setPayInfo("success", tempPayPoint, playerId, PAY.getMoney(tempPayPoint), "0", 
+											PAY.getName(tempPayPoint), PAY.getDesc(tempPayPoint), payCount, orderId, "0", "支付成功");
+								}else if(result.getResultCode() == -3){
+									JniPayCallbackHelper.payCallback(payPoint, 1);
+									setPayInfo("cancel", tempPayPoint, playerId, PAY.getMoney(tempPayPoint), "0", 
+											PAY.getName(tempPayPoint), PAY.getDesc(tempPayPoint), payCount, orderId, "-3", "取消支付");
+								}else{
+									JniPayCallbackHelper.payCallback(payPoint, 1);
+									setPayInfo("fail", tempPayPoint, playerId, PAY.getMoney(tempPayPoint), "0", 
+											PAY.getName(tempPayPoint), PAY.getDesc(tempPayPoint), payCount, orderId, result.getErrorCode(), result.getErrorMsg());
+								}
+							}
+						}, new MarkClickOkInterface() {
+							
+							@Override
+							public void clickOk() {
+								setPayInfo("clickOk", tempPayPoint, playerId, PAY.getMoney(tempPayPoint), "0", 
+										PAY.getName(tempPayPoint), PAY.getDesc(tempPayPoint), payCount, orderId, "101", "点击确定");
+							}
+						});
+					}else{
+						GamePay.getInstance().pay(activity, tempPayPoint, reviveNum, orderId, new GamePayCallback() {
 							
 							@Override
 							public void result(OrderResultInfo result) {
