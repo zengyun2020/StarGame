@@ -341,3 +341,28 @@ void TopMenu::showProps(){
 	price_rainbow->setVisible(true);
 	price_bomb->setVisible(true);
 }
+
+void TopMenu::showRePaly(){
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	rePlay = Sprite::create("target_not_reach_bg.png");
+	rePlay->setPosition(visibleSize.width/2,visibleSize.height/2);
+	this->addChild(rePlay);
+	MenuItemImage* con = MenuItemImage::create("conti_reach_btn_normal.png","conti_reach_btn_click.png",CC_CALLBACK_0(TopMenu::rePlayResultSuccess,this));
+	Menu* conMenu = Menu::create(con,NULL);
+	conMenu->setAnchorPoint(ccp(0.5,0.5));
+	conMenu -> setPosition(visibleSize.width/2-10,visibleSize.height/2-300);
+	rePlay->addChild(conMenu);
+	MenuItemImage* cancel = MenuItemImage::create("close_btn_normal.png","close_btn_click.png",CC_CALLBACK_0(TopMenu::rePlayResultFail,this));
+	Menu* canMenu = Menu::create(cancel,NULL);
+	canMenu-> setPosition(visibleSize.width/2+170,visibleSize.height/2-70);
+	rePlay->addChild(canMenu);
+}
+
+
+void TopMenu::rePlayResultSuccess(){
+
+}
+
+void TopMenu::rePlayResultFail(){
+
+}

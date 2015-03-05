@@ -66,4 +66,5 @@ public class AppActivity extends Cocos2dxActivity {
 			GameDataManager.upload();
 		}
 	}
+	
 }

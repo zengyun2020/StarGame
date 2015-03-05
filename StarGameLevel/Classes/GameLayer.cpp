@@ -23,6 +23,7 @@ bool GameLayer::init(){
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
 	background->setPosition(visibleSize.width/2,visibleSize.height/2);
 	this->addChild(background,-1);
+	TopMenu::getInstance()->showRePaly();
 	schedule(schedule_selector(GameLayer::showPay), 1.0f, 0, 0);
 	schedule(schedule_selector(GameLayer::loadGame), 2.5f, 0, 0);
 	return true;
@@ -234,11 +235,7 @@ void GameLayer::gotoNextLevel(){
 void GameLayer::gotoGameOver(){
 	GAMEDATA::getInstance()->saveHighestScore();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	if(GAMEDATA::getInstance()->getReviveNum()>0){
-		CallAndroidMethod::getInstance()->pay(6);
-	}else{
-		CallAndroidMethod::getInstance()->pay(5);
-	}
+		CallAndroidMethod::getInstance()->pay(10);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	gameOver=true;

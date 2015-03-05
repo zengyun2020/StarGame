@@ -24,6 +24,9 @@ public:
 	void hideProps();//隐藏所有道具
 	void showProps();
 	void hideMenuGift();
+	void showRePaly();
+	void rePlayResultSuccess();
+	void rePlayResultFail();
 private:
 	static TopMenu* _instance;
 	//Label* highestScore;
@@ -44,7 +47,7 @@ private:
 	Label* price_rainbow;
 	Label* price_bomb;
 	Menu* menuGift;
-
+    Sprite* rePlay;
 private:
 	TopMenu();
 
