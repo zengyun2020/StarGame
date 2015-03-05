@@ -23,6 +23,7 @@ public:
 	void cancelUseProp();
 	void hideProps();//隐藏所有道具
 	void showProps();
+	void hideMenuGift();
 private:
 	static TopMenu* _instance;
 	//Label* highestScore;

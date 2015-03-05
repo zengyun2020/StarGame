@@ -169,6 +169,10 @@ void TopMenu::payGift(){
 #endif
 }
 
+void TopMenu::hideMenuGift(){
+	menuGift->setVisible(false);
+}
+
 void TopMenu::refresh(int score){
 	GAMEDATA* data = GAMEDATA::getInstance();
 	data->setCurScore(data->getCurScore() + score);
