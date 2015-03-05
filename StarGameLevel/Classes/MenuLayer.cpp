@@ -346,7 +346,7 @@ void MenuLayer::autoStartGame(float dt){
 void MenuLayer::pay(){
 	Audio::getInstance()->playClick();
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		CallAndroidMethod::getInstance()->pay(7);
+		CallAndroidMethod::getInstance()->pay(4);
     #endif
 }
 

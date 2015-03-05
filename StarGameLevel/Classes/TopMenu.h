@@ -42,6 +42,7 @@ private:
 	Label* price_magic;
 	Label* price_rainbow;
 	Label* price_bomb;
+	Menu* menuGift;
 
 private:
 	TopMenu();

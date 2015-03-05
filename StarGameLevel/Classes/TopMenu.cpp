@@ -80,16 +80,15 @@ bool TopMenu::init(){
 	MenuItemImage* giftBtn = MenuItemImage::create(
 		"box.png","box.png",CC_CALLBACK_0(TopMenu::payGift,this)
 		);
-	giftBtn->setScale(0.5f);
 	auto scale1= ScaleTo::create(1.0f,0.7f);
-	auto scale2= ScaleTo::create(1.0f,0.5f);
+	auto scale2= ScaleTo::create(1.0f,1.0f);
 	auto seq =Sequence::create(scale1,scale2,nullptr);
 	giftBtn->runAction(RepeatForever::create(seq));
-	Menu* menuGift = Menu::create(giftBtn, NULL);
+	menuGift = Menu::create(giftBtn, NULL);
 	menuGift->alignItemsHorizontally();
 	menuGift->setAnchorPoint(Point(0.5,0.5));
 	menuGift->setPosition(visibleSize.width/2+180,visibleSize.height-115);
-	if(!GAMEDATA::getInstance()->getIsBuySuperGift()){
+	if(GAMEDATA::getInstance()->getIsBuySuperGift()){
 		menuGift->setVisible(false);
 	}
 	this->addChild(menuGift);
@@ -113,22 +112,22 @@ bool TopMenu::init(){
 	props->setVisible(false);
 	this->addChild(props);
 
-	price_hammer = Label::create("500","Arial",18);
+	price_hammer = Label::create("800","Arial",18);
 	price_hammer->setPosition(visibleSize.width/2-185,visibleSize.height/2 -385);
 	price_hammer->setVisible(false);
 	this->addChild(price_hammer);
 
-	price_magic = Label::create("500","Arial",18);
+	price_magic = Label::create("800","Arial",18);
 	price_magic->setPosition(visibleSize.width/2-68,visibleSize.height/2 -385);
 	price_magic->setVisible(false);
 	this->addChild(price_magic);
 
-	price_rainbow = Label::create("500","Arial",18);
+	price_rainbow = Label::create("600","Arial",18);
 	price_rainbow->setPosition(visibleSize.width/2+64,visibleSize.height/2 -385);
 	price_rainbow->setVisible(false);
 	this->addChild(price_rainbow);
 
-	price_bomb = Label::create("500","Arial",18);
+	price_bomb = Label::create("1000","Arial",18);
 	price_bomb->setPosition(visibleSize.width/2+179,visibleSize.height/2 -385);
 	price_bomb->setVisible(false);
 	this->addChild(price_bomb);
@@ -156,14 +155,17 @@ bool TopMenu::init(){
 void TopMenu::pay(){
 	Audio::getInstance()->playClick();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	CallAndroidMethod::getInstance()->pay(12);
+	CallAndroidMethod::getInstance()->pay(5);
 #endif
 }
 
 void TopMenu::payGift(){
+	if(!menuGift->isVisible()){
+		return;
+	}
 	Audio::getInstance()->playClick();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	CallAndroidMethod::getInstance()->pay(12);
+	CallAndroidMethod::getInstance()->pay(11);
 #endif
 }
 
@@ -205,7 +207,7 @@ void TopMenu::PauseGame(){
 void TopMenu::usePropsHammer(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
-	if(gold>=500){
+	if(gold>=800){
 		if(!StarMatrix::HammerClick){
 			StarMatrix::HammerClick=true;
 			magicBtn->setVisible(false);
@@ -221,7 +223,7 @@ void TopMenu::usePropsHammer(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		CallAndroidMethod::getInstance()->pay(13);
+		CallAndroidMethod::getInstance()->pay(6);
 #endif
 	}
 }
@@ -229,7 +231,7 @@ void TopMenu::usePropsHammer(){
 void TopMenu::usePropsMagic(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
-	if(gold>=500){
+	if(gold>=800){
 		if(!StarMatrix::MagicClick){
 			Size visibleSize = Director::getInstance()->getVisibleSize();
 			StarMatrix::MagicClick=true;
@@ -247,7 +249,7 @@ void TopMenu::usePropsMagic(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		CallAndroidMethod::getInstance()->pay(13);
+		CallAndroidMethod::getInstance()->pay(6);
 #endif
 	}
 }
@@ -255,7 +257,7 @@ void TopMenu::usePropsMagic(){
 void TopMenu::usePropsRainBow(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
-	if(gold>=500){
+	if(gold>=600){
 		if(!StarMatrix::RainBowClick){
 			Size visibleSize = Director::getInstance()->getVisibleSize();
 			StarMatrix::RainBowClick=true;
@@ -273,7 +275,7 @@ void TopMenu::usePropsRainBow(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		CallAndroidMethod::getInstance()->pay(13);
+		CallAndroidMethod::getInstance()->pay(6);
 #endif
 	}
 }
@@ -281,7 +283,7 @@ void TopMenu::usePropsRainBow(){
 void TopMenu::usePropsBomb(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
-	if(gold>=500){
+	if(gold>=1000){
 		if(!(StarMatrix::BombClick)){
 			Size visibleSize = Director::getInstance()->getVisibleSize();
 			StarMatrix::BombClick=true;
@@ -299,7 +301,7 @@ void TopMenu::usePropsBomb(){
 		}
 	}else{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		CallAndroidMethod::getInstance()->pay(13);
+		CallAndroidMethod::getInstance()->pay(6);
 #endif
 	}
 }

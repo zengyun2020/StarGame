@@ -30,9 +30,12 @@ bool GameLayer::init(){
 
 void GameLayer::showPay(float dt){
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		if(!GAMEDATA::getInstance()->hasShowRegisterPay()){
+		if(!GAMEDATA::getInstance()->getIsBuySuperGift() &&
+				GAMEDATA::getInstance()->getCurExpNum()==0 &&
+				(GAMEDATA::getInstance()->getUserLevel()==1 || GAMEDATA::getInstance()->getUserLevel()==2 ||
+						GAMEDATA::getInstance()->getUserLevel()==3 || GAMEDATA::getInstance()->getUserLevel()==4)){
 			needInitPause = false;
-			CallAndroidMethod::getInstance()->pay(6);
+			CallAndroidMethod::getInstance()->pay(9);
 		}
 	#endif
 }

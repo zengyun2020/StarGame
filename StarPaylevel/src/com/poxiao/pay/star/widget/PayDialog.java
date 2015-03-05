@@ -26,7 +26,6 @@ public class PayDialog extends Dialog {
 
 	private ImageView payTip1;
 	private ImageView payTitle;
-	private ImageView revive;
 
 	private MarkClickOkInterface markClickOkInterface;
 
@@ -57,51 +56,19 @@ public class PayDialog extends Dialog {
 
 		payTip1 = (ImageView) findViewById(R.id.pay_tip1);
 		payTitle = (ImageView) findViewById(R.id.pay_title);
-		revive = (ImageView)findViewById(R.id.revive_num);
-		revive.setVisibility(View.INVISIBLE);
 
 		switch (payPoint) {
-		case 1:
-			payTitle.setBackgroundResource(R.drawable.pay_title_1);
-			break;
-		case 2:
-			payTitle.setBackgroundResource(R.drawable.pay_title_1);
-			break;
-		case 3:
-			payTitle.setBackgroundResource(R.drawable.pay_title_1);
-			break;
-		case 4:
-			payTitle.setBackgroundResource(R.drawable.pay_title_1);
-			break;
-		case 5:
-			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_5);
-			payTitle.setBackgroundResource(R.drawable.pay_title_5);
-			break;
-		case 6:
-			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_6);
-			payTitle.setBackgroundResource(R.drawable.pay_title_1);
-			break;
 		case 7:
 			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_7);
 			payTitle.setBackgroundResource(R.drawable.pay_title_1);
 			break;
-		case 8:
-			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_8);
-			payTitle.setBackgroundResource(R.drawable.pay_title_1);
-			break;
 		case 9:
 			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_9);
-			payTitle.setBackgroundResource(R.drawable.pay_title_5);
-			revive.setVisibility(View.VISIBLE);
-			if(reviveNum == 4){
-				revive.setBackgroundResource(R.drawable.reborn_4);
-			}else if(reviveNum == 3){
-				revive.setBackgroundResource(R.drawable.reborn_3);
-			}else if(reviveNum == 2){
-				revive.setBackgroundResource(R.drawable.reborn_2);
-			}else if(reviveNum == 1){
-				revive.setBackgroundResource(R.drawable.reborn_1);
-			}
+			payTitle.setBackgroundResource(R.drawable.pay_title_1);
+			break;
+		case 10:
+			payTip1.setBackgroundResource(R.drawable.pay_tip_goods_10);
+			payTitle.setBackgroundResource(R.drawable.pay_title_1);
 			break;
 		}
 

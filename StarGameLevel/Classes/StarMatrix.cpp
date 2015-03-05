@@ -79,7 +79,7 @@ void StarMatrix::onTouch(const Point& p){
 	if(s && acceptTouch){
 		clearOneByOne = true;
 		if(BombClick){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-1000);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
 			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
@@ -90,7 +90,7 @@ void StarMatrix::onTouch(const Point& p){
 			}
 			return;
 		}else if(HammerClick){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-800);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
 			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
@@ -101,7 +101,7 @@ void StarMatrix::onTouch(const Point& p){
 			}
 			return;
 		}else if(MagicClick){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-800);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
 			if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){
@@ -112,7 +112,7 @@ void StarMatrix::onTouch(const Point& p){
 			}
 			return;	
 		}else if(RainBowClick){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-500);
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-600);
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
 			doRainbow();

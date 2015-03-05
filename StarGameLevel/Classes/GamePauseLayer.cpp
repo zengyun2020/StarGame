@@ -94,7 +94,7 @@ bool GamePauseLayer::init(TopMenu* topNode){
 
 void GamePauseLayer::payProps(){
 	Audio::getInstance()->playClick();
-	CallAndroidMethod::getInstance()->pay(11);
+	CallAndroidMethod::getInstance()->pay(8);
 }
 
 void GamePauseLayer::goBack(){
