@@ -64,6 +64,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			GAMEDATA::getInstance()->saveBiNum();
 			TopMenu::getInstance()->refreshGold();
 			GAMEDATA::getInstance()->setIsBuySuperGift();
+			TopMenu::getInstance()->hideMenuGift();
 		}
 		break;
 	case 7:
@@ -107,6 +108,7 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			GAMEDATA::getInstance()->saveBiNum();
 			TopMenu::getInstance()->refreshGold();
 			GAMEDATA::getInstance()->setIsBuySuperGift();
+			TopMenu::getInstance()->hideMenuGift();
 		}
 		break;
 	case 12:
