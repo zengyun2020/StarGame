@@ -113,7 +113,8 @@ void GameLayer::update(float delta){
 		needRevive=false;
 	}
 	if(goToNextLevel){
-		GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
+		GAMEDATA::getInstance()->setCurScore(GAMEDATA::getInstance()->getNextScore());
+		GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);		
 	    gotoNextLevel();
 		goToNextLevel=false;
 	}
@@ -138,7 +139,7 @@ void GameLayer::refreshMenu(int score){
 	menu->refresh(score);
 	menu->refreshTargetScore();
 	GAMEDATA* data = GAMEDATA::getInstance();
-	if(data->getCurScore()+score>=GAMEDATA::getInstance()->getNextScore()&&!hasShowMission){
+	if(data->getCurScore()+score>=GAMEDATA::getInstance()->getNextScore()&&!hasShowMission&& score!=0){
 		hasShowMission =true;
 		showMissionComplete();
 	}

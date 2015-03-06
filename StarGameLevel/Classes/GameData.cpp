@@ -46,7 +46,7 @@ int GAMEDATA::getScoreByLevel(int level){
 	int score = 0;
 	if (level == 1)
 	{
-		score = 1000;
+		score = 10000;
 	}
 	else if (level == 2)
 	{
