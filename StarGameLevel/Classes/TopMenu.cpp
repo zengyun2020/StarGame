@@ -356,12 +356,20 @@ void TopMenu::showRePaly(){
 	Menu* canMenu = Menu::create(cancel,NULL);
 	canMenu-> setPosition(visibleSize.width/2+170,visibleSize.height/2-70);
 	rePlay->addChild(canMenu);
+	
 }
 
 
 void TopMenu::rePlayResultSuccess(){
-	GameLayer::needRevive=true;
-    GameLayer::gameOver=false;
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if(GAMEDATA::getInstance()->getGoldNum()>=3000){
+		GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-3000);
+	   GameLayer::needRevive=true;
+       GameLayer::gameOver=false;
+	}else{
+		CallAndroidMethod::getInstance()->pay(7);
+	}	
+#endif
 }
 
 void TopMenu::rePlayResultFail(){
