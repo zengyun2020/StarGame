@@ -19,6 +19,7 @@ bool GameLayer::init(){
 	}
 	needInitPause = true;
 	hasShowMission =false;
+	missionComplete = NULL;
 	TopMenu::getInstance()->cleanScore();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite* background = Sprite::create("bg_mainscene.jpg");
@@ -89,7 +90,10 @@ void GameLayer::showStarMatrix(float dt){
 }
 
 void GameLayer::doRevive(){
+    TopMenu::getInstance()->cleanScore();
 	GAMEDATA::getInstance()->setCurScore(GAMEDATA::getInstance()->getLastLevelScore());
+	TopMenu::getInstance()->refresh(0);
+	TopMenu::getInstance()->refreshTargetScore();	
 	schedule(schedule_selector(GameLayer::showStarMatrix), 1.0f, 0, 0);
 	matrix->setAcceptTouch(true);
 	Audio::getInstance()->playNextGameRound();
@@ -109,6 +113,7 @@ void GameLayer::update(float delta){
 		needRevive=false;
 	}
 	if(goToNextLevel){
+		GAMEDATA::getInstance()->setCurLevel(GAMEDATA::getInstance()->getCurLevel() + 1);
 	    gotoNextLevel();
 		goToNextLevel=false;
 	}
@@ -264,7 +269,10 @@ void GameLayer::showMissionComplete(){
 }
 
 void GameLayer::removeMissonComplet(){
-	missionComplete->removeFromParentAndCleanup(true);
+	if(NULL !=missionComplete){
+		missionComplete->removeFromParentAndCleanup(true);
+		missionComplete = NULL;
+	}
 	hasShowMission=false;
 }
 

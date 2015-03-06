@@ -174,6 +174,7 @@ void TopMenu::hideMenuGift(){
 }
 
 void TopMenu::refresh(int score){
+	
 	GAMEDATA* data = GAMEDATA::getInstance();
 	data->setCurScore(data->getCurScore() + score);
 	if(data->getCurScore() > data->getHistoryScore()){
