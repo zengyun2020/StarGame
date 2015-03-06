@@ -78,16 +78,16 @@ public class PayDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 				// TODO :  免付费版本，关掉支付
-				if (0 < orderInfo.getPrice()) { // PAY.getMoney()
-					markClickOkInterface.clickOk();
-					buffett.pay(activity, orderInfo, callback);
-				} else {
+//				if (0 < orderInfo.getPrice()) { // PAY.getMoney()
+//					markClickOkInterface.clickOk();
+//					buffett.pay(activity, orderInfo, callback);
+//				} else {
 					OrderResultInfo result = new OrderResultInfo();
 					result.setResultCode(0);
 					result.setErrorCode("0");
 					result.setErrorMsg("支付成功");
 					callback.result(result);
-				}
+//				}
 				dismiss();
 			}
 		});

@@ -14,8 +14,8 @@ Star* Star::create(int color){
 
 char* Star::getImage(int color){
 	switch(color){
-	case BLUE:
-		return "blue.png";
+	/*case BLUE:
+		return "blue.png";*/
 	case GREEN:
 		return "green.png";
 	case YELLOW:

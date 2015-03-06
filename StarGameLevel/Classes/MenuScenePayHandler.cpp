@@ -75,9 +75,12 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		break;
 	case 7:
 		if(resultId==0){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+50000);
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+47000);
 			GAMEDATA::getInstance()->saveGoldNum();
 			Gold::getInstance()->refreshGold();
+			TopMenu::getInstance()->refreshGold();
+			GameLayer::needRevive=true;
+			GameLayer::gameOver=false;
 		}else{
 			GameLayer::needRevive=false;
 			GameLayer::gameOver=true;
@@ -99,8 +102,9 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			GameLayer::goToNextLevel =true;
 		}else{
 		   //´ÓÍæ±¾¹Ý
-			TopMenu::getInstance()->showRePaly();
+			GameLayer::isShowRePlay =true;
 		}
+
 		break;
 	case 11:
 		if(resultId==0){

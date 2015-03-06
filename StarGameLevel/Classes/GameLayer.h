@@ -49,5 +49,6 @@ public :
 	static bool gameOver;
 	static bool needRevive;
 	static bool goToNextLevel;
+	static bool isShowRePlay;
 };
 #endif

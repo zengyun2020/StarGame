@@ -13,6 +13,7 @@ GAMEDATA* GAMEDATA::getInstance(){
 }
 
 void GAMEDATA::init(){
+	lastLevelScore=0;
     setCurLevel(0);
 	setCurScore(0);
 	setHistoryScore(UserDefault::getInstance()->getIntegerForKey("highestScore",0));
