@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>StarGame2</name>
+	<name>StarGameLevel</name>
 	<comment></comment>
 	<projects>
 		<project>libcocos2dx</project>

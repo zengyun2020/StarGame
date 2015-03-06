@@ -1,9 +1,6 @@
 /****************************************************************************
-Copyright (c) 2008-2010 Ricardo Quesada
-Copyright (c) 2010-2012 cocos2d-x.org
-Copyright (c) 2011      Zynga Inc.
-Copyright (c) 2013-2014 Chukong Technologies Inc.
- 
+Copyright (c) 2014 cocos2d-x.org
+
 http://www.cocos2d-x.org
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,9 +21,28 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-package org.cocos2dx.cpp;
 
-import org.cocos2dx.lib.Cocos2dxActivity;
+#include "EditBoxEvent.h"
 
-public class AppActivity extends Cocos2dxActivity {
+using namespace Platform;
+
+namespace cocos2d
+{
+	EditBoxEvent::EditBoxEvent( Platform::Object^ sender, Platform::String^ arg, Windows::Foundation::EventHandler<Platform::String^>^ handle ):
+		m_sender(sender),
+		m_args(arg),
+		m_handler(handle)
+	{
+
+	}
+
+	void EditBoxEvent::execute()
+	{
+        if(m_handler.Get())
+        {
+		    m_handler.Get()->Invoke(m_sender.Get(), m_args.Get());
+        }
+	}
+
+
 }

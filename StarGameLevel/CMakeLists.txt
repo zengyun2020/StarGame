@@ -116,64 +116,12 @@ include_directories(
 set(GAME_SRC
   Classes/AppDelegate.cpp
   Classes/HelloWorldScene.cpp
-  Classes/MenuLayer.cpp
-  Classes/Chinese.cpp
-  Classes/ComboEffect.cpp
-  Classes/FloatWord.cpp
-  Classes/GameData.cpp
-  Classes/GameLayer.cpp
-  Classes/LevelMsgLayer.cpp
-  Classes/GameScene.cpp
-  Classes/Star.cpp
-  Classes/StarMatrix.cpp
-  Classes/StarParticle.cpp
-  Classes/TopMenu.cpp
-  Classes/GameOverScene.cpp
-  Classes/GameOverLayer.cpp
-  Classes/Audio.cpp  
-  Classes/GameOverScene.cpp
-  Classes/GameOverLayer.cpp
-  Classes/PlayerRank.cpp
-  Classes/CallAndroidMethod.cpp
-  Classes/MenuScenePayHandler.cpp
-  Classes/GamePauseLayer.cpp
-  Classes/SignIn.cpp
-  Classes/Upgrade.cpp
-  Classes/About.cpp
-  Classes/BlinkTitle.cpp
-  Classes/Gold.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
 set(GAME_HEADERS
   Classes/AppDelegate.h
   Classes/HelloWorldScene.h
-  Classes/MenuLayer.h
-  Classes/Chinese.h
-  Classes/ComboEffect.h
-  Classes/FloatWord.h
-  Classes/GameData.h
-  Classes/GameLayer.h
-  Classes/LevelMsgLayer.h
-  Classes/GameScene.h
-  Classes/Star.h
-  Classes/StarMatrix.h
-  Classes/StarParticle.h
-  Classes/TopMenu.h
-  Classes/GameOverScene.h
-  Classes/GameOverLayer.h
-  Classes/Audio.h
-  Classes/GameOverScene.h
-  Classes/GameOverLayer.h
-  Classes/PlayerRank.h
-  Classes/CallAndroidMethod.h
-  Classes/MenuScenePayHandler.h
-  Classes/GamePauseLayer.h
-  Classes/SignIn.h
-  Classes/Upgrade.h
-  Classes/About.h
-  Classes/BlinkTitle.h
-  Classes/Gold.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
