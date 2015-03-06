@@ -44,18 +44,18 @@ public final class R {
 		public static final int switch_logo_bottom_padding = 0x7f060004;
 	}
 	public static final class drawable {
-		public static final int sm_auth_btn_bg_gray = 0x7f02000e;
-		public static final int sm_auth_btn_bg_normal = 0x7f02000f;
-		public static final int sm_auth_btn_bg_select = 0x7f020010;
-		public static final int sm_auth_button = 0x7f020011;
-		public static final int sm_close_btn = 0x7f020012;
-		public static final int sm_close_btn_normal = 0x7f020013;
-		public static final int sm_close_btn_select = 0x7f020014;
-		public static final int sm_pay_bg = 0x7f020015;
-		public static final int sm_pay_comfirm_button = 0x7f020016;
-		public static final int sm_pay_comfirm_normal = 0x7f020017;
-		public static final int sm_pay_comfirm_selected = 0x7f020018;
-		public static final int sm_phone = 0x7f020019;
+		public static final int sm_auth_btn_bg_gray = 0x7f02000f;
+		public static final int sm_auth_btn_bg_normal = 0x7f020010;
+		public static final int sm_auth_btn_bg_select = 0x7f020011;
+		public static final int sm_auth_button = 0x7f020012;
+		public static final int sm_close_btn = 0x7f020013;
+		public static final int sm_close_btn_normal = 0x7f020014;
+		public static final int sm_close_btn_select = 0x7f020015;
+		public static final int sm_pay_bg = 0x7f020016;
+		public static final int sm_pay_comfirm_button = 0x7f020017;
+		public static final int sm_pay_comfirm_normal = 0x7f020018;
+		public static final int sm_pay_comfirm_selected = 0x7f020019;
+		public static final int sm_phone = 0x7f02001a;
 	}
 	public static final class id {
 		public static final int auth_btn = 0x7f09000d;

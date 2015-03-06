@@ -24,6 +24,7 @@ public final class R {
         public static final int back_button_shadow_focus=0x7f050012;
         public static final int back_button_shadow_normal=0x7f050010;
         /** 白色 
+白色 
          */
         public static final int black=0x7f05001b;
         public static final int dialog_transparent_background=0x7f050001;
@@ -33,6 +34,7 @@ public final class R {
         public static final int input_hint=0x7f050004;
         public static final int input_title=0x7f050003;
         /** 黑色 
+黑色 
          */
         public static final int lonzhu_bg_0=0x7f05001c;
         public static final int lonzhu_bg_1=0x7f05001d;
@@ -51,6 +53,7 @@ public final class R {
         public static final int task_prize_gold_text=0x7f050014;
         public static final int text_yellow=0x7f050015;
         /**  前两位是透明的效果，参数从00到99（透明，不怎么透明），后6位是颜色的设置 
+ 前两位是透明的效果，参数从00到99（透明，不怎么透明），后6位是颜色的设置 
          */
         public static final int transparent_background=0x7f050000;
         public static final int transparent_background_zjh=0x7f050013;
@@ -79,18 +82,19 @@ public final class R {
         public static final int pay_tip_goods_9=0x7f02000b;
         public static final int pay_tip_sky=0x7f02000c;
         public static final int pay_title_1=0x7f02000d;
-        public static final int sm_auth_btn_bg_gray=0x7f02000e;
-        public static final int sm_auth_btn_bg_normal=0x7f02000f;
-        public static final int sm_auth_btn_bg_select=0x7f020010;
-        public static final int sm_auth_button=0x7f020011;
-        public static final int sm_close_btn=0x7f020012;
-        public static final int sm_close_btn_normal=0x7f020013;
-        public static final int sm_close_btn_select=0x7f020014;
-        public static final int sm_pay_bg=0x7f020015;
-        public static final int sm_pay_comfirm_button=0x7f020016;
-        public static final int sm_pay_comfirm_normal=0x7f020017;
-        public static final int sm_pay_comfirm_selected=0x7f020018;
-        public static final int sm_phone=0x7f020019;
+        public static final int push_logo=0x7f02000e;
+        public static final int sm_auth_btn_bg_gray=0x7f02000f;
+        public static final int sm_auth_btn_bg_normal=0x7f020010;
+        public static final int sm_auth_btn_bg_select=0x7f020011;
+        public static final int sm_auth_button=0x7f020012;
+        public static final int sm_close_btn=0x7f020013;
+        public static final int sm_close_btn_normal=0x7f020014;
+        public static final int sm_close_btn_select=0x7f020015;
+        public static final int sm_pay_bg=0x7f020016;
+        public static final int sm_pay_comfirm_button=0x7f020017;
+        public static final int sm_pay_comfirm_normal=0x7f020018;
+        public static final int sm_pay_comfirm_selected=0x7f020019;
+        public static final int sm_phone=0x7f02001a;
     }
     public static final class id {
         public static final int auth_btn=0x7f09000d;
@@ -118,6 +122,10 @@ public final class R {
         public static final int pay_tip1=0x7f090005;
         public static final int pay_tip2=0x7f090003;
         public static final int pay_title=0x7f090006;
+        public static final int push_content=0x7f09001f;
+        public static final int push_icon=0x7f09001c;
+        public static final int push_title=0x7f09001e;
+        public static final int text_area=0x7f09001d;
         public static final int tv_cp_hint=0x7f090016;
         public static final int tv_hint=0x7f090017;
         public static final int tv_user_phone=0x7f09000f;
@@ -125,6 +133,7 @@ public final class R {
     public static final class layout {
         public static final int dialog_pay=0x7f030000;
         public static final int main_sm_sky_pay=0x7f030001;
+        public static final int push_notification=0x7f030002;
     }
     public static final class string {
         public static final int APP_INFO_ERROR_HINT=0x7f07001c;
@@ -216,6 +225,7 @@ public final class R {
         public static final int dialog=0x7f080003;
         public static final int dialog_game_style=0x7f080007;
         /** 模糊 
+模糊 
          */
         public static final int dialog_tip_style=0x7f080008;
         public static final int mytheme=0x7f080000;
