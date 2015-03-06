@@ -29,8 +29,6 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			GAMEDATA::getInstance()->saveGoldNum();
 			TopMenu::getInstance()->refreshGold();
 		}	
-		GAMEDATA::getInstance()->setHasShowRegisterPay(true);
-		GAMEDATA::getInstance()->saveShowRegisterPay();
 		break;
 	case 2:
 		if(resultId==0){
@@ -44,40 +42,34 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		break;
 	case 4:
 		if(resultId==0){
-			GAMEDATA::getInstance()->setAddTimeNum(5+GAMEDATA::getInstance()->getAddTimeNum());
-			GAMEDATA::getInstance()->saveAddTimeNum();
-			GAMEDATA::getInstance()->setBombNum(5+GAMEDATA::getInstance()->getBombNum());
-			GAMEDATA::getInstance()->saveBombNum();
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+50000);
+			GAMEDATA::getInstance()->saveGoldNum();
+			TopMenu::getInstance()->refreshGold();
+			Gold::getInstance()->refreshGold();
 		}	
 		break;
 	case 5:
 		if(resultId==0){
-			GAMEDATA::getInstance()->setReviveNum(GAMEDATA::getInstance()->getReviveNum()-1);
-			GAMEDATA::getInstance()->saveAddTimeNum();
-			GameLayer::needRevive=true;
-			GameLayer::gameOver=false;
-		}else{
-			GameLayer::needRevive=false;
-			GameLayer::gameOver=true;
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+50000);
+			GAMEDATA::getInstance()->saveGoldNum();
+			TopMenu::getInstance()->refreshGold();
 		}
-
 		break;
 	case 9:
 		if(resultId==0){
-			GAMEDATA::getInstance()->setReviveNum(GAMEDATA::getInstance()->getReviveNum()-1);
-			GAMEDATA::getInstance()->saveAddTimeNum();
-			GameLayer::needRevive=true;
-			GameLayer::gameOver=false;
-		}else{
-			GameLayer::needRevive=false;
-			GameLayer::gameOver=true;
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+60000);
+			GAMEDATA::getInstance()->setChuiNum(1);
+			GAMEDATA::getInstance()->setBiNum(1);
+			GAMEDATA::getInstance()->saveChuiNum();
+			GAMEDATA::getInstance()->saveBiNum();
+			TopMenu::getInstance()->refreshGold();
+			GAMEDATA::getInstance()->setIsBuySuperGift();
 		}
 		break;
 	case 7:
 		if(resultId==0){
 			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+47000);
 			GAMEDATA::getInstance()->saveGoldNum();
-			Gold::getInstance()->refreshGold();
 			TopMenu::getInstance()->refreshGold();
 			GameLayer::needRevive=true;
 			GameLayer::gameOver=false;
@@ -88,9 +80,9 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		break;
 	case 8:
 		if(resultId==0){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+60000);
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+50000);
 			GAMEDATA::getInstance()->saveGoldNum();
-			Gold::getInstance()->refreshGold();
+			TopMenu::getInstance()->refreshGold();
 		}
 		break;
 	case 10:
@@ -108,9 +100,13 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 		break;
 	case 11:
 		if(resultId==0){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+50000);
-			GAMEDATA::getInstance()->saveGoldNum();
+			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()+60000);
+			GAMEDATA::getInstance()->setChuiNum(1);
+			GAMEDATA::getInstance()->setBiNum(1);
+			GAMEDATA::getInstance()->saveChuiNum();
+			GAMEDATA::getInstance()->saveBiNum();
 			TopMenu::getInstance()->refreshGold();
+			GAMEDATA::getInstance()->setIsBuySuperGift();
 		}
 		break;
 	case 12:

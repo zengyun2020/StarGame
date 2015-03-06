@@ -28,6 +28,12 @@ public:
 	inline void setBombNum(int bombNum){bomb_num = bombNum;}
 	inline int getBombNum(){return bomb_num;}
 
+	inline void setChuiNum(int chuiNum){chui_num = chuiNum;}
+	inline int getChuiNum(){return chui_num;}
+
+	inline void setBiNum(int biNum){bi_num = biNum;}
+	inline int getBiNum(){return bi_num;}
+
 	inline void setReviveNum(int reviveNum){revive_num = reviveNum;}
 	inline int getReviveNum(){return revive_num;}
 
@@ -70,6 +76,8 @@ public:
 	void savePrizeTimes();
 	void saveAddTimeNum();
 	void saveBombNum();
+	void saveChuiNum();
+	void saveBiNum();
 	void saveReviveNum();
 	void saveShowRegisterPay();
 	void saveSoundEffect();
@@ -102,6 +110,8 @@ private:
 	int prize_times;
 	int add_time_num;
 	int bomb_num;
+	int chui_num;
+	int bi_num;
 	bool sound_effect;
 	bool music_state;
 	int revive_num;
