@@ -21,8 +21,10 @@ void GAMEDATA::init(){
 	setGoldNum(UserDefault::getInstance()->getIntegerForKey("goldNum",1000));
 	setPowerStoneNum(UserDefault::getInstance()->getIntegerForKey("powerStoneNum",0));
 	setPrizeTimes(UserDefault::getInstance()->getIntegerForKey("prizeTimes",3));
-	setAddTimeNum(UserDefault::getInstance()->getIntegerForKey("addTimeNum",1));
-	setBombNum(UserDefault::getInstance()->getIntegerForKey("bombNum",1));
+	setAddTimeNum(UserDefault::getInstance()->getIntegerForKey("addTimeNum",0));
+	setBombNum(UserDefault::getInstance()->getIntegerForKey("bombNum",0));
+	setChuiNum(UserDefault::getInstance()->getIntegerForKey("chuiNum",0));
+	setBiNum(UserDefault::getInstance()->getIntegerForKey("biNum",0));
 	setReviveNum(UserDefault::getInstance()->getIntegerForKey("reviveNum",0));
 	setHasShowRegisterPay(UserDefault::getInstance()->getBoolForKey("showRegisterPay",false));
 	setSoundEffect(UserDefault::getInstance()->getBoolForKey("soundEffect",true));
@@ -122,6 +124,14 @@ void GAMEDATA::saveAddTimeNum(){
 
 void GAMEDATA::saveBombNum(){
 	UserDefault::getInstance()->setIntegerForKey("bombNum",getBombNum());
+}
+
+void GAMEDATA::saveChuiNum(){
+	UserDefault::getInstance()->setIntegerForKey("chuiNum",getChuiNum());
+}
+
+void GAMEDATA::saveBiNum(){
+	UserDefault::getInstance()->setIntegerForKey("biNum",getBiNum());
 }
 
 void GAMEDATA::saveReviveNum(){

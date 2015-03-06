@@ -90,9 +90,14 @@ void StarMatrix::onTouch(const Point& p){
 			}*/
 			return;
 		}else if(HammerClick){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-800);
-			GAMEDATA::getInstance()->saveGoldNum();
-			TopMenu::getInstance()->refreshGold();
+			if(GAMEDATA::getInstance()->getChuiNum() > 0){
+				GAMEDATA::getInstance()->setChuiNum(0);
+				GAMEDATA::getInstance()->saveChuiNum();
+			}else{
+				GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-800);
+				GAMEDATA::getInstance()->saveGoldNum();
+				TopMenu::getInstance()->refreshGold();
+			}
 		/*	if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){*/
 			doHammer(s);
 			m_layer->hidePropInfos();
@@ -101,9 +106,14 @@ void StarMatrix::onTouch(const Point& p){
 			}*/
 			return;
 		}else if(MagicClick){
-			GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-800);
-			GAMEDATA::getInstance()->saveGoldNum();
-			TopMenu::getInstance()->refreshGold();
+			if(GAMEDATA::getInstance()->getBiNum() > 0){
+				GAMEDATA::getInstance()->setBiNum(0);
+				GAMEDATA::getInstance()->saveBiNum();
+			}else{
+				GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-800);
+				GAMEDATA::getInstance()->saveGoldNum();
+				TopMenu::getInstance()->refreshGold();
+			}
 			/*if(animSprite->getTag()==(s->getIndexI()*COL_NUM+s->getIndexJ())){*/
 			doMagic(s);
 			m_layer->hidePropInfos();

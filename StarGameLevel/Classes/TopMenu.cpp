@@ -212,7 +212,7 @@ void TopMenu::PauseGame(){
 void TopMenu::usePropsHammer(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
-	if(gold>=800){
+	if(gold>=800 || GAMEDATA::getInstance()->getChuiNum() > 0){
 		if(!StarMatrix::HammerClick){
 			StarMatrix::HammerClick=true;
 			magicBtn->setVisible(false);
@@ -236,7 +236,7 @@ void TopMenu::usePropsHammer(){
 void TopMenu::usePropsMagic(){
 	Audio::getInstance()->playClick();
 	auto gold =GAMEDATA::getInstance()->getGoldNum();
-	if(gold>=800){
+	if(gold>=800 || GAMEDATA::getInstance()->getBiNum() > 0){
 		if(!StarMatrix::MagicClick){
 			Size visibleSize = Director::getInstance()->getVisibleSize();
 			StarMatrix::MagicClick=true;
