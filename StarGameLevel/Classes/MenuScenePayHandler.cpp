@@ -99,8 +99,9 @@ void MenuScenePayHandler::payCallback(int requestId,int resultId){
 			GameLayer::goToNextLevel =true;
 		}else{
 		   //´ÓÍæ±¾¹Ý
-			TopMenu::getInstance()->showRePaly();
+			GameLayer::isShowRePlay =true;
 		}
+
 		break;
 	case 11:
 		if(resultId==0){

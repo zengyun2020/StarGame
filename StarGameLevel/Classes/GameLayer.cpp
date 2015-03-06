@@ -11,6 +11,7 @@
 bool GameLayer::needRevive =false;
 bool GameLayer::gameOver =false;
 bool GameLayer::goToNextLevel=false;
+bool GameLayer::isShowRePlay = false;
 
 bool GameLayer::init(){
 	if(!Layer::init()){
@@ -110,6 +111,10 @@ void GameLayer::update(float delta){
 	if(goToNextLevel){
 	    gotoNextLevel();
 		goToNextLevel=false;
+	}
+	if(isShowRePlay){
+		TopMenu::getInstance()->showRePaly();
+		isShowRePlay = false;
 	}
 }
 

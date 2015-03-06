@@ -33,7 +33,7 @@ bool TopMenu::init(){
 	);
 	highestScore->setPosition(visibleSize.width/2,visibleSize.height/2+350);
 	this->addChild(highestScore);*/
-
+	rePlay =NULL;
 	level = Label::create(
 		ChineseWord("guanqia") + cocos2d::String::createWithFormat("%d",GAMEDATA::getInstance()->getNextLevel())->_string,
 		"Verdana-Bold",24
@@ -362,6 +362,10 @@ void TopMenu::showRePaly(){
 
 void TopMenu::rePlayResultSuccess(){
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if(NULL != rePlay ){
+	   rePlay->removeFromParent();
+	   rePlay= NULL;
+	}
 	if(GAMEDATA::getInstance()->getGoldNum()>=3000){
 		GAMEDATA::getInstance()->setGoldNum(GAMEDATA::getInstance()->getGoldNum()-3000);
 	   GameLayer::needRevive=true;
@@ -373,6 +377,10 @@ void TopMenu::rePlayResultSuccess(){
 }
 
 void TopMenu::rePlayResultFail(){
+	if(NULL != rePlay ){
+	   rePlay->removeFromParent();
+	   rePlay= NULL;
+	}
 	GameLayer::needRevive=false;
     GameLayer::gameOver=true;
 }
