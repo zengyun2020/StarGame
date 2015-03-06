@@ -10,6 +10,7 @@
 #include "Audio.h"
 #include "Upgrade.h"
 #include "Chinese.h"
+#include "Gold.h"
 
 using namespace cocos2d;
 
@@ -306,6 +307,7 @@ void GameOverLayer::back(){
 	}
 	if(canClick){
 		Audio::getInstance()->playClick();
+		Gold::getInstance()->refreshGold();
 		Director::getInstance()->replaceScene(TransitionFade::create(1,HelloWorld::createScene()));
 	}
 }

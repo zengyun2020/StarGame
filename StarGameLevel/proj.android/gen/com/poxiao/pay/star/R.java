@@ -169,13 +169,11 @@ public final class R {
 		public static final int week = 0x7f070002;
 	}
 	public static final class style {
-		public static final int AppBaseTheme = 0x7f080005;
-		public static final int AppTheme = 0x7f080006;
 		public static final int PopupAnimation = 0x7f080002;
 		public static final int back_button_normal = 0x7f080004;
 		public static final int dialog = 0x7f080003;
-		public static final int dialog_game_style = 0x7f080007;
-		public static final int dialog_tip_style = 0x7f080008;
+		public static final int dialog_game_style = 0x7f080005;
+		public static final int dialog_tip_style = 0x7f080006;
 		public static final int mytheme = 0x7f080000;
 		public static final int transparent = 0x7f080001;
 	}

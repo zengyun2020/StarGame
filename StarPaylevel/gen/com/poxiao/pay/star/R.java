@@ -193,30 +193,15 @@ public final class R {
         public static int week=0x7f070002;
     }
     public static final class style {
-        /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-         */
-        public static int AppBaseTheme=0x7f080005;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
-         */
-        public static int AppTheme=0x7f080006;
         public static int PopupAnimation=0x7f080002;
         public static int back_button_normal=0x7f080004;
         /** 模糊
          */
         public static int dialog=0x7f080003;
-        public static int dialog_game_style=0x7f080007;
+        public static int dialog_game_style=0x7f080005;
         /** 模糊 
          */
-        public static int dialog_tip_style=0x7f080008;
+        public static int dialog_tip_style=0x7f080006;
         public static int mytheme=0x7f080000;
         public static int transparent=0x7f080001;
     }

@@ -5,6 +5,7 @@
 #include "GameData.h"
 #include "GameLayer.h"
 #include "HelloWorldScene.h"
+#include "Gold.h"
 
 using namespace cocos2d;
 
@@ -100,6 +101,7 @@ void GamePauseLayer::payProps(){
 void GamePauseLayer::goBack(){
 		Audio::getInstance()->playClick();
 		this->removeFromParentAndCleanup(true);
+		Gold::getInstance()->refreshGold();
 	Director::getInstance()->replaceScene(HelloWorld::createScene());
 }
 
